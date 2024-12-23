@@ -21,6 +21,6 @@ func Update(delta:float):
 	else:
 		Transitioned.emit(self, "idle")
 
-func Physics_Update(delta:float):
+func Physics_Update(_delta:float):
 	if monster:
 		monster.velocity = move_direction * monster.move_speed

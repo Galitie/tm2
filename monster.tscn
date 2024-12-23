@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=30 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" path="res://monster.gd" id="1_ni8ke"]
@@ -21,11 +21,14 @@
 [ext_resource type="Script" path="res://Scripts/wander.gd" id="19_jjfbp"]
 [ext_resource type="Script" path="res://Scripts/idle.gd" id="20_772v6"]
 [ext_resource type="Script" path="res://Scripts/hurt.gd" id="21_j21k1"]
+[ext_resource type="Script" path="res://Scripts/attack.gd" id="22_lrr1d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l0xfk"]
+resource_local_to_scene = true
 radius = 121.3
 
 [sub_resource type="Animation" id="Animation_8ls5d"]
+resource_local_to_scene = true
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -207,8 +210,170 @@ tracks/14/keys = {
 "update": 0,
 "values": [Vector2(-98, -2)]
 }
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes/Spider:animation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+
+[sub_resource type="Animation" id="Animation_m5wnj"]
+resource_local_to_scene = true
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster/MonsterContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.0666667, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.37001, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Tail:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.443314, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:skew")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0733038, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegFront:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegBack:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.523599, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackFront:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackBack:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.523599, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/EarFront:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.436332, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/EarBack:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.436332, 0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes/Spider:animation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"default", &"hurt", &"default"]
+}
 
 [sub_resource type="Animation" id="Animation_gil5w"]
+resource_local_to_scene = true
 resource_name = "idle"
 loop_mode = 1
 tracks/0/type = "value"
@@ -343,144 +508,21 @@ tracks/10/keys = {
 "update": 0,
 "values": [0.0, -0.0349066, 0.0]
 }
-
-[sub_resource type="Animation" id="Animation_m5wnj"]
-resource_name = "hurt"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Monster/MonsterContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.1, 0.266667, 0.433333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Wings:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.37001, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Tail:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.443314, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:skew")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.0733038, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegFront:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.523599, 0.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegBack:rotation")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.523599, 0.0]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackFront:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.523599, 0.0]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackBack:rotation")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.523599, 0.0]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/EarFront:rotation")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.436332, 0.0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/EarBack:rotation")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0, 0.133333, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.436332, 0.0]
+"values": [Vector2(-21, -64), Vector2(-21, -70), Vector2(-21, -64)]
 }
 
 [sub_resource type="Animation" id="Animation_wqamt"]
+resource_local_to_scene = true
 resource_name = "walk"
 loop_mode = 1
 tracks/0/type = "value"
@@ -615,8 +657,21 @@ tracks/10/keys = {
 "update": 0,
 "values": [0.0, 0.0872665, 0.0]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Wings:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.566667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-21, -64), Vector2(-21, -54), Vector2(-21, -64)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m5r23"]
+resource_local_to_scene = true
 _data = {
 "RESET": SubResource("Animation_8ls5d"),
 "hurt": SubResource("Animation_m5wnj"),
@@ -648,13 +703,25 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 0.25,
+"texture": ExtResource("9_pftqj")
+}],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
 }]
 
 [node name="Monster" type="CharacterBody2D"]
-position = Vector2(585, 343)
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ni8ke")
-move_speed = 30
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.4, 1.24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -22)
+shape = SubResource("CircleShape2D_l0xfk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -665,7 +732,7 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_m5r23")
 }
-blend_times = [&"hurt", &"idle", 0.5, &"hurt", &"walk", 0.5, &"idle", &"idle", 0.5, &"idle", &"walk", 0.5, &"walk", &"idle", 0.5, &"walk", &"walk", 0.5]
+blend_times = [&"hurt", &"idle", 0.5, &"hurt", &"walk", 0.5, &"idle", &"hurt", 0.25, &"idle", &"idle", 0.5, &"idle", &"walk", 0.5, &"walk", &"hurt", 0.25, &"walk", &"idle", 0.5, &"walk", &"walk", 0.5]
 
 [node name="MonsterContainer" type="Node2D" parent="."]
 
@@ -675,10 +742,9 @@ blend_times = [&"hurt", &"idle", 0.5, &"hurt", &"walk", 0.5, &"idle", &"idle", 0
 texture = ExtResource("1_23gn5")
 
 [node name="Wings" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-position = Vector2(-12, -64)
+position = Vector2(-21, -64)
 
 [node name="BeeWings" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Wings"]
-visible = false
 position = Vector2(-30, -119)
 texture = ExtResource("2_8osax")
 offset = Vector2(0, 65)
@@ -687,6 +753,7 @@ offset = Vector2(0, 65)
 position = Vector2(-21, -64)
 
 [node name="Spines" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/BackAccFull"]
+visible = false
 position = Vector2(-8, -111)
 texture = ExtResource("3_cxmoy")
 offset = Vector2(20, 70)
@@ -695,11 +762,12 @@ offset = Vector2(20, 70)
 position = Vector2(-98, -2)
 
 [node name="Tail_Mermaid" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
-visible = false
+rotation = 0.261799
 texture = ExtResource("4_8turo")
-offset = Vector2(-100, 80)
+offset = Vector2(-90, 80)
 
 [node name="Tail_Fluffy" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
+visible = false
 texture = ExtResource("5_e1pwx")
 offset = Vector2(-85, -110)
 
@@ -719,7 +787,7 @@ texture = ExtResource("7_jf67t")
 
 [node name="Spider" type="AnimatedSprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Eyes"]
 sprite_frames = SubResource("SpriteFrames_ehxlx")
-frame_progress = 0.398408
+autoplay = "default"
 
 [node name="Mouth" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
 position = Vector2(60, -24)
@@ -731,6 +799,7 @@ texture = ExtResource("10_0ngcn")
 position = Vector2(41, -101)
 
 [node name="UnicornHorn" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/AccCenter"]
+visible = false
 texture = ExtResource("11_fq860")
 offset = Vector2(10, -50)
 
@@ -812,9 +881,8 @@ offset = Vector2(0, 50)
 visible = false
 texture = ExtResource("16_kuqcn")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("18_cjpl6")
-initial_state = NodePath("Hurt")
 
 [node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player")]
 script = ExtResource("19_jjfbp")
@@ -831,4 +899,8 @@ script = ExtResource("21_j21k1")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("22_lrr1d")
+
+[connection signal="area_entered" from="Area2D" to="StateMachine" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Hurt" method="_on_animation_player_animation_finished"]

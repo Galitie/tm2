@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt8qxvg55g5bp"]
+
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_chdhq"]
+[ext_resource type="Script" path="res://roll_cards.gd" id="2_xaeja"]
+
+[node name="Panel" type="PanelContainer"]
+offset_right = 398.0
+offset_bottom = 120.0
+theme = ExtResource("1_chdhq")
+script = ExtResource("2_xaeja")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_chdhq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Reroll" type="Button" parent="MarginContainer/HBoxContainer/Options"]
+layout_mode = 2
+theme = ExtResource("1_chdhq")
+text = "Reroll"
+
+[node name="Skip" type="Button" parent="MarginContainer/HBoxContainer/Options"]
+layout_mode = 2
+theme = ExtResource("1_chdhq")
+text = "Skip"
+
+[node name="Cards" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_chdhq")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Options/Reroll" to="." method="_on_reroll_pressed"]

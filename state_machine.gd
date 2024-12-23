@@ -1,18 +1,16 @@
 extends Node
 
-@export var initial_state : State
-
 var current_state : State
 var states : Dictionary = {}
+
 
 func _ready():
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(transition_state)
-	if initial_state:
-		initial_state.Enter()
-		current_state = initial_state
+	states["idle"].Enter()
+	current_state = states["idle"]
 
 func _process(delta):
 	if current_state:
@@ -34,3 +32,8 @@ func transition_state(state, new_state_name):
 		current_state.Exit()
 	new_state.Enter()
 	current_state = new_state
+
+
+func _on_area_2d_area_entered(_area):
+	if current_state == states.wander:
+		transition_state(current_state, "idle")

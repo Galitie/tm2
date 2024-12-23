@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgbiaduauaghx"]
+
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_8erfr"]
+[ext_resource type="Script" path="res://Cards/card.gd" id="2_0simy"]
+[ext_resource type="Resource" uid="uid://b6bunnjw00ern" path="res://Cards/card_info.tres" id="3_jfart"]
+
+[node name="Panel" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 121.0
+offset_bottom = 113.0
+theme = ExtResource("1_8erfr")
+script = ExtResource("2_0simy")
+info = ExtResource("3_jfart")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
+layout_mode = 2
+offset_right = 121.0
+offset_bottom = 113.0
+theme = ExtResource("1_8erfr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Button/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "ADD STATS:"
+
+[node name="Items" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="Stat1" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="Percent" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "+5%"
+
+[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "Damage"
+
+[node name="Stat2" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="Percent2" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "+5%"
+
+[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "Health"
+
+[node name="Ability" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+visible = false
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Ability"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "Life Steal"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items/Ability"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Ability/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+text = "When mon does damage to another mon, regain 1 hp"
+autowrap_mode = 3
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

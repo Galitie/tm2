@@ -1,14 +1,13 @@
 extends PanelContainer
 var max_cards : int = 3
 var card = load("res://card.tscn")
+signal add_stats_to_mon
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	add_cards()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -35,9 +34,18 @@ func build_card():
 	new_card.info.title = "Add Stats"
 	new_card.info.stat1_value = randi_range(1,10)
 	new_card.info.stat2_value = randi_range(1,10)
+	new_card.connect("card_pressed", card_pressed)
 	return new_card
+
 
 #TO-DO, make this more flexible...cases where the removal and add are different
 func _on_reroll_pressed():
 	remove_cards(3)
 	add_cards(3)
+
+
+func card_pressed(card_pressed):
+	emit_signal("add_stats_to_mon", card_pressed.info)
+	remove_cards(1, card_pressed)
+	add_cards(1)
+	

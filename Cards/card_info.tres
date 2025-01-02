@@ -3,7 +3,10 @@
 [ext_resource type="Script" path="res://Cards/card_info.gd" id="1_hiqky"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_hiqky")
 title = ""
 stat1 = 0
+stat2 = 0
 stat1_value = 0
+stat2_value = 0

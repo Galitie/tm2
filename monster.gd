@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-var hp : int
+var max_hp : int
+var current_hp : int
 var mp : int
 var damage : int = 1
 var intelligence : int = 1
@@ -12,6 +13,9 @@ var xp: int = 1
 var main_color
 var secondary_color
 
+@onready var hp_bar = %HPBar
+@onready var current_hp_label = %current_hp
+@onready var max_hp_label = %max_hp
 
 # attack ideas
 # basic attack, special attack, block, super
@@ -20,6 +24,12 @@ var secondary_color
 
 func _ready():
 	get_parent().get_node("UpgradePanel").connect("add_stats_to_mon", add_stats)
+	current_hp = 1
+	max_hp = 1
+	current_hp_label.text = str(max_hp)
+	max_hp_label.text = str(max_hp)
+	hp_bar.max_value = max_hp
+	hp_bar.value = max_hp
 
 	
 func _physics_process(_delta):
@@ -32,6 +42,8 @@ func _physics_process(_delta):
 
 func add_stats(info):
 	damage += info.stat1_value
-	print(damage)
-	hp += info.stat2_value
-	print(hp)
+	max_hp += info.stat2_value
+	current_hp_label.text = str(max_hp)
+	max_hp_label.text = str(max_hp)
+	hp_bar.max_value = max_hp
+	hp_bar.value = max_hp

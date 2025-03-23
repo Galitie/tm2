@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=32 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" path="res://monster.gd" id="1_ni8ke"]
@@ -713,6 +713,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb8nq"]
+bg_color = Color(0.334122, 0.334122, 0.334122, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7qba"]
+bg_color = Color(0, 0.639216, 0, 1)
+
 [node name="Monster" type="CharacterBody2D"]
 script = ExtResource("1_ni8ke")
 
@@ -901,6 +907,45 @@ animation_player = NodePath("../../AnimationPlayer")
 
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource("22_lrr1d")
+
+[node name="HPBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -104.0
+offset_top = -252.0
+offset_right = 96.0
+offset_bottom = -202.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bb8nq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_o7qba")
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="HPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HPBar/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="current_hp" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
+
+[node name="slash" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "/"
+
+[node name="max_hp" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "0"
 
 [connection signal="area_entered" from="Area2D" to="StateMachine" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Hurt" method="_on_animation_player_animation_finished"]

@@ -4,8 +4,8 @@ signal card_pressed(node)
 
 func _ready():
 	%Title.text = info.title
-	%Percent.text = "+" + str(info.stat1_value)
-	%Percent2.text = "+" + str(info.stat2_value)
+	%Amount.text = "+" + str(info.stat1_value)
+	%Amount2.text = "+" + str(info.stat2_value)
 	
 
 func _process(delta):

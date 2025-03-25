@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=3 uid="uid://b6bunnjw00ern"]
 
-[ext_resource type="Script" path="res://Cards/card_info.gd" id="1_hiqky"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_hiqky"]
 
 [resource]
 resource_local_to_scene = true

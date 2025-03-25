@@ -8,7 +8,7 @@ func _ready():
 	%Amount2.text = "+" + str(info.stat2_value)
 	
 
-func _process(delta):
+func _process(_delta):
 	pass
 
 

@@ -12,16 +12,23 @@ func _ready():
 	states["idle"].Enter()
 	current_state = states["idle"]
 
+
 func _process(delta):
 	if current_state:
 		current_state.Update(delta)
+
 
 func _physics_process(delta):
 	if current_state:
 		current_state.Physics_Update(delta)
 
+func choose_new_state():
+	# logic for mon choosing it's next state
+	pass
+
 # Right now, you have to set which state the mon goes to
 # I want this to be weighted in the future
+# connected to "Transitioned" signal in statess
 func transition_state(state, new_state_name):
 	if state != current_state:
 		return

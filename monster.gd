@@ -18,7 +18,7 @@ var secondary_color
 @onready var max_hp_label = %max_hp
 
 # attack ideas
-# basic attack, special attack, block, super
+# basic attack, special attack, block, super/big range/fullscreen
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 # rerolls - not sure where this should live since it doesn't actually apply to the mon
 

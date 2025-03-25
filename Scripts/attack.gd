@@ -6,7 +6,7 @@ class_name Attack
 
 
 func Enter():
-	animation_player.play("attack")
+	animation_player.play("attack_front_close")
 	monster.velocity = Vector2.ZERO
 
 #still manually moving to wander state, want this to not be hardcoded

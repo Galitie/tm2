@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgbiaduauaghx"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_8erfr"]
-[ext_resource type="Script" path="res://Cards/card.gd" id="2_0simy"]
+[ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
 [ext_resource type="Resource" uid="uid://b6bunnjw00ern" path="res://Cards/card_info.tres" id="3_jfart"]
 
 [node name="Panel" type="PanelContainer"]

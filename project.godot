@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+Player="A player's mon"
+HurtBox="Area to take damage in"
+Attack=""
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

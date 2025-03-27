@@ -3,25 +3,30 @@ class_name Chase
 
 @export var monster: CharacterBody2D
 @export var animation_player : AnimationPlayer
+var target_mon : CharacterBody2D
 
-var move_direction : Vector2
-var wander_time : float
-
-
-func randomize_wander():
-	move_direction = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
-	wander_time = randf_range(1,5)
 
 func Enter():
+	select_target()
 	animation_player.play("run")
-	randomize_wander()
 
-func Update(delta:float):
-	if wander_time > 0:
-		wander_time -= delta
-	else:
-		Transitioned.emit(self, "idle")
-
+#TODO: Check if the target_monster was knocked out while chasing
 func Physics_Update(_delta:float):
-	if monster:
-		monster.velocity = move_direction * (monster.move_speed + 5)
+	if target_mon:
+		var direction = target_mon.global_position - monster.global_position
+		if direction.length() > 100:
+			monster.velocity = direction.normalized() * monster.move_speed
+		else:
+			monster.velocity = Vector2()
+			ChooseNewState.emit(self)
+
+#TODO: Check first if monster is not knocked out
+func select_target():
+	var player_collection = get_tree().get_nodes_in_group("Player")
+	var self_in_player_collection = player_collection.find(monster)
+	player_collection.remove_at(self_in_player_collection)
+	if player_collection.size()  != 0:
+		target_mon = player_collection.pick_random()
+	else: 
+		print("Could not find target")
+		ChooseNewState.emit(self)

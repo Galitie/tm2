@@ -6,9 +6,10 @@ class_name Hurt
 
 
 func Enter():
+	print("owwwwwie I'm hurt")
 	animation_player.play("hurt")
 	monster.velocity = Vector2.ZERO
 
-#still manually moving to wander state, want this to not be hardcoded
+
 func _on_animation_player_animation_finished(_anim_name):
-	Transitioned.emit(self, "wander")
+	ChooseNewState.emit(self)

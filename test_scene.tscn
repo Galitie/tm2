@@ -40,3 +40,12 @@ scale = Vector2(0.3, 0.3)
 
 [node name="UpgradePanel" parent="Player1" instance=ExtResource("3_l53vo")]
 visible = false
+
+[node name="Player2" type="Node" parent="."]
+
+[node name="Monster" parent="Player2" instance=ExtResource("1_7a21h")]
+position = Vector2(719, 188)
+scale = Vector2(0.3, 0.3)
+
+[node name="UpgradePanel" parent="Player2" instance=ExtResource("3_l53vo")]
+visible = false

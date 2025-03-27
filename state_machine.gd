@@ -2,6 +2,7 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
+@export var melee_attack : Area2D
 
 
 func _ready():
@@ -9,6 +10,7 @@ func _ready():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(transition_state)
+			child.ChooseNewState.connect(choose_new_state)
 	states["idle"].Enter()
 	current_state = states["idle"]
 
@@ -22,13 +24,16 @@ func _physics_process(delta):
 	if current_state:
 		current_state.Physics_Update(delta)
 
-func choose_new_state():
-	# logic for mon choosing it's next state
-	pass
 
-# Right now, you have to set which state the mon goes to
-# I want this to be weighted in the future
-# connected to "Transitioned" signal in statess
+#TODO: Choose state off of scenarios not randomness
+# connected to "ChooseNewState" signal in state.gd
+func choose_new_state(state):
+	var state_choices = ["wander", "chase", "idle", "attack"]
+	var new_state = state_choices.pick_random()
+	transition_state(state, new_state)
+
+
+# connected to "Transitioned" signal in state.gd
 func transition_state(state, new_state_name):
 	if state != current_state:
 		return
@@ -41,6 +46,7 @@ func transition_state(state, new_state_name):
 	current_state = new_state
 
 
-func _on_area_2d_area_entered(_area):
-	if current_state == states.wander:
-		transition_state(current_state, "idle")
+
+func _on_mon_collision_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Attack") and area != melee_attack:
+		transition_state(current_state, "hurt")

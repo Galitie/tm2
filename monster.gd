@@ -1,9 +1,8 @@
 extends CharacterBody2D
 
-var max_hp : int
-var current_hp : int
-var mp : int
-var damage : int = 1
+var max_hp : int = 1
+var current_hp : int = 1
+var base_damage : int = 1
 var intelligence : int = 1
 var move_speed : int = 40
 var attack_speed : int = 1
@@ -22,10 +21,22 @@ var secondary_color
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 # rerolls - not sure where this should live since it doesn't actually apply to the mon
 
+# Scenarios for state
+# Doesn't see a creature
+# -> Wander or idle
+
+# See a creature 
+# -> if far > chase or attack
+# -> if close > run away, block or attack
+# -> if creature is charging up > run away or block
+
+# attacks can be short range, long range or specials with a charge up
+# ability slots? for short range, long range, special and passive?
+# mash A to charge special?
+# give them preferences? melee, range, etc.
+
 func _ready():
 	get_parent().get_node("UpgradePanel").connect("add_stats_to_mon", add_stats)
-	current_hp = 1
-	max_hp = 1
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
@@ -41,7 +52,7 @@ func _physics_process(_delta):
 
 
 func add_stats(info):
-	damage += info.stat1_value
+	base_damage += info.stat1_value
 	max_hp += info.stat2_value
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)

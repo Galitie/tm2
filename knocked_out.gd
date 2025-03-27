@@ -14,6 +14,7 @@ func Physics_Update(_delta:float):
 	monster.velocity = Vector2.ZERO
 	hurtbox_collision.disabled = true
 	body_collision.disabled = true
+	monster.z_index = -1
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fainting":

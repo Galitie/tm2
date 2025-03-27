@@ -2,6 +2,8 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
+
+@export var monster = CharacterBody2D
 @export var melee_attack : Area2D
 
 
@@ -44,7 +46,6 @@ func transition_state(state, new_state_name):
 		current_state.Exit()
 	new_state.Enter()
 	current_state = new_state
-
 
 
 func _on_mon_collision_area_entered(area: Area2D) -> void:

@@ -6,8 +6,6 @@ var base_damage : int = 1
 var intelligence : int = 1
 var move_speed : int = 40
 var attack_speed : int = 1
-var level : int = 1
-var xp: int = 1
 
 var main_color
 var secondary_color

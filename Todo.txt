@@ -1,7 +1,5 @@
 Todo:
 Figure out how creatures will choose their next state
-Goto & attack state
-Make getting hurt work
 Make multi-player work
 Controller
 Menus

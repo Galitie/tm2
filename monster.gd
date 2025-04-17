@@ -7,6 +7,7 @@ var intelligence : int = 1
 var move_speed : int = 40
 var attack_speed : int = 1
 
+var mon_name : String
 var main_color
 var secondary_color
 
@@ -18,15 +19,6 @@ var secondary_color
 # basic attack, special attack, block, super/big range/fullscreen
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 # rerolls - not sure where this should live since it doesn't actually apply to the mon
-
-# Scenarios for state
-# Doesn't see a creature
-# -> Wander or idle
-
-# See a creature 
-# -> if far > chase or attack
-# -> if close > run away, block or attack
-# -> if creature is charging up > run away or block
 
 # attacks can be short range, long range or specials with a charge up
 # ability slots? for short range, long range, special and passive?
@@ -47,7 +39,6 @@ func _physics_process(_delta):
 		$MonsterContainer.scale = Vector2(1,1)
 	if velocity.length() > 0 and velocity.x < 0:
 		$MonsterContainer.scale = Vector2(-1,1)
-
 
 func add_stats(info):
 	base_damage += info.stat1_value

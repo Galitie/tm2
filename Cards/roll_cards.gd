@@ -1,6 +1,6 @@
 extends PanelContainer
 var max_cards : int = 3
-var card = load("res://card.tscn")
+var card = load("uid://dgbiaduauaghx")
 signal add_stats_to_mon
 
 func _ready():

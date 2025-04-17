@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dt8qxvg55g5bp"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_chdhq"]
-[ext_resource type="Script" uid="uid://chdr2ub2bshrd" path="res://roll_cards.gd" id="2_xaeja"]
+[ext_resource type="Script" uid="uid://chdr2ub2bshrd" path="res://Cards/roll_cards.gd" id="2_xaeja"]
 
 [node name="Panel" type="PanelContainer"]
 offset_right = 450.0

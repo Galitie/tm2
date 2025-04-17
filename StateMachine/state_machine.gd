@@ -34,6 +34,15 @@ func choose_new_state(state):
 	var new_state = state_choices.pick_random()
 	transition_state(state, new_state)
 
+# Scenarios for state
+# Doesn't see a creature
+# -> Wander or idle
+
+# See a creature 
+# -> if far > chase or attack
+# -> if close > run away, block or attack
+# -> if creature is charging up > run away or block
+
 
 # connected to "Transitioned" signal in state.gd
 func transition_state(state, new_state_name):
@@ -49,5 +58,6 @@ func transition_state(state, new_state_name):
 
 
 func _on_mon_collision_area_entered(area: Area2D) -> void:
+	print(area)
 	if area.is_in_group("Attack") and area != melee_attack:
 		transition_state(current_state, "hurt")

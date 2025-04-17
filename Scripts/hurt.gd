@@ -12,14 +12,15 @@ func Enter():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hurt":
+		check_if_knocked_out()
 		ChooseNewState.emit(self)
 
+
 func Physics_Update(_delta:float):
-	check_if_knocked_out()
+	pass
 
 
 func take_damage():
-	print("took damage")
 	monster.current_hp -= 1
 	monster.current_hp_label.text = str(monster.current_hp)
 	monster.hp_bar.value = monster.current_hp

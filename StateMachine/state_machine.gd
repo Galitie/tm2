@@ -58,6 +58,5 @@ func transition_state(state, new_state_name):
 
 
 func _on_mon_collision_area_entered(area: Area2D) -> void:
-	print(area)
 	if area.is_in_group("Attack") and area != melee_attack:
 		transition_state(current_state, "hurt")

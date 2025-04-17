@@ -40,6 +40,7 @@ func _physics_process(_delta):
 	if velocity.length() > 0 and velocity.x < 0:
 		$MonsterContainer.scale = Vector2(-1,1)
 
+
 func add_stats(info):
 	base_damage += info.stat1_value
 	max_hp += info.stat2_value

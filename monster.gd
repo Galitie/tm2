@@ -44,6 +44,7 @@ func _physics_process(_delta):
 func add_stats(info):
 	base_damage += info.stat1_value
 	max_hp += info.stat2_value
+	current_hp = max_hp
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp

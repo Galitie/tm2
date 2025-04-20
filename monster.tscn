@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=44 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://cfc0n2o6rngal" path="res://StateMachine/knocked_out.gd" id="24_u8wmr"]
 [ext_resource type="StyleBox" uid="uid://b1cqxdsndopa" path="res://hp_green.tres" id="25_o122v"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="25_s0vvg"]
+[ext_resource type="Script" uid="uid://bljsuke2bqro" path="res://refresh.gd" id="26_3x5v3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6py8i"]
 resource_local_to_scene = true
@@ -1264,13 +1265,12 @@ animations = [{
 size = Vector2(141, 173)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb8nq"]
-bg_color = Color(0.299547, 0.299547, 0.299547, 1)
+bg_color = Color(0.20033, 0.20033, 0.20033, 1)
 
 [node name="Monster" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_ni8ke")
 
 [node name="MonCollision" type="Area2D" parent="." groups=["HurtBox"]]
-visible = false
 scale = Vector2(1.4, 1.24)
 collision_mask = 2
 
@@ -1279,7 +1279,6 @@ position = Vector2(16.4286, -22)
 shape = SubResource("CircleShape2D_6py8i")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -22)
 shape = SubResource("CircleShape2D_l0xfk")
 
@@ -1296,6 +1295,7 @@ blend_times = [&"attack_front_close", &"attack_front_close", 0.25, &"attack_fron
 material = SubResource("ShaderMaterial_3x5v3")
 
 [node name="BodyHorizontal" type="Sprite2D" parent="MonsterContainer/Parts"]
+z_index = 1
 use_parent_material = true
 rotation = 0.0486036
 texture = ExtResource("1_23gn5")
@@ -1458,7 +1458,6 @@ offset = Vector2(0, 50)
 z_index = -1
 use_parent_material = true
 position = Vector2(-98, -2)
-scale = Vector2(1, 1)
 
 [node name="Tail_Mermaid" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
 use_parent_material = true
@@ -1523,6 +1522,10 @@ animation_player = NodePath("../../AnimationPlayer")
 hurtbox_collision = NodePath("../../MonCollision/CollisionShape2D")
 body_collision = NodePath("../../BodyCollision")
 
+[node name="Refresh" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster")]
+script = ExtResource("26_3x5v3")
+monster = NodePath("../..")
+
 [node name="HPBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 offset_left = -99.0
@@ -1562,12 +1565,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "0"
 
-[node name="Label" type="Label" parent="."]
+[node name="Name" type="Label" parent="."]
 offset_left = -52.0
 offset_top = 144.0
 offset_right = 53.0
 offset_bottom = 194.0
 theme = ExtResource("25_s0vvg")
+theme_override_font_sizes/font_size = 36
 text = "NAME"
 horizontal_alignment = 1
 

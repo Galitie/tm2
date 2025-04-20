@@ -1,0 +1,478 @@
+[gd_scene load_steps=2 format=3 uid="uid://caig5oumsc857"]
+
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_sx8i1"]
+
+[node name="TestUpgrade" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sx8i1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Player1" type="MarginContainer" parent="MarginContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PlayerContainer/Player1"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+text = "UPGRADE
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade1" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade1"]
+layout_mode = 2
+text = "Lightning Blast
+Melee Attacks can Chain Lighting and some stuff
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade2" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade2"]
+layout_mode = 2
+text = "Poison Pete
+Melee Attacks can Chain Lighting
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade3" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Upgrade3"]
+layout_mode = 2
+text = "Friendly Fire
+Spawn a friend to help you
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Dude Window"]
+layout_mode = 2
+text = "Dude here"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Stats"]
+layout_mode = 2
+text = "STATS
+HP: 5 | MP: 10 | STR: 11"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Done Upgrading"
+
+[node name="Player2" type="MarginContainer" parent="MarginContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PlayerContainer/Player2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+text = "UPGRADE
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade1" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade1"]
+layout_mode = 2
+text = "Lightning Blast
+Melee Attacks can Chain Lighting and some stuff
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade2" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade2"]
+layout_mode = 2
+text = "Poison Pete
+Melee Attacks can Chain Lighting
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade3" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Upgrade3"]
+layout_mode = 2
+text = "Friendly Fire
+Spawn a friend to help you
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Dude Window"]
+layout_mode = 2
+text = "Dude here
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Stats"]
+layout_mode = 2
+text = "STATS
+HP: 5 | MP: 10 | STR: 11
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Done Upgrading"
+
+[node name="Player3" type="MarginContainer" parent="MarginContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PlayerContainer/Player3"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+text = "UPGRADE
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade1" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade1"]
+layout_mode = 2
+text = "Lightning Blast
+Melee Attacks can Chain Lighting and some stuff
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade2" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade2"]
+layout_mode = 2
+text = "Poison Pete
+Melee Attacks can Chain Lighting
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade3" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Upgrade3"]
+layout_mode = 2
+text = "Friendly Fire
+Spawn a friend to help you
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Dude Window"]
+layout_mode = 2
+text = "Dude here
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Stats"]
+layout_mode = 2
+text = "STATS
+HP: 5 | MP: 10 | STR: 11
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Done Upgrading"
+
+[node name="Player4" type="MarginContainer" parent="MarginContainer/PlayerContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PlayerContainer/Player4"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+text = "UPGRADE
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade1" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade1"]
+layout_mode = 2
+text = "Lightning Blast
+Melee Attacks can Chain Lighting and some stuff
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade2" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade2"]
+layout_mode = 2
+text = "Poison Pete
+Melee Attacks can Chain Lighting
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Upgrade3" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Upgrade3"]
+layout_mode = 2
+text = "Friendly Fire
+Spawn a friend to help you
++ 3 HP, +5 DMG"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Dude Window"]
+layout_mode = 2
+text = "Dude here
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Stats"]
+layout_mode = 2
+text = "STATS
+HP: 5 | MP: 10 | STR: 11
+"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Done Upgrading"

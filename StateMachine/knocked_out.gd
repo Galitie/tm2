@@ -16,5 +16,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fainting":
 		monster.z_index = -10
 		animation_player.play("knocked_out")
+		monster.velocity = Vector2.ZERO
 
 	

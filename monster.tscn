@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=43 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
+[ext_resource type="Shader" uid="uid://dv7rfbcor1jiv" path="res://monster_color.gdshader" id="2_7mvib"]
 [ext_resource type="Texture2D" uid="uid://cgd7r71ipj4om" path="res://test_parts/bee_wings.png" id="2_8osax"]
 [ext_resource type="Texture2D" uid="uid://dgl31qo8ag4dp" path="res://test_parts/back_scales.png" id="3_cxmoy"]
 [ext_resource type="Texture2D" uid="uid://dikllt6nfssof" path="res://test_parts/tail_mermaid.png" id="4_8turo"]
@@ -1039,6 +1040,18 @@ tracks/11/keys = {
 "update": 0,
 "values": [0.279253]
 }
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:offset")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.0333333, 0.433333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 5), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_wqamt"]
 resource_local_to_scene = true
@@ -1202,6 +1215,17 @@ _data = {
 &"walk": SubResource("Animation_wqamt")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3x5v3"]
+shader = ExtResource("2_7mvib")
+shader_parameter/red_factor = 1.0
+shader_parameter/green_factor = 1.0
+shader_parameter/blue_factor = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 1.0
+shader_parameter/hue_shift = 0.0
+shader_parameter/gamma = 1.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ehxlx"]
 animations = [{
 "frames": [{
@@ -1246,6 +1270,7 @@ bg_color = Color(0.299547, 0.299547, 0.299547, 1)
 script = ExtResource("1_ni8ke")
 
 [node name="MonCollision" type="Area2D" parent="." groups=["HurtBox"]]
+visible = false
 scale = Vector2(1.4, 1.24)
 collision_mask = 2
 
@@ -1254,6 +1279,7 @@ position = Vector2(16.4286, -22)
 shape = SubResource("CircleShape2D_6py8i")
 
 [node name="BodyCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -22)
 shape = SubResource("CircleShape2D_l0xfk")
 
@@ -1267,149 +1293,188 @@ blend_times = [&"attack_front_close", &"attack_front_close", 0.25, &"attack_fron
 [node name="MonsterContainer" type="Node2D" parent="."]
 
 [node name="Parts" type="Node2D" parent="MonsterContainer"]
+material = SubResource("ShaderMaterial_3x5v3")
 
 [node name="BodyHorizontal" type="Sprite2D" parent="MonsterContainer/Parts"]
+use_parent_material = true
 rotation = 0.0486036
 texture = ExtResource("1_23gn5")
 
 [node name="Wings" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
 position = Vector2(-21, -64)
 
 [node name="BeeWings" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Wings"]
+use_parent_material = true
 position = Vector2(-30, -119)
 texture = ExtResource("2_8osax")
 offset = Vector2(0, 65)
 
 [node name="BackAccFull" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
 position = Vector2(-21, -64)
 
 [node name="Spines" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/BackAccFull"]
 visible = false
+use_parent_material = true
 position = Vector2(-8, -111)
 texture = ExtResource("3_cxmoy")
 offset = Vector2(20, 70)
 
+[node name="Head" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
+position = Vector2(76, -44)
+
+[node name="Round" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+texture = ExtResource("6_ht88n")
+offset = Vector2(25, -50)
+
+[node name="Eyes" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+position = Vector2(43, -59)
+
+[node name="Beady" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Eyes"]
+visible = false
+use_parent_material = true
+texture = ExtResource("7_jf67t")
+
+[node name="Spider" type="AnimatedSprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Eyes"]
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_ehxlx")
+autoplay = "default"
+
+[node name="Mouth" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+position = Vector2(60, -24)
+
+[node name="Dog" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Mouth"]
+use_parent_material = true
+texture = ExtResource("10_0ngcn")
+
+[node name="AccCenter" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+position = Vector2(41, -101)
+
+[node name="UnicornHorn" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/AccCenter"]
+visible = false
+use_parent_material = true
+texture = ExtResource("11_fq860")
+offset = Vector2(10, -50)
+
+[node name="EarFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+position = Vector2(-15, -89)
+
+[node name="Cat" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/EarFront"]
+use_parent_material = true
+position = Vector2(0, -20)
+texture = ExtResource("12_w4jrt")
+
+[node name="EarBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
+use_parent_material = true
+position = Vector2(63, -99)
+
+[node name="Cat" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/EarBack"]
+z_index = -1
+use_parent_material = true
+texture = ExtResource("13_pa2n8")
+offset = Vector2(-25, -15)
+
+[node name="LegBegFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
+position = Vector2(68, 16)
+
+[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegFront"]
+visible = false
+use_parent_material = true
+texture = ExtResource("14_0ovdc")
+offset = Vector2(0, 70)
+
+[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegFront"]
+use_parent_material = true
+texture = ExtResource("15_j1fpw")
+offset = Vector2(0, 50)
+
+[node name="LegBegBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+z_index = -1
+use_parent_material = true
+position = Vector2(54, -3)
+
+[node name="LegBack" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegBack"]
+visible = false
+z_index = -1
+use_parent_material = true
+texture = ExtResource("14_0ovdc")
+offset = Vector2(0, 70)
+
+[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegBack"]
+use_parent_material = true
+texture = ExtResource("15_j1fpw")
+offset = Vector2(0, 50)
+
+[node name="LegMidFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
+position = Vector2(1, 19)
+
+[node name="LegMidBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+z_index = -1
+use_parent_material = true
+
+[node name="LegBackFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+use_parent_material = true
+position = Vector2(-73, 11)
+
+[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackFront"]
+visible = false
+use_parent_material = true
+rotation = 0.23911
+texture = ExtResource("14_0ovdc")
+offset = Vector2(30, 80)
+
+[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackFront"]
+use_parent_material = true
+texture = ExtResource("15_j1fpw")
+offset = Vector2(0, 50)
+
+[node name="LegBackBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+z_index = -1
+use_parent_material = true
+position = Vector2(-70, 3)
+
+[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackBack"]
+visible = false
+z_index = -1
+use_parent_material = true
+position = Vector2(20, 70)
+texture = ExtResource("14_0ovdc")
+
+[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackBack"]
+use_parent_material = true
+texture = ExtResource("15_j1fpw")
+offset = Vector2(0, 50)
+
 [node name="Tail" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
+z_index = -1
+use_parent_material = true
 position = Vector2(-98, -2)
+scale = Vector2(1, 1)
 
 [node name="Tail_Mermaid" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
+use_parent_material = true
 rotation = 0.261799
 texture = ExtResource("4_8turo")
 offset = Vector2(-90, 80)
 
 [node name="Tail_Fluffy" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
 visible = false
+use_parent_material = true
 texture = ExtResource("5_e1pwx")
 offset = Vector2(-85, -110)
 
-[node name="Head" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-position = Vector2(76, -44)
-
-[node name="Round" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-texture = ExtResource("6_ht88n")
-offset = Vector2(25, -50)
-
-[node name="Eyes" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-position = Vector2(43, -59)
-
-[node name="Beady" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Eyes"]
-visible = false
-texture = ExtResource("7_jf67t")
-
-[node name="Spider" type="AnimatedSprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Eyes"]
-sprite_frames = SubResource("SpriteFrames_ehxlx")
-autoplay = "default"
-
-[node name="Mouth" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-position = Vector2(60, -24)
-
-[node name="Dog" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/Mouth"]
-texture = ExtResource("10_0ngcn")
-
-[node name="AccCenter" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-position = Vector2(41, -101)
-
-[node name="UnicornHorn" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/AccCenter"]
-visible = false
-texture = ExtResource("11_fq860")
-offset = Vector2(10, -50)
-
-[node name="EarFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-position = Vector2(-15, -89)
-
-[node name="Cat" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/EarFront"]
-position = Vector2(0, -20)
-texture = ExtResource("12_w4jrt")
-
-[node name="EarBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
-position = Vector2(63, -99)
-
-[node name="Cat" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head/EarBack"]
-z_index = -1
-texture = ExtResource("13_pa2n8")
-offset = Vector2(-25, -15)
-
-[node name="LegBegFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-position = Vector2(68, 16)
-
-[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegFront"]
-visible = false
-texture = ExtResource("14_0ovdc")
-offset = Vector2(0, 70)
-
-[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegFront"]
-texture = ExtResource("15_j1fpw")
-offset = Vector2(0, 50)
-
-[node name="LegBegBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-z_index = -1
-position = Vector2(54, -3)
-
-[node name="LegBack" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegBack"]
-visible = false
-z_index = -1
-texture = ExtResource("14_0ovdc")
-offset = Vector2(0, 70)
-
-[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBegBack"]
-texture = ExtResource("15_j1fpw")
-offset = Vector2(0, 50)
-
-[node name="LegMidFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-position = Vector2(1, 19)
-
-[node name="LegMidBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-z_index = -1
-
-[node name="LegBackFront" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-position = Vector2(-73, 11)
-
-[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackFront"]
-visible = false
-rotation = 0.23911
-texture = ExtResource("14_0ovdc")
-offset = Vector2(30, 80)
-
-[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackFront"]
-texture = ExtResource("15_j1fpw")
-offset = Vector2(0, 50)
-
-[node name="LegBackBack" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
-z_index = -1
-position = Vector2(-70, 3)
-
-[node name="Simple" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackBack"]
-visible = false
-z_index = -1
-position = Vector2(20, 70)
-texture = ExtResource("14_0ovdc")
-
-[node name="Short" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/LegBackBack"]
-texture = ExtResource("15_j1fpw")
-offset = Vector2(0, 50)
-
 [node name="BodyVertical" type="Sprite2D" parent="MonsterContainer/Parts"]
 visible = false
+use_parent_material = true
 texture = ExtResource("16_kuqcn")
 
 [node name="MeleeAttack" type="Area2D" parent="MonsterContainer" groups=["Attack"]]

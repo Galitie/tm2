@@ -44,8 +44,8 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/UpgradeTitle"]
 layout_mode = 2
-text = "UPGRADE
-"
+theme_override_font_sizes/font_size = 28
+text = "UPGRADE"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -155,8 +155,8 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/UpgradeTitle"]
 layout_mode = 2
-text = "UPGRADE
-"
+theme_override_font_sizes/font_size = 28
+text = "UPGRADE"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -224,8 +224,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Dude Window"]
 layout_mode = 2
-text = "Dude here
-"
+text = "Dude here"
 horizontal_alignment = 1
 vertical_alignment = 3
 
@@ -238,8 +237,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Stats"]
 layout_mode = 2
 text = "STATS
-HP: 5 | MP: 10 | STR: 11
-"
+HP: 5 | MP: 10 | STR: 11"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -268,8 +266,8 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/UpgradeTitle"]
 layout_mode = 2
-text = "UPGRADE
-"
+theme_override_font_sizes/font_size = 28
+text = "UPGRADE"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -337,8 +335,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Dude Window"]
 layout_mode = 2
-text = "Dude here
-"
+text = "Dude here"
 horizontal_alignment = 1
 vertical_alignment = 3
 
@@ -351,8 +348,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Stats"]
 layout_mode = 2
 text = "STATS
-HP: 5 | MP: 10 | STR: 11
-"
+HP: 5 | MP: 10 | STR: 11"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -381,8 +377,8 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/UpgradeTitle"]
 layout_mode = 2
-text = "UPGRADE
-"
+theme_override_font_sizes/font_size = 28
+text = "UPGRADE"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
@@ -450,8 +446,7 @@ size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Dude Window"]
 layout_mode = 2
-text = "Dude here
-"
+text = "Dude here"
 horizontal_alignment = 1
 vertical_alignment = 3
 
@@ -464,8 +459,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Stats"]
 layout_mode = 2
 text = "STATS
-HP: 5 | MP: 10 | STR: 11
-"
+HP: 5 | MP: 10 | STR: 11"
 horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3

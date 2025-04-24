@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=45 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
@@ -267,6 +267,18 @@ tracks/18/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:rotation")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0486036]
 }
 
 [sub_resource type="Animation" id="Animation_7juug"]
@@ -766,6 +778,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [-0.0890118]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0488692]
+}
 
 [sub_resource type="Animation" id="Animation_u8wmr"]
 resource_name = "knocked_out"
@@ -1203,12 +1227,149 @@ tracks/11/keys = {
 "values": [Vector2(-21, -64), Vector2(-21, -54), Vector2(-21, -64)]
 }
 
+[sub_resource type="Animation" id="Animation_3x5v3"]
+resource_name = "get_up"
+step = 0.33
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegFront:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.65283, -0.185005]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBegBack:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.05069, -0.158825]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackFront:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.2514, -0.127409]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/LegBackBack:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.45211, 0.111701]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Tail:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.666667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.39968, 0.846485, 0.0174533]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.05069, -0.225147]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(76, -33), Vector2(76, -47)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/EarFront:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.249582, -0.132645]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(5.96046e-08),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 21)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes/Spider:animation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.0333333, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"hurt", &"default"]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0488692, -0.205949, 0.0488692]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m5r23"]
 resource_local_to_scene = true
 _data = {
 &"RESET": SubResource("Animation_8ls5d"),
 &"attack_front_close": SubResource("Animation_7juug"),
 &"fainting": SubResource("Animation_s0vvg"),
+&"get_up": SubResource("Animation_3x5v3"),
 &"hurt": SubResource("Animation_m5wnj"),
 &"idle": SubResource("Animation_gil5w"),
 &"knocked_out": SubResource("Animation_u8wmr"),
@@ -1270,11 +1431,11 @@ bg_color = Color(0.20033, 0.20033, 0.20033, 1)
 [node name="Monster" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_ni8ke")
 
-[node name="MonCollision" type="Area2D" parent="." groups=["HurtBox"]]
+[node name="Hurtbox" type="Area2D" parent="." groups=["HurtBox"]]
 scale = Vector2(1.4, 1.24)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MonCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(16.4286, -22)
 shape = SubResource("CircleShape2D_6py8i")
 
@@ -1513,18 +1674,23 @@ animation_player = NodePath("../../AnimationPlayer")
 script = ExtResource("22_lrr1d")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-hurtbox = NodePath("../../MonCollision")
+hurtbox = NodePath("../../Hurtbox")
 
-[node name="KnockedOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision")]
+[node name="KnockedOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
 script = ExtResource("24_u8wmr")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
-hurtbox_collision = NodePath("../../MonCollision/CollisionShape2D")
+hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 body_collision = NodePath("../../BodyCollision")
+melee_collision = NodePath("../../MonsterContainer/MeleeAttack/CollisionShape2D")
 
-[node name="Refresh" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster")]
+[node name="Reset" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
 script = ExtResource("26_3x5v3")
 monster = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
+body_collision = NodePath("../../BodyCollision")
+melee_collision = NodePath("../../MonsterContainer/MeleeAttack/CollisionShape2D")
 
 [node name="HPBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
@@ -1575,7 +1741,8 @@ theme_override_font_sizes/font_size = 36
 text = "NAME"
 horizontal_alignment = 1
 
-[connection signal="area_entered" from="MonCollision" to="StateMachine" method="_on_mon_collision_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="StateMachine" method="_on_mon_collision_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Hurt" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/KnockedOut" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Reset" method="_on_animation_player_animation_finished"]

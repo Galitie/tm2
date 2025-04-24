@@ -19,9 +19,9 @@ func Enter():
 func turn_on_collisions():
 	hurtbox_collision.disabled = false
 	body_collision.disabled = false
-	melee_collision.disabled = false
+	melee_collision.disabled = true
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "get_up":
-		animation_player.play("idle")
+		Transitioned.emit(self, "idle")

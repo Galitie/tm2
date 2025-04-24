@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var max_hp : int = 3
+var max_hp : int = 1
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1

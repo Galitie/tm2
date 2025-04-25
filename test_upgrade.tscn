@@ -9,13 +9,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_sx8i1")
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -110,12 +112,6 @@ autowrap_mode = 3
 [node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer/Dude Window"]
-layout_mode = 2
-text = "Dude here"
-horizontal_alignment = 1
-vertical_alignment = 3
 
 [node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player1/VBoxContainer"]
 layout_mode = 2
@@ -222,12 +218,6 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer/Dude Window"]
-layout_mode = 2
-text = "Dude here"
-horizontal_alignment = 1
-vertical_alignment = 3
-
 [node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player2/VBoxContainer"]
 layout_mode = 2
 
@@ -333,12 +323,6 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer/Dude Window"]
-layout_mode = 2
-text = "Dude here"
-horizontal_alignment = 1
-vertical_alignment = 3
-
 [node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player3/VBoxContainer"]
 layout_mode = 2
 
@@ -443,12 +427,6 @@ autowrap_mode = 3
 [node name="Dude Window" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer/Dude Window"]
-layout_mode = 2
-text = "Dude here"
-horizontal_alignment = 1
-vertical_alignment = 3
 
 [node name="Stats" type="MarginContainer" parent="MarginContainer/PlayerContainer/Player4/VBoxContainer"]
 layout_mode = 2

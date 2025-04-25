@@ -31,12 +31,12 @@ func select_target():
 
 func get_targetable_monsters() -> Array[CharacterBody2D]:
 	var targetable_monsters: Array[CharacterBody2D] = []
-	var player_collection = get_tree().get_nodes_in_group("Player")
-	player_collection.erase(monster)
+	var monster_collection = get_tree().get_nodes_in_group("Monster")
+	monster_collection.erase(monster)
 
-	for player in player_collection:
-		var state_machine = player.get_node("StateMachine")
+	for monster in monster_collection:
+		var state_machine = monster.get_node("StateMachine")
 		if state_machine.current_state != state_machine.states["knockedout"]:
-			targetable_monsters.append(player)
+			targetable_monsters.append(monster)
 
 	return targetable_monsters

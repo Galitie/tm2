@@ -2,7 +2,6 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
-
 @export var monster = CharacterBody2D
 @export var melee_attack : Area2D
 
@@ -42,7 +41,6 @@ func choose_new_state(state):
 # -> if far > chase or attack
 # -> if close > run away, block or attack
 # -> if creature is charging up > run away or block
-
 
 # connected to "Transitioned" signal in state.gd
 func transition_state(state, new_state_name):

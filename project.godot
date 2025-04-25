@@ -15,15 +15,20 @@ run/main_scene="res://test_scene.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://globals.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
 
 [global_group]
 
-Player="A player's mon"
 HurtBox="Area to take damage in"
 Attack=""
+Monster="A player's mon"
+Player=""
 
 [rendering]
 

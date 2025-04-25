@@ -11,6 +11,7 @@ var mon_name : String
 var main_color
 var secondary_color
 
+@onready var state_machine = $StateMachine
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
 @onready var max_hp_label = %max_hp
@@ -26,13 +27,12 @@ var secondary_color
 # give them preferences? melee, range, etc.
 
 func _ready():
-	get_parent().get_node("UpgradePanel").connect("add_stats_to_mon", add_stats)
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
 
-	
+
 func _physics_process(_delta):
 	move_and_slide()
 	if velocity.length() > 0 and velocity.x > 0:
@@ -53,3 +53,4 @@ func fill_hp_bar():
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
+	

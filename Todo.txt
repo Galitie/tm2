@@ -1,5 +1,5 @@
 Todo:
-	Put HP bar logic in one place
+	Put HP bar logic in one place?
 	Figure out how creatures will choose their next state
 	Make multi-player work
 	Controller

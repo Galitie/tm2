@@ -12,6 +12,9 @@ func Enter():
 	clean_up_collisions()
 	monster.velocity = Vector2.ZERO
 	animation_player.play("fainting")
+	monster.current_hp = 0
+	monster.current_hp_label.text = "0"
+	monster.hp_bar.value = monster.current_hp
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

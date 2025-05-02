@@ -1,5 +1,5 @@
 extends State
-class_name Reset
+class_name Fight
 
 @export var monster: CharacterBody2D
 @export var animation_player : AnimationPlayer
@@ -10,13 +10,11 @@ class_name Reset
 var health_fill_style := load("uid://b1cqxdsndopa") as StyleBox
 
 func Enter():
-	monster.set_hp_bar_max()
-	animation_player.play("get_up")
-	monster.get_node("HPBar").visible = true
-	monster.hp_bar.add_theme_stylebox_override("fill", health_fill_style)
-	monster.z_index = 1
-	turn_on_collisions()
 	monster.velocity = Vector2()
+	turn_on_collisions()
+	monster.get_node("HPBar").visible = true
+	monster.z_index = 1
+	ChooseNewState.emit()
 
 
 func turn_on_collisions():

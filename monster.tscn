@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=47 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
@@ -28,7 +28,8 @@
 [ext_resource type="StyleBox" uid="uid://b1cqxdsndopa" path="res://hp_green.tres" id="25_o122v"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="25_s0vvg"]
 [ext_resource type="Script" uid="uid://bljsuke2bqro" path="res://StateMachine/reset.gd" id="26_3x5v3"]
-[ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://upgrade.gd" id="27_14274"]
+[ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://StateMachine/upgrade.gd" id="27_14274"]
+[ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://StateMachine/fight_start.gd" id="28_hqfdu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6py8i"]
 resource_local_to_scene = true
@@ -1459,8 +1460,7 @@ material = SubResource("ShaderMaterial_3x5v3")
 [node name="BodyHorizontal" type="Sprite2D" parent="MonsterContainer/Parts"]
 z_index = 1
 use_parent_material = true
-position = Vector2(0, 21)
-rotation = 0.0488692
+rotation = 0.0486036
 texture = ExtResource("1_23gn5")
 
 [node name="Wings" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
@@ -1486,7 +1486,7 @@ offset = Vector2(20, 70)
 
 [node name="Head" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
 use_parent_material = true
-position = Vector2(76, -33)
+position = Vector2(76, -44)
 
 [node name="Round" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
 use_parent_material = true
@@ -1694,8 +1694,16 @@ hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
 body_collision = NodePath("../../BodyCollision")
 melee_collision = NodePath("../../MonsterContainer/MeleeAttack/CollisionShape2D")
 
-[node name="Upgrade" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
+[node name="UpgradeStart" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
 script = ExtResource("27_14274")
+monster = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
+hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
+body_collision = NodePath("../../BodyCollision")
+melee_collision = NodePath("../../MonsterContainer/MeleeAttack/CollisionShape2D")
+
+[node name="FightStart" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
+script = ExtResource("28_hqfdu")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 hurtbox_collision = NodePath("../../Hurtbox/CollisionShape2D")
@@ -1756,5 +1764,4 @@ horizontal_alignment = 1
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Hurt" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/KnockedOut" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Reset" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Upgrade" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/UpgradeStart" method="_on_animation_player_animation_finished"]

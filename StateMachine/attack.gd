@@ -11,4 +11,5 @@ func Enter():
 
 
 func _on_animation_player_animation_finished(_anim_name):
-	ChooseNewState.emit(self)
+	if _anim_name == "attack_front_close":
+		ChooseNewState.emit()

@@ -14,10 +14,9 @@ func Enter():
 	monster.velocity = Vector2()
 	monster.get_node("MonsterContainer").modulate = Color(1,1,1,1)
 	animation_player.play("get_up")
-	monster.fill_hp_bar()
+	monster.set_hp_bar_max()
 	monster.get_node("HPBar").visible = false
 	monster.z_index = 1
-	print("upgrade state")
 
 
 func turn_off_collisions():

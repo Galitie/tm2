@@ -3,6 +3,7 @@ var max_cards : int = 3
 var card = load("uid://dgbiaduauaghx")
 signal add_stats_to_mon
 
+
 func _ready():
 	add_cards()
 
@@ -31,9 +32,6 @@ func remove_cards(amount : int = 1, specific_card : Node = null):
 # TO-DO, build cards better
 func build_card():
 	var new_card = card.instantiate()
-	new_card.info.title = "Add Stats"
-	new_card.info.stat1_value = randi_range(1,10)
-	new_card.info.stat2_value = randi_range(1,10)
 	new_card.connect("card_pressed", card_pressed)
 	return new_card
 

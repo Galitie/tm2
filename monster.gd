@@ -1,6 +1,7 @@
 extends CharacterBody2D
+class_name Monster
 
-var max_hp : int = 1
+var max_hp : int = 10
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
@@ -41,13 +42,7 @@ func _physics_process(_delta):
 		$MonsterContainer.scale = Vector2(-1,1)
 
 
-func add_stats(info):
-	base_damage += info.stat1_value
-	max_hp += info.stat2_value
-	fill_hp_bar()
-
-
-func fill_hp_bar():
+func set_hp_bar_max():
 	current_hp = max_hp
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)

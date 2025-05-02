@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c37d7vyo0m6jb"]
+
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_mklda"]
+
+[resource]
+script = ExtResource("1_mklda")
+card_name = "Minor hp boost"
+hp_name = "HP:"
+hp = 3

@@ -20,4 +20,4 @@ func Update(delta:float):
 	if idle_time > 0:
 		idle_time -= delta
 	else:
-		ChooseNewState.emit(self)
+		ChooseNewState.emit()

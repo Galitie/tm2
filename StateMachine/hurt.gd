@@ -12,8 +12,9 @@ func Enter():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hurt":
-		check_if_knocked_out()
-		ChooseNewState.emit(self)
+		if check_if_knocked_out():
+			return
+		ChooseNewState.emit()
 
 
 func Physics_Update(_delta:float):
@@ -21,7 +22,10 @@ func Physics_Update(_delta:float):
 
 
 func take_damage():
-	monster.current_hp -= 1
+	if Globals.is_sudden_death_mode:
+		monster.current_hp = 0
+	else:
+		monster.current_hp -= 1
 	monster.current_hp_label.text = str(monster.current_hp)
 	monster.hp_bar.value = monster.current_hp
 	check_low_hp()
@@ -30,7 +34,9 @@ func take_damage():
 
 func check_if_knocked_out():
 	if monster.current_hp <= 0:
-		Transitioned.emit(self, "knockedout")
+		Transitioned.emit("knockedout")
+		return true
+	return false
 
 
 func check_low_hp():

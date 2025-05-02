@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgbiaduauaghx"]
+[gd_scene load_steps=3 format=3 uid="uid://dgbiaduauaghx"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_8erfr"]
 [ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
-[ext_resource type="Resource" uid="uid://b6bunnjw00ern" path="res://Cards/card_info.tres" id="3_jfart"]
 
 [node name="Panel" type="PanelContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -12,7 +11,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_8erfr")
 script = ExtResource("2_0simy")
-info = ExtResource("3_jfart")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
@@ -23,6 +21,10 @@ layout_mode = 0
 offset_right = 220.0
 offset_bottom = 178.0
 theme = ExtResource("1_8erfr")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Button/MarginContainer"]
 layout_mode = 2
@@ -34,7 +36,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "ADD STATS:"
+text = "Upgrade title"
 autowrap_mode = 2
 
 [node name="Items" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
@@ -45,60 +47,15 @@ theme = ExtResource("1_8erfr")
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-text = "+5"
-
 [node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
 
-[node name="Stat2" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-
-[node name="Amount2" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "+5"
-
-[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-text = "Health"
-
-[node name="Ability" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
-visible = false
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-
-[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Ability"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-text = "+Ability - Life Steal"
-autowrap_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items/Ability"]
-visible = false
-layout_mode = 2
-
-[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Ability/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-theme = ExtResource("1_8erfr")
-text = "When mon does damage to another mon, regain 1 hp"
-autowrap_mode = 3
-
-[node name="BodyPart" type="Label" parent="Button/MarginContainer/VBoxContainer/Items"]
-visible = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-text = "+Part - Wings"
-autowrap_mode = 3
+text = "5"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

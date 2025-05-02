@@ -17,7 +17,7 @@ func Physics_Update(_delta:float):
 			monster.velocity = direction.normalized() * monster.move_speed
 		else:
 			monster.velocity = Vector2()
-			ChooseNewState.emit(self)
+			ChooseNewState.emit()
 
 
 func select_target():
@@ -26,7 +26,7 @@ func select_target():
 		target_mon = targetable_monsters.pick_random()
 		animation_player.play("run")
 	else:
-		ChooseNewState.emit(self)
+		ChooseNewState.emit()
 
 
 func get_targetable_monsters() -> Array[CharacterBody2D]:

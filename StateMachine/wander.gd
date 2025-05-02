@@ -19,7 +19,7 @@ func Update(delta:float):
 	if wander_time > 0:
 		wander_time -= delta
 	else:
-		ChooseNewState.emit(self)
+		ChooseNewState.emit()
 
 func Physics_Update(_delta:float):
 	if monster:

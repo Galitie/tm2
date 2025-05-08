@@ -16,6 +16,7 @@ var secondary_color
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
 @onready var max_hp_label = %max_hp
+@onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 
 # attack ideas
 # basic attack, special attack, block, super/big range/fullscreen
@@ -48,4 +49,4 @@ func set_hp_bar_max():
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
-	
+	hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)

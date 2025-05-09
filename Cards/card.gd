@@ -7,12 +7,16 @@ var chosen_resource : Resource
 
 func _ready():
 	choose_card_resource()
-	$Button/MarginContainer/VBoxContainer/Title.text = chosen_resource.card_name
-	$Button/MarginContainer/VBoxContainer/Items/Stat1/Stat.text = chosen_resource.hp_name
-	$Button/MarginContainer/VBoxContainer/Items/Stat1/Amount.text = str(chosen_resource.hp)
-	$Button/MarginContainer/VBoxContainer/Items/Description.text = chosen_resource.description
-	if chosen_resource.description != null:
-		$Button/MarginContainer/VBoxContainer/Items/Description.visible = true
+	%Title.text = chosen_resource.card_name
+	%Stat.text = chosen_resource.hp_name
+	%Amount.text = str(chosen_resource.hp)
+	%Description.text = chosen_resource.description
+	if chosen_resource.description:
+		%Description.visible = true
+	if chosen_resource.hp:
+		%Stat.visible = true
+	if chosen_resource.hp_name:
+		%Amount.visible = true
 
 
 func _process(_delta):

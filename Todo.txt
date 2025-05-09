@@ -1,11 +1,13 @@
 Todo:
+	Stats on upgrade screen are real
+	Realtime updates to stats on upgrade screen
+	
 	Figure out how creatures will choose their next state
 	Make multi-player work
 	Controller
 	Menus
 	Naming creatures
 	Rounds
-	Put HP bar logic in one place?
 
 Ideas:
 Pick an egg, that determines starting body shape

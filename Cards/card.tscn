@@ -31,7 +31,10 @@ layout_mode = 2
 theme = ExtResource("1_8erfr")
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer"]
+[node name="TitleDescription" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer/TitleDescription"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -39,25 +42,30 @@ theme = ExtResource("1_8erfr")
 text = "Upgrade title"
 autowrap_mode = 2
 
+[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/TitleDescription"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Description"
+
 [node name="Items" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-
-[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/Items"]
-visible = false
-layout_mode = 2
 
 [node name="Stat1" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
 [node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
 
 [node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"

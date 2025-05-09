@@ -43,6 +43,10 @@ autowrap_mode = 2
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
+[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/Items"]
+visible = false
+layout_mode = 2
+
 [node name="Stat1" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")

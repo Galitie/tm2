@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=48 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Texture2D" uid="uid://dxyx1fd5hukjm" path="res://test_parts/body_horizontal.png" id="1_23gn5"]
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
@@ -23,8 +23,9 @@
 [ext_resource type="Script" uid="uid://dg7e4rqh2bmw7" path="res://StateMachine/chase.gd" id="20_6py8i"]
 [ext_resource type="Script" uid="uid://buxkyj050pe6q" path="res://StateMachine/idle.gd" id="20_772v6"]
 [ext_resource type="Script" uid="uid://cxwy6h8ky36h" path="res://StateMachine/hurt.gd" id="21_j21k1"]
-[ext_resource type="Script" uid="uid://ljj4p0w8v65v" path="res://StateMachine/attack.gd" id="22_lrr1d"]
+[ext_resource type="Script" uid="uid://ljj4p0w8v65v" path="res://StateMachine/punch.gd" id="22_lrr1d"]
 [ext_resource type="Script" uid="uid://cfc0n2o6rngal" path="res://StateMachine/knocked_out.gd" id="24_u8wmr"]
+[ext_resource type="Script" uid="uid://lwl5h5lf00gg" path="res://bite_life_steal.gd" id="25_ce3e3"]
 [ext_resource type="StyleBox" uid="uid://b1cqxdsndopa" path="res://hp_green.tres" id="25_o122v"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="25_s0vvg"]
 [ext_resource type="Script" uid="uid://bljsuke2bqro" path="res://StateMachine/reset.gd" id="26_3x5v3"]
@@ -1430,8 +1431,9 @@ size = Vector2(141, 173)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb8nq"]
 bg_color = Color(0.20033, 0.20033, 0.20033, 1)
 
-[node name="Monster" type="CharacterBody2D" groups=["Monster"]]
+[node name="Monster" type="CharacterBody2D" node_paths=PackedStringArray("melee_attack") groups=["Monster"]]
 script = ExtResource("1_ni8ke")
+melee_attack = NodePath("MonsterContainer/MeleeAttack")
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["HurtBox"]]
 scale = Vector2(1.4, 1.24)
@@ -1647,10 +1649,9 @@ position = Vector2(200.5, 5.5)
 shape = SubResource("RectangleShape2D_6py8i")
 disabled = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("monster", "melee_attack")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("monster")]
 script = ExtResource("18_cjpl6")
 monster = NodePath("..")
-melee_attack = NodePath("../MonsterContainer/MeleeAttack")
 
 [node name="Wander" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player")]
 script = ExtResource("19_jjfbp")
@@ -1672,11 +1673,16 @@ script = ExtResource("21_j21k1")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox")]
+[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox")]
 script = ExtResource("22_lrr1d")
 monster = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 hurtbox = NodePath("../../Hurtbox")
+
+[node name="BiteLifeSteal" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player")]
+script = ExtResource("25_ce3e3")
+monster = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
 
 [node name="KnockedOut" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster", "animation_player", "hurtbox_collision", "body_collision", "melee_collision")]
 script = ExtResource("24_u8wmr")
@@ -1760,8 +1766,9 @@ theme_override_font_sizes/font_size = 36
 text = "NAME"
 horizontal_alignment = 1
 
-[connection signal="area_entered" from="Hurtbox" to="StateMachine" method="_on_mon_collision_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Hurt" method="_on_animation_player_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Punch" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/KnockedOut" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/UpgradeStart" method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/BiteLifeSteal" method="_on_animation_player_animation_finished"]

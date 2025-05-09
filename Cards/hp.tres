@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_mklda")
-card_name = "Minor hp boost"
+card_name = "HP boost"
 hp_name = "HP:"
 hp = 3

@@ -41,7 +41,7 @@ func set_upgrade_mode():
 
 
 func set_fight_mode():
-	$SuddenDeathTimer.start()
+	#$SuddenDeathTimer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
@@ -72,8 +72,13 @@ func debug_stuff():
 			target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_cancel"):
 		set_fight_mode()
+	if Input.is_action_just_pressed("ui_down"):
+		Globals.is_sudden_death_mode = false
 
 
 func card_pressed(resource, monster):
-	monster.max_hp += resource.hp
-	monster.set_hp_bar_max()
+	if resource.hp:
+		monster.max_hp += resource.hp
+		monster.apply_hp(monster.max_hp)
+	if resource.state_id and not monster.state_machine.state_choices.has(resource.state_id):
+		monster.state_machine.state_choices.append(resource.state_id)

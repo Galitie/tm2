@@ -2,8 +2,8 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
+var state_choices = ["wander", "chase", "idle", "punch"]
 @export var monster = CharacterBody2D
-@export var melee_attack : Area2D
 
 
 func _ready():
@@ -29,7 +29,7 @@ func _physics_process(delta):
 #TODO: Choose state off of scenarios not randomness
 # connected to "ChooseNewState" signal in state.gd
 func choose_new_state():
-	var state_choices = ["wander", "chase", "idle", "attack"]
+	print(state_choices)
 	var new_state = state_choices.pick_random()
 	transition_state(new_state)
 
@@ -50,9 +50,3 @@ func transition_state(new_state_name):
 	current_state.Exit()
 	current_state = new_state
 	current_state.Enter()
-	print(current_state)
-
-
-func _on_mon_collision_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Attack") and area != melee_attack:
-		transition_state("hurt")

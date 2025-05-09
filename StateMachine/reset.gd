@@ -10,7 +10,7 @@ class_name Reset
 var health_fill_style := load("uid://b1cqxdsndopa") as StyleBox
 
 func Enter():
-	monster.set_hp_bar_max()
+	monster.apply_hp(monster.max_hp)
 	animation_player.play("get_up")
 	monster.get_node("HPBar").visible = true
 	monster.hp_bar.add_theme_stylebox_override("fill", health_fill_style)

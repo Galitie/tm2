@@ -5,7 +5,6 @@ class_name Bite
 @export var animation_player : AnimationPlayer
 
 func Enter():
-	print("biting!")
 	animation_player.play("attack_front_close")
 	monster.velocity = Vector2.ZERO
 

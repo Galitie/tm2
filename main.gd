@@ -14,7 +14,7 @@ func _init():
 
 
 func _ready():
-	var upgrade_cards = upgrade_panel.get_tree().get_nodes_in_group("card")
+	var upgrade_cards = upgrade_panel.get_tree().get_nodes_in_group("UpgradeCard")
 	for card in upgrade_cards:
 		card.connect("card_pressed", card_pressed)
 
@@ -32,6 +32,7 @@ func count_death():
 
 func set_upgrade_mode():
 	$SuddenDeathTimer.stop()
+	get_node("UpgradePanel").setup()
 	get_node("UpgradePanel").visible = true
 	for player in players:
 		var monster = player.get_node("Monster")
@@ -42,6 +43,7 @@ func set_upgrade_mode():
 
 func set_fight_mode():
 	#$SuddenDeathTimer.start()
+	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
@@ -57,6 +59,8 @@ func _on_sudden_death_timer_timeout():
 
 func _on_round_over_delay_timer_timeout():
 	set_upgrade_mode()
+	for player in players:
+		player.upgrade_points = 3
 
 
 func debug_stuff():
@@ -70,15 +74,27 @@ func debug_stuff():
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
 			target_monster.state_machine.transition_state("knockedout")
-	if Input.is_action_just_pressed("ui_cancel"):
-		set_fight_mode()
 	if Input.is_action_just_pressed("ui_down"):
 		Globals.is_sudden_death_mode = false
 
 
-func card_pressed(resource, monster):
-	if resource.hp:
-		monster.max_hp += resource.hp
-		monster.apply_hp(monster.max_hp)
-	if resource.state_id and not monster.state_machine.state_choices.has(resource.state_id):
-		monster.state_machine.state_choices.append(resource.state_id)
+func card_pressed(card):
+	var player = card.upgrade_panel.player
+	player.upgrade_points -= 1
+	if card.chosen_resource.hp:
+		player.monster.max_hp += card.chosen_resource.hp
+		player.monster.apply_hp(player.monster.max_hp)
+	if card.chosen_resource.state_id and not player.monster.state_machine.state_choices.has(card.chosen_resource.state_id):
+		player.monster.state_machine.state_choices.append(card.chosen_resource.state_id)
+	card.upgrade_panel.update_stats()
+	if player.upgrade_points > 0:
+		card.choose_card_resource()
+	else:
+		card.upgrade_panel.disable_cards()
+		var players_have_no_points = true
+		for p in players:
+			if p.upgrade_points > 0:
+				players_have_no_points = false
+				break
+		if players_have_no_points:
+			set_fight_mode()

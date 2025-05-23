@@ -65,7 +65,6 @@ func _on_hurtbox_area_entered(area):
 			"punch":
 				take_damage(attacking_mon)
 			"bitelifesteal":
-				print("bitelifesteal")
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
 
@@ -74,7 +73,6 @@ func take_damage(enemy):
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		var attack_power = enemy.base_damage
 		apply_hp(-enemy.base_damage)
 	check_low_hp()
 

@@ -29,7 +29,6 @@ func _physics_process(delta):
 #TODO: Choose state off of scenarios not randomness
 # connected to "ChooseNewState" signal in state.gd
 func choose_new_state():
-	print(state_choices)
 	var new_state = state_choices.pick_random()
 	transition_state(new_state)
 

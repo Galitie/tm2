@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba3142spsuljy"]
+
+[ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://player_upgrade_panel.gd" id="1_kvryu"]
+[ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
+
+[node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
+size_flags_horizontal = 3
+script = ExtResource("1_kvryu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "UPGRADE"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+layout_mode = 2
+
+[node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+layout_mode = 2
+
+[node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+layout_mode = 2
+
+[node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Stats" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Stats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Stats"]
+layout_mode = 2
+text = "STATS
+HP: 5 | MP: 10 | STR: 11"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3

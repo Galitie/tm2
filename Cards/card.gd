@@ -1,12 +1,25 @@
 extends PanelContainer
 
-var monster : Monster
-signal card_pressed(resource, monster)
+signal card_pressed(resource, player)
 var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq")]
 var chosen_resource : Resource
+var upgrade_panel : PlayerUpgradePanel
 
 func _ready():
 	choose_card_resource()
+
+
+func _process(_delta):
+	pass
+
+
+func _on_button_pressed():
+	emit_signal("card_pressed", self) #Caught by game scene
+
+
+func choose_card_resource():
+	reset_card()
+	chosen_resource = resource_array.pick_random()
 	%Title.text = chosen_resource.card_name
 	%Stat.text = chosen_resource.hp_name
 	%Amount.text = str(chosen_resource.hp)
@@ -19,12 +32,15 @@ func _ready():
 		%Amount.visible = true
 
 
-func _process(_delta):
-	pass
+func reset_card():
+	%Description.visible = false
+	%Stat.visible = false
+	%Amount.visible = false
 
 
-func _on_button_pressed():
-	emit_signal("card_pressed", chosen_resource, monster) #Caught by game scene
+func disable():
+	$Button.disabled = true
 
-func choose_card_resource():
-	chosen_resource = resource_array.pick_random()
+
+func enable():
+	$Button.disabled = false

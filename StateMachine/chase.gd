@@ -34,9 +34,9 @@ func get_targetable_monsters() -> Array[CharacterBody2D]:
 	var monster_collection = get_tree().get_nodes_in_group("Monster")
 	monster_collection.erase(monster)
 
-	for monster in monster_collection:
-		var state_machine = monster.get_node("StateMachine")
+	for mon in monster_collection:
+		var state_machine = mon.get_node("StateMachine")
 		if state_machine.current_state != state_machine.states["knockedout"]:
-			targetable_monsters.append(monster)
+			targetable_monsters.append(mon)
 
 	return targetable_monsters

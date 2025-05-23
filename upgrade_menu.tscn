@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://caig5oumsc857"]
+
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_sx8i1"]
+[ext_resource type="Script" uid="uid://b72ksksy2twh2" path="res://upgrade_menu.gd" id="2_tug6p"]
+[ext_resource type="PackedScene" uid="uid://ba3142spsuljy" path="res://player_upgrade_panel.tscn" id="3_tnm5o"]
+
+[node name="UpgradeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_sx8i1")
+script = ExtResource("2_tug6p")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PlayerContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Player1" parent="MarginContainer/PlayerContainer" instance=ExtResource("3_tnm5o")]
+layout_mode = 2
+
+[node name="Player2" parent="MarginContainer/PlayerContainer" instance=ExtResource("3_tnm5o")]
+layout_mode = 2
+
+[node name="Player3" parent="MarginContainer/PlayerContainer" instance=ExtResource("3_tnm5o")]
+layout_mode = 2
+
+[node name="Player4" parent="MarginContainer/PlayerContainer" instance=ExtResource("3_tnm5o")]
+layout_mode = 2

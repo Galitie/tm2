@@ -1,12 +1,11 @@
 Todo:
-	Stats on upgrade screen are real
-	Realtime updates to stats on upgrade screen
-	
+	Limit upgrades if they have taken them, some are limited some are not
 	Figure out how creatures will choose their next state
 	Make multi-player work
 	Controller
 	Menus
 	Naming creatures
+	Creature colors
 	Rounds
 
 Ideas:
@@ -14,7 +13,6 @@ Pick an egg, that determines starting body shape
 3 body shapes to choose from (or more if I have time)
 As they gain experience, they look cooler?
 Let players customize a character from the start? (Name/color...accessories?)
-Pick and pass upgrade card options?
 Coop mode where you fight an NPC(s) or just against each other?
 Have multiple creatures? If so, they will need player outlines or something
 Different Idle options? Could bop, or dance or zone out etc.

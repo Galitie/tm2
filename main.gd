@@ -87,17 +87,22 @@ func card_pressed(card):
 			player.monster.apply_hp(player.monster.max_hp)
 		if card.chosen_resource.attribute_1 == 2: #MOVE_SPEED
 			player.monster.move_speed += card.chosen_resource.attribute_amount_1
+	# Sometimes I want to replace slots, not just add potential states...
 	if card.chosen_resource.state_id and not player.monster.state_machine.state_choices.has(card.chosen_resource.state_id):
 		player.monster.state_machine.state_choices.append(card.chosen_resource.state_id)
 	card.upgrade_panel.update_stats()
+	check_if_upgrade_round_over(card, player)
+
+
+func check_if_upgrade_round_over(card, player):
 	if player.upgrade_points > 0:
 		card.choose_card_resource()
 	else:
 		card.upgrade_panel.disable_cards()
-		var players_have_no_points = true
-		for p in players:
-			if p.upgrade_points > 0:
-				players_have_no_points = false
-				break
-		if players_have_no_points:
-			set_fight_mode()
+	var players_have_no_points = true
+	for p in players:
+		if p.upgrade_points > 0:
+			players_have_no_points = false
+			break
+	if players_have_no_points:
+		set_fight_mode()

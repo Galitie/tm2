@@ -3,7 +3,7 @@ extends Resource
 
 @export var card_name : String
 @export_multiline var description: String
-@export_enum("melee", "ranged", "charge", "block", "passive", "immediate") var type : String
+@export_enum("attack", "charge_attack", "special", "block", "passive", "immediate") var type : String
 @export var state_id : String
 @export var limited_to_one : bool
 

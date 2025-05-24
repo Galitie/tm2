@@ -20,14 +20,19 @@ var secondary_color
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 
-# attack ideas
-# basic attack, special attack, block, super/big range/fullscreen
-# attacks have stats: speed, mp amount, base damage, size, distance, pierce
-# rerolls - not sure where this should live since it doesn't actually apply to the mon
+@onready var attack : State = $StateMachine/Punch
+@onready var charge_attack : State
+@onready var block : State
+@onready var super_attack : State
+var passive_1
+var passive_2
+var passive_3
 
-# attacks can be short range, long range or specials with a charge up
-# ability slots? for short range, long range, special and passive?
-# mash A to charge special?
+
+# attacks have stats: speed, mp amount, base damage, size, distance, pierce
+
+# attacks can be short range, long range or 
+# specials with a charge up
 # give them preferences? melee, range, etc.
 
 func _ready():

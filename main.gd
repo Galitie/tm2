@@ -85,6 +85,8 @@ func card_pressed(card):
 		if card.chosen_resource.attribute_1 == 1: #HP
 			player.monster.max_hp += card.chosen_resource.attribute_amount_1
 			player.monster.apply_hp(player.monster.max_hp)
+		if card.chosen_resource.attribute_1 == 2: #MOVE_SPEED
+			player.monster.move_speed += card.chosen_resource.attribute_amount_1
 	if card.chosen_resource.state_id and not player.monster.state_machine.state_choices.has(card.chosen_resource.state_id):
 		player.monster.state_machine.state_choices.append(card.chosen_resource.state_id)
 	card.upgrade_panel.update_stats()

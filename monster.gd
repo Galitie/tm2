@@ -5,7 +5,7 @@ var max_hp : int = 10
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
-var move_speed : int = 40
+var move_speed : int = 35
 var attack_speed : int = 1
 
 var mon_name : String

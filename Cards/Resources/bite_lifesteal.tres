@@ -4,11 +4,17 @@
 
 [resource]
 script = ExtResource("1_1p3yw")
-card_name = "Vampire Bite"
-description = "Learn a lifesteal attack"
+card_name = "VAMPIRE BITE"
+description = "Replaces Melee attack, heals +1 HP on bite"
 type = "melee"
 state_id = "bitelifesteal"
 limited_to_one = true
 attribute_1 = 0
-attribute_label = ""
-attribute_amount = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0

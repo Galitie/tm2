@@ -1,5 +1,6 @@
 Todo:
-	Limit upgrades if they have taken them, some are limited some are not
+	Limit upgrades if the player has already taken them
+	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
 	Make multi-player work
 	Controller

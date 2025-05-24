@@ -12,7 +12,7 @@ func _ready():
 
 
 func update_stats():
-	stats.text = "HP: " + str(player.monster.max_hp) + " | " + "STR: " + str(player.monster.base_damage)
+	stats.text = "HP: " + str(player.monster.max_hp) + " | STR: " + str(player.monster.base_damage) + " | MOV_SPD: " + str(player.monster.move_speed)
 
 
 func disable_cards():

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cvtqvsltnme3w"]
+
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_6hnit"]
+
+[resource]
+script = ExtResource("1_6hnit")
+card_name = "SPEED BOOST"
+description = ""
+type = "immediate"
+state_id = ""
+limited_to_one = false
+attribute_1 = 2
+attribute_label_1 = "MOVE SPEED"
+attribute_amount_1 = 15
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0

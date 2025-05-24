@@ -79,6 +79,8 @@ func debug_stuff():
 
 
 func card_pressed(card):
+	if card.chosen_resource.limited_to_one:
+		card.upgrade_panel.resource_array.erase(card.chosen_resource)
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
 	if card.chosen_resource.attribute_1 != 0:
@@ -96,7 +98,11 @@ func card_pressed(card):
 
 func check_if_upgrade_round_over(card, player):
 	if player.upgrade_points > 0:
-		card.choose_card_resource()
+		var deep_copy = card.upgrade_panel.resource_array.duplicate(true)
+		for panel_card in card.upgrade_panel.upgrade_cards:
+			if panel_card.chosen_resource.limited_to_one:
+				deep_copy.erase(panel_card.chosen_resource)
+		card.choose_card_resource(deep_copy.pick_random())
 	else:
 		card.upgrade_panel.disable_cards()
 	var players_have_no_points = true

@@ -20,15 +20,20 @@ func _on_button_pressed():
 func choose_card_resource():
 	reset_card()
 	chosen_resource = resource_array.pick_random()
+	if chosen_resource.limited_to_one:
+		print("can only have one")
+		# The card creation needs to consider if the monster already has that ability and the card is limited to one.
+		# If the monster already has it, it needs to pick a different one.
+		# Monster keeps it's list of states in
 	%Title.text = chosen_resource.card_name
-	%Stat.text = chosen_resource.hp_name
-	%Amount.text = str(chosen_resource.hp)
 	%Description.text = chosen_resource.description
+	%Stat.text = chosen_resource.attribute_label_1
+	%Amount.text = str(chosen_resource.attribute_amount_1)
 	if chosen_resource.description:
 		%Description.visible = true
-	if chosen_resource.hp:
+	if chosen_resource.attribute_label_1:
 		%Stat.visible = true
-	if chosen_resource.hp_name:
+	if chosen_resource.attribute_amount_1:
 		%Amount.visible = true
 
 

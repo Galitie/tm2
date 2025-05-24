@@ -6,6 +6,15 @@
 script = ExtResource("1_mklda")
 card_name = "HP Boost"
 description = ""
+type = "immediate"
 state_id = ""
-hp_name = "Max HP +"
-hp = 3
+limited_to_one = false
+attribute_1 = 1
+attribute_label_1 = "+ MAX HP"
+attribute_amount_1 = 3
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0

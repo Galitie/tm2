@@ -42,7 +42,7 @@ func set_upgrade_mode():
 
 
 func set_fight_mode():
-	#$SuddenDeathTimer.start()
+	$SuddenDeathTimer.start()
 	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -81,9 +81,10 @@ func debug_stuff():
 func card_pressed(card):
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
-	if card.chosen_resource.hp:
-		player.monster.max_hp += card.chosen_resource.hp
-		player.monster.apply_hp(player.monster.max_hp)
+	if card.chosen_resource.attribute_1 != 0:
+		if card.chosen_resource.attribute_1 == 1: #HP
+			player.monster.max_hp += card.chosen_resource.attribute_amount_1
+			player.monster.apply_hp(player.monster.max_hp)
 	if card.chosen_resource.state_id and not player.monster.state_machine.state_choices.has(card.chosen_resource.state_id):
 		player.monster.state_machine.state_choices.append(card.chosen_resource.state_id)
 	card.upgrade_panel.update_stats()

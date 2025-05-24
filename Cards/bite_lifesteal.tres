@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://3aquqn25lskq"]
+
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_1p3yw"]
+
+[resource]
+script = ExtResource("1_1p3yw")
+card_name = "Vampire Bite"
+description = "Learn a lifesteal attack"
+type = "melee"
+state_id = "bitelifesteal"
+limited_to_one = true
+attribute_1 = 0
+attribute_label = ""
+attribute_amount = 0

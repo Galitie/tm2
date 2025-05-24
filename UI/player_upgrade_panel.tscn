@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ba3142spsuljy"]
 
-[ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://player_upgrade_panel.gd" id="1_kvryu"]
+[ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
 
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]

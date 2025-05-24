@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dgbiaduauaghx"]
 
-[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://Theme.tres" id="1_8erfr"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_8erfr"]
 [ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
 
 [node name="Panel" type="PanelContainer"]

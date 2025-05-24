@@ -1,5 +1,4 @@
 Todo:
-	Limit upgrades if the player has already taken them
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
 	Make multi-player work
@@ -7,14 +6,14 @@ Todo:
 	Menus
 	Naming creatures
 	Creature colors
-	Rounds
+
 
 Ideas:
-Pick an egg, that determines starting body shape
-3 body shapes to choose from (or more if I have time)
-As they gain experience, they look cooler?
-Let players customize a character from the start? (Name/color...accessories?)
-Coop mode where you fight an NPC(s) or just against each other?
-Have multiple creatures? If so, they will need player outlines or something
-Different Idle options? Could bop, or dance or zone out etc.
-Do upgrade cards determine looks? Does's it tell you?
+	Pick an egg, that determines starting body shape
+	3 body shapes to choose from (or more if I have time)
+	As they gain experience, they look cooler?
+	Let players customize a character from the start? (Name/color...accessories?)
+	Coop mode where you fight an NPC(s) or just against each other?
+	Have multiple creatures? If so, they will need player outlines or something
+	Different Idle options? Could bop, or dance or zone out etc.
+	Do upgrade cards determine looks? Does's it tell you?

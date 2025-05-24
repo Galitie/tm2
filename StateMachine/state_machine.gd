@@ -2,7 +2,7 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
-var state_choices = ["wander", "chase", "idle", "punch"]
+var state_choices = ["wander", "chase", "idle", "punch", "block"]
 @export var monster = CharacterBody2D
 
 

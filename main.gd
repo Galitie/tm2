@@ -1,13 +1,12 @@
 extends Node2D
 class_name Game
 @export var rounds : int = 10
-@export var debug_mode : bool = true
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player_count = players.size()
 @onready var upgrade_panel = $UpgradePanel
-
 var dead_monsters : int
 
+@export var debug_mode : bool = true
 
 func _init():
 	Globals.game = self

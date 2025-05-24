@@ -20,7 +20,7 @@ var secondary_color
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 
-@onready var attack : State = $StateMachine/Punch
+@onready var basic_attack : State = $StateMachine/Punch
 @onready var charge_attack : State
 @onready var block : State
 @onready var super_attack : State
@@ -57,7 +57,7 @@ func apply_hp(amount):
 	max_hp_label.text = str(max_hp)
 	current_hp_label.text = str(current_hp)
 	hp_bar.value = current_hp
-	if current_hp >= (max_hp / 3):
+	if current_hp >= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)
 
 
@@ -83,5 +83,5 @@ func take_damage(enemy):
 
 
 func check_low_hp():
-	if current_hp <= (max_hp / 3):
+	if current_hp <= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)

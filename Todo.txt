@@ -1,6 +1,7 @@
 Todo:
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
+	How to decide winner? Last one standing? There is a sudden death mode...
 	Make multi-player work
 	Controller
 	Menus

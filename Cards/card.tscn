@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgbiaduauaghx"]
+[gd_scene load_steps=4 format=3 uid="uid://dgbiaduauaghx"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_8erfr"]
 [ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wsk7e"]
 
 [node name="Panel" type="PanelContainer"]
 custom_minimum_size = Vector2(100, 100)
@@ -10,6 +12,7 @@ offset_bottom = 113.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_8erfr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_wsk7e")
 script = ExtResource("2_0simy")
 
 [node name="Button" type="Button" parent="."]

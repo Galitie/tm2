@@ -13,3 +13,4 @@ func setup():
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.setup_cards()
 		player_upgrade_panel.setup_rerolls()
+		player_upgrade_panel.upgrade_title.text = "EXP POINTS [x" + str(player_upgrade_panel.player.upgrade_points) + "]"

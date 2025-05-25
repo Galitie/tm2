@@ -109,6 +109,7 @@ func card_pressed(card):
 		card.upgrade_panel.resource_array.erase(chosen_card)
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
+	card.upgrade_panel.upgrade_title.text = "EXP POINTS [x" + str(player.upgrade_points) + "]"
 	if chosen_card.attribute_1 != CardResourceScript.Attributes.NONE:
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.HP:
 			player.monster.max_hp += chosen_card.attribute_amount_1
@@ -136,6 +137,7 @@ func check_if_upgrade_round_over(card, player):
 		upgrade_panel.disable_cards()
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
+		upgrade_panel.upgrade_title.text = "DONE UPGRADING"
 	var players_have_no_points = true
 	for p in players:
 		if p.upgrade_points > 0:
@@ -151,7 +153,7 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "🎲 Upgrades " + "[x" + str(player.rerolls)+ "]"
+		upgrade_panel.reroll_button.text = "🎲 Reroll Upgrades " + "[x" + str(player.rerolls) + "]"
 	else:
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true

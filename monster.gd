@@ -56,10 +56,13 @@ func _physics_process(_delta):
 
 func apply_hp(amount):
 	current_hp += amount
-	if current_hp > max_hp:
+	if current_hp >= max_hp:
 		current_hp = max_hp
+	if current_hp <= 0:
+		current_hp = 0
 	max_hp_label.text = str(max_hp)
 	current_hp_label.text = str(current_hp)
+	hp_bar.max_value = max_hp
 	hp_bar.value = current_hp
 	if current_hp >= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)

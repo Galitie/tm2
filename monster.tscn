@@ -2235,6 +2235,7 @@ offset_right = 101.0
 offset_bottom = -202.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bb8nq")
 theme_override_styles/fill = ExtResource("25_o122v")
+rounded = true
 show_percentage = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HPBar"]

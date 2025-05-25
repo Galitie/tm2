@@ -57,7 +57,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 scale = Vector2(0.3, 0.3)
-hue_shift = 0.374
+hue_shift = 0.786
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 493)

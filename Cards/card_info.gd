@@ -1,11 +1,11 @@
 extends Resource
-
+class_name CardResourceScript
 
 @export var card_name : String
 @export_multiline var description: String
 @export_enum("attack", "charge_attack", "special", "block", "passive", "immediate") var type : String
 @export var state_id : String
-@export var limited_to_one : bool
+@export var unique : bool
 
 @export_group("Attributes")
 enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE}

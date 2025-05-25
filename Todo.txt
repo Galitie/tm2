@@ -1,5 +1,4 @@
 Todo:
-	Rerolls limitations
 	Concept of points
 	Concept of rounds
 	Modes - Quickplay, Regular etc.

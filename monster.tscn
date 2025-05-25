@@ -1091,6 +1091,18 @@ tracks/13/keys = {
 "update": 0,
 "values": [0.0488692]
 }
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Monster/MonsterContainer/Parts/BodyHorizontal/Head/Eyes/Spider:animation")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
 
 [sub_resource type="Animation" id="Animation_u8wmr"]
 resource_name = "knocked_out"
@@ -2094,7 +2106,8 @@ material = SubResource("ShaderMaterial_3x5v3")
 [node name="BodyHorizontal" type="Sprite2D" parent="MonsterContainer/Parts"]
 z_index = 1
 use_parent_material = true
-rotation = 0.0486036
+position = Vector2(0, 21)
+rotation = 0.0488692
 texture = ExtResource("1_23gn5")
 
 [node name="Wings" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
@@ -2121,6 +2134,7 @@ offset = Vector2(20, 70)
 [node name="Head" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
 use_parent_material = true
 position = Vector2(76, -44)
+rotation = -0.0890118
 
 [node name="Round" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Head"]
 use_parent_material = true
@@ -2254,7 +2268,7 @@ offset = Vector2(0, 50)
 [node name="Tail" type="Node2D" parent="MonsterContainer/Parts/BodyHorizontal"]
 z_index = -1
 use_parent_material = true
-position = Vector2(-98, -2)
+position = Vector2(-72.11, -17.19)
 
 [node name="Tail_Mermaid" type="Sprite2D" parent="MonsterContainer/Parts/BodyHorizontal/Tail"]
 use_parent_material = true

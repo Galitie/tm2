@@ -14,7 +14,7 @@ func Enter():
 	turn_on_collisions()
 	monster.get_node("HPBar").visible = true
 	monster.z_index = 1
-	ChooseNewState.emit()
+	Transitioned.emit("wander")
 
 
 func turn_on_collisions():

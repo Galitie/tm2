@@ -10,6 +10,7 @@ size = Vector2(1174, 20)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
+total_rounds = 1
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -108,9 +109,13 @@ metadata/_edit_lock_ = true
 wait_time = 1.75
 one_shot = true
 
+[node name="UpgradeOverDelayTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="SuddenDeathTimer" type="Timer" parent="."]
 wait_time = 60.0
 one_shot = true
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
+[connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]
 [connection signal="timeout" from="SuddenDeathTimer" to="." method="_on_sudden_death_timer_timeout"]

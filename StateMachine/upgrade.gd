@@ -13,7 +13,10 @@ func Enter():
 	turn_off_collisions()
 	monster.velocity = Vector2()
 	monster.get_node("MonsterContainer").modulate = Color(1,1,1,1)
-	animation_player.play("get_up")
+	if monster.state_machine.current_state == KnockedOut:
+		animation_player.play("get_up")
+	else:
+		animation_player.play("idle")
 	monster.apply_hp(monster.max_hp)
 	monster.get_node("HPBar").visible = false
 	monster.z_index = 1

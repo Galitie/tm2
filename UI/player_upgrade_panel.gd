@@ -31,7 +31,7 @@ func setup_cards():
 	var temp_resources = resource_array.duplicate(true)
 	for card in upgrade_cards:
 		var random_resource = temp_resources.pick_random()
-		if random_resource.limited_to_one:
+		if random_resource.unique:
 			temp_resources.erase(random_resource)
 		card.choose_card_resource(random_resource)
 		card.enable()

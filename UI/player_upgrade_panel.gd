@@ -31,8 +31,12 @@ func setup_cards():
 			temp_resources.erase(random_resource)
 		card.choose_card_resource(random_resource)
 		card.enable()
-
+	if player.rerolls != 0:
+		$VBoxContainer/Reroll.text = "Reroll Upgrades " + "[x" + str(player.rerolls)+ "]"
+	else:
+		$VBoxContainer/Reroll.text = "Out of Rerolls"
 
 func _on_reroll_pressed():
-	player.rerolls -= 1
-	setup_cards()
+	if player.rerolls > 0:
+		player.rerolls -= 1
+		setup_cards()

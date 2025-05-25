@@ -57,9 +57,11 @@ func _on_sudden_death_timer_timeout():
 
 
 func _on_round_over_delay_timer_timeout():
-	set_upgrade_mode()
 	for player in players:
 		player.upgrade_points = 3
+		player.rerolls = 3
+	set_upgrade_mode()
+
 
 
 func debug_stuff():

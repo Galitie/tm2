@@ -40,6 +40,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player1" instance=ExtResource("1_7a21h")]
 position = Vector2(262, 192)
 scale = Vector2(0.3, 0.3)
+hue_shift = -0.376
 
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 493)
@@ -56,6 +57,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 scale = Vector2(0.3, 0.3)
+hue_shift = 0.374
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 493)
@@ -88,6 +90,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player4" instance=ExtResource("1_7a21h")]
 position = Vector2(864, 459)
 scale = Vector2(0.3, 0.3)
+hue_shift = -0.735
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
 position = Vector2(1000, 493)

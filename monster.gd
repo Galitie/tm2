@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 10
+var max_hp : int = 3
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
@@ -11,6 +11,8 @@ var attack_speed : int = 1
 var mon_name : String
 var main_color
 var secondary_color
+
+@export_range(-1, 1) var hue_shift : float
 
 @onready var state_machine = $StateMachine
 @export var melee_attack : Area2D
@@ -40,6 +42,8 @@ func _ready():
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
+	$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
+	
 
 
 func _physics_process(_delta):

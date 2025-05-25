@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cv4dcuvdmk4d"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://cv4dcuvdmk4d"]
 
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_lrdyw"]
 
@@ -8,9 +8,9 @@ card_name = "DAMAGE BOOST"
 description = ""
 type = "immediate"
 state_id = ""
-limited_to_one = false
+unique = false
 attribute_1 = 3
-attribute_label_1 = "BASE DAMAGE"
+attribute_label_1 = "BASE DMG"
 attribute_amount_1 = 1
 attribute_2 = 0
 attribute_label_2 = ""

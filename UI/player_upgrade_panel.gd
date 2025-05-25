@@ -19,7 +19,7 @@ func _ready():
 	
 
 func update_stats():
-	stats.text = "HP: " + str(player.monster.max_hp) + " | STR: " + str(player.monster.base_damage) + " | MOV_SPD: " + str(player.monster.move_speed)
+	stats.text = "HP: " + str(player.monster.max_hp) + " | STR: " + str(player.monster.base_damage) + " | MOV SPD: " + str(player.monster.move_speed)
 
 
 func disable_cards():
@@ -39,10 +39,10 @@ func setup_cards():
 
 func setup_rerolls():
 	if player.rerolls > 0:
-		reroll_button.text = "Reroll Upgrades " + "[x" + str(player.rerolls) + "]"
+		reroll_button.text = "🎲 Upgrades " + "[x" + str(player.rerolls) + "]"
 		reroll_button.disabled = false
 	else:
-		reroll_button.text = "No Rerolls Available"
+		reroll_button.text = "No 🎲 Available"
 		reroll_button.disabled = true
 
 

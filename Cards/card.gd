@@ -32,6 +32,8 @@ func choose_card_resource(card_resource):
 			%PosNeg.text = "+"
 		else:
 			%PosNeg.text = "-"
+	if chosen_resource.unique:
+		%Tags.text += "UNIQUE"
 
 
 func reset_card():
@@ -39,6 +41,7 @@ func reset_card():
 	%Stat.visible = false
 	%Amount.visible = false
 	%PosNeg.visible = false
+	%Tags.text = ""
 
 
 func disable():

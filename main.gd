@@ -134,7 +134,7 @@ func check_if_upgrade_round_over(card, player):
 		card.choose_card_resource(deep_copy.pick_random())
 	else:
 		upgrade_panel.disable_cards()
-		upgrade_panel.reroll_button.text = "Out of Rerolls"
+		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
 	var players_have_no_points = true
 	for p in players:
@@ -151,9 +151,9 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "Reroll Upgrades " + "[x" + str(player.rerolls)+ "]"
+		upgrade_panel.reroll_button.text = "🎲 Upgrades " + "[x" + str(player.rerolls)+ "]"
 	else:
-		upgrade_panel.reroll_button.text = "Out of Rerolls"
+		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
 
 

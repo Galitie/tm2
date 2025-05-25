@@ -1,11 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://3aquqn25lskq"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://3aquqn25lskq"]
 
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_syuw0"]
 
 [resource]
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
-description = "Replaces Melee attack, heals +1 HP on bite"
+description = "On BITE, deals BASE DMG and HEALS +1 HP"
 type = "attack"
 state_id = "bitelifesteal"
 unique = true

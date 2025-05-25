@@ -3,7 +3,7 @@ class_name Game
 @export var rounds : int = 10
 @onready var players = get_tree().get_nodes_in_group("Player")
 @onready var player_count = players.size()
-@onready var upgrade_panel = $UpgradePanel
+@onready var upgrade_menu = $UpgradePanel
 var dead_monsters : int
 
 @export var debug_mode : bool = true
@@ -13,9 +13,12 @@ func _init():
 
 
 func _ready():
-	var upgrade_cards = upgrade_panel.get_tree().get_nodes_in_group("UpgradeCard")
+	var upgrade_cards = upgrade_menu.get_tree().get_nodes_in_group("UpgradeCard")
+	var player_upgrade_panels = upgrade_menu.get_tree().get_nodes_in_group("PlayerUpgradePanel")
 	for card in upgrade_cards:
 		card.connect("card_pressed", card_pressed)
+	for player_upgrade_panel in player_upgrade_panels:
+		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
 
 
 func _process(_delta):
@@ -31,8 +34,8 @@ func count_death():
 
 func set_upgrade_mode():
 	$SuddenDeathTimer.stop()
-	get_node("UpgradePanel").setup()
-	get_node("UpgradePanel").visible = true
+	upgrade_menu.setup()
+	upgrade_menu.visible = true
 	for player in players:
 		var monster = player.get_node("Monster")
 		var upgrade_pos = player.get_node("UpgradePos")
@@ -108,6 +111,8 @@ func check_if_upgrade_round_over(card, player):
 		card.choose_card_resource(deep_copy.pick_random())
 	else:
 		card.upgrade_panel.disable_cards()
+		card.upgrade_panel.reroll_button.text = "Out of Rerolls"
+		card.upgrade_panel.reroll_button.disabled = true
 	var players_have_no_points = true
 	for p in players:
 		if p.upgrade_points > 0:
@@ -115,3 +120,14 @@ func check_if_upgrade_round_over(card, player):
 			break
 	if players_have_no_points:
 		set_fight_mode()
+
+
+func reroll_pressed(upgrade_panel):
+	if upgrade_panel.player.rerolls > 0 and upgrade_panel.player.upgrade_points > 0:
+		upgrade_panel.player.rerolls -= 1
+		upgrade_panel.setup_cards()
+	if upgrade_panel.player.rerolls != 0 and upgrade_panel.player.upgrade_points > 0:
+		upgrade_panel.reroll_button.text = "Reroll Upgrades " + "[x" + str(upgrade_panel.player.rerolls)+ "]"
+	else:
+		upgrade_panel.reroll_button.text = "Out of Rerolls"
+		upgrade_panel.reroll_button.disabled = true

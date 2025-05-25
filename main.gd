@@ -88,6 +88,8 @@ func card_pressed(card):
 			player.monster.apply_hp(player.monster.max_hp)
 		if card.chosen_resource.attribute_1 == 2: #MOVE_SPEED
 			player.monster.move_speed += card.chosen_resource.attribute_amount_1
+		if card.chosen_resource.attribute_1 == 3: #BASE_DAMAGE
+			player.monster.base_damage += card.chosen_resource.attribute_amount_1
 	# Sometimes I want to replace slots, not just add potential states...
 	if card.chosen_resource.state_id and not player.monster.state_machine.state_choices.has(card.chosen_resource.state_id):
 		player.monster.state_machine.state_choices.append(card.chosen_resource.state_id)

@@ -8,7 +8,7 @@ extends Resource
 @export var limited_to_one : bool
 
 @export_group("Attributes")
-enum Attributes {NONE, HP, MOVE_SPEED}
+enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE}
 @export var attribute_1 : Attributes
 @export var attribute_label_1 : String
 @export var attribute_amount_1: int

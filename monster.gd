@@ -21,6 +21,8 @@ var secondary_color
 @onready var max_hp_label = %max_hp
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
+@onready var animation_player = $AnimationPlayer
+@onready var animation_player_damage = $AnimationPlayer_Damage
 
 @onready var basic_attack : State = $StateMachine/Punch
 @onready var charge_attack : State
@@ -86,6 +88,8 @@ func take_damage(enemy):
 		apply_hp(-max_hp)
 	else:
 		apply_hp(-enemy.base_damage)
+	$Damage.text = str(enemy.base_damage)
+	animation_player_damage.play("damage")
 	check_low_hp()
 
 

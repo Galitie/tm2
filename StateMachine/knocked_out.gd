@@ -23,7 +23,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		animation_player.play("knocked_out")
 		monster.velocity = Vector2.ZERO
 		monster.get_node("HPBar").visible = false
-		Globals.game.count_death()
+		Globals.game.count_death(monster)
 
 
 func clean_up_collisions():

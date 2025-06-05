@@ -28,6 +28,8 @@ var secondary_color
 @onready var charge_attack : State
 @onready var block : State
 @onready var super_attack : State
+
+@export var player : Player
 var passive_1
 var passive_2
 var passive_3

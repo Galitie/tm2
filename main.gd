@@ -13,6 +13,7 @@ class_name Game
 var dead_monsters : int
 var current_round : int
 var current_mode : Modes
+var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE}
 
 
@@ -55,13 +56,15 @@ func _process(_delta):
 		debug_stuff()
 
 
-func count_death():
+func count_death(monster: Monster):
 	dead_monsters += 1
+	current_knocked_out_monsters.append(monster)
 	if dead_monsters == player_count - 1:
 		$RoundOverDelayTimer.start()
 
 
 func set_upgrade_mode():
+	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
 	check_if_game_over()
 	$SuddenDeathTimer.stop()
@@ -96,7 +99,18 @@ func _on_sudden_death_timer_timeout():
 
 
 func _on_round_over_delay_timer_timeout():
+	for player in players:
+		if player.monster.current_hp > 0:
+			current_knocked_out_monsters.append(player.monster)
+			break
+	print(current_knocked_out_monsters)
+	var victory_points_gained = 0
+	for monster in current_knocked_out_monsters:
+		monster.player.victory_points += victory_points_gained
+		victory_points_gained += 1
 	set_upgrade_mode()
+	for player in players:
+		print(player.name, " : " ,player.victory_points)
 
 
 func _on_upgrade_over_delay_timer_timeout():
@@ -160,5 +174,17 @@ func reroll_pressed(upgrade_panel):
 
 
 func check_if_game_over():
-	if current_round == total_rounds:
+	if current_round >= total_rounds:
 		print("game over")
+		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
+		var highest_score = players[0].victory_points
+		var winners = players.filter(func(p): return p.victory_points == highest_score)
+		if winners.size() == 1:
+			print("Winner:", winners[0].name)
+		else:
+			print("It's a tie between:")
+			for p in winners:
+				print("- ", p.name)
+
+func clear_knocked_out_monsters():
+	current_knocked_out_monsters.clear()

@@ -1,15 +1,17 @@
 Todo:
-	Concept of points
-	Concept of rounds
+	Find winner of the game
+	Letting players choose accessorie options - one idea is to left and right press on an upgrade
+	card to show a preview of what it will look like. Give each upgrade 1-2 options?
 	Modes - Quickplay, Regular etc.
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
-	How to decide winner? Last one standing? There is a sudden death mode...
 	Make multi-player work
 	Controller
 	Menus
 	Naming creatures
 	Creature colors
+	Save, play games to unlock accessories
+	Achievements, like get 0 points, total kills > 100 etc.
 
 
 Ideas:

@@ -132,9 +132,13 @@ func card_pressed(card):
 			player.monster.move_speed += chosen_card.attribute_amount_1
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.BASE_DAMAGE:
 			player.monster.base_damage += chosen_card.attribute_amount_1
-	# Sometimes I want to replace slots, not just add potential states...
-	if chosen_card.state_id and not player.monster.state_machine.state_choices.has(chosen_card.state_id):
-		player.monster.state_machine.state_choices.append(chosen_card.state_id)
+	# Replace a slot
+	if chosen_card.state_id:
+		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
+		print(player.monster.state_machine.state_choices)
+	if chosen_card.remove_specific_states.size():
+		for state in chosen_card.remove_specific_states:
+			player.monster.state_machine.state_choices.erase(state)
 	card.upgrade_panel.update_stats()
 	check_if_upgrade_round_over(card, player)
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c37d7vyo0m6jb"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://c37d7vyo0m6jb"]
 
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_mklda"]
 
@@ -6,9 +6,10 @@
 script = ExtResource("1_mklda")
 card_name = "HP BOOST"
 description = ""
-type = "immediate"
+Type = "immediate"
 state_id = ""
-limited_to_one = false
+unique = false
+remove_specific_states = Array[String]([])
 attribute_1 = 1
 attribute_label_1 = "MAX HP"
 attribute_amount_1 = 3

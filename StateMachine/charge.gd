@@ -12,4 +12,5 @@ func Enter():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "charge":
-		Transitioned.emit("punch")
+		Transitioned.emit(monster.state_machine.state_choices["basic_attack"])
+		# Needs to be changed to charge attack eventually

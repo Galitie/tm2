@@ -6,9 +6,10 @@
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
 description = "On BITE, deals BASE DMG and HEALS +1 HP"
-type = "attack"
+Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true
+remove_specific_states = Array[String]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

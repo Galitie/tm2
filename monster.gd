@@ -13,6 +13,7 @@ var main_color
 var secondary_color
 
 @export_range(-1, 1) var hue_shift : float
+@export var player : Player
 
 @onready var state_machine = $StateMachine
 @export var melee_attack : Area2D
@@ -23,16 +24,6 @@ var secondary_color
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player = $AnimationPlayer
 @onready var animation_player_damage = $AnimationPlayer_Damage
-
-@onready var basic_attack : State = $StateMachine/Punch
-@onready var charge_attack : State
-@onready var block : State
-@onready var super_attack : State
-
-@export var player : Player
-var passive_1
-var passive_2
-var passive_3
 
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
@@ -98,3 +89,8 @@ func take_damage(enemy):
 func check_low_hp():
 	if current_hp <= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)
+
+
+func update_slot(current_slot_id : String, replacement_slot_id : String):
+	state_machine.state_choices.erase(current_slot_id)
+	state_machine.state_choices.append(replacement_slot_id)

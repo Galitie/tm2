@@ -12,7 +12,7 @@ signal reroll_pressed(upgrade_panel)
 
 var player : Player
 var disabled : bool = false
-var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d")]
+var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p")]
 
 func _ready():
 	for card in upgrade_cards:

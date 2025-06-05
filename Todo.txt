@@ -1,10 +1,9 @@
 Todo:
-	Find winner of the game
-	Letting players choose accessorie options - one idea is to left and right press on an upgrade
-	card to show a preview of what it will look like. Give each upgrade 1-2 options?
-	Modes - Quickplay, Regular etc.
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
+	Letting players choose accessory options - one idea is to left and right press on an upgrade
+	card to show a preview of what it will look like. Give each upgrade 1-2 options?
+	Modes - Quickplay, Regular etc.
 	Make multi-player work
 	Controller
 	Menus

@@ -2423,6 +2423,16 @@ theme_override_font_sizes/font_size = 36
 text = "NAME"
 horizontal_alignment = 1
 
+[node name="CurrentState" type="Label" parent="."]
+offset_left = -135.0
+offset_top = -321.0
+offset_right = 143.0
+offset_bottom = -271.0
+theme = ExtResource("25_s0vvg")
+theme_override_font_sizes/font_size = 36
+text = "CURRENT STATE"
+horizontal_alignment = 1
+
 [node name="Damage" type="Label" parent="."]
 offset_left = -16.0
 offset_top = -322.0

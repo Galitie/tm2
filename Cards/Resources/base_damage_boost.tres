@@ -6,9 +6,10 @@
 script = ExtResource("1_lrdyw")
 card_name = "DAMAGE BOOST"
 description = ""
-type = "immediate"
+Type = "immediate"
 state_id = ""
 unique = false
+remove_specific_states = Array[String]([])
 attribute_1 = 3
 attribute_label_1 = "BASE DMG"
 attribute_amount_1 = 1

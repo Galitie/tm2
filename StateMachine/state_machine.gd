@@ -2,9 +2,9 @@ extends Node
 
 var current_state : State
 var states : Dictionary = {}
-var state_choices = ["wander", "chase", "idle", "punch", "block", "charge"]
+var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle" : "idle", "charge_attack" : "charge", "basic_attack" : "punch", "block" : "block"}
 @export var monster = CharacterBody2D
-
+@onready var current_state_label = $"../CurrentState"
 
 func _ready():
 	for child in get_children():
@@ -29,8 +29,8 @@ func _physics_process(delta):
 #TODO: Choose state off of scenarios not randomness
 # connected to "ChooseNewState" signal in state.gd
 func choose_new_state():
-	var new_state = state_choices.pick_random()
-	transition_state(new_state)
+	var new_state = state_choices.keys().pick_random()
+	transition_state(state_choices[new_state])
 
 # Scenarios for state
 # Doesn't see a creature
@@ -49,3 +49,4 @@ func transition_state(new_state_name):
 	current_state.Exit()
 	current_state = new_state
 	current_state.Enter()
+	current_state_label.text = current_state.name

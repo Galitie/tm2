@@ -1,4 +1,6 @@
 Todo:
+	Place logic - 1st, 2nd, 3rd etc. based off of total player points 
+	Add a charge attack and replace charges transition argument from basic attack to charge
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state
 	Letting players choose accessory options - one idea is to left and right press on an upgrade

@@ -32,6 +32,8 @@ func debug_stuff():
 		set_fight_mode()
 	if Input.is_action_just_pressed("ui_down"):
 		Globals.is_sudden_death_mode = false
+	if Input.is_action_just_pressed("ui_up"):
+		generate_random_name()
 
 
 func _init():
@@ -64,18 +66,21 @@ func count_death(monster: Monster):
 
 
 func set_upgrade_mode():
+	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
 	check_if_game_over()
 	$SuddenDeathTimer.stop()
 	Globals.is_sudden_death_mode = false
+	var rerolls_amount_counter = 0
 	for player in players:
 		var monster = player.get_node("Monster")
 		var upgrade_pos = player.get_node("UpgradePos")
 		monster.state_machine.transition_state("upgradestart")
 		monster.global_position = upgrade_pos.global_position
 		player.upgrade_points = 3
-		player.rerolls = 3
+		player.rerolls = rerolls_amount_counter
+		rerolls_amount_counter += 1
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
 
@@ -103,7 +108,6 @@ func _on_round_over_delay_timer_timeout():
 		if player.monster.current_hp > 0:
 			current_knocked_out_monsters.append(player.monster)
 			break
-	print(current_knocked_out_monsters)
 	var victory_points_gained = 0
 	for monster in current_knocked_out_monsters:
 		monster.player.victory_points += victory_points_gained
@@ -135,7 +139,6 @@ func card_pressed(card):
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
-		print(player.monster.state_machine.state_choices)
 	if chosen_card.remove_specific_states.size():
 		for state in chosen_card.remove_specific_states:
 			player.monster.state_machine.state_choices.erase(state)
@@ -190,5 +193,23 @@ func check_if_game_over():
 			for p in winners:
 				print("- ", p.name)
 
+
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()
+
+
+func generate_random_name():
+	var name_parts = []
+	var title_start_list = ["Sir", "Madam", "Lord", "My Lady", "Baron", "Baroness", "Count", "Countess", "Duke", "Princess", "Duchess", "Emperor", "Empress", "King", "Queen", "Prince", "Dark Lord", "Archduke", "High Priest", "Commander", "Captain", "Major", "General", "Colonel", "Admiral", "Professor", "Dr.", "Reverend", "The Honorable", "Your Grace", "Warden", "Inquisitor", "Chancellor", "Vizier", "Grandmaster", "Sovereign", "Archmage", "Mystic", "The Unyielding", "Lil'", "The Gentle", "The Great"]
+	var end_name_suffixes = ["Jr.", "Sr.", "II", "III", "Esq.", "PhD", "The Undying", "The Maw", "The Forsaken", "The Cute", "The Unbearable", "The Cruel", "The Worn", "The Loved", "The Joyful", "The Kind", "The Stinky", "The Opulent", "The Grim", "The Cursed", "The Faded", "The Burdened", "The Adorable", "The Weird", "The Beefy", "The Elderly", "The Bloodthirsty"]
+	var first_name_prefixes = ["Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub"]
+	var last_name_suffixes = ["wump", "wuff", "kins", "poo", "buns", "muff", "wubby", "wuzzy", "boo", "bean", "puff", "snug", "wiggles", "socks", "nugget", "bop", "tush", "sniff", "chub", "nubs", "flop", "snick", "pookie", "bloop", "giggles", "lumps", "floops", "tickles", "munch", "lolly", "hug", "nuzzle", "tots", "zoo", "binky", "sweetie", "nib", "toes", "twix", "peeps", "bubbles", "piddles", "gushs", "wubs", "sprig", "doodles", "noms", "bits", "squeaks", "mon", "nips", "butts", "cheeks", "frog"]
+	if randi() % 4 == 0:
+		name_parts.append(title_start_list[randi() % title_start_list.size()])
+	var name = first_name_prefixes[randi() % first_name_prefixes.size()]
+	if randi() % 2 == 0:
+		name += last_name_suffixes[randi() % last_name_suffixes.size()]
+	name_parts.append(name)
+	if randi() % 4 == 0:
+		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
+	print(" ".join(name_parts))

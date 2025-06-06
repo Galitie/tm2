@@ -24,7 +24,7 @@ var secondary_color
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player = $AnimationPlayer
 @onready var animation_player_damage = $AnimationPlayer_Damage
-
+@export var debug_mode : bool
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 

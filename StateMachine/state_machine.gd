@@ -49,4 +49,5 @@ func transition_state(new_state_name):
 	current_state.Exit()
 	current_state = new_state
 	current_state.Enter()
-	current_state_label.text = current_state.name
+	if monster.debug_mode:
+		current_state_label.text = current_state.name

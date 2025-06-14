@@ -30,17 +30,21 @@ func debug_stuff():
 			target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-	if Input.is_action_just_pressed("ui_down"):
-		Globals.is_sudden_death_mode = false
-	if Input.is_action_just_pressed("ui_up"):
-		generate_random_name()
+	#if Input.is_action_just_pressed("ui_down"):
+		#Globals.is_sudden_death_mode = false
+	#if Input.is_action_just_pressed("ui_up"):
+		#generate_random_name()
 
 
 func _init():
+	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
 
 func _ready():
+	for player_index in players.size():
+		var player = players[player_index]
+		player.controller_port = player_index
 	var upgrade_cards = upgrade_menu.get_tree().get_nodes_in_group("UpgradeCard")
 	var player_upgrade_panels = upgrade_menu.get_tree().get_nodes_in_group("PlayerUpgradePanel")
 	for card in upgrade_cards:

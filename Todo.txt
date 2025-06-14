@@ -1,3 +1,13 @@
+Features to make it playtest ready:
+	Controller
+	Multi-player controller function
+	Variable player amount
+	Show winner at end of round
+	Show winner at the end of the game
+	Find a way to show that attacks are being replaced by other chosen attacks
+	More cards to test
+
+
 Todo:
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points 
 	Add a charge attack and replace charges transition argument from basic attack to charge
@@ -15,7 +25,7 @@ Todo:
 	Achievements, like get 0 points, total kills > 100 etc.
 
 
-Ideas:
+General Ideas:
 	Pick an egg, that determines starting body shape
 	3 body shapes to choose from (or more if I have time)
 	As they gain experience, they look cooler?
@@ -24,3 +34,30 @@ Ideas:
 	Have multiple creatures? If so, they will need player outlines or something
 	Different Idle options? Could bop, or dance or zone out etc.
 	Do upgrade cards determine looks? Does's it tell you?
+
+
+Card ideas:
+	Summons (Sabrina loves these generally) spiders, bats, ghosts
+	Change creature size, really big or really small
+	Slime trails
+	Drop bombs, traps, bananas
+	Block builds - spiky armor
+	Turn all attacks into blocks
+	Turn all attacks into charge attacks
+	If you are in last place get bonus, first place get penalty
+	Extra rerolls
+	Extra Upgrade point(s) for the next round
+	Gamble upgrade points each round between 1-5
+	Sparkles, glowing
+	Extra damage at low health
+	Blocking reflects damage
+	Teleport
+	Chain lightening
+	Ghost twin, after death summon a ghost version of you that fights
+	Exploding on death
+	Crazy damage, only one hp
+	Doubles all damage done and recieved
+	Moves faster every 5 seconds of a round
+	First hit is reflected back to the aggresor
+	Auto repair bots
+	Drop an egg, will hatch in 1 rounds and fight for you unless destroyed

@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 [autoload]
 
 Globals="*res://globals.gd"
+Controller="*res://controller.gd"
 
 [display]
 

@@ -57,4 +57,4 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_reroll_pressed"]
+[connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_button_pressed"]

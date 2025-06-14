@@ -13,17 +13,19 @@ var disabled : bool = false
 var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p")]
 @onready var button_array: Array[Node] = [reroll_button, $VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3]
 var current_user_position_in_button_array : int = 0
+var new_stylebox_normal = StyleBoxFlat.new()
+
+
 
 func _ready():
 	for card in upgrade_cards:
 		card.upgrade_panel = self
-
+	create_stylebox()
 
 func _physics_process(delta):
-	# -1(up), 0, 1(down)
 	if current_user_position_in_button_array == 0:
-		reroll_button.add_theme_color_override("font_outline_color", Color.SKY_BLUE)
-		reroll_button.add_theme_constant_override("outline_size", 3)
+		reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
+		reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
 	var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
 	if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
 		current_user_position_in_button_array += dpad_vertical_input
@@ -34,18 +36,11 @@ func _physics_process(delta):
 		# Really shitty way to see what index player is on
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:
-			reroll_button.add_theme_color_override("font_outline_color", Color.SKY_BLUE)
-			reroll_button.add_theme_constant_override("outline_size", 3)
+			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 		else:
-			var new_stylebox_normal = button.get_theme_stylebox("theme").duplicate()
-			new_stylebox_normal.border_width_top = 5
-			new_stylebox_normal.border_width_bottom = 5
-			new_stylebox_normal.border_width_left = 5
-			new_stylebox_normal.border_width_right = 5
-			new_stylebox_normal.border_color = Color.SKY_BLUE
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
-			reroll_button.add_theme_constant_override("outline_size", 0)
-			reroll_button.remove_theme_color_override("font_outline_color")
+			reroll_button.remove_theme_stylebox_override("normal")
+			reroll_button.remove_theme_stylebox_override("disabled")
 		for other_button in button_array:
 			if other_button != button:
 				other_button.remove_theme_stylebox_override("panel")
@@ -89,3 +84,11 @@ func setup_rerolls():
 # reroll button
 func _on_button_pressed():
 	emit_signal("reroll_pressed", self) #Caught by game scene
+
+
+func create_stylebox():
+	new_stylebox_normal.border_width_top = 5
+	new_stylebox_normal.border_width_bottom = 5
+	new_stylebox_normal.border_width_left = 5
+	new_stylebox_normal.border_width_right = 5
+	new_stylebox_normal.border_color = Color.SKY_BLUE

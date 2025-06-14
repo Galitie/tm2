@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=4 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
 size_flags_horizontal = 3
@@ -28,6 +30,7 @@ autowrap_mode = 3
 
 [node name="Reroll" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
 text = "Reroll Upgrades"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]

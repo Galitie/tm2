@@ -9,7 +9,6 @@ signal reroll_pressed(upgrade_panel)
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
 var player : Player
-var disabled : bool = false
 var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p")]
 @onready var button_array: Array[Node] = [reroll_button, $VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3]
 var current_user_position_in_button_array : int = 0
@@ -22,38 +21,46 @@ func _ready():
 		card.upgrade_panel = self
 	create_stylebox()
 
+
 func _physics_process(delta):
-	if current_user_position_in_button_array == 0:
-		reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
-		reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
-	var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
-	if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
-		current_user_position_in_button_array += dpad_vertical_input
-		if current_user_position_in_button_array <= -1:
-			current_user_position_in_button_array = button_array.size() - 1
-		if current_user_position_in_button_array >= button_array.size():
-			current_user_position_in_button_array = 0
-		# Really shitty way to see what index player is on
+	#prob want a better way to do this, like a
+	if player.upgrade_points > 0:
+		if current_user_position_in_button_array == 0:
+			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
+			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
+		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
+			current_user_position_in_button_array += dpad_vertical_input
+			if current_user_position_in_button_array <= -1:
+				current_user_position_in_button_array = button_array.size() - 1
+			if current_user_position_in_button_array >= button_array.size():
+				current_user_position_in_button_array = 0
+			# Really shitty way to see what index player is on
+			var button = button_array[current_user_position_in_button_array]
+			if button == reroll_button:
+				reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
+			else:
+				button.add_theme_stylebox_override("panel", new_stylebox_normal)
+				reroll_button.remove_theme_stylebox_override("normal")
+				reroll_button.remove_theme_stylebox_override("disabled")
+			for other_button in button_array:
+				if other_button != button:
+					other_button.remove_theme_stylebox_override("panel")
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
+			var button = button_array[current_user_position_in_button_array]
+			if button == reroll_button:
+				_on_button_pressed()
+			else:
+				button._on_button_pressed()
+	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:
-			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
-		else:
-			button.add_theme_stylebox_override("panel", new_stylebox_normal)
 			reroll_button.remove_theme_stylebox_override("normal")
 			reroll_button.remove_theme_stylebox_override("disabled")
-		for other_button in button_array:
-			if other_button != button:
-				other_button.remove_theme_stylebox_override("panel")
-		
-	if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
-		var button = button_array[current_user_position_in_button_array]
-		if button == reroll_button:
-			_on_button_pressed()
 		else:
-			button._on_button_pressed()
-		
-	
-	
+			button.remove_theme_stylebox_override("panel")
+
+
 func update_stats():
 	stats.text = "HP: " + str(player.monster.max_hp) + " | STR: " + str(player.monster.base_damage) + " | MOV SPD: " + str(player.monster.move_speed)
 
@@ -64,6 +71,7 @@ func disable_cards():
 
 
 func setup_cards():
+	current_user_position_in_button_array = 0
 	var temp_resources = resource_array.duplicate(true)
 	for card in upgrade_cards:
 		var random_resource = temp_resources.pick_random()

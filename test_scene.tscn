@@ -11,6 +11,7 @@ size = Vector2(1174, 20)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
 total_rounds = 2
+start_in_fight_mode = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
 

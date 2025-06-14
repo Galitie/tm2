@@ -1,6 +1,4 @@
 Features to make it playtest ready:
-	Controller
-	Multi-player controller function
 	Variable player amount
 	Show winner at end of round
 	Show winner at the end of the game

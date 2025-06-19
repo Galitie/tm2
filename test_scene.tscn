@@ -44,7 +44,6 @@ position = Vector2(262, 192)
 scale = Vector2(0.3, 0.3)
 hue_shift = -0.376
 player = NodePath("..")
-debug_mode = true
 
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 550)
@@ -63,7 +62,6 @@ position = Vector2(878, 185)
 scale = Vector2(0.3, 0.3)
 hue_shift = 0.786
 player = NodePath("..")
-debug_mode = true
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 550)
@@ -81,7 +79,6 @@ monster = NodePath("Monster")
 position = Vector2(251, 439)
 scale = Vector2(0.3, 0.3)
 player = NodePath("..")
-debug_mode = true
 
 [node name="UpgradePos" type="Node2D" parent="Player3"]
 position = Vector2(720, 550)
@@ -100,7 +97,6 @@ position = Vector2(864, 459)
 scale = Vector2(0.3, 0.3)
 hue_shift = -0.735
 player = NodePath("..")
-debug_mode = true
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
 position = Vector2(1000, 550)

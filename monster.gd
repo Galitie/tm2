@@ -24,7 +24,7 @@ var secondary_color
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player = $AnimationPlayer
 @onready var animation_player_damage = $AnimationPlayer_Damage
-@export var debug_mode : bool
+var debug_mode : bool
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 
@@ -38,7 +38,7 @@ func _ready():
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
 	$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
-	
+	generate_random_name()
 
 
 func _physics_process(_delta):
@@ -94,3 +94,20 @@ func check_low_hp():
 func update_slot(current_slot_id : String, replacement_slot_id : String):
 	state_machine.state_choices.erase(current_slot_id)
 	state_machine.state_choices.append(replacement_slot_id)
+
+
+func generate_random_name():
+	var name_parts = []
+	var title_start_list = ["Sir", "Madam", "Lord", "My Lady", "Baron", "Baroness", "Count", "Countess", "Duke", "Princess", "Duchess", "Emperor", "Empress", "King", "Queen", "Prince", "Dark Lord", "Archduke", "High Priest", "Commander", "Captain", "Major", "General", "Colonel", "Admiral", "Professor", "Dr.", "Reverend", "The Honorable", "Your Grace", "Warden", "Inquisitor", "Chancellor", "Vizier", "Grandmaster", "Sovereign", "Archmage", "Mystic", "The Unyielding", "Lil'", "The Gentle", "The Great"]
+	var end_name_suffixes = ["Jr.", "Sr.", "II", "III", "Esq.", "PhD", "The Undying", "The Maw", "The Forsaken", "The Cute", "The Unbearable", "The Cruel", "The Worn", "The Loved", "The Joyful", "The Kind", "The Stinky", "The Opulent", "The Grim", "The Cursed", "The Faded", "The Burdened", "The Adorable", "The Weird", "The Beefy", "The Elderly", "The Bloodthirsty"]
+	var first_name_prefixes = ["Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub"]
+	var last_name_suffixes = ["wump", "wuff", "kins", "poo", "buns", "muff", "wubby", "wuzzy", "boo", "bean", "puff", "snug", "wiggles", "socks", "nugget", "bop", "tush", "sniff", "chub", "nubs", "flop", "snick", "pookie", "bloop", "giggles", "lumps", "floops", "tickles", "munch", "lolly", "hug", "nuzzle", "tots", "zoo", "binky", "sweetie", "nib", "toes", "twix", "peeps", "bubbles", "piddles", "gushs", "wubs", "sprig", "doodles", "noms", "bits", "squeaks", "mon", "nips", "butts", "cheeks", "frog"]
+	if randi() % 4 == 0:
+		name_parts.append(title_start_list[randi() % title_start_list.size()])
+	var first_name = first_name_prefixes[randi() % first_name_prefixes.size()]
+	if randi() % 2 == 0:
+		first_name += last_name_suffixes[randi() % last_name_suffixes.size()]
+	name_parts.append(first_name)
+	if randi() % 4 == 0:
+		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
+	$Name.text = (" ".join(name_parts))

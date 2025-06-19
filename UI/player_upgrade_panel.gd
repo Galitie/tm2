@@ -22,8 +22,8 @@ func _ready():
 	create_stylebox()
 
 
-func _physics_process(delta):
-	#prob want a better way to do this, like a
+func _physics_process(_delta):
+	#prob want a better way to do this
 	if player.upgrade_points > 0:
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)

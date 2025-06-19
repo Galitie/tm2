@@ -11,7 +11,6 @@ size = Vector2(1174, 20)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
 total_rounds = 2
-start_in_fight_mode = true
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -46,11 +45,11 @@ hue_shift = -0.376
 player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player1"]
-position = Vector2(149, 550)
+position = Vector2(149, 575)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player1"]
-position = Vector2(252, 179)
+position = Vector2(252, 200)
 metadata/_edit_lock_ = true
 
 [node name="Player2" type="Node" parent="." node_paths=PackedStringArray("monster") groups=["Player"]]
@@ -64,7 +63,7 @@ hue_shift = 0.786
 player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
-position = Vector2(436, 550)
+position = Vector2(436, 575)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player2"]
@@ -81,7 +80,7 @@ scale = Vector2(0.3, 0.3)
 player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player3"]
-position = Vector2(720, 550)
+position = Vector2(720, 575)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player3"]
@@ -99,7 +98,7 @@ hue_shift = -0.735
 player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
-position = Vector2(1000, 550)
+position = Vector2(1000, 575)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player4"]

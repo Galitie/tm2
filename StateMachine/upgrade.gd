@@ -13,6 +13,7 @@ var at_target: bool = false
 
 
 func Enter():
+	monster.get_node("HPBar").visible = true
 	if monster.state_machine.current_state == KnockedOut:
 		animation_player.play("get_up")
 	else:
@@ -22,7 +23,6 @@ func Enter():
 	monster.velocity = Vector2()
 	monster.get_node("MonsterContainer").modulate = Color(1,1,1,1)
 	monster.apply_hp(monster.max_hp)
-	monster.get_node("HPBar").visible = false
 	monster.z_index = 1
 
 

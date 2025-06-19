@@ -149,7 +149,6 @@ func card_pressed(card):
 	if chosen_card.remove_specific_states.size():
 		for state in chosen_card.remove_specific_states:
 			player.monster.state_machine.state_choices.erase(state)
-	card.upgrade_panel.update_stats()
 	check_if_upgrade_round_over(card, player)
 
 

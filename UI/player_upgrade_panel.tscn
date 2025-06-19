@@ -46,18 +46,4 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Stats" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer/Stats"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/Stats"]
-layout_mode = 2
-text = "STATS
-HP: 5 | MP: 10 | STR: 11"
-horizontal_alignment = 1
-vertical_alignment = 3
-autowrap_mode = 3
-
 [connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_button_pressed"]

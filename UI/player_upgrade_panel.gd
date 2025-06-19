@@ -4,7 +4,6 @@ class_name PlayerUpgradePanel
 signal reroll_pressed(upgrade_panel)
 
 @onready var reroll_button : Button = $VBoxContainer/Reroll
-@onready var stats = $VBoxContainer/Stats/Label
 @onready var upgrade_cards = [$VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3 ]
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
@@ -59,10 +58,6 @@ func _physics_process(_delta):
 			reroll_button.remove_theme_stylebox_override("disabled")
 		else:
 			button.remove_theme_stylebox_override("panel")
-
-
-func update_stats():
-	stats.text = "HP: " + str(player.monster.max_hp) + " | STR: " + str(player.monster.base_damage) + " | MOV SPD: " + str(player.monster.move_speed)
 
 
 func disable_cards():

@@ -40,7 +40,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 func Physics_Update(_delta:float):
 	var direction = monster.target_point - monster.global_position
-	if direction.length() > 10 and got_up:
+	if direction.length() >= 10 and got_up:
 		monster.velocity = direction.normalized() * (monster.move_speed * 20)
 		at_target = false
 	else:

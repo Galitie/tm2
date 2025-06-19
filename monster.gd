@@ -26,6 +26,8 @@ var secondary_color
 @onready var animation_player_damage = $AnimationPlayer_Damage
 var debug_mode : bool
 
+var target_point : Vector2
+
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 
 # attacks can be short range, long range or 

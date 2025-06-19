@@ -83,8 +83,8 @@ func set_upgrade_mode():
 	for player in players:
 		var monster = player.get_node("Monster")
 		var upgrade_pos = player.get_node("UpgradePos")
+		monster.target_point = upgrade_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
-		monster.global_position = upgrade_pos.global_position
 		player.upgrade_points = 3
 		player.rerolls = rerolls_amount_counter
 		rerolls_amount_counter += 1

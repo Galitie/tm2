@@ -1,8 +1,7 @@
 extends State
 class_name Idle
 
-@export var monster: CharacterBody2D
-@export var animation_player : AnimationPlayer
+var monster: CharacterBody2D
 
 var idle_time : float
 
@@ -11,7 +10,7 @@ func randomize_idle():
 
 
 func Enter():
-	animation_player.play("idle")
+	monster.animation_player.play("idle")
 	randomize_idle()
 	monster.velocity = Vector2.ZERO
 
@@ -21,3 +20,6 @@ func Update(delta:float):
 		idle_time -= delta
 	else:
 		ChooseNewState.emit()
+
+func animation_finished(anim_name: String) -> void:
+	pass

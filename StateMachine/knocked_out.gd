@@ -1,32 +1,21 @@
 extends State
 class_name KnockedOut
 
-@export var monster: CharacterBody2D
-@export var animation_player : AnimationPlayer
-@export var hurtbox_collision: CollisionShape2D
-@export var body_collision: CollisionShape2D
-@export var melee_collision: CollisionShape2D 
-
+var monster: CharacterBody2D
 
 func Enter():
-	clean_up_collisions()
+	monster.toggle_collisions(false)
 	monster.velocity = Vector2.ZERO
-	animation_player.play("fainting")
+	monster.animation_player.play("faint")
 	monster.current_hp = 0
 	monster.current_hp_label.text = "0"
 	monster.hp_bar.value = monster.current_hp
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "fainting":
+func animation_finished(anim_name: String) -> void:
+	if anim_name == "faint":
 		monster.z_index = -10
-		animation_player.play("knocked_out")
+		#monster.animation_player.play("knocked_out")
 		monster.velocity = Vector2.ZERO
 		monster.get_node("HPBar").visible = false
 		Globals.game.count_death(monster)
-
-
-func clean_up_collisions():
-	hurtbox_collision.disabled = true
-	body_collision.disabled = true
-	melee_collision.disabled = true

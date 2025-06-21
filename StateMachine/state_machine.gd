@@ -1,20 +1,21 @@
 extends Node
 
+var monster: Monster
 var current_state : State
 var states : Dictionary = {}
 var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle" : "idle", "charge_attack" : "charge", "basic_attack" : "punch", "block" : "block"}
-@export var monster = CharacterBody2D
 @onready var current_state_label = $"../CurrentState"
 
-func _ready():
+func initialize():
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(transition_state)
 			child.ChooseNewState.connect(choose_new_state)
+			child.monster = monster
 	states["idle"].Enter()
 	current_state = states["idle"]
-
+	monster.animation_player.animation_finished.connect(_animation_finished)
 
 func _process(delta):
 	if current_state:
@@ -51,3 +52,6 @@ func transition_state(new_state_name):
 	current_state.Enter()
 	if monster.debug_mode:
 		current_state_label.text = current_state.name
+
+func _animation_finished(anim_name: String) -> void:
+	current_state.animation_finished(anim_name)

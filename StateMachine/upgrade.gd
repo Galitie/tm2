@@ -1,50 +1,44 @@
 extends State
 class_name Upgrade
 
-@export var monster: CharacterBody2D
-@export var animation_player : AnimationPlayer
-@export var hurtbox_collision: CollisionShape2D
-@export var body_collision: CollisionShape2D
-@export var melee_collision: CollisionShape2D
+var monster: CharacterBody2D
 
-var got_up : bool = false
+var got_up : bool
 var health_fill_style := load("uid://b1cqxdsndopa") as StyleBox
 var at_target: bool = false
 
-
 func Enter():
+	got_up = false
 	monster.get_node("HPBar").visible = true
-	if monster.state_machine.current_state == KnockedOut:
-		animation_player.play("get_up")
+	if monster.current_hp <= 0:
+		monster.animation_player.play("get_up")
 	else:
 		got_up = true
-		animation_player.play("run")
-	turn_off_collisions()
+		# Should be "run", but it's debatable if I should make run animations
+		monster.animation_player.play("walk", -1.0, 2.0)
+	monster.toggle_collisions(false)
 	monster.velocity = Vector2()
-	monster.get_node("MonsterContainer").modulate = Color(1,1,1,1)
+	monster.get_node("bunny").modulate = Color(1,1,1,1)
 	monster.apply_hp(monster.max_hp)
 	monster.z_index = 1
+	
 
-
-func turn_off_collisions():
-	hurtbox_collision.disabled = true
-	body_collision.disabled = true
-	melee_collision.disabled = true
-
-
-func _on_animation_player_animation_finished(anim_name):
+func animation_finished(anim_name: String):
 	if anim_name == "get_up":
 		got_up = true
-		animation_player.play("run")
+		if monster.target_point.x < monster.global_position.x:
+			monster.get_node("bunny").scale = Vector2(-1, 1)
+		else:
+			monster.get_node("bunny").scale = Vector2(1, 1)
+		# Should be "run", but it's debatable if I should make run animations
+		monster.animation_player.play("walk", -1.0, 2.0)
 
 
 func Physics_Update(_delta:float):
-	var direction = monster.target_point - monster.global_position
-	if direction.length() >= 10 and got_up:
-		monster.velocity = direction.normalized() * (monster.move_speed * 20)
-		at_target = false
-	else:
+	if got_up:
+		monster.global_position = monster.global_position.move_toward(monster.target_point, 800 * _delta)
+		
+	if monster.global_position.is_equal_approx(monster.target_point):
+		monster.get_node("bunny").scale = Vector2(1, 1)
 		monster.global_position = monster.target_point
-		monster.velocity = Vector2()
-		at_target = true
-		animation_player.play("idle")
+		monster.animation_player.play("idle")

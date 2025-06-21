@@ -1,16 +1,29 @@
 extends State
 class_name Charge
 
-@export var monster: CharacterBody2D
-@export var animation_player : AnimationPlayer
-
-
+var monster: CharacterBody2D
+var done_charging: bool
+var charge_cycles: int
+var cycle_threshold: int
 
 func Enter():
-	animation_player.play("charge")
+	done_charging = false
+	charge_cycles = 0
+	cycle_threshold = 6
+	monster.animation_player.play("charge")
 	monster.velocity = Vector2.ZERO
 
-func _on_animation_player_animation_finished(anim_name):
+func animation_finished(anim_name: String):
 	if anim_name == "charge":
-		Transitioned.emit(monster.state_machine.state_choices["basic_attack"])
-		# Needs to be changed to charge attack eventually
+		if !done_charging:
+			monster.animation_player.play("charge_idle")
+		else:
+			# Needs to be changed to charge attack eventually
+			Transitioned.emit(monster.state_machine.state_choices["basic_attack"])
+	elif anim_name == "charge_idle":
+		charge_cycles += 1
+		if charge_cycles >= cycle_threshold:
+			monster.animation_player.play("charge", -1.0, -1.0, true)
+			done_charging = true
+		else:
+			monster.animation_player.play("charge_idle")

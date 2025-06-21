@@ -6,9 +6,9 @@ class_name Game
 @export var start_in_fight_mode : bool
 
 @onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
+@onready var monsters: Array[Monster]
 @onready var player_count : int = players.size()
 @onready var upgrade_menu : Node = $UpgradePanel
-
 
 var dead_monsters : int
 var current_round : int
@@ -40,8 +40,20 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
+func _physics_process(delta: float) -> void:
+	# Sort monsters by Y position every second (for performance reasons)
+	await get_tree().create_timer(1.0).timeout
+	monsters.sort_custom(SortByY)
+	for i: int in range(monsters.size()):
+		monsters[i].z_index = i
+
+func SortByY(a, b):
+	return a.global_position.y < b.global_position.y
 
 func _ready():
+	for player in players:
+		monsters.push_back(player.monster)
+	
 	if debug_mode:
 		for player in players:
 			player.monster.debug_mode = true

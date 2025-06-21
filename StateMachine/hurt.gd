@@ -1,16 +1,13 @@
 extends State
 class_name Hurt
 
-@export var monster: CharacterBody2D
-@export var animation_player : AnimationPlayer
-
-
+var monster: CharacterBody2D
 
 func Enter():
 	monster.velocity = Vector2.ZERO
-	animation_player.play("hurt")
+	monster.animation_player.play("hurt")
 
-func _on_animation_player_animation_finished(anim_name):
+func animation_finished(anim_name: String):
 	if anim_name == "hurt":
 		if check_if_knocked_out():
 			return

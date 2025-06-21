@@ -22,8 +22,16 @@ var secondary_color
 @onready var max_hp_label = %max_hp
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player : AnimationPlayer = $bunny/anim_player
+@onready var monster_container : CanvasGroup = $bunny
 @onready var animation_player_damage = $AnimationPlayer_Damage
+
+@onready var body_collision = $body
+@onready var hitbox_collision = $bunny/hitbox/shape
+@onready var hurtbox_collision = $bunny/body/hurtbox/shape
+@onready var hurtbox = $bunny/body/hurtbox
+@onready var hitbox = $bunny/hitbox
+
 var debug_mode : bool
 
 var target_point : Vector2
@@ -35,20 +43,25 @@ var target_point : Vector2
 # give them preferences? melee, range, etc.
 
 func _ready():
+	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
+	
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
-	$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
+	#$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
 	generate_random_name()
+	
+	state_machine.monster = self
+	state_machine.initialize()
 
 
 func _physics_process(_delta):
 	move_and_slide()
 	if velocity.length() > 0 and velocity.x > 0:
-		$MonsterContainer.scale = Vector2(1,1)
+		monster_container.scale = Vector2(1,1)
 	if velocity.length() > 0 and velocity.x < 0:
-		$MonsterContainer.scale = Vector2(-1,1)
+		monster_container.scale = Vector2(-1,1)
 
 
 func apply_hp(amount):
@@ -66,9 +79,9 @@ func apply_hp(amount):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.is_in_group("Attack") and area != melee_attack:
+	if area.is_in_group("Attack") and area != hitbox:
 		state_machine.transition_state("hurt")
-		var attacking_mon : Node = area.get_owner()
+		var attacking_mon : Node = area.get_owner().get_owner()
 		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
@@ -113,3 +126,8 @@ func generate_random_name():
 	if randi() % 4 == 0:
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	$Name.text = (" ".join(name_parts))
+
+func toggle_collisions(is_enabled: bool):
+	hurtbox_collision.disabled = !is_enabled
+	body_collision.disabled = !is_enabled
+	hitbox_collision.disabled = true

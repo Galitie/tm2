@@ -97,8 +97,11 @@ func set_upgrade_mode():
 		var upgrade_pos = player.get_node("UpgradePos")
 		monster.target_point = upgrade_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
-		player.upgrade_points = 3
-		player.rerolls = rerolls_amount_counter
+		if player.randomize_upgrade_points:
+			player.upgrade_points = randi_range(1,5)
+		else:
+			player.upgrade_points = 3
+		player.rerolls = rerolls_amount_counter + player.bonus_rerolls
 		rerolls_amount_counter += 1
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
@@ -155,6 +158,10 @@ func card_pressed(card):
 			player.monster.move_speed += chosen_card.attribute_amount_1
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.BASE_DAMAGE:
 			player.monster.base_damage += chosen_card.attribute_amount_1
+		if chosen_card.attribute_1 == CardResourceScript.Attributes.REROLL:
+			player.bonus_rerolls += chosen_card.attribute_amount_1
+		if chosen_card.attribute_1 == CardResourceScript.Attributes.UPGRADE_POINTS:
+			player.randomize_upgrade_points = true
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id

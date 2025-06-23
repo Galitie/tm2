@@ -1,7 +1,7 @@
 Features to make it playtest ready:
 	Left bumper to show stats (less important)
 	Right bumper to show slots
-	left + right to cycle through cosmetics for each card
+	Left + right to cycle through cosmetics for each card
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Variable player amount
@@ -10,12 +10,11 @@ Features to make it playtest ready:
 
 
 Todo:
-	Place logic - 1st, 2nd, 3rd etc. based off of total player points 
+	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Add a charge attack and replace charges transition argument from basic attack to charge
 	Figure out how to track and where to track abilities taken
 	Figure out how creatures will choose their next state rather than random?
-	Letting players choose accessory options - one idea is to left and right press on an upgrade
-	card to show a preview of what it will look like. Give each upgrade 1-2 options?
+	Card to show a preview of what it will look like. Give each upgrade 1-2 options?
 	Modes - Quickplay, Regular etc.
 	Menus
 	Naming creatures
@@ -37,14 +36,13 @@ General Ideas:
 
 Card ideas:
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
-	Change creature size, really big or really small
-	Slime trails
+	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
+	Slime trails?
 	Drop bombs, traps, bananas
 	Block builds - spiky armor
 	Turn all attacks into blocks
 	Turn all attacks into charge attacks
 	If you are in last place get bonus, first place get penalty
-	Extra rerolls
 	Extra Upgrade point(s) for the next round
 	Gamble upgrade points each round between 1-5
 	Sparkles, glowing

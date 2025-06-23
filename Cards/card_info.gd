@@ -9,7 +9,7 @@ class_name CardResourceScript
 @export var remove_specific_states : Array[String]
 
 @export_group("Attributes")
-enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE}
+enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS}
 @export var attribute_1 : Attributes
 @export var attribute_label_1 : String
 @export var attribute_amount_1: int

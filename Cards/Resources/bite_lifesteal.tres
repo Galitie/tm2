@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
-description = "On BITE, deals BASE DMG and HEALS +1 HP"
+description = "Replaces BASIC ATK. Deals DMG and HEALS +1 HP"
 Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true

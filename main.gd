@@ -41,7 +41,10 @@ func _physics_process(delta: float) -> void:
 	await get_tree().create_timer(1.0).timeout
 	monsters.sort_custom(SortByY)
 	for i: int in range(monsters.size()):
-		monsters[i].z_index = i
+		if monsters[i].current_hp > 0:
+			monsters[i].z_index = i
+		else:
+			monsters[i].z_index = -1
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y

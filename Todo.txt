@@ -43,8 +43,6 @@ Card ideas:
 	Turn all attacks into blocks
 	Turn all attacks into charge attacks
 	If you are in last place get bonus, first place get penalty
-	Extra Upgrade point(s) for the next round
-	Gamble upgrade points each round between 1-5
 	Sparkles, glowing
 	Extra damage at low health
 	Blocking reflects damage

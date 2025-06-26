@@ -16,7 +16,6 @@ var secondary_color
 @export var player : Player
 
 @onready var state_machine = $StateMachine
-@export var melee_attack : Area2D
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
 @onready var max_hp_label = %max_hp

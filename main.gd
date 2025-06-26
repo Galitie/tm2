@@ -30,10 +30,6 @@ func debug_stuff():
 			target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-	#if Input.is_action_just_pressed("ui_down"):
-		#Globals.is_sudden_death_mode = false
-	#if Input.is_action_just_pressed("ui_up"):
-		#generate_random_name()
 
 
 func _init():
@@ -53,7 +49,6 @@ func SortByY(a, b):
 func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
-	
 	if debug_mode:
 		for player in players:
 			player.monster.debug_mode = true

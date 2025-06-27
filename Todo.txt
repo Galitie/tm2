@@ -1,5 +1,6 @@
 Features to make it playtest ready:
-	Click to open new menu for accessories
+	Make accessories focusable
+	Add accessory to creature
 	left to show stats
 	Show winner at end of round - make them dance
 	Show winner at the end of the game

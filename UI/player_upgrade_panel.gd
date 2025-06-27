@@ -13,6 +13,7 @@ var resource_array: Array[Resource] = [load("uid://c37d7vyo0m6jb"), load("uid://
 var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()
 
+var current_user_position_in_accessory_array : int = 0
 
 
 func _ready():
@@ -27,6 +28,7 @@ func _physics_process(_delta):
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
 		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
+		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
 			current_user_position_in_button_array += dpad_vertical_input
@@ -54,6 +56,10 @@ func _physics_process(_delta):
 			if button == reroll_button:
 				_on_button_pressed()
 			else:
+				if button.chosen_resource.accessories.size() > 0:
+					current_user_position_in_accessory_array = 0
+					var accessory_button = button.accessories[current_user_position_in_accessory_array]
+					accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
 				button._on_button_pressed()
 		
 		var button = button_array[current_user_position_in_button_array]
@@ -63,7 +69,19 @@ func _physics_process(_delta):
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
 			if button.accessory_panel.visible:
-				print("moving left or right in the accessory menu")
+				print(current_user_position_in_accessory_array)
+				current_user_position_in_accessory_array += dpad_horizontal_input
+				print(current_user_position_in_accessory_array)
+				if current_user_position_in_accessory_array <= -1:
+					current_user_position_in_accessory_array = button.accessories.size() - 1
+				if current_user_position_in_accessory_array >= button.accessories.size():
+					current_user_position_in_accessory_array = 0
+				print(current_user_position_in_accessory_array)
+				var accessory_button = button.accessories[current_user_position_in_accessory_array]
+				accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
+				for other_button in button.accessories:
+					if other_button != accessory_button:
+						other_button.remove_theme_stylebox_override("panel")
 	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:

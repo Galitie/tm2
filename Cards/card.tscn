@@ -32,6 +32,7 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="AccessoryInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
+theme_override_constants/separation = 10
 
 [node name="TitleDescription" type="VBoxContainer" parent="AccessoryInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -47,7 +48,8 @@ autowrap_mode = 2
 [node name="Accessories" type="HBoxContainer" parent="AccessoryInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-theme_override_constants/separation = 60
+theme_override_constants/separation = 10
+alignment = 1
 
 [node name="CardInfo" type="Button" parent="."]
 layout_mode = 2

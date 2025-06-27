@@ -5,6 +5,7 @@ var chosen_resource : Resource
 var upgrade_panel : PlayerUpgradePanel
 @onready var accessory_panel = $AccessoryInfo
 @onready var card_info_panel = $CardInfo
+var accessories  = []
 
 func _process(_delta):
 	pass
@@ -41,12 +42,12 @@ func choose_card_resource(card_resource):
 		%Tags.text += "UNIQUE"
 	
 	for accessory in chosen_resource.accessories:
-		var panel = Panel.new()
+		var panel = PanelContainer.new()
 		var button = Button.new()
 		button.icon = accessory.image
 		panel.add_child(button)
 		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
-
+		accessories.append(panel)
 
 func reset_card():
 	%Description.visible = false

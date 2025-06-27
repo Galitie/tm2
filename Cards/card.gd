@@ -12,11 +12,7 @@ func _process(_delta):
 
 
 func _on_button_pressed():
-	if chosen_resource.accessories.size() > 0:
-		$CardInfo.hide()
-		$AccessoryInfo.show()
-	else:
-		emit_signal("card_pressed", self) #Caught by game scene
+	emit_signal("card_pressed", self) #Caught by game scene
 
 
 func choose_card_resource(card_resource):

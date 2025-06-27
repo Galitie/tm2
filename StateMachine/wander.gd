@@ -24,5 +24,6 @@ func Physics_Update(_delta:float):
 	if monster:
 		monster.velocity = move_direction * monster.move_speed
 
+# Don't remove these
 func animation_finished(anim_name: String) -> void:
 	pass

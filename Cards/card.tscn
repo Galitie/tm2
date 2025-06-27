@@ -12,11 +12,11 @@ size_flags_vertical = 3
 theme = ExtResource("1_8erfr")
 script = ExtResource("2_0simy")
 
-[node name="Button" type="Button" parent="."]
+[node name="AccessoryInfo" type="Button" parent="."]
+visible = false
 layout_mode = 2
-theme = ExtResource("1_8erfr")
 
-[node name="MarginContainer" type="MarginContainer" parent="Button"]
+[node name="MarginContainer" type="MarginContainer" parent="AccessoryInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,14 +29,51 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Button/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AccessoryInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="TitleDescription" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
+[node name="TitleDescription" type="VBoxContainer" parent="AccessoryInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Button/MarginContainer/VBoxContainer/TitleDescription"]
+[node name="Title" type="Label" parent="AccessoryInfo/MarginContainer/VBoxContainer/TitleDescription"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+theme_override_font_sizes/font_size = 18
+text = "CHOOSE AN ACCESSORY"
+autowrap_mode = 2
+
+[node name="Accessories" type="HBoxContainer" parent="AccessoryInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+theme_override_constants/separation = 60
+
+[node name="CardInfo" type="Button" parent="."]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="MarginContainer" type="MarginContainer" parent="CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8erfr")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_8erfr")
+
+[node name="TitleDescription" type="VBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -45,7 +82,7 @@ theme_override_font_sizes/font_size = 22
 text = "UPGRADE TITLE"
 autowrap_mode = 2
 
-[node name="Description" type="Label" parent="Button/MarginContainer/VBoxContainer/TitleDescription"]
+[node name="Description" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -53,86 +90,86 @@ theme_override_font_sizes/font_size = 14
 text = "Description"
 autowrap_mode = 3
 
-[node name="Items" type="VBoxContainer" parent="Button/MarginContainer/VBoxContainer"]
+[node name="Items" type="VBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="Stat1" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+[node name="Stat1" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="PosNeg" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+[node name="PosNeg" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+[node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat1"]
+[node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
 
-[node name="Stat2" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+[node name="Stat2" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="PosNeg" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="PosNeg" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 autowrap_mode = 2
 
-[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
 autowrap_mode = 2
 
-[node name="Stat3" type="HBoxContainer" parent="Button/MarginContainer/VBoxContainer/Items"]
+[node name="Stat3" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="PosNeg" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="PosNeg" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Amount" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 autowrap_mode = 2
 
-[node name="Stat" type="Label" parent="Button/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
 autowrap_mode = 2
 
-[node name="Tags" type="Label" parent="Button/MarginContainer/VBoxContainer"]
+[node name="Tags" type="Label" parent="CardInfo/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CardInfo" to="." method="_on_button_pressed"]

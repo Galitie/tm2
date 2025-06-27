@@ -21,3 +21,6 @@ enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS}
 @export var attribute_3 : Attributes
 @export var attribute_label_3 : String
 @export var attribute_amount_3: int
+
+@export_group("Accessories")
+@export var accessories : Array[AccessoryResourceScript]

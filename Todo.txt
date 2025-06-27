@@ -1,7 +1,6 @@
 Features to make it playtest ready:
-	Left bumper to show stats (less important)
-	Right bumper to show slots
-	Left + right to cycle through cosmetics for each card
+	Click to open new menu for accessories
+	left to show stats
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Variable player amount

@@ -14,5 +14,6 @@ func Enter():
 	monster.toggle_collisions(true)
 	monster.velocity = Vector2()
 
+# Don't remove these
 func animation_finished(anim_name: String) -> void:
 	pass

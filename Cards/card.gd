@@ -3,14 +3,19 @@ extends PanelContainer
 signal card_pressed(resource, player)
 var chosen_resource : Resource
 var upgrade_panel : PlayerUpgradePanel
-
+@onready var accessory_panel = $AccessoryInfo
+@onready var card_info_panel = $CardInfo
 
 func _process(_delta):
 	pass
 
 
 func _on_button_pressed():
-	emit_signal("card_pressed", self) #Caught by game scene
+	if chosen_resource.accessories.size() > 0:
+		$CardInfo.hide()
+		$AccessoryInfo.show()
+	else:
+		emit_signal("card_pressed", self) #Caught by game scene
 
 
 func choose_card_resource(card_resource):
@@ -34,6 +39,13 @@ func choose_card_resource(card_resource):
 			%PosNeg.text = "-"
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
+	
+	for accessory in chosen_resource.accessories:
+		var panel = Panel.new()
+		var button = Button.new()
+		button.icon = accessory.image
+		panel.add_child(button)
+		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
 
 
 func reset_card():
@@ -45,8 +57,8 @@ func reset_card():
 
 
 func disable():
-	$Button.disabled = true
+	$CardInfo.disabled = true
 
 
 func enable():
-	$Button.disabled = false
+	$CardInfo.disabled = false

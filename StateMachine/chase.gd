@@ -45,5 +45,6 @@ func get_targetable_monsters() -> Array[CharacterBody2D]:
 
 	return targetable_monsters
 
+# Don't remove these
 func animation_finished(anim_name: String) -> void:
 	pass

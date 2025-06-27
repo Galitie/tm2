@@ -22,12 +22,12 @@ func _ready():
 
 
 func _physics_process(_delta):
-	#prob want a better way to do this
 	if player.upgrade_points > 0:
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
 		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
+		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
 			current_user_position_in_button_array += dpad_vertical_input
 			if current_user_position_in_button_array <= -1:
@@ -43,14 +43,27 @@ func _physics_process(_delta):
 				reroll_button.remove_theme_stylebox_override("normal")
 				reroll_button.remove_theme_stylebox_override("disabled")
 			for other_button in button_array:
+				if other_button != reroll_button:
+					other_button.card_info_panel.show()
+					other_button.accessory_panel.hide()
 				if other_button != button:
 					other_button.remove_theme_stylebox_override("panel")
+			
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			var button = button_array[current_user_position_in_button_array]
 			if button == reroll_button:
 				_on_button_pressed()
 			else:
 				button._on_button_pressed()
+		
+		var button = button_array[current_user_position_in_button_array]
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
+			button.card_info_panel.show()
+			button.accessory_panel.hide()
+		
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
+			if button.accessory_panel.visible:
+				print("moving left or right in the accessory menu")
 	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:

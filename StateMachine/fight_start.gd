@@ -12,5 +12,6 @@ func Enter():
 	monster.z_index = 1
 	Transitioned.emit("wander")
 
+# Don't remove these
 func animation_finished(anim_name: String) -> void:
 	pass

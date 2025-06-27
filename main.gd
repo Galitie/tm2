@@ -36,7 +36,7 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
 	monsters.sort_custom(SortByY)

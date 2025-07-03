@@ -49,6 +49,12 @@ func choose_card_resource(card_resource):
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
+	if chosen_resource.state_id:
+		if %Tags.text == "":
+			%Tags.text = "SWAP"
+		else:
+			%Tags.text += ", SWAP"
+		
 	
 	for accessory in chosen_resource.accessories:
 		var panel = PanelContainer.new()

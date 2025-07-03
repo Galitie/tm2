@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://c6dyyjnj08tgh"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://c6dyyjnj08tgh"]
 
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_oxl6m"]
+[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_wtx4u"]
 
 [resource]
 script = ExtResource("1_oxl6m")
@@ -11,11 +12,12 @@ state_id = ""
 unique = true
 remove_specific_states = Array[String]([])
 attribute_1 = 4
-attribute_label_1 = "REROLL(S)"
-attribute_amount_1 = 1
+attribute_label_1 = ""
+attribute_amount_1 = 0
 attribute_2 = 0
 attribute_label_2 = ""
 attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0
+accessories = Array[ExtResource("1_wtx4u")]([])

@@ -21,7 +21,9 @@ func choose_card_resource(card_resource):
 	%Title.text = chosen_resource.card_name
 	%Description.text = chosen_resource.description
 	%Stat.text = chosen_resource.attribute_label_1
+	%Stat2.text = chosen_resource.attribute_label_2
 	%Amount.text = str(chosen_resource.attribute_amount_1)
+	%Amount2.text = str(chosen_resource.attribute_amount_2)
 
 	if chosen_resource.description:
 		%Description.visible = true
@@ -34,6 +36,17 @@ func choose_card_resource(card_resource):
 			%PosNeg.text = "+"
 		else:
 			%PosNeg.text = "-"
+	
+	if chosen_resource.attribute_label_2:
+		%Stat2.visible = true
+	if chosen_resource.attribute_amount_2:
+		%Amount2.visible = true
+		%PosNeg2.visible = true
+		if chosen_resource.attribute_amount_2 > 0:
+			%PosNeg2.text = "+"
+		else:
+			%PosNeg2.text = "-"
+	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
 	
@@ -48,8 +61,11 @@ func choose_card_resource(card_resource):
 func reset_card():
 	%Description.visible = false
 	%Stat.visible = false
+	%Stat2.visible = false
 	%Amount.visible = false
+	%Amount2.visible = false
 	%PosNeg.visible = false
+	%PosNeg2.visible = false
 	%Tags.text = ""
 
 

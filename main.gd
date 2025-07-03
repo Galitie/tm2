@@ -147,7 +147,7 @@ func card_pressed(card):
 		card.upgrade_panel.resource_array.erase(chosen_card)
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
-	card.upgrade_panel.upgrade_title.text = "EXP POINTS [x" + str(player.upgrade_points) + "]"
+	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	if chosen_card.attribute_1 != CardResourceScript.Attributes.NONE:
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.HP:
 			player.monster.max_hp += chosen_card.attribute_amount_1
@@ -159,6 +159,18 @@ func card_pressed(card):
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.REROLL:
 			player.bonus_rerolls += chosen_card.attribute_amount_1
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.UPGRADE_POINTS:
+			player.randomize_upgrade_points = true
+	if chosen_card.attribute_2 != CardResourceScript.Attributes.NONE:
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.HP:
+			player.monster.max_hp += chosen_card.attribute_amount_2
+			player.monster.apply_hp(player.monster.max_hp)
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.MOVE_SPEED:
+			player.monster.move_speed += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.BASE_DAMAGE:
+			player.monster.base_damage += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.REROLL:
+			player.bonus_rerolls += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.UPGRADE_POINTS:
 			player.randomize_upgrade_points = true
 	# Replace a slot
 	if chosen_card.state_id:

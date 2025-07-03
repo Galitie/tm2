@@ -43,14 +43,12 @@ var target_point : Vector2
 
 func _ready():
 	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
-	
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
 	#$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
 	generate_random_name()
-	
 	state_machine.monster = self
 	state_machine.initialize()
 
@@ -125,6 +123,7 @@ func generate_random_name():
 	if randi() % 4 == 0:
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	$Name.text = (" ".join(name_parts))
+
 
 func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.disabled = !is_enabled

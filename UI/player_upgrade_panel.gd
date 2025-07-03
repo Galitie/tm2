@@ -14,7 +14,7 @@ var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()
 
 var current_user_position_in_accessory_array : int = 0
-
+var in_accessory_menu = false
 
 func _ready():
 	for card in upgrade_cards:
@@ -50,6 +50,7 @@ func _physics_process(_delta):
 					other_button.accessory_panel.hide()
 				if other_button != button:
 					other_button.remove_theme_stylebox_override("panel")
+			in_accessory_menu = false
 			
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			var button = button_array[current_user_position_in_button_array]
@@ -58,14 +59,21 @@ func _physics_process(_delta):
 			else:
 				# For navigating the accessory menu
 				if button.chosen_resource.accessories.size() > 0:
-					button.card_info_panel.hide()
-					button.accessory_panel.show()
-					current_user_position_in_accessory_array = 0
-					var accessory_button = button.accessories[current_user_position_in_accessory_array]
-					accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
-					for other_button in button.accessories:
-						if other_button != accessory_button:
-							other_button.remove_theme_stylebox_override("panel")
+					if in_accessory_menu:
+						in_accessory_menu = false
+						button._on_button_pressed()
+						button.card_info_panel.show()
+						button.accessory_panel.hide()
+					else:
+						button.card_info_panel.hide()
+						button.accessory_panel.show()
+						current_user_position_in_accessory_array = 0
+						var accessory_button = button.accessories[current_user_position_in_accessory_array]
+						accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
+						in_accessory_menu = true
+						for other_button in button.accessories:
+							if other_button != accessory_button:
+								other_button.remove_theme_stylebox_override("panel")
 				else:
 					button._on_button_pressed()
 		
@@ -73,18 +81,16 @@ func _physics_process(_delta):
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
 			button.card_info_panel.show()
 			button.accessory_panel.hide()
+			in_accessory_menu = false
 		
 		# For navigating the accessory menu
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
 			if button.accessory_panel.visible:
-				print(current_user_position_in_accessory_array)
 				current_user_position_in_accessory_array += dpad_horizontal_input
-				print(current_user_position_in_accessory_array)
 				if current_user_position_in_accessory_array <= -1:
 					current_user_position_in_accessory_array = button.accessories.size() - 1
 				if current_user_position_in_accessory_array >= button.accessories.size():
 					current_user_position_in_accessory_array = 0
-				print(current_user_position_in_accessory_array)
 				var accessory_button = button.accessories[current_user_position_in_accessory_array]
 				accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
 				for other_button in button.accessories:

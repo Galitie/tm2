@@ -1,12 +1,11 @@
 Features to make it playtest ready:
-	Make accessories focusable
 	Add accessory to creature
-	left to show stats
+	Find a way to show that attacks are being replaced by other chosen attacks
+	More cards to test
+	Left to show stats (?) if folks care about this?
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Variable player amount
-	Find a way to show that attacks are being replaced by other chosen attacks
-	More cards to test
 
 
 Todo:

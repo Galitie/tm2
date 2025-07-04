@@ -86,6 +86,10 @@ func _on_hurtbox_area_entered(area):
 			"bitelifesteal":
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
+			"spikyblock":
+				if state_machine.current_state == state_machine.state_choices["basic_attack"]:
+					print("I punched someone while they were spiky blocking")
+					take_damage(attacking_mon)
 
 
 func take_damage(enemy):

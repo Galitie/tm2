@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=24 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="PackedScene" uid="uid://7gu2g6yyeyis" path="res://bunny.tscn" id="2_wdu3u"]
+[ext_resource type="Script" uid="uid://btxypp2upng2q" path="res://Cards/Scripts/spiky_block.gd" id="16_5105l"]
 [ext_resource type="Script" uid="uid://bp80m3jubyud6" path="res://StateMachine/state_machine.gd" id="18_cjpl6"]
 [ext_resource type="Script" uid="uid://caefbbot3pqn4" path="res://StateMachine/wander.gd" id="19_jjfbp"]
 [ext_resource type="Script" uid="uid://dg7e4rqh2bmw7" path="res://StateMachine/chase.gd" id="20_6py8i"]
@@ -135,7 +136,7 @@ script = ExtResource("20_772v6")
 [node name="Block" type="Node" parent="StateMachine"]
 script = ExtResource("23_x38pf")
 
-[node name="Charge" type="Node" parent="StateMachine"]
+[node name="BasicCharge" type="Node" parent="StateMachine"]
 script = ExtResource("24_pu8g8")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
@@ -158,6 +159,9 @@ script = ExtResource("28_hqfdu")
 
 [node name="BiteLifeSteal" type="Node" parent="StateMachine"]
 script = ExtResource("25_ce3e3")
+
+[node name="SpikyBlock" type="Node" parent="StateMachine"]
+script = ExtResource("16_5105l")
 
 [node name="HPBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

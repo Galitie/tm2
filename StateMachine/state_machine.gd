@@ -3,7 +3,7 @@ extends Node
 var monster: Monster
 var current_state : State
 var states : Dictionary = {}
-var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle" : "idle", "charge_attack" : "charge", "basic_attack" : "punch", "block" : "block"}
+var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle" : "idle", "charge_attack" : "basiccharge", "basic_attack" : "punch", "block" : "block"}
 @onready var current_state_label = $"../CurrentState"
 
 func initialize():

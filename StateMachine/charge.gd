@@ -13,6 +13,7 @@ func Enter():
 	monster.animation_player.play("charge")
 	monster.velocity = Vector2.ZERO
 
+
 func animation_finished(anim_name: String):
 	if anim_name == "charge":
 		if !done_charging:

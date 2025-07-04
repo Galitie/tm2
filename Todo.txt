@@ -1,5 +1,6 @@
 Features to make it playtest ready:
 	Add accessory to creature (Raam)
+	Add Spiky Block Animation and HURTbox in attack group
 	Find a way to show that attacks are being replaced by other chosen attacks
 	More cards to test
 	Left to show stats (?) if folks care about this?
@@ -7,7 +8,7 @@ Features to make it playtest ready:
 	Show winner at the end of the game
 	Variable player amount
 	Log that prints the cards chosen by players, dictionary
-
+	
 
 Todo:
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points

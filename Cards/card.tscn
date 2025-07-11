@@ -151,18 +151,21 @@ layout_mode = 2
 theme = ExtResource("1_8erfr")
 
 [node name="PosNeg3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
 [node name="Amount3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
 [node name="Stat3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")

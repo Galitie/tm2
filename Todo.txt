@@ -14,14 +14,14 @@ Features to make it playtest ready:
 
 
 Todo:
+	Show sudden death and countdown timer
 	Add dancing
-	Adjust poop to come out the back end
 	Spiky block - fix
 	Chase - targets a specific point, like a monsters back or front, avoidance behavior / steering behavior
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part
-	Modes - Quickplay, Regular etc.
+	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus
 	Naming creatures
 	Creature colors
@@ -71,10 +71,12 @@ Potential issues:
 
 Builds:
 	Crit
+		Crits more often, but less multiplier
 	Life steal
 	Block
 	Poison
 	Damage
 	Attack Rate
 	Summons
-	Poop
+		Poop
+			Poops twice as much

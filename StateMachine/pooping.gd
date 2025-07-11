@@ -23,7 +23,7 @@ func animation_finished(anim_name: String):
 			monster.animation_player.play("charge_idle")
 		else:
 			emit_signal("spawn_poop", monster)
-			ChooseNewState.emit()
+			ChooseNewState.emit() # caught in main game scene
 			
 	elif anim_name == "charge_idle":
 		charge_cycles += 1

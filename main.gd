@@ -9,6 +9,8 @@ class_name Game
 @onready var monsters: Array[Monster]
 @onready var player_count : int = players.size()
 @onready var upgrade_menu : Node = $UpgradePanel
+@onready var sudden_death_label: Label = $SuddenDeathLabel
+@onready var sudden_death_timer: Timer = $SuddenDeathTimer
 
 var dead_monsters : int
 var current_round : int
@@ -77,6 +79,11 @@ func _ready():
 func _process(_delta):
 	if debug_mode:
 		debug_stuff()
+	if sudden_death_timer.is_stopped():
+		sudden_death_label.text = "Sudden Death"
+	else:
+		var time_left = sudden_death_timer.time_left
+		sudden_death_label.text = "Sudden Death: %d" % time_left
 
 
 func count_death(monster: Monster):
@@ -87,12 +94,13 @@ func count_death(monster: Monster):
 
 
 func set_upgrade_mode():
+	sudden_death_label.visible = false
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
 	check_if_game_over()
-	$SuddenDeathTimer.stop()
+	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
 	var rerolls_amount_counter = 0
 	for player in players:
@@ -111,9 +119,10 @@ func set_upgrade_mode():
 
 
 func set_fight_mode():
+	sudden_death_label.visible = true
 	current_mode = Modes.FIGHT
 	current_round += 1
-	$SuddenDeathTimer.start()
+	sudden_death_timer.start()
 	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -125,7 +134,6 @@ func set_fight_mode():
 
 func _on_sudden_death_timer_timeout():
 	Globals.is_sudden_death_mode = true
-	print("Sudden death!")
 
 
 func _on_round_over_delay_timer_timeout():
@@ -181,6 +189,9 @@ func card_pressed(card):
 			player.randomize_upgrade_points = true
 		if chosen_card.attribute_2 == CardResourceScript.Attributes.CRIT_PERCENT:
 			player.monster.crit_chance += chosen_card.attribute_amount_2
+	if chosen_card.attribute_3 != CardResourceScript.Attributes.NONE:
+		if chosen_card.attribute_3 == CardResourceScript.Attributes.CRIT_MULTIPLIER:
+			player.monster.crit_multiplier == chosen_card.attribute_amount_3
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
@@ -249,7 +260,7 @@ func spawn_poop(monster):
 		poop.global_position = monster.global_position + Vector2(60,30)
 	else:
 		poop.global_position = monster.global_position + Vector2(-60,30)
-	poop.texture = load("res://poo.png")
+	poop.texture = load("uid://b5sjapvyrr6u7")
 	poop.z_index = -1
 	add_child(poop)
 

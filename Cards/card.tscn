@@ -125,49 +125,51 @@ text = "Damage"
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="PosNeg" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="PosNeg2" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="Amount2" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
-autowrap_mode = 2
 
-[node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+[node name="Stat2" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
-autowrap_mode = 2
 
 [node name="Stat3" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="PosNeg" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="PosNeg3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
 
-[node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="Amount3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "5"
-autowrap_mode = 2
 
-[node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+[node name="Stat3" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat3"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 text = "Damage"
-autowrap_mode = 2
 
 [node name="Tags" type="Label" parent="CardInfo/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

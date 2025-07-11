@@ -1,12 +1,14 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 3
+var max_hp : int = 10
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
 var move_speed : int = 35
 var attack_speed : int = 1
+var crit_chance: int = 1
+var crit_multiplier: float = 1.5
 
 var mon_name : String
 var main_color
@@ -32,7 +34,7 @@ var hurtbox
 var hitbox 
 
 var debug_mode : bool
-
+var facing : String = "right"
 var target_point : Vector2
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
@@ -48,7 +50,6 @@ func _ready():
 	hp_bar.value = max_hp
 	#$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
 	generate_random_name()
-	
 	state_machine.monster = self
 
 func SetCollisionRefs() -> void:
@@ -63,8 +64,10 @@ func _physics_process(_delta):
 	move_and_slide()
 	if velocity.length() > 0 and velocity.x > 0:
 		monster_container.scale = Vector2(1,1)
+		facing = "right"
 	if velocity.length() > 0 and velocity.x < 0:
 		monster_container.scale = Vector2(-1,1)
+		facing = "left"
 
 
 func apply_hp(amount):
@@ -92,14 +95,22 @@ func _on_hurtbox_area_entered(area):
 			"bitelifesteal":
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
+			"spikyblock":
+				if state_machine.current_state == state_machine.state_choices["basic_attack"]:
+					print("I punched someone while they were spiky blocking")
+					take_damage(attacking_mon)
 
 
 func take_damage(enemy):
+	var critted = roll_crit()
+	var crit_text = " CRIT" if critted else ""
+	var random_modifier : int = randi_range(0,5)
+	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) + random_modifier)
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		apply_hp(-enemy.base_damage)
-	$Damage.text = str(enemy.base_damage)
+		apply_hp(-damage)
+	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
 
@@ -130,7 +141,15 @@ func generate_random_name():
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	$Name.text = (" ".join(name_parts))
 
+
 func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.disabled = !is_enabled
 	body_collision.disabled = !is_enabled
 	hitbox_collision.disabled = true
+
+
+func roll_crit() -> bool:
+	var chance = randi_range(1,100)
+	if crit_chance >= chance:
+		return true
+	return false

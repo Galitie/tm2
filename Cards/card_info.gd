@@ -9,7 +9,7 @@ class_name CardResourceScript
 @export var remove_specific_states : Array[String]
 
 @export_group("Attributes")
-enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS}
+enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS, CRIT_PERCENT, CRIT_MULTIPLIER}
 @export var attribute_1 : Attributes
 @export var attribute_label_1 : String
 @export var attribute_amount_1: int
@@ -20,7 +20,7 @@ enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS}
 
 @export var attribute_3 : Attributes
 @export var attribute_label_3 : String
-@export var attribute_amount_3: int
+@export var attribute_amount_3: float
 
 @export_group("Accessories")
 @export var accessories : Array[AccessoryResourceScript]

@@ -9,6 +9,8 @@ class_name Game
 @onready var monsters: Array[Monster]
 @onready var player_count : int = players.size()
 @onready var upgrade_menu : Node = $UpgradePanel
+@onready var sudden_death_label: Label = $SuddenDeathLabel
+@onready var sudden_death_timer: Timer = $SuddenDeathTimer
 
 var dead_monsters : int
 var current_round : int
@@ -36,6 +38,7 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
+
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
@@ -46,18 +49,21 @@ func _physics_process(_delta: float) -> void:
 		else:
 			monsters[i].z_index = -1
 
+
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
+
 
 func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
+		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
 		
 	for monster in monsters:
 		MonsterGeneration.Generate(monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
 		monster.SetCollisionRefs()
 		monster.state_machine.initialize()
-	
+
 	if debug_mode:
 		for player in players:
 			player.monster.debug_mode = true
@@ -79,6 +85,11 @@ func _ready():
 func _process(_delta):
 	if debug_mode:
 		debug_stuff()
+	if sudden_death_timer.is_stopped():
+		sudden_death_label.text = "Sudden Death"
+	else:
+		var time_left = sudden_death_timer.time_left
+		sudden_death_label.text = "Sudden Death: %d" % time_left
 
 
 func count_death(monster: Monster):
@@ -89,11 +100,13 @@ func count_death(monster: Monster):
 
 
 func set_upgrade_mode():
+	sudden_death_label.visible = false
+	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
 	check_if_game_over()
-	$SuddenDeathTimer.stop()
+	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
 	var rerolls_amount_counter = 0
 	for player in players:
@@ -112,9 +125,10 @@ func set_upgrade_mode():
 
 
 func set_fight_mode():
+	sudden_death_label.visible = true
 	current_mode = Modes.FIGHT
 	current_round += 1
-	$SuddenDeathTimer.start()
+	sudden_death_timer.start()
 	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -126,7 +140,6 @@ func set_fight_mode():
 
 func _on_sudden_death_timer_timeout():
 	Globals.is_sudden_death_mode = true
-	print("Sudden death!")
 
 
 func _on_round_over_delay_timer_timeout():
@@ -153,7 +166,7 @@ func card_pressed(card):
 		card.upgrade_panel.resource_array.erase(chosen_card)
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
-	card.upgrade_panel.upgrade_title.text = "EXP POINTS [x" + str(player.upgrade_points) + "]"
+	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	if chosen_card.attribute_1 != CardResourceScript.Attributes.NONE:
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.HP:
 			player.monster.max_hp += chosen_card.attribute_amount_1
@@ -166,6 +179,25 @@ func card_pressed(card):
 			player.bonus_rerolls += chosen_card.attribute_amount_1
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.UPGRADE_POINTS:
 			player.randomize_upgrade_points = true
+		if chosen_card.attribute_1 == CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += chosen_card.attribute_amount_1
+	if chosen_card.attribute_2 != CardResourceScript.Attributes.NONE:
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.HP:
+			player.monster.max_hp += chosen_card.attribute_amount_2
+			player.monster.apply_hp(player.monster.max_hp)
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.MOVE_SPEED:
+			player.monster.move_speed += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.BASE_DAMAGE:
+			player.monster.base_damage += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.REROLL:
+			player.bonus_rerolls += chosen_card.attribute_amount_2
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.UPGRADE_POINTS:
+			player.randomize_upgrade_points = true
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += chosen_card.attribute_amount_2
+	if chosen_card.attribute_3 != CardResourceScript.Attributes.NONE:
+		if chosen_card.attribute_3 == CardResourceScript.Attributes.CRIT_MULTIPLIER:
+			player.monster.crit_multiplier == chosen_card.attribute_amount_3
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
@@ -226,3 +258,21 @@ func check_if_game_over():
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()
+
+
+func spawn_poop(monster):
+	var poop = Sprite2D.new()
+	poop.add_to_group("CleanUp")
+	if monster.facing == "left":
+		poop.global_position = monster.global_position + Vector2(60,30)
+	else:
+		poop.global_position = monster.global_position + Vector2(-60,30)
+	poop.texture = load("uid://b5sjapvyrr6u7")
+	poop.z_index = -1
+	add_child(poop)
+
+
+func clean_up_screen():
+	var items = get_tree().get_nodes_in_group("CleanUp")
+	for item in items:
+		item.queue_free()

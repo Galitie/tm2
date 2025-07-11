@@ -3,17 +3,24 @@ class_name Chase
 
 var monster: CharacterBody2D
 var target_mon : CharacterBody2D
+var chase_time : float
 
+func randomize_chase():
+	chase_time = randf_range(3,8)
+	
+	
 func Enter():
 	select_target()
+	randomize_chase()
 
 # FIX: Since body colliders are uneven in nature, reaching the destination of a target
 # is not always possible, or sometimes leaves the attacker in a position that is too far
 # to land an attack.
-func Physics_Update(_delta:float):
+func Physics_Update(delta:float):
 	if target_mon:
 		var direction = target_mon.global_position - monster.global_position
-		if direction.length() > 80 && target_mon.current_hp > 0:
+		chase_time -= delta
+		if direction.length() > 80 and target_mon.current_hp > 0 and chase_time > 0:
 			monster.velocity = direction.normalized() * monster.move_speed
 		else:
 			if target_mon.global_position.x < monster.global_position.x:

@@ -1,17 +1,16 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cr0ughlj0g43p"]
-
 [ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_ax7ws"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_lnc4m"]
 [ext_resource type="Resource" uid="uid://dysgq7sk2vggr" path="res://parts/bat_arm.tres" id="2_ci2r1"]
 
 [resource]
 script = ExtResource("1_lnc4m")
-card_name = "AGGRESSIVE"
-description = "Monster will no longer idle or wander"
+card_name = "FOCUSED"
+description = "Monster will no longer idle"
 Type = "passive"
 state_id = ""
 unique = true
-remove_specific_states = Array[String](["idle", "wander"])
+remove_specific_states = Array[String](["idle"])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

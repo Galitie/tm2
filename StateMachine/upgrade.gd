@@ -18,7 +18,7 @@ func Enter():
 		monster.animation_player.play("walk", -1.0, 2.0)
 	monster.toggle_collisions(false)
 	monster.velocity = Vector2()
-	monster.get_node("bunny").modulate = Color(1,1,1,1)
+	monster.get_node("root").modulate = Color(1,1,1,1)
 	monster.apply_hp(monster.max_hp)
 	monster.z_index = 1
 	
@@ -27,9 +27,9 @@ func animation_finished(anim_name: String):
 	if anim_name == "get_up":
 		got_up = true
 		if monster.target_point.x < monster.global_position.x:
-			monster.get_node("bunny").scale = Vector2(-1, 1)
+			monster.get_node("root").scale = Vector2(-1, 1)
 		else:
-			monster.get_node("bunny").scale = Vector2(1, 1)
+			monster.get_node("root").scale = Vector2(1, 1)
 		# Should be "run", but it's debatable if I should make run animations
 		monster.animation_player.play("walk", -1.0, 2.0)
 
@@ -39,6 +39,6 @@ func Physics_Update(_delta:float):
 		monster.global_position = monster.global_position.move_toward(monster.target_point, 800 * _delta)
 		
 	if monster.global_position.is_equal_approx(monster.target_point):
-		monster.get_node("bunny").scale = Vector2(1, 1)
+		monster.get_node("root").scale = Vector2(1, 1)
 		monster.global_position = monster.target_point
 		monster.animation_player.play("idle")

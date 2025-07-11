@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://dysgq7sk2vggr"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_jftdr"]
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_ybodw"]
+[ext_resource type="Texture2D" uid="uid://qsslcnv41lfj" path="res://test_parts/bat_arm.png" id="2_ybodw"]
+
+[resource]
+script = ExtResource("1_jftdr")
+monster_type = 1
+type = 4
+texture = ExtResource("2_ybodw")
+offset = Vector2(-87.355, 17.055)
+connections = Array[ExtResource("1_ybodw")]([])
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

@@ -52,6 +52,12 @@ func SortByY(a, b):
 func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
+		
+	for monster in monsters:
+		MonsterGeneration.Generate(monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
+		monster.SetCollisionRefs()
+		monster.state_machine.initialize()
+	
 	if debug_mode:
 		for player in players:
 			player.monster.debug_mode = true
@@ -166,6 +172,7 @@ func card_pressed(card):
 	if chosen_card.remove_specific_states.size():
 		for state in chosen_card.remove_specific_states:
 			player.monster.state_machine.state_choices.erase(state)
+
 	check_if_upgrade_round_over(card, player)
 
 

@@ -1,6 +1,8 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://cr0ughlj0g43p"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cr0ughlj0g43p"]
 
+[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_ax7ws"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_lnc4m"]
+[ext_resource type="Resource" uid="uid://dysgq7sk2vggr" path="res://parts/bat_arm.tres" id="2_ci2r1"]
 
 [resource]
 script = ExtResource("1_lnc4m")
@@ -19,3 +21,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0
+accessories = Array[ExtResource("1_ax7ws")]([])
+part = ExtResource("2_ci2r1")

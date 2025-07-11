@@ -17,9 +17,9 @@ func Physics_Update(_delta:float):
 			monster.velocity = direction.normalized() * monster.move_speed
 		else:
 			if target_mon.global_position.x < monster.global_position.x:
-				monster.get_node("bunny").scale = Vector2(-1, 1)
+				monster.get_node("root").scale = Vector2(-1, 1)
 			else:
-				monster.get_node("bunny").scale = Vector2(1, 1)
+				monster.get_node("root").scale = Vector2(1, 1)
 			monster.velocity = Vector2()
 			ChooseNewState.emit()
 

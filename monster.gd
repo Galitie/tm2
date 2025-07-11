@@ -21,15 +21,15 @@ var secondary_color
 @onready var max_hp_label = %max_hp
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
-@onready var animation_player : AnimationPlayer = $bunny/anim_player
-@onready var monster_container : CanvasGroup = $bunny
+@onready var animation_player : AnimationPlayer = $root/anim_player
+@onready var monster_container : CanvasGroup = $root
 @onready var animation_player_damage = $AnimationPlayer_Damage
 
 @onready var body_collision = $body
-@onready var hitbox_collision = $bunny/hitbox/shape
-@onready var hurtbox_collision = $bunny/body/hurtbox/shape
-@onready var hurtbox = $bunny/body/hurtbox
-@onready var hitbox = $bunny/hitbox
+var hitbox_collision
+var hurtbox_collision
+var hurtbox
+var hitbox 
 
 var debug_mode : bool
 
@@ -42,8 +42,6 @@ var target_point : Vector2
 # give them preferences? melee, range, etc.
 
 func _ready():
-	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
-	
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
@@ -52,8 +50,14 @@ func _ready():
 	generate_random_name()
 	
 	state_machine.monster = self
-	state_machine.initialize()
 
+func SetCollisionRefs() -> void:
+	hitbox = $root/hitbox
+	hurtbox = $root/body/hurtbox
+	hitbox_collision = hitbox.get_node("shape")
+	hurtbox_collision = hurtbox.get_node("shape")
+	
+	hurtbox.area_entered.connect(_on_hurtbox_area_entered)
 
 func _physics_process(_delta):
 	move_and_slide()
@@ -80,7 +84,7 @@ func apply_hp(amount):
 func _on_hurtbox_area_entered(area):
 	if area.is_in_group("Attack") and area != hitbox:
 		state_machine.transition_state("hurt")
-		var attacking_mon : Node = area.get_owner().get_owner()
+		var attacking_mon : Node = area.get_parent().get_parent()
 		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":

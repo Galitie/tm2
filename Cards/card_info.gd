@@ -24,3 +24,5 @@ enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS}
 
 @export_group("Accessories")
 @export var accessories : Array[AccessoryResourceScript]
+
+@export var part: MonsterPart

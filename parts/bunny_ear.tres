@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://c7kbcfhprqc84"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_1nahy"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_f4ju3"]
+[ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://test_parts/bunny_ear.png" id="3_f4ju3"]
+
+[resource]
+script = ExtResource("2_f4ju3")
+type = 2
+texture = ExtResource("3_f4ju3")
+offset = Vector2(-16.405, -51.48)
+connections = Array[ExtResource("1_1nahy")]([])
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

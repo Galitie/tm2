@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=10 format=3 uid="uid://c64sy158bma5j"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_0jw40"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_6gb7q"]
+[ext_resource type="Texture2D" uid="uid://bfwkwfchvyo8f" path="res://test_parts/bat_body.png" id="3_6gb7q"]
+
+[sub_resource type="Resource" id="Resource_wq3nt"]
+script = ExtResource("1_0jw40")
+part_type = 1
+position = Vector2(36.305, -47.395)
+is_back = false
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_44txn"]
+script = ExtResource("1_0jw40")
+part_type = 4
+position = Vector2(1.175, -60.505)
+is_back = false
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_jgwj4"]
+script = ExtResource("1_0jw40")
+part_type = 4
+position = Vector2(25.035, -60.505)
+is_back = true
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_bh8ct"]
+script = ExtResource("1_0jw40")
+part_type = 6
+position = Vector2(-6.63, 46.53)
+is_back = false
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_ll4xd"]
+script = ExtResource("1_0jw40")
+part_type = 6
+position = Vector2(20.94, 46.53)
+is_back = true
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_v3wbw"]
+script = ExtResource("1_0jw40")
+part_type = 3
+position = Vector2(-59.415, 29.005)
+is_back = false
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[resource]
+script = ExtResource("2_6gb7q")
+monster_type = 1
+type = 0
+texture = ExtResource("3_6gb7q")
+offset = Vector2(0, 0)
+connections = Array[ExtResource("1_0jw40")]([SubResource("Resource_wq3nt"), SubResource("Resource_44txn"), SubResource("Resource_jgwj4"), SubResource("Resource_bh8ct"), SubResource("Resource_ll4xd"), SubResource("Resource_v3wbw")])
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

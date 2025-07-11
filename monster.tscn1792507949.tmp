@@ -1,7 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=23 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
-[ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
+[ext_resource type="PackedScene" uid="uid://7gu2g6yyeyis" path="res://bunny.tscn" id="2_wdu3u"]
 [ext_resource type="Script" uid="uid://bp80m3jubyud6" path="res://StateMachine/state_machine.gd" id="18_cjpl6"]
 [ext_resource type="Script" uid="uid://caefbbot3pqn4" path="res://StateMachine/wander.gd" id="19_jjfbp"]
 [ext_resource type="Script" uid="uid://dg7e4rqh2bmw7" path="res://StateMachine/chase.gd" id="20_6py8i"]
@@ -17,13 +17,6 @@
 [ext_resource type="Script" uid="uid://bljsuke2bqro" path="res://StateMachine/reset.gd" id="26_3x5v3"]
 [ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://StateMachine/upgrade.gd" id="27_14274"]
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://StateMachine/fight_start.gd" id="28_hqfdu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
-shader = ExtResource("2_5105l")
-shader_parameter/line_thickness = 3.0
-shader_parameter/line_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5105l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 78.7
@@ -117,20 +110,9 @@ _data = {
 }
 
 [node name="Monster" type="CharacterBody2D" groups=["Monster"]]
-y_sort_enabled = true
-motion_mode = 1
 script = ExtResource("1_ni8ke")
 
-[node name="root" type="CanvasGroup" parent="."]
-material = SubResource("ShaderMaterial_lqt3o")
-
-[node name="anim_player" type="AnimationPlayer" parent="root"]
-
-[node name="hitbox" type="Area2D" parent="root" groups=["Attack"]]
-
-[node name="shape" type="CollisionShape2D" parent="root/hitbox"]
-shape = SubResource("RectangleShape2D_5105l")
-disabled = true
+[node name="bunny" parent="." instance=ExtResource("2_wdu3u")]
 
 [node name="body" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -166,8 +148,9 @@ script = ExtResource("24_u8wmr")
 [node name="Reset" type="Node" parent="StateMachine"]
 script = ExtResource("26_3x5v3")
 
-[node name="UpgradeStart" type="Node" parent="StateMachine"]
+[node name="UpgradeStart" type="Node" parent="StateMachine" node_paths=PackedStringArray("monster")]
 script = ExtResource("27_14274")
+monster = NodePath("../..")
 
 [node name="FightStart" type="Node" parent="StateMachine"]
 script = ExtResource("28_hqfdu")
@@ -217,17 +200,10 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="Name" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -52.5
-offset_top = 142.0
-offset_right = 52.5
-offset_bottom = 192.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -109.0
+offset_top = 146.0
+offset_right = -4.0
+offset_bottom = 196.0
 theme = ExtResource("25_s0vvg")
 theme_override_font_sizes/font_size = 36
 text = "NAME"

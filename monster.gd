@@ -34,7 +34,7 @@ var secondary_color
 @onready var hitbox = $bunny/hitbox
 
 var debug_mode : bool
-
+var facing : String = "right"
 var target_point : Vector2
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
@@ -59,8 +59,10 @@ func _physics_process(_delta):
 	move_and_slide()
 	if velocity.length() > 0 and velocity.x > 0:
 		monster_container.scale = Vector2(1,1)
+		facing = "right"
 	if velocity.length() > 0 and velocity.x < 0:
 		monster_container.scale = Vector2(-1,1)
+		facing = "left"
 
 
 func apply_hp(amount):

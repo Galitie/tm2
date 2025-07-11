@@ -1,13 +1,11 @@
 Guiding lights:
-	What would Sabrina like? -> Accesories, outfits, cute stuff
+	What would Sabrina like? -> Accesories, outfits, cute stuff, creepy stuff
 	Is it fun?
 	Does it have the spirit of Tylermon 1?
 
 
 Features to make it playtest ready:
-	Right now all attacks do base attack damage - do I want attacks to have their own damage + base damage
 	Add accessory to creature (Raam)
-	Add Spiky Block Animation and HURTbox in attack group
 	More cards to test
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
@@ -16,6 +14,9 @@ Features to make it playtest ready:
 
 
 Todo:
+	Add dancing
+	Adjust poop to come out the back end
+	Spiky block - fix
 	Chase - targets a specific point, like a monsters back or front, avoidance behavior / steering behavior
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
@@ -24,6 +25,7 @@ Todo:
 	Menus
 	Naming creatures
 	Creature colors
+	Backgrounds
 	Save, play games to unlock accessories
 	Achievements, like get 0 points, total kills > 100 etc.
 
@@ -75,3 +77,4 @@ Builds:
 	Damage
 	Attack Rate
 	Summons
+	Poop

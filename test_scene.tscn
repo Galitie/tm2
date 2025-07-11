@@ -10,8 +10,6 @@ size = Vector2(1174, 20)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
-total_rounds = 2
-debug_mode = false
 
 [node name="Walls" type="StaticBody2D" parent="."]
 

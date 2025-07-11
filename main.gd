@@ -36,6 +36,7 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
+
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
@@ -46,12 +47,15 @@ func _physics_process(_delta: float) -> void:
 		else:
 			monsters[i].z_index = -1
 
+
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
+
 
 func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
+		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
 	if debug_mode:
 		for player in players:
 			player.monster.debug_mode = true
@@ -83,6 +87,7 @@ func count_death(monster: Monster):
 
 
 func set_upgrade_mode():
+	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
@@ -235,3 +240,21 @@ func check_if_game_over():
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()
+
+
+func spawn_poop(monster):
+	var poop = Sprite2D.new()
+	poop.add_to_group("CleanUp")
+	if monster.facing == "left":
+		poop.global_position = monster.global_position + Vector2(60,30)
+	else:
+		poop.global_position = monster.global_position + Vector2(-60,30)
+	poop.texture = load("res://poo.png")
+	poop.z_index = -1
+	add_child(poop)
+
+
+func clean_up_screen():
+	var items = get_tree().get_nodes_in_group("CleanUp")
+	for item in items:
+		item.queue_free()

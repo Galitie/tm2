@@ -8,7 +8,7 @@ signal reroll_pressed(upgrade_panel)
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
 var player : Player
-var resource_array: Array[Resource] = [load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg")]
+var resource_array: Array[Resource] = [load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg"), load("uid://b7mqshabtd6un")]
 @onready var button_array: Array[Node] = [reroll_button, $VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3]
 var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()

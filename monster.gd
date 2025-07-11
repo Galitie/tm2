@@ -1,12 +1,14 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 3
+var max_hp : int = 10
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
 var move_speed : int = 35
 var attack_speed : int = 1
+var crit_chance: int = 1
+var crit_multiplier: float = 1.5
 
 var mon_name : String
 var main_color
@@ -93,11 +95,15 @@ func _on_hurtbox_area_entered(area):
 
 
 func take_damage(enemy):
+	var critted = roll_crit()
+	var crit_text = " CRIT" if critted else ""
+	var random_modifier : int = randi_range(0,5)
+	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) + random_modifier)
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		apply_hp(-enemy.base_damage)
-	$Damage.text = str(enemy.base_damage)
+		apply_hp(-damage)
+	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
 
@@ -133,3 +139,10 @@ func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.disabled = !is_enabled
 	body_collision.disabled = !is_enabled
 	hitbox_collision.disabled = true
+
+
+func roll_crit() -> bool:
+	var chance = randi_range(1,100)
+	if crit_chance >= chance:
+		return true
+	return false

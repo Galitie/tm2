@@ -160,6 +160,8 @@ func card_pressed(card):
 			player.bonus_rerolls += chosen_card.attribute_amount_1
 		if chosen_card.attribute_1 == CardResourceScript.Attributes.UPGRADE_POINTS:
 			player.randomize_upgrade_points = true
+		if chosen_card.attribute_1 == CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += chosen_card.attribute_amount_1
 	if chosen_card.attribute_2 != CardResourceScript.Attributes.NONE:
 		if chosen_card.attribute_2 == CardResourceScript.Attributes.HP:
 			player.monster.max_hp += chosen_card.attribute_amount_2
@@ -172,6 +174,8 @@ func card_pressed(card):
 			player.bonus_rerolls += chosen_card.attribute_amount_2
 		if chosen_card.attribute_2 == CardResourceScript.Attributes.UPGRADE_POINTS:
 			player.randomize_upgrade_points = true
+		if chosen_card.attribute_2 == CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += chosen_card.attribute_amount_2
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id

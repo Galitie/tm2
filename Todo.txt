@@ -1,27 +1,54 @@
+Guiding lights:
+	What would Sabrina like? -> Accesories, outfits, cute stuff
+	Is it fun?
+	Does it have the spirit of Tylermon 1?
+
+
 Features to make it playtest ready:
+	Right now all attacks do base attack damage - do I want attacks to have their own damage + base damage
 	Add accessory to creature (Raam)
 	Add Spiky Block Animation and HURTbox in attack group
-	Find a way to show that attacks are being replaced by other chosen attacks
 	More cards to test
-	Left to show stats (?) if folks care about this?
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Variable player amount
 	Log that prints the cards chosen by players, dictionary
-	
+
 
 Todo:
+	Chase - targets a specific point, like a monsters back or front, avoidance behavior / steering behavior
+	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
-	Add a charge attack and replace charges transition argument from basic attack to charge
-	Figure out how to track and where to track abilities taken
-	Figure out how creatures will choose their next state rather than random?
-	Card to show a preview of what it will look like. Give each upgrade 1-2 options?
+	Show preview of accessory or body part
 	Modes - Quickplay, Regular etc.
 	Menus
 	Naming creatures
 	Creature colors
 	Save, play games to unlock accessories
 	Achievements, like get 0 points, total kills > 100 etc.
+
+
+Card ideas:
+	Summons (Sabrina loves these generally) spiders, bats, ghosts
+	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
+	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
+	Drop bombs, traps, bananas
+	Turn all attacks into blocks
+	Turn all attacks into charge attacks
+	If you are in last place get bonus, first place get penalty
+	Sparkles, glowing
+	Extra damage at low health
+	Blocking reflects damage
+	Teleport
+	Chain lightning
+	Ghost twin, after death summon a ghost version of you that fights
+	Exploding on death
+	Crazy damage, only one hp
+	Doubles all damage done and recieved
+	Moves faster every 5 seconds of a round
+	First hit is reflected back to the aggresor
+	Auto repair bots
+	Drop an egg, will hatch in 1 rounds and fight for you unless destroyed
 
 
 General Ideas:
@@ -35,29 +62,16 @@ General Ideas:
 	Do upgrade cards determine looks? Does's it tell you?
 
 
-Card ideas:
-	Summons (Sabrina loves these generally) spiders, bats, ghosts
-	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
-	Slime trails?
-	Drop bombs, traps, bananas
-	Block builds - spiky armor
-	Turn all attacks into blocks
-	Turn all attacks into charge attacks
-	If you are in last place get bonus, first place get penalty
-	Sparkles, glowing
-	Extra damage at low health
-	Blocking reflects damage
-	Teleport
-	Chain lightening
-	Ghost twin, after death summon a ghost version of you that fights
-	Exploding on death
-	Crazy damage, only one hp
-	Doubles all damage done and recieved
-	Moves faster every 5 seconds of a round
-	First hit is reflected back to the aggresor
-	Auto repair bots
-	Drop an egg, will hatch in 1 rounds and fight for you unless destroyed
-
-
 Potential issues:
 	Not getting enough HP boosts -> can you get this from other cards? Secondary attributte
+	Does HP matter if you're not dealing enough damage because we now have sudden death
+
+
+Builds:
+	Crit
+	Life steal
+	Block
+	Poison
+	Damage
+	Attack Rate
+	Summons

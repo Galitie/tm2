@@ -19,5 +19,5 @@ attribute_label_2 = ""
 attribute_amount_2 = 0
 attribute_3 = 7
 attribute_label_3 = "CRIT MULT"
-attribute_amount_3 = 1.25
+attribute_amount_3 = -0.25
 accessories = Array[ExtResource("1_5rp5m")]([])

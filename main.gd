@@ -197,7 +197,7 @@ func card_pressed(card):
 			player.monster.crit_chance += chosen_card.attribute_amount_2
 	if chosen_card.attribute_3 != CardResourceScript.Attributes.NONE:
 		if chosen_card.attribute_3 == CardResourceScript.Attributes.CRIT_MULTIPLIER:
-			player.monster.crit_multiplier = chosen_card.attribute_amount_3
+			player.monster.crit_multiplier += chosen_card.attribute_amount_3
 	# Replace a slot
 	if chosen_card.state_id:
 		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id

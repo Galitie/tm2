@@ -36,8 +36,6 @@ func choose_card_resource(card_resource):
 		%PosNeg.visible = true
 		if chosen_resource.attribute_amount_1 > 0:
 			%PosNeg.text = "+"
-		else:
-			%PosNeg.text = "-"
 	
 	if chosen_resource.attribute_label_2:
 		%Stat2.visible = true
@@ -46,18 +44,14 @@ func choose_card_resource(card_resource):
 		%PosNeg2.visible = true
 		if chosen_resource.attribute_amount_2 > 0:
 			%PosNeg2.text = "+"
-		else:
-			%PosNeg2.text = "-"
 	
-	if chosen_resource.attribute_label_2:
+	if chosen_resource.attribute_label_3:
 		%Stat3.visible = true
-	if chosen_resource.attribute_amount_2:
+	if chosen_resource.attribute_amount_3:
 		%Amount3.visible = true
 		%PosNeg3.visible = true
-		if chosen_resource.attribute_amount_2 > 0:
+		if chosen_resource.attribute_amount_3 > 0:
 			%PosNeg3.text = "+"
-		else:
-			%PosNeg3.text = "-"
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"

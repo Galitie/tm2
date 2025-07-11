@@ -1,5 +1,5 @@
 extends Resource
-class_name AccessoryResourceScript
+class_name AccessoryInfo
 
 @export var name : String
 @export var image : Texture

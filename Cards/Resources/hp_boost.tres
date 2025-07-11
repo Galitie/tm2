@@ -20,5 +20,4 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0
-accessories = Array[ExtResource("1_m3588")]([])
 part = ExtResource("2_un73k")

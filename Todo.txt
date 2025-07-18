@@ -6,7 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Fixing sizing bug for monsters
-	Poop mechanics
+	Poop mechanics - actually make them do something. Right now they just follow you around
 		What does it do?
 		Can you slip on it and take damage?
 		Can it be made into an attack?

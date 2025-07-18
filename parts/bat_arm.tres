@@ -11,4 +11,6 @@ type = 4
 texture = ExtResource("2_ybodw")
 offset = Vector2(-87.355, 17.055)
 connections = Array[ExtResource("1_ybodw")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

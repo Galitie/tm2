@@ -167,40 +167,13 @@ func card_pressed(card):
 	var player = card.upgrade_panel.player
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
-	if chosen_card.attribute_1 != CardResourceScript.Attributes.NONE:
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.HP:
-			player.monster.max_hp += chosen_card.attribute_amount_1
-			player.monster.apply_hp(player.monster.max_hp)
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.MOVE_SPEED:
-			player.monster.move_speed += chosen_card.attribute_amount_1
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.BASE_DAMAGE:
-			player.monster.base_damage += chosen_card.attribute_amount_1
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.REROLL:
-			player.bonus_rerolls += chosen_card.attribute_amount_1
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.UPGRADE_POINTS:
-			player.randomize_upgrade_points = true
-		if chosen_card.attribute_1 == CardResourceScript.Attributes.CRIT_PERCENT:
-			player.monster.crit_chance += chosen_card.attribute_amount_1
-	if chosen_card.attribute_2 != CardResourceScript.Attributes.NONE:
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.HP:
-			player.monster.max_hp += chosen_card.attribute_amount_2
-			player.monster.apply_hp(player.monster.max_hp)
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.MOVE_SPEED:
-			player.monster.move_speed += chosen_card.attribute_amount_2
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.BASE_DAMAGE:
-			player.monster.base_damage += chosen_card.attribute_amount_2
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.REROLL:
-			player.bonus_rerolls += chosen_card.attribute_amount_2
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.UPGRADE_POINTS:
-			player.randomize_upgrade_points = true
-		if chosen_card.attribute_2 == CardResourceScript.Attributes.CRIT_PERCENT:
-			player.monster.crit_chance += chosen_card.attribute_amount_2
-	if chosen_card.attribute_3 != CardResourceScript.Attributes.NONE:
-		if chosen_card.attribute_3 == CardResourceScript.Attributes.CRIT_MULTIPLIER:
-			player.monster.crit_multiplier += chosen_card.attribute_amount_3
+	apply_card_effects(card)
 	# Replace a slot
 	if chosen_card.state_id:
-		player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
+		if chosen_card.state_id == "poop_summon":
+			player.poop_summons = true
+		else:
+			player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
 	if chosen_card.remove_specific_states.size():
 		for state in chosen_card.remove_specific_states:
 			player.monster.state_machine.state_choices.erase(state)
@@ -261,18 +234,52 @@ func clear_knocked_out_monsters():
 
 
 func spawn_poop(monster):
-	var poop = Sprite2D.new()
-	poop.add_to_group("CleanUp")
-	if monster.facing == "left":
-		poop.global_position = monster.global_position + Vector2(60,30)
-	else:
-		poop.global_position = monster.global_position + Vector2(-60,30)
-	poop.texture = load("uid://b5sjapvyrr6u7")
+	var poop = preload("uid://b03qji6okxywb").instantiate()
+	poop.global_position = monster.poop_checker.global_position
 	poop.z_index = -1
+	poop.monster = monster
+	poop.move_speed = monster.move_speed
+	if monster.player.poop_summons:
+		poop.is_a_summon = true
 	add_child(poop)
+	poop.add_to_group("CleanUp")
 
 
 func clean_up_screen():
 	var items = get_tree().get_nodes_in_group("CleanUp")
 	for item in items:
 		item.queue_free()
+
+
+func apply_card_effects(card):
+	var attributes = [
+		[card.chosen_resource.attribute_1, card.chosen_resource.attribute_amount_1],
+		[card.chosen_resource.attribute_2, card.chosen_resource.attribute_amount_2],
+		[card.chosen_resource.attribute_3, card.chosen_resource.attribute_amount_3]
+	]
+	
+	for attr_data in attributes:
+		var attr = attr_data[0]
+		var amount = attr_data[1]
+		if attr != CardResourceScript.Attributes.NONE:
+			apply_card_attribute(attr, amount, card)
+
+
+func apply_card_attribute(attribute, amount, card):
+	var player = card.upgrade_panel.player
+	match attribute:
+		CardResourceScript.Attributes.HP:
+			player.monster.max_hp += amount
+			player.monster.apply_hp(player.monster.max_hp)
+		CardResourceScript.Attributes.MOVE_SPEED:
+			player.monster.move_speed += amount
+		CardResourceScript.Attributes.BASE_DAMAGE:
+			player.monster.base_damage += amount
+		CardResourceScript.Attributes.REROLL:
+			player.bonus_rerolls += amount
+		CardResourceScript.Attributes.UPGRADE_POINTS:
+			player.randomize_upgrade_points = true
+		CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += amount
+		CardResourceScript.Attributes.CRIT_MULTIPLIER:
+			player.monster.crit_multiplier += amount

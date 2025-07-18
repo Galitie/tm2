@@ -5,16 +5,25 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Fixing sizing bug for monsters
+	Poop mechanics
+		What does it do?
+		Can you slip on it and take damage?
+		Can it be made into an attack?
+		Spiky poops
+		Poop more often <- weighted
+		Poop summon, runs around and smacks
+		Poop has weapons
+	Summon mechanics
 	Add accessory to creature (Raam)
 	More cards to test
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
-	Variable player amount
 	Log that prints the cards chosen by players, dictionary
 
 
 Todo:
-	Show sudden death and countdown timer
+	GDC talks on party games
 	Add dancing
 	Spiky block - fix
 	Chase - targets a specific point, like a monsters back or front, avoidance behavior / steering behavior
@@ -23,6 +32,7 @@ Todo:
 	Show preview of accessory or body part
 	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus
+	Variable player amount
 	Naming creatures
 	Creature colors
 	Backgrounds

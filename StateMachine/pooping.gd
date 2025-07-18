@@ -22,9 +22,21 @@ func animation_finished(anim_name: String):
 		if !done_charging:
 			monster.animation_player.play("charge_idle")
 		else:
-			emit_signal("spawn_poop", monster)
-			ChooseNewState.emit() # caught in main game scene
-			
+			# Make sure poops don't spawn on each other and freak out
+			var bodies : Array[Node2D] = monster.poop_checker.get_overlapping_bodies()
+			for body in bodies:
+				if body is Poop:
+					print("found some poop, did it fly?")
+					var difference = monster.poop_checker.global_position - body.global_position
+					var direction = difference.normalized()
+					var circle_radius = 15.52
+					var penetration = direction * circle_radius
+					body.velocity = -penetration
+					body.move_and_slide()
+					#body.global_position += penetration
+			emit_signal("spawn_poop", monster) # Caught in main game scene
+			ChooseNewState.emit() 
+	
 	elif anim_name == "charge_idle":
 		charge_cycles += 1
 		if charge_cycles >= cycle_threshold:

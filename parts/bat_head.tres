@@ -32,4 +32,6 @@ type = 1
 texture = ExtResource("2_xdfjk")
 offset = Vector2(33.28, -19.895)
 connections = Array[ExtResource("1_eqi76")]([SubResource("Resource_po0ht"), SubResource("Resource_pyx1l"), SubResource("Resource_eqi76")])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

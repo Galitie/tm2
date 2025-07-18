@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=28 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
@@ -26,6 +26,9 @@ shader_parameter/line_thickness = 3.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5105l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lqt3o"]
+radius = 15.52
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 78.7
@@ -133,6 +136,14 @@ material = SubResource("ShaderMaterial_lqt3o")
 [node name="shape" type="CollisionShape2D" parent="root/hitbox"]
 shape = SubResource("RectangleShape2D_5105l")
 disabled = true
+
+[node name="PoopChecker" type="Area2D" parent="root"]
+position = Vector2(-201, 166)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/PoopChecker"]
+shape = SubResource("CircleShape2D_lqt3o")
 
 [node name="body" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -250,10 +261,10 @@ theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 
 [node name="Damage" type="Label" parent="."]
-offset_left = -35.0
-offset_top = -380.0
-offset_right = 38.0
-offset_bottom = -236.0
+offset_left = -16.0
+offset_top = -322.0
+offset_right = 57.0
+offset_bottom = -178.0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_constants/outline_size = 2

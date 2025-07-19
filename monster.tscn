@@ -31,8 +31,8 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 radius = 15.52
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
-radius = 78.7
-height = 319.51
+radius = 47.0
+height = 160.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb8nq"]
 bg_color = Color(0.20033, 0.20033, 0.20033, 1)
@@ -138,7 +138,7 @@ shape = SubResource("RectangleShape2D_5105l")
 disabled = true
 
 [node name="PoopChecker" type="Area2D" parent="root"]
-position = Vector2(-201, 166)
+position = Vector2(-91, 30)
 collision_layer = 0
 collision_mask = 2
 
@@ -197,10 +197,10 @@ script = ExtResource("17_lqt3o")
 [node name="HPBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 z_index = 3
-offset_left = -99.0
-offset_top = -252.0
-offset_right = 101.0
-offset_bottom = -202.0
+offset_left = -69.0
+offset_top = -69.0
+offset_right = 70.0
+offset_bottom = -42.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bb8nq")
 theme_override_styles/fill = ExtResource("25_o122v")
 rounded = true
@@ -221,18 +221,15 @@ alignment = 1
 [node name="current_hp" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="slash" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "/"
 
 [node name="max_hp" type="Label" parent="HPBar/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "0"
 
 [node name="Name" type="Label" parent="."]
@@ -241,23 +238,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.5
-offset_top = 142.0
-offset_right = 52.5
-offset_bottom = 192.0
+offset_left = -50.0
+offset_top = 46.0
+offset_right = 55.0
+offset_bottom = 96.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("25_s0vvg")
-theme_override_font_sizes/font_size = 36
 text = "NAME"
+horizontal_alignment = 1
 
 [node name="CurrentState" type="Label" parent="."]
 offset_left = -135.0
-offset_top = -321.0
+offset_top = -99.0
 offset_right = 143.0
-offset_bottom = -271.0
+offset_bottom = -49.0
 theme = ExtResource("25_s0vvg")
-theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 
 [node name="Damage" type="Label" parent="."]

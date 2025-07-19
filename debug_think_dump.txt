@@ -1,0 +1,22 @@
+Debug think dump
+
+Globals will know if the game is in debug mode
+How do I want to force monsters into a certain state?
+-> Generally I think just change out the value and then call it using the key
+->  This is how to call a value using a key
+Transitioned.emit(monster.state_machine.state_choices["basic_attack"])
+
+Type in the state? Press a button? Press a key?
+I have 14 states currently... maybe a small clickable list of buttons? typing it might be slow...
+
+Do I want it per monsters?
+Or does it affect all monsters (easiest I think?)
+
+-------------------------------------------------------------------------
+
+Just thinking ahead, it's not always states I need them in, they might need certain cards so they can use those states
+
+Do I instead force certain cards into the upgrade drawn pile and then wait for them to use them in the game?
+I have 12 of them now, but will have many more later...
+A list of buttons could be ok here for now?
+Maybe I can drop a resource into a card while playing in debug mode?

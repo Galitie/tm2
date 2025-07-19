@@ -65,6 +65,7 @@ func _ready():
 		monster.state_machine.initialize()
 
 	if debug_mode:
+		Globals.game.debug_mode = true
 		for player in players:
 			player.monster.debug_mode = true
 	for player_index in players.size():
@@ -118,7 +119,10 @@ func set_upgrade_mode():
 			player.upgrade_points = randi_range(1,5)
 		else:
 			player.upgrade_points = 3
-		player.rerolls = rerolls_amount_counter + player.bonus_rerolls
+		if current_round == 0:
+			player.rerolls = 3
+		else:
+			player.rerolls = rerolls_amount_counter + player.bonus_rerolls
 		rerolls_amount_counter += 1
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
@@ -238,10 +242,10 @@ func clear_knocked_out_monsters():
 
 func spawn_poop(monster):
 	var poop = preload("uid://b03qji6okxywb").instantiate()
-	poop.global_position = monster.poop_checker.global_position
 	poop.z_index = -1
 	poop.monster = monster
 	poop.move_speed = monster.move_speed
+	poop.global_position = monster.poop_checker.global_position
 	if monster.player.poop_summons:
 		poop.is_a_summon = true
 	add_child(poop)

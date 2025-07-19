@@ -31,9 +31,7 @@ func animation_finished(anim_name: String):
 					var direction = difference.normalized()
 					var circle_radius = 15.52
 					var penetration = direction * circle_radius
-					body.velocity = -penetration
-					body.move_and_slide()
-					#body.global_position += penetration
+					body.velocity += -penetration * 0.5
 			emit_signal("spawn_poop", monster) # Caught in main game scene
 			if monster.player.more_poops and randi() % 2 == 0:
 				print("pooped twice!")
@@ -45,9 +43,7 @@ func animation_finished(anim_name: String):
 						var direction = difference.normalized()
 						var circle_radius = 15.52
 						var penetration = direction * circle_radius
-						body.velocity = -penetration
-						body.move_and_slide()
-						#body.global_position += penetration
+						body.velocity += -penetration * 0.5
 				emit_signal("spawn_poop", monster) # Caught in main game scene
 			ChooseNewState.emit() 
 	

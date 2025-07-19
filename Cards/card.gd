@@ -55,11 +55,11 @@ func choose_card_resource(card_resource):
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
-	if chosen_resource.state_id:
-		if %Tags.text == "":
-			%Tags.text = "SWAP"
-		else:
-			%Tags.text += ", SWAP"
+	#if chosen_resource.state_id: This isn't true for all resources with a state_id
+		#if %Tags.text == "":
+			#%Tags.text = "SWAP"
+		#else:
+			#%Tags.text += ", SWAP"
 		
 	
 	for accessory in chosen_resource.accessories:

@@ -9,9 +9,10 @@ var move_speed : int
 
 
 func _ready():
+	velocity = Vector2.ZERO
 	if not is_a_summon:
 		collision.disabled = true
-	
+
 
 func _physics_process(_delta):
 	if is_a_summon:

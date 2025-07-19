@@ -170,10 +170,13 @@ func card_pressed(card):
 	apply_card_effects(card)
 	# Replace a slot
 	if chosen_card.state_id:
-		if chosen_card.state_id == "poop_summon":
-			player.poop_summons = true
-		else:
-			player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
+		match chosen_card.state_id:
+			"poop_summon":
+				player.poop_summons = true
+			"more_poops":
+				player.more_poops = true
+			_:
+				player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
 	if chosen_card.remove_specific_states.size():
 		for state in chosen_card.remove_specific_states:
 			player.monster.state_machine.state_choices.erase(state)

@@ -35,6 +35,20 @@ func animation_finished(anim_name: String):
 					body.move_and_slide()
 					#body.global_position += penetration
 			emit_signal("spawn_poop", monster) # Caught in main game scene
+			if monster.player.more_poops and randi() % 2 == 0:
+				print("pooped twice!")
+				bodies = monster.poop_checker.get_overlapping_bodies()
+				for body in bodies:
+					if body is Poop:
+						print("found some poop, did it fly?")
+						var difference = monster.poop_checker.global_position - body.global_position
+						var direction = difference.normalized()
+						var circle_radius = 15.52
+						var penetration = direction * circle_radius
+						body.velocity = -penetration
+						body.move_and_slide()
+						#body.global_position += penetration
+				emit_signal("spawn_poop", monster) # Caught in main game scene
 			ChooseNewState.emit() 
 	
 	elif anim_name == "charge_idle":

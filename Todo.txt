@@ -11,7 +11,7 @@ Features to make it playtest ready:
 		Can you slip on it and take damage?
 		Can it be made into an attack?
 		Spiky poops
-		Poop more often <- weighted
+		Poop more often <- weighted actions? Or add another poop action? Or have a high chance of pooping again? Or two poops per poop
 		Poop summon, runs around and smacks
 		Poop has weapons
 	Summon mechanics

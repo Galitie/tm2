@@ -88,14 +88,16 @@ func apply_hp(amount):
 
 func _on_hurtbox_area_entered(area):
 	if area.is_in_group("Attack") and area != hitbox:
-		state_machine.transition_state("hurt")
-		var attacking_mon : Node = area.get_parent().get_parent()
-		var attack : String = attacking_mon.state_machine.current_state.name
 		var current_state = state_machine.current_state.name
+		var attacking_mon : Node = area.get_parent().get_parent()
+		print(current_state)
 		match current_state.to_lower():
 			"spikyblock":
 				print("I was spikyblocking and someone punched me!")
 				attacking_mon.take_damage(self)
+				return
+		state_machine.transition_state("hurt")
+		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
 				take_damage(attacking_mon)

@@ -5,7 +5,8 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Fixing sizing bug for monsters
+	Fixing sizing bug for monsters (Raam)
+	Spiky block - fix currently doesn't deal damage
 	Poop mechanics - actually make them do something. Right now they just follow you around
 		What does it do?
 		Can you slip on it and take damage?
@@ -25,7 +26,6 @@ Todo:
 	Debug mode - force creatures into state
 	GDC talks on party games
 	Add dancing
-	Spiky block - fix
 	Chase - targets a specific point, like a monsters back or front, avoidance behavior / steering behavior
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points

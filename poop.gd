@@ -38,7 +38,7 @@ func _physics_process(_delta):
 		# trigger a death animation?
 
 # Make sure poops don't spawn their colliders on each other and freak out
-func is_not_colliding():
+func is_not_colliding() -> bool:
 	var bodies : Array[Node2D] = $Area2D.get_overlapping_bodies()
 	if bodies.size():
 		return false

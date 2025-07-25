@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=2 format=3 uid="uid://ds51dyaoyuqjg"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://ds51dyaoyuqjg"]
 
+[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_cp0ph"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_o25rm"]
 
 [resource]
@@ -9,7 +10,7 @@ description = "Starting next round, instead of 3, randomly get 1-5 upgrade point
 Type = "passive"
 state_id = ""
 unique = true
-remove_specific_states = Array[String]([])
+remove_specific_states = Array[int]([])
 attribute_1 = 5
 attribute_label_1 = ""
 attribute_amount_1 = 0
@@ -18,4 +19,5 @@ attribute_label_2 = ""
 attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
-attribute_amount_3 = 0
+attribute_amount_3 = 0.0
+accessories = Array[ExtResource("1_cp0ph")]([])

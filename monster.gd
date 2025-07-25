@@ -91,16 +91,18 @@ func _on_hurtbox_area_entered(area):
 		state_machine.transition_state("hurt")
 		var attacking_mon : Node = area.get_parent().get_parent()
 		var attack : String = attacking_mon.state_machine.current_state.name
+		var current_state = state_machine.current_state.name
+		match current_state.to_lower():
+			"spikyblock":
+				print("I was spikyblocking and someone punched me!")
+				attacking_mon.take_damage(self)
 		match attack.to_lower():
 			"punch":
 				take_damage(attacking_mon)
 			"bitelifesteal":
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
-			"spikyblock":
-				if state_machine.current_state == state_machine.state_choices["basic_attack"]:
-					print("I punched someone while they were spiky blocking")
-					take_damage(attacking_mon)
+
 
 
 func take_damage(enemy):

@@ -172,18 +172,18 @@ func card_pressed(card):
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	apply_card_effects(card)
-	# Replace a slot
 	if chosen_card.state_id:
 		match chosen_card.state_id:
 			"poop_summon":
 				player.poop_summons = true
 			"more_poops":
 				player.more_poops = true
-			_:
+			_: # Replace a slot
 				player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
+	# Set a slot weight to 0. This comes from an array of weights
 	if chosen_card.remove_specific_states.size():
-		for state in chosen_card.remove_specific_states:
-			player.monster.state_machine.state_choices.erase(state)
+		for state_index in chosen_card.remove_specific_states:
+			player.monster.state_machine.weights[state_index] = 0
 
 	check_if_upgrade_round_over(card, player)
 

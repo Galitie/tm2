@@ -6,7 +6,6 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Fixing sizing bug for monsters (Raam)
-	Spiky block - fix currently doesn't deal damage
 	Poop mechanics - actually make them do something. Right now they just follow you around
 		What does it do?
 		Can you slip on it and take damage?

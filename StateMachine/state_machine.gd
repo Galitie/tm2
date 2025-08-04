@@ -7,7 +7,7 @@ var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle"
 @onready var current_state_label = $"../CurrentState"
 
 var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other"]
-var weights = PackedFloat32Array([1,1,1,1,1,1,.5])
+var weights = PackedFloat32Array([1,1,1,1,1,1,1])
 var rng = RandomNumberGenerator.new()
 
 func initialize():

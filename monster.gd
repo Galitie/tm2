@@ -90,10 +90,8 @@ func _on_hurtbox_area_entered(area):
 	if area.is_in_group("Attack") and area != hitbox:
 		var current_state = state_machine.current_state.name
 		var attacking_mon : Node = area.get_parent().get_parent()
-		print(current_state)
 		match current_state.to_lower():
 			"spikyblock":
-				print("I was spikyblocking and someone punched me!")
 				attacking_mon.take_damage(self)
 				return
 		state_machine.transition_state("hurt")
@@ -104,7 +102,10 @@ func _on_hurtbox_area_entered(area):
 			"bitelifesteal":
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
-
+	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
+		state_machine.transition_state("hurt")
+		var attacking_mon = area.owner.emitter.monster
+		take_damage(attacking_mon)
 
 
 func take_damage(enemy):

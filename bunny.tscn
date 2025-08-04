@@ -135,7 +135,6 @@ offset = Vector2(-15.455, -9.805)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="body" groups=["HurtBox"]]
-collision_mask = 5
 metadata/_edit_lock_ = true
 
 [node name="shape" type="CollisionShape2D" parent="body/hurtbox"]

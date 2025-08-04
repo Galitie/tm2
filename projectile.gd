@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 
 
 func area_entered(area):
-	print(self, " prjectile and ", monster, " monster I belong to")
 	var entity = area.owner
-	if entity != emitter and entity != Poop and area != monster.hurtbox:
+	if entity != emitter and entity != Summon and area != monster.hurtbox:
 		queue_free()

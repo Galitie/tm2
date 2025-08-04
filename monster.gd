@@ -26,8 +26,10 @@ var secondary_color
 @onready var animation_player : AnimationPlayer = $root/anim_player
 @onready var monster_container : CanvasGroup = $root
 @onready var animation_player_damage = $AnimationPlayer_Damage
+
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body
+@onready var vision = $Vision
 
 var hitbox_collision
 var hurtbox_collision

@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Poop
+class_name Summon
 
 @onready var monster : Monster
 var is_a_summon : bool = false

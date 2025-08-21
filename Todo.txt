@@ -15,6 +15,7 @@ Features to make it playtest ready:
 
 
 Todo:
+	Make controller joystick work (eventually)
 	Debug mode - force creatures into state
 	GDC talks on party games
 	Add dancing

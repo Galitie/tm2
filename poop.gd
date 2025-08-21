@@ -4,12 +4,13 @@ class_name Summon
 @onready var monster : Monster
 var is_a_summon : bool = false
 var move_speed : int
-@onready var sprite = $Sprite2D
-@onready var collision = $BodyCollision
-@onready var projectile = load("res://projectile.tscn")
 var collision_added : bool = false
 var poop_shoot_interval : float = 5.0
 var poop_shoot_timer : float = 0.0
+
+@onready var sprite = $Sprite2D
+@onready var collision = $BodyCollision
+@onready var projectile = load("res://projectile.tscn")
 
 func _ready():
 	if not is_a_summon:

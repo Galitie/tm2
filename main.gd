@@ -178,6 +178,9 @@ func card_pressed(card):
 				player.poop_summons = true
 			"more_poops":
 				player.more_poops = true
+			"dbl_dmg":
+				player.monster.damage_dealt_mult = 2.0
+				player.monster.damage_received_mult = 2.0
 			_: # Replace a slot
 				player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
 	# Set a slot weight to 0. This comes from an array of weights

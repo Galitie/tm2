@@ -9,7 +9,8 @@ var move_speed : int = 35
 var attack_speed : int = 1
 var crit_chance: int = 1
 var crit_multiplier: float = 1.5
-
+var damage_received_mult: float = 1.0
+var damage_dealt_mult: float = 1.0
 var mon_name : String
 var main_color
 var secondary_color
@@ -115,11 +116,11 @@ func take_damage(enemy : CharacterBody2D):
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted else ""
 	var random_modifier : int = randi_range(0,3)
-	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) + random_modifier)
+	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		apply_hp(-damage)
+		apply_hp(-damage * damage_received_mult)
 	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()

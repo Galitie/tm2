@@ -7,6 +7,8 @@ var move_speed : int
 var collision_added : bool = false
 var poop_shoot_interval : float = 5.0
 var poop_shoot_timer : float = 0.0
+var base_damage: int = 1
+var crit_multiplier: float = 1
 
 @onready var sprite = $Sprite2D
 @onready var collision = $BodyCollision

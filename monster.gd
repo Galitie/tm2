@@ -106,14 +106,14 @@ func _on_hurtbox_area_entered(area):
 				attacking_mon.apply_hp(1)
 	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
 		state_machine.transition_state("hurt")
-		var attacking_mon = area.owner.emitter.monster
+		var attacking_mon = area.owner.emitter
 		take_damage(attacking_mon)
 
 
-func take_damage(enemy):
+func take_damage(enemy : CharacterBody2D):
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted else ""
-	var random_modifier : int = randi_range(0,5)
+	var random_modifier : int = randi_range(0,3)
 	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) + random_modifier)
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)

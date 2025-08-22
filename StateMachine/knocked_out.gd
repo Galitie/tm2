@@ -15,7 +15,6 @@ func Enter():
 func animation_finished(anim_name: String) -> void:
 	if anim_name == "faint":
 		monster.z_index = -10
-		#monster.animation_player.play("knocked_out")
 		monster.velocity = Vector2.ZERO
 		monster.get_node("HPBar").visible = false
 		Globals.game.count_death(monster)

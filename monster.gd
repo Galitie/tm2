@@ -96,7 +96,6 @@ func _on_hurtbox_area_entered(area):
 			"spikyblock":
 				attacking_mon.take_damage(self)
 				return
-		state_machine.transition_state("hurt")
 		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
@@ -104,10 +103,12 @@ func _on_hurtbox_area_entered(area):
 			"bitelifesteal":
 				take_damage(attacking_mon)
 				attacking_mon.apply_hp(1)
-	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
 		state_machine.transition_state("hurt")
+	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
 		var attacking_mon = area.owner.emitter
 		take_damage(attacking_mon)
+		state_machine.transition_state("hurt")
+
 
 
 func take_damage(enemy : CharacterBody2D):
@@ -152,9 +153,9 @@ func generate_random_name():
 
 
 func toggle_collisions(is_enabled: bool):
-	hurtbox_collision.disabled = !is_enabled
-	body_collision.disabled = !is_enabled
-	hitbox_collision.disabled = true
+	hurtbox_collision.set_deferred("disabled", !is_enabled)
+	body_collision.set_deferred("disabled", !is_enabled)
+	hitbox_collision.set_deferred("disabled", true)
 
 
 func roll_crit() -> bool:

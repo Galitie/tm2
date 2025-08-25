@@ -38,6 +38,7 @@ var hurtbox
 var hitbox 
 
 var debug_mode : bool
+@export var pre_loaded_cards : Array[Resource]
 var facing : String = "right"
 var target_point : Vector2
 
@@ -110,7 +111,6 @@ func _on_hurtbox_area_entered(area):
 		var attacking_mon = area.owner.emitter
 		take_damage(attacking_mon)
 		state_machine.transition_state("hurt")
-
 
 
 func take_damage(enemy : CharacterBody2D):

@@ -16,7 +16,7 @@ Features to make it playtest ready:
 
 Todo:
 	Make controller joystick work (eventually)
-	Debug mode - force creatures into state
+	Debug mode - force creatures into state or certain cards to appear
 	GDC talks on party games
 	Add dancing
 	Press left to show stats (?) if folks care about this?
@@ -48,7 +48,6 @@ Card ideas:
 	Ghost twin, after death summon a ghost version of you that fights
 	Exploding on death
 	Crazy damage, only one hp
-	Doubles all damage done and recieved
 	Moves faster every 5 seconds of a round
 	First hit is reflected back to the aggresor
 	Auto repair bots

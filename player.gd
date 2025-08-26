@@ -10,3 +10,4 @@ var victory_points :int = 0
 var controller_port: int = -1
 var poop_summons : bool = false
 var more_poops :bool = false
+var upgrade_panel : PlayerUpgradePanel

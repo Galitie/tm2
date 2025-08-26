@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=7 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="PackedScene" uid="uid://d3fkc0o45x3ja" path="res://monster.tscn" id="1_7a21h"]
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://main.gd" id="1_fnpeg"]
 [ext_resource type="Script" uid="uid://bw5vr4ucfdgof" path="res://player.gd" id="2_coq8p"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_sasra"]
+[ext_resource type="Resource" uid="uid://bn1d6phtvfhry" path="res://Cards/Resources/poop_summon.tres" id="4_2nij2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4v2"]
 size = Vector2(1174, 20)
@@ -40,6 +41,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player1" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(262, 192)
 player = NodePath("..")
+pre_loaded_cards = Array[Resource]([ExtResource("4_2nij2")])
 
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 575)

@@ -76,6 +76,7 @@ func _ready():
 	for player_index in players.size():
 		var player = players[player_index]
 		player.controller_port = player_index
+	
 	var upgrade_cards = upgrade_menu.get_tree().get_nodes_in_group("UpgradeCard")
 	var player_upgrade_panels = upgrade_menu.get_tree().get_nodes_in_group("PlayerUpgradePanel")
 	for card in upgrade_cards:
@@ -175,8 +176,6 @@ func card_pressed(card : PanelContainer):
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	apply_card_resource_effects(card.chosen_resource, player)
-	if card.chosen_resource.unique:
-		card.upgrade_panel.resource_array.erase(card.chosen_resource)
 	check_if_upgrade_round_over(card, player)
 
 
@@ -205,7 +204,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 	if card_resource.remove_specific_states.size():
 		for state_index in card_resource.remove_specific_states:
 			player.monster.state_machine.weights[state_index] = 0
-
+	if card_resource.unique:
+		player.upgrade_panel.resource_array.erase(card_resource)
 
 func apply_card_attribute(attribute, amount, player):
 	match attribute:

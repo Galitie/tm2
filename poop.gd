@@ -48,7 +48,6 @@ func _physics_process(delta):
 			poop_shoot_timer -= poop_shoot_interval
 			shoot_projectile()
 		# trigger a death animation?
-		
 
 
 # Make sure poops don't spawn their colliders on each other and freak out

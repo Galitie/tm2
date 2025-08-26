@@ -5,6 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Have bombs roll away when spawned
 	Fixing sizing bug for monsters (Raam)
 	Summon mechanics
 	Add accessory to creature (Raam)
@@ -16,17 +17,15 @@ Features to make it playtest ready:
 
 Todo:
 	Make controller joystick work (eventually)
-	Debug mode - force creatures into state or certain cards to appear
 	GDC talks on party games
 	Add dancing
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part
 	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
-	Menus
+	Menus - sound, etc.
 	Variable player amount
-	Naming creatures
-	Creature colors
+	Menu for naming creatures / creature colorss
 	Backgrounds
 	Save, play games to unlock accessories
 	Achievements, like get 0 points, total kills > 100 etc.

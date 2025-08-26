@@ -35,6 +35,8 @@ Attack=""
 Monster="A player's mon"
 Player=""
 Projectile=""
+Bomb=""
+CleanUp=""
 
 [rendering]
 

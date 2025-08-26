@@ -102,18 +102,22 @@ func _on_hurtbox_area_entered(area):
 		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
-				take_damage(attacking_mon)
+				take_damage_from(attacking_mon)
 			"bitelifesteal":
-				take_damage(attacking_mon)
+				take_damage_from(attacking_mon)
 				attacking_mon.apply_hp(1)
 		state_machine.transition_state("hurt")
 	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
-		var attacking_mon = area.owner.emitter
-		take_damage(attacking_mon)
+		var attacking_summon = area.owner.emitter
+		take_damage_from(attacking_summon)
+		state_machine.transition_state("hurt")
+	if area.is_in_group("Bomb") and area != hitbox:
+		var attacking_bomb = area.owner
+		take_damage_from(attacking_bomb)
 		state_machine.transition_state("hurt")
 
 
-func take_damage(enemy : CharacterBody2D):
+func take_damage_from(enemy):
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted else ""
 	var random_modifier : int = randi_range(0,3)

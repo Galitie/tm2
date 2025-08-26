@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
 radius = 6.0
 
-[node name="Projectile" type="Node2D"]
+[node name="Projectile" type="Node2D" groups=["CleanUp", "Projectile"]]
 script = ExtResource("1_qxf0c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

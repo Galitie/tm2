@@ -59,6 +59,7 @@ func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
+		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
 		
 	for monster in monsters:
 		MonsterGeneration.Generate(monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
@@ -194,6 +195,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 		match card_resource.state_id:
 			"poop_summon":
 				player.poop_summons = true
+				player.monster.state_machine.state_choices[card_resource.Type] = "pooping"
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
@@ -206,6 +208,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			player.monster.state_machine.weights[state_index] = 0
 	if card_resource.unique:
 		player.upgrade_panel.resource_array.erase(card_resource)
+
 
 func apply_card_attribute(attribute, amount, player):
 	match attribute:
@@ -288,6 +291,14 @@ func spawn_poop(monster):
 		poop.is_a_summon = true
 	add_child(poop)
 	poop.add_to_group("CleanUp")
+
+
+func spawn_bomb(monster):
+	var bomb = preload("uid://gxo3acon6q5t").instantiate()
+	bomb.z_index = 1
+	bomb.monster = monster
+	bomb.global_position = monster.poop_checker.global_position
+	add_child(bomb)	
 
 
 func clean_up_screen():

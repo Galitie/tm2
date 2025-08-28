@@ -53,4 +53,6 @@ type = 0
 texture = ExtResource("3_6gb7q")
 offset = Vector2(0, 0)
 connections = Array[ExtResource("1_0jw40")]([SubResource("Resource_wq3nt"), SubResource("Resource_44txn"), SubResource("Resource_jgwj4"), SubResource("Resource_bh8ct"), SubResource("Resource_ll4xd"), SubResource("Resource_v3wbw")])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

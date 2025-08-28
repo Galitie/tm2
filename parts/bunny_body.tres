@@ -7,42 +7,42 @@
 [sub_resource type="Resource" id="Resource_4b4xw"]
 script = ExtResource("1_f4dbq")
 part_type = 1
-position = Vector2(118, -57)
+position = Vector2(21, -22)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_f4dbq"]
 script = ExtResource("1_f4dbq")
 part_type = 5
-position = Vector2(74, 38)
+position = Vector2(39, -17)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_3b2q1"]
 script = ExtResource("1_f4dbq")
 part_type = 5
-position = Vector2(53, 38)
+position = Vector2(27, -17)
 is_back = true
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_3vuqk"]
 script = ExtResource("1_f4dbq")
 part_type = 6
-position = Vector2(-55, 30)
+position = Vector2(-16, 4)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_f06q4"]
 script = ExtResource("1_f4dbq")
 part_type = 6
-position = Vector2(-23, 30)
+position = Vector2(-22, 4)
 is_back = true
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_c0o7f"]
 script = ExtResource("1_f4dbq")
 part_type = 3
-position = Vector2(-121, -40)
+position = Vector2(-36, 9)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
@@ -53,6 +53,6 @@ type = 0
 texture = ExtResource("2_fcibb")
 offset = Vector2(0, 0)
 connections = Array[ExtResource("1_f4dbq")]([SubResource("Resource_4b4xw"), SubResource("Resource_f4dbq"), SubResource("Resource_3b2q1"), SubResource("Resource_3vuqk"), SubResource("Resource_f06q4"), SubResource("Resource_c0o7f")])
-hurtbox_offset = Vector2(-1, 1.5)
-hurtbox_size = Vector2(260, 201)
+hurtbox_offset = Vector2(-1.075, -2.725)
+hurtbox_size = Vector2(89.255, 77.36)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

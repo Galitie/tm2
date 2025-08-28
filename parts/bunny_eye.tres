@@ -6,8 +6,11 @@
 
 [resource]
 script = ExtResource("2_1yctk")
+monster_type = 0
 type = 7
 texture = ExtResource("3_1yctk")
 offset = Vector2(0, 0)
 connections = Array[ExtResource("1_nhlib")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

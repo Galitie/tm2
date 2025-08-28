@@ -12,14 +12,14 @@ var parts: Dictionary[MonsterPart.MONSTER_TYPE, Dictionary] = {
 		MonsterPart.PART_TYPE.EAR : load("uid://c7kbcfhprqc84"),
 		MonsterPart.PART_TYPE.EYE : load("uid://bup2objw1mx86"),
 	},
-	MonsterPart.MONSTER_TYPE.BAT : {
-		MonsterPart.PART_TYPE.BODY : load("uid://c64sy158bma5j"),
-		MonsterPart.PART_TYPE.HEAD : load("uid://ksytcn7eqhrl"),
-		MonsterPart.PART_TYPE.HINDLEG : load("uid://cou8dbgo02cmc"),
-		MonsterPart.PART_TYPE.EAR : load("uid://bnxvdo03dka41"),
-		MonsterPart.PART_TYPE.EYE : load("uid://vmf1gswgnep4"),
-		MonsterPart.PART_TYPE.ARM : load("uid://dysgq7sk2vggr"),
-	},
+	#MonsterPart.MONSTER_TYPE.BAT : {
+		#MonsterPart.PART_TYPE.BODY : load("uid://c64sy158bma5j"),
+		#MonsterPart.PART_TYPE.HEAD : load("uid://ksytcn7eqhrl"),
+		#MonsterPart.PART_TYPE.HINDLEG : load("uid://cou8dbgo02cmc"),
+		#MonsterPart.PART_TYPE.EAR : load("uid://bnxvdo03dka41"),
+		#MonsterPart.PART_TYPE.EYE : load("uid://vmf1gswgnep4"),
+		#MonsterPart.PART_TYPE.ARM : load("uid://dysgq7sk2vggr"),
+	#},
 }
 
 var body_animations: Dictionary[MonsterPart.MONSTER_TYPE, AnimationLibrary] = {
@@ -111,7 +111,11 @@ func Generate(parent: Node2D, new_part: MonsterPart, _connection: MonsterConnect
 	for connection: MonsterConnection in new_part.connections:
 		var part: MonsterPart = GetRandomPart(connection.part_type)
 		var part_node: Node2D = Generate(new_part_node, part, connection, new_part)
-		
-	parent.add_child(new_part_node)
+	
+	if parent_part != null && parent_part.type != MonsterPart.PART_TYPE.BODY:
+		var anim_offset_node: Node2D = parent.get_child(0)
+		anim_offset_node.add_child(new_part_node)
+	else:
+		parent.add_child(new_part_node)
 	
 	return parent

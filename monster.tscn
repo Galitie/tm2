@@ -22,7 +22,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
 shader = ExtResource("2_5105l")
-shader_parameter/line_thickness = 0.0
+shader_parameter/line_thickness = 3.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5105l"]

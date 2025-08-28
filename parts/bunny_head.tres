@@ -7,21 +7,21 @@
 [sub_resource type="Resource" id="Resource_jm6j1"]
 script = ExtResource("1_qcste")
 part_type = 2
-position = Vector2(-3, -42)
+position = Vector2(3.905, -20.59)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_t57dc"]
 script = ExtResource("1_qcste")
 part_type = 2
-position = Vector2(27, -42)
+position = Vector2(16, -24)
 is_back = true
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_qcste"]
 script = ExtResource("1_qcste")
 part_type = 7
-position = Vector2(38.38, -12.44)
+position = Vector2(24.38, -14.44)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
@@ -30,6 +30,8 @@ script = ExtResource("1_b3st4")
 monster_type = 0
 type = 1
 texture = ExtResource("2_md67m")
-offset = Vector2(45.085, -5.62)
+offset = Vector2(18.39, -15.195)
 connections = Array[ExtResource("1_qcste")]([SubResource("Resource_jm6j1"), SubResource("Resource_t57dc"), SubResource("Resource_qcste")])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

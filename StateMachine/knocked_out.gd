@@ -4,7 +4,6 @@ class_name KnockedOut
 var monster: CharacterBody2D
 
 func Enter():
-	print("entered knocked out")
 	monster.animation_player.play("faint")
 	monster.toggle_collisions(false)
 	monster.velocity = Vector2.ZERO

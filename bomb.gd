@@ -44,7 +44,6 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_explosion_countdown_timeout():
-	print("bomb exploded")
 	$Area2D/ExplosionHitBox.disabled = false
 	$ExplosionTime.start()
 	$Sprite2D.play("explode")

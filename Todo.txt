@@ -5,7 +5,6 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Have bombs roll away when spawned
 	Fixing sizing bug for monsters (Raam)
 	Summon mechanics
 	Add accessory to creature (Raam)

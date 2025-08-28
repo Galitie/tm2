@@ -118,10 +118,14 @@ wait_time = 30.0
 one_shot = true
 
 [node name="SuddenDeathLabel" type="Label" parent="."]
+z_index = 99
 offset_left = 488.0
 offset_top = 38.0
 offset_right = 528.0
 offset_bottom = 61.0
+theme_override_colors/font_color = Color(1, 0.103705, 0.322429, 1)
+theme_override_colors/font_outline_color = Color(0.273438, 0.0588808, 0.0466346, 1)
+theme_override_constants/outline_size = 8
 horizontal_alignment = 1
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]

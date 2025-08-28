@@ -18,7 +18,6 @@ func animation_finished(anim_name: String):
 	if anim_name == "block":
 		if !done_blocking:
 			monster.animation_player.play("block_idle")
-			monster.hurtbox_collision.disabled = true
 		else:
 			ChooseNewState.emit()
 	elif anim_name == "block_idle":
@@ -26,6 +25,5 @@ func animation_finished(anim_name: String):
 		if block_cycles >= block_threshold:
 			monster.animation_player.play("block", -1.0, -1.0, true)
 			done_blocking = true
-			monster.hurtbox_collision.disabled = false
 		else:
 			monster.animation_player.play("block_idle")

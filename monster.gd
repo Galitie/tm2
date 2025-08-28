@@ -9,7 +9,8 @@ var move_speed : int = 35
 var attack_speed : int = 1
 var crit_chance: int = 1
 var crit_multiplier: float = 1.5
-
+var damage_received_mult: float = 1.0
+var damage_dealt_mult: float = 1.0
 var mon_name : String
 var main_color
 var secondary_color
@@ -26,8 +27,10 @@ var secondary_color
 @onready var animation_player : AnimationPlayer = $root/anim_player
 @onready var monster_container : CanvasGroup = $root
 @onready var animation_player_damage = $AnimationPlayer_Damage
+
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body
+@onready var vision = $Vision
 
 var hitbox_collision
 var hurtbox_collision
@@ -35,6 +38,7 @@ var hurtbox
 var hitbox 
 
 var debug_mode : bool
+@export var pre_loaded_cards : Array[Resource]
 var facing : String = "right"
 var target_point : Vector2
 
@@ -88,30 +92,40 @@ func apply_hp(amount):
 
 func _on_hurtbox_area_entered(area):
 	if area.is_in_group("Attack") and area != hitbox:
-		state_machine.transition_state("hurt")
+		var current_state = state_machine.current_state.name
 		var attacking_mon : Node = area.get_parent().get_parent()
+		match current_state.to_lower():
+			"spikyblock":
+				attacking_mon.take_damage(self)
+				attacking_mon.state_machine.transition_state("hurt")
+				return
 		var attack : String = attacking_mon.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
-				take_damage(attacking_mon)
+				take_damage_from(attacking_mon)
 			"bitelifesteal":
-				take_damage(attacking_mon)
+				take_damage_from(attacking_mon)
 				attacking_mon.apply_hp(1)
-			"spikyblock":
-				if state_machine.current_state == state_machine.state_choices["basic_attack"]:
-					print("I punched someone while they were spiky blocking")
-					take_damage(attacking_mon)
+		state_machine.transition_state("hurt")
+	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
+		var attacking_summon = area.owner.emitter
+		take_damage_from(attacking_summon)
+		state_machine.transition_state("hurt")
+	if area.is_in_group("Bomb") and area != hitbox:
+		var attacking_bomb = area.owner
+		take_damage_from(attacking_bomb)
+		state_machine.transition_state("hurt")
 
 
-func take_damage(enemy):
+func take_damage_from(enemy):
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted else ""
-	var random_modifier : int = randi_range(0,5)
-	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) + random_modifier)
+	var random_modifier : int = randi_range(0,3)
+	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		apply_hp(-damage)
+		apply_hp(-damage * damage_received_mult)
 	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
@@ -145,9 +159,9 @@ func generate_random_name():
 
 
 func toggle_collisions(is_enabled: bool):
-	hurtbox_collision.disabled = !is_enabled
-	body_collision.disabled = !is_enabled
-	hitbox_collision.disabled = true
+	hurtbox_collision.set_deferred("disabled", !is_enabled)
+	body_collision.set_deferred("disabled", !is_enabled)
+	hitbox_collision.set_deferred("disabled", true)
 
 
 func roll_crit() -> bool:

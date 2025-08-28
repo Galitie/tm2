@@ -6,7 +6,7 @@ extends Control
 func _ready():
 	for player_index in range(players.size()):
 		player_upgrade_panels[player_index].player = players[player_index]
-
+		players[player_index].upgrade_panel = player_upgrade_panels[player_index]
 
 func setup():
 	for player_upgrade_panel in player_upgrade_panels:

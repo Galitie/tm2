@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=30 format=3 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
 [ext_resource type="Script" uid="uid://btxypp2upng2q" path="res://Cards/Scripts/spiky_block.gd" id="16_5105l"]
 [ext_resource type="Script" uid="uid://qbs8cikjj5vp" path="res://StateMachine/pooping.gd" id="17_lqt3o"]
+[ext_resource type="Script" uid="uid://cueda0va4rji" path="res://StateMachine/bombing.gd" id="18_a7j2b"]
 [ext_resource type="Script" uid="uid://bp80m3jubyud6" path="res://StateMachine/state_machine.gd" id="18_cjpl6"]
 [ext_resource type="Script" uid="uid://caefbbot3pqn4" path="res://StateMachine/wander.gd" id="19_jjfbp"]
 [ext_resource type="Script" uid="uid://dg7e4rqh2bmw7" path="res://StateMachine/chase.gd" id="20_6py8i"]
@@ -33,6 +34,9 @@ radius = 15.52
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 47.0
 height = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7j2b"]
+radius = 85.09
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bb8nq"]
 bg_color = Color(0.20033, 0.20033, 0.20033, 1)
@@ -149,6 +153,11 @@ shape = SubResource("CircleShape2D_lqt3o")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5105l")
 
+[node name="Vision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
+shape = SubResource("CircleShape2D_a7j2b")
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("18_cjpl6")
 
@@ -193,6 +202,9 @@ script = ExtResource("16_5105l")
 
 [node name="Pooping" type="Node" parent="StateMachine"]
 script = ExtResource("17_lqt3o")
+
+[node name="Bombing" type="Node" parent="StateMachine"]
+script = ExtResource("18_a7j2b")
 
 [node name="HPBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

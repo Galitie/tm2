@@ -1,12 +1,19 @@
 extends CharacterBody2D
-class_name Poop
+class_name Summon
 
 @onready var monster : Monster
 var is_a_summon : bool = false
 var move_speed : int
+var collision_added : bool = false
+var poop_shoot_interval : float = 5.0
+var poop_shoot_timer : float = 0.0
+var base_damage: int = 1
+var crit_multiplier: float = 1
+var damage_dealt_mult: float = 1.0
+
 @onready var sprite = $Sprite2D
 @onready var collision = $BodyCollision
-var collision_added : bool = false
+@onready var projectile = load("res://projectile.tscn")
 
 func _ready():
 	if not is_a_summon:
@@ -14,7 +21,7 @@ func _ready():
 	velocity = Vector2.ZERO
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if is_a_summon and is_not_colliding() and not collision_added:
 		collision.disabled = false
 		collision_added = true
@@ -35,11 +42,31 @@ func _physics_process(_delta):
 		
 		if monster.current_hp <= 0:
 			is_a_summon = false
+		
+		poop_shoot_timer += delta
+		if poop_shoot_timer >= poop_shoot_interval:
+			poop_shoot_timer -= poop_shoot_interval
+			shoot_projectile()
 		# trigger a death animation?
 
+
 # Make sure poops don't spawn their colliders on each other and freak out
-func is_not_colliding():
-	var bodies : Array[Node2D] = $Area2D.get_overlapping_bodies()
+func is_not_colliding() -> bool:
+	var bodies : Array[Node2D] = $CheckToSpawnCollision.get_overlapping_bodies()
 	if bodies.size():
 		return false
 	return true
+
+
+func shoot_projectile():
+	var projectile = projectile.instantiate()
+	projectile.emitter = self
+	projectile.monster = monster
+	if sprite.scale == Vector2(1,1):
+		projectile.direction = Vector2.RIGHT
+	elif sprite.scale == Vector2(-1,1):
+		projectile.direction = Vector2.LEFT
+	else:
+		projectile.direction = Vector2.RIGHT
+	projectile.position = position + Vector2(0, -2) + (projectile.direction * 6)
+	Globals.game.add_child(projectile)

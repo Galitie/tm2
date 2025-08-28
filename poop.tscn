@@ -24,10 +24,10 @@ position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_vqr27")
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CheckToSpawnCollision" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckToSpawnCollision"]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_a7brd")

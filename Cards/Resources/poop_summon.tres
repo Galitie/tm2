@@ -7,10 +7,10 @@
 script = ExtResource("2_k3gwj")
 card_name = "POOP SUMMON"
 description = "Turn POOPS into SUMMONS that fight for you"
-Type = "passive"
+Type = "other"
 state_id = "poop_summon"
 unique = true
-remove_specific_states = Array[String]([])
+remove_specific_states = Array[int]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

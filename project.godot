@@ -34,6 +34,9 @@ HurtBox="Area to take damage in"
 Attack=""
 Monster="A player's mon"
 Player=""
+Projectile=""
+Bomb=""
+CleanUp=""
 
 [rendering]
 

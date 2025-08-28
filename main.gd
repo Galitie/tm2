@@ -32,6 +32,7 @@ func debug_stuff():
 			target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
+		
 
 
 func _init():
@@ -58,6 +59,7 @@ func _ready():
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
+		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
 		
 	for monster in monsters:
 		MonsterGeneration.Generate(monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
@@ -68,9 +70,14 @@ func _ready():
 		Globals.game.debug_mode = true
 		for player in players:
 			player.monster.debug_mode = true
+			if player.monster.pre_loaded_cards.size():
+				for pre_loaded_card in player.monster.pre_loaded_cards:
+					apply_card_resource_effects(pre_loaded_card, player)
+	
 	for player_index in players.size():
 		var player = players[player_index]
 		player.controller_port = player_index
+	
 	var upgrade_cards = upgrade_menu.get_tree().get_nodes_in_group("UpgradeCard")
 	var player_upgrade_panels = upgrade_menu.get_tree().get_nodes_in_group("PlayerUpgradePanel")
 	for card in upgrade_cards:
@@ -164,28 +171,62 @@ func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()
 
 
-func card_pressed(card):
-	var chosen_card = card.chosen_resource
-	if chosen_card.unique:
-		card.upgrade_panel.resource_array.erase(chosen_card)
-	var player = card.upgrade_panel.player
+func card_pressed(card : PanelContainer):
+	var player : Player = card.upgrade_panel.player
+	var resource_array : Array[Resource] = card.upgrade_panel.resource_array
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
-	apply_card_effects(card)
-	# Replace a slot
-	if chosen_card.state_id:
-		match chosen_card.state_id:
+	apply_card_resource_effects(card.chosen_resource, player)
+	check_if_upgrade_round_over(card, player)
+
+
+func apply_card_resource_effects(card_resource : Resource, player):
+	var attributes = [
+		[card_resource.attribute_1, card_resource.attribute_amount_1],
+		[card_resource.attribute_2, card_resource.attribute_amount_2],
+		[card_resource.attribute_3, card_resource.attribute_amount_3]
+	]
+	for attr_data in attributes:
+		var attr = attr_data[0]
+		var amount = attr_data[1]
+		if attr != CardResourceScript.Attributes.NONE:
+			apply_card_attribute(attr, amount, player)
+	if card_resource.state_id:
+		match card_resource.state_id:
 			"poop_summon":
 				player.poop_summons = true
+				player.monster.state_machine.state_choices[card_resource.Type] = "pooping"
 			"more_poops":
 				player.more_poops = true
-			_:
-				player.monster.state_machine.state_choices[chosen_card.Type] = chosen_card.state_id
-	if chosen_card.remove_specific_states.size():
-		for state in chosen_card.remove_specific_states:
-			player.monster.state_machine.state_choices.erase(state)
+			"dbl_dmg":
+				player.monster.damage_dealt_mult = 2.0
+				player.monster.damage_received_mult = 2.0
+			_: # Replace a slot
+				player.monster.state_machine.state_choices[card_resource.Type] = card_resource.state_id
+	if card_resource.remove_specific_states.size():
+		for state_index in card_resource.remove_specific_states:
+			player.monster.state_machine.weights[state_index] = 0
+	if card_resource.unique:
+		player.upgrade_panel.resource_array.erase(card_resource)
 
-	check_if_upgrade_round_over(card, player)
+
+func apply_card_attribute(attribute, amount, player):
+	match attribute:
+		CardResourceScript.Attributes.HP:
+			player.monster.max_hp += amount
+			player.monster.apply_hp(player.monster.max_hp)
+		CardResourceScript.Attributes.MOVE_SPEED:
+			player.monster.move_speed += amount
+		CardResourceScript.Attributes.BASE_DAMAGE:
+			player.monster.base_damage += amount
+		CardResourceScript.Attributes.REROLL:
+			player.bonus_rerolls += amount
+		CardResourceScript.Attributes.UPGRADE_POINTS:
+			player.randomize_upgrade_points = true
+		CardResourceScript.Attributes.CRIT_PERCENT:
+			player.monster.crit_chance += amount
+		CardResourceScript.Attributes.CRIT_MULTIPLIER:
+			player.monster.crit_multiplier += amount
 
 
 func check_if_upgrade_round_over(card, player):
@@ -252,41 +293,15 @@ func spawn_poop(monster):
 	poop.add_to_group("CleanUp")
 
 
+func spawn_bomb(monster):
+	var bomb = preload("uid://gxo3acon6q5t").instantiate()
+	bomb.z_index = 1
+	bomb.monster = monster
+	bomb.global_position = monster.poop_checker.global_position
+	add_child(bomb)	
+
+
 func clean_up_screen():
 	var items = get_tree().get_nodes_in_group("CleanUp")
 	for item in items:
 		item.queue_free()
-
-
-func apply_card_effects(card):
-	var attributes = [
-		[card.chosen_resource.attribute_1, card.chosen_resource.attribute_amount_1],
-		[card.chosen_resource.attribute_2, card.chosen_resource.attribute_amount_2],
-		[card.chosen_resource.attribute_3, card.chosen_resource.attribute_amount_3]
-	]
-	
-	for attr_data in attributes:
-		var attr = attr_data[0]
-		var amount = attr_data[1]
-		if attr != CardResourceScript.Attributes.NONE:
-			apply_card_attribute(attr, amount, card)
-
-
-func apply_card_attribute(attribute, amount, card):
-	var player = card.upgrade_panel.player
-	match attribute:
-		CardResourceScript.Attributes.HP:
-			player.monster.max_hp += amount
-			player.monster.apply_hp(player.monster.max_hp)
-		CardResourceScript.Attributes.MOVE_SPEED:
-			player.monster.move_speed += amount
-		CardResourceScript.Attributes.BASE_DAMAGE:
-			player.monster.base_damage += amount
-		CardResourceScript.Attributes.REROLL:
-			player.bonus_rerolls += amount
-		CardResourceScript.Attributes.UPGRADE_POINTS:
-			player.randomize_upgrade_points = true
-		CardResourceScript.Attributes.CRIT_PERCENT:
-			player.monster.crit_chance += amount
-		CardResourceScript.Attributes.CRIT_MULTIPLIER:
-			player.monster.crit_multiplier += amount

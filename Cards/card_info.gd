@@ -3,10 +3,10 @@ class_name CardResourceScript
 
 @export var card_name : String
 @export_multiline var description: String
-@export_enum("basic_attack", "charge_attack", "special", "block", "passive", "immediate") var Type : String
+@export_enum("basic_attack", "charge_attack", "special", "block", "passive", "immediate", "other") var Type : String
 @export var state_id : String
 @export var unique : bool
-@export var remove_specific_states : Array[String]
+@export var remove_specific_states : Array[int]
 
 @export_group("Attributes")
 enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS, CRIT_PERCENT, CRIT_MULTIPLIER}

@@ -200,6 +200,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"dbl_dmg":
 				player.monster.damage_dealt_mult = 2.0
 				player.monster.damage_received_mult = 2.0
+			"larger_poops":
+				player.larger_poops = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -288,6 +290,8 @@ func spawn_poop(monster):
 	poop.global_position = monster.poop_checker.global_position
 	if monster.player.poop_summons:
 		poop.is_a_summon = true
+	if monster.player.larger_poops:
+		poop.scale += Vector2(.25, .25)
 	add_child(poop)
 	poop.add_to_group("CleanUp")
 
@@ -297,6 +301,8 @@ func spawn_bomb(monster):
 	bomb.z_index = 1
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
+	if monster.player.larger_poops:
+		bomb.scale += Vector2(.25, .25)
 	add_child(bomb)	
 
 

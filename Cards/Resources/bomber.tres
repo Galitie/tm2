@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_rdoa5")
 card_name = "BOMBER"
-description = "Replaces POOPS with BOMBS. Deals DMG but can hurt you too."
+description = "Sometimes POOP out POOP BOMBS. POOP BOMBS DMG everyone they hit."
 Type = "other"
 state_id = "bombing"
 unique = true

@@ -3,11 +3,20 @@ extends Node
 var monster: Monster
 var current_state : State
 var states : Dictionary = {}
-var state_choices : Dictionary = {"wander" : "wander", "chase" : "chase", "idle" : "idle", "charge_attack" : "basiccharge", "basic_attack" : "punch", "block" : "block", "other" : "pooping"}
 @onready var current_state_label = $"../CurrentState"
 
 var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other"]
 var weights = PackedFloat32Array([1,1,1,1,1,1,1])
+
+var wander_values = ["wander"]
+var chase_values = ["chase"]
+var idle_values = ["idle"]
+var charge_attack_values = ["basiccharge"]
+var basic_attack_values = ["punch"]
+var block_values = ["block"]
+var other_values = ["pooping"]
+var state_choices : Dictionary = {"wander" : wander_values, "chase" : chase_values, "idle" : idle_values, "charge_attack" : charge_attack_values, "basic_attack" : basic_attack_values, "block" : block_values, "other" : other_values}
+
 var rng = RandomNumberGenerator.new()
 
 func initialize():
@@ -35,7 +44,7 @@ func _physics_process(delta):
 # connected to "ChooseNewState" signal in state.gd
 func choose_new_state():
 	var new_state = keys[rng.rand_weighted(weights)]
-	transition_state(state_choices[new_state])
+	transition_state(state_choices[new_state].pick_random())
 
 #TODO: Scenarios for state if I want smarter creatures?
 # Doesn't see a creature

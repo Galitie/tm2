@@ -194,15 +194,14 @@ func apply_card_resource_effects(card_resource : Resource, player):
 	if card_resource.state_id:
 		match card_resource.state_id:
 			"poop_summon":
-				player.poop_summons = true
-				player.monster.state_machine.state_choices[card_resource.Type] = "pooping"
+				player.poop_summons = true 
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
 				player.monster.damage_dealt_mult = 2.0
 				player.monster.damage_received_mult = 2.0
-			_: # Default replace a slot if no matching ID
-				player.monster.state_machine.state_choices[card_resource.Type] = card_resource.state_id
+			_:
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
 		for state_index in card_resource.remove_specific_states:
 			player.monster.state_machine.weights[state_index] = 0

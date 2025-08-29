@@ -44,7 +44,7 @@ shape = SubResource("CircleShape2D_4fn8o")
 disabled = true
 
 [node name="ExplosionTime" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.25
 one_shot = true
 
 [connection signal="timeout" from="ExplosionCountdown" to="." method="_on_explosion_countdown_timeout"]

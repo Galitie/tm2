@@ -96,7 +96,7 @@ func _on_hurtbox_area_entered(area):
 		var attacking_mon : Node = area.get_parent().get_parent()
 		match current_state.to_lower():
 			"spikyblock":
-				attacking_mon.take_damage(self)
+				attacking_mon.take_damage_from(self)
 				attacking_mon.state_machine.transition_state("hurt")
 				return
 		var attack : String = attacking_mon.state_machine.current_state.name

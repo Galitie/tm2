@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_lnc4m")
 card_name = "FOCUSED"
-description = "Monster will no longer idle"
+description = "Monster will no longer IDLE"
 Type = "passive"
 state_id = ""
 unique = true

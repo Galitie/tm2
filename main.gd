@@ -208,6 +208,12 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"blocker":
 				var block_index = player.monster.state_machine.keys.find("block")
 				player.monster.state_machine.weights[block_index] += 1
+			"attacker":
+				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
+				player.monster.state_machine.weights[basic_attack_index] += 1
+			"pooper":
+				var other_index = player.monster.state_machine.keys.find("other")
+				player.monster.state_machine.weights[other_index] += 1
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

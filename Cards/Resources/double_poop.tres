@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://b1yf5pmgknoky"]
 
-[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_nmuom"]
-[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_wxjny"]
+[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_7bdyh"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_88tgj"]
 
 [resource]
-script = ExtResource("2_wxjny")
+script = ExtResource("2_88tgj")
 card_name = "THE RUNS"
 description = "When POOPING 50% chance to make an additional POOP"
 Type = "passive"
@@ -20,4 +20,4 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-accessories = Array[ExtResource("1_nmuom")]([])
+accessories = Array[ExtResource("1_7bdyh")]([])

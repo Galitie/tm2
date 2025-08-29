@@ -25,6 +25,7 @@ Todo:
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part
+	Sound - Background, effects etc.
 	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus - sound, etc.
 	Variable player amount
@@ -35,8 +36,10 @@ Todo:
 
 
 Card ideas:
+	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
 	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
+	and does affect range / damage
 	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
 	Drop bombs, traps, bananas
 	Turn all attacks into blocks

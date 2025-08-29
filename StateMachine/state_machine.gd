@@ -5,6 +5,7 @@ var current_state : State
 var states : Dictionary = {}
 @onready var current_state_label = $"../CurrentState"
 
+
 var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other"]
 var weights = PackedFloat32Array([1,1,1,1,1,1,1])
 

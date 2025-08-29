@@ -202,6 +202,12 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.damage_received_mult = 2.0
 			"larger_poops":
 				player.larger_poops = true
+			"chaser":
+				var chase_index = player.monster.state_machine.keys.find("chase")
+				player.monster.state_machine.weights[chase_index] += 1
+			"blocker":
+				var block_index = player.monster.state_machine.keys.find("block")
+				player.monster.state_machine.weights[block_index] += 1
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

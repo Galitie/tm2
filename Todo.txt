@@ -9,7 +9,6 @@ Features to make it playtest ready:
 	should summons have a lifetime
 	Summon mechanics
 	
-	changing the slots into additions, adding to slots, then grabbing a weighted choice from it
 	charge attack need to do bigger attacks
 	
 	Add accessory to creature (Raam)

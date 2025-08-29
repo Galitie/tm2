@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://c37d7vyo0m6jb"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://c37d7vyo0m6jb"]
 
 [ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_m3588"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_mklda"]
-[ext_resource type="Resource" uid="uid://bnxvdo03dka41" path="res://parts/bat_ear.tres" id="2_un73k"]
 
 [resource]
 script = ExtResource("1_mklda")
@@ -22,4 +21,3 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 accessories = Array[ExtResource("1_m3588")]([])
-part = ExtResource("2_un73k")

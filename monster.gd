@@ -82,6 +82,9 @@ func _physics_process(_delta):
 
 
 func apply_hp(amount):
+	if amount < 0:
+		$Damage.text = str(amount)
+		animation_player_damage.play("damage")
 	current_hp += amount
 	if current_hp >= max_hp:
 		current_hp = max_hp
@@ -91,6 +94,7 @@ func apply_hp(amount):
 	current_hp_label.text = str(current_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = current_hp
+	check_low_hp()
 	if current_hp >= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)
 
@@ -101,7 +105,7 @@ func _on_hurtbox_area_entered(area):
 		var attacking_mon : Node = area.get_parent().get_parent()
 		match current_state.to_lower():
 			"spikyblock":
-				attacking_mon.take_damage_from(self)
+				attacking_mon.take_damage_from(attacking_mon)
 				attacking_mon.state_machine.transition_state("hurt")
 				return
 		var attack : String = attacking_mon.state_machine.current_state.name
@@ -110,7 +114,7 @@ func _on_hurtbox_area_entered(area):
 				take_damage_from(attacking_mon)
 			"bitelifesteal":
 				take_damage_from(attacking_mon)
-				attacking_mon.apply_hp(1)
+				attacking_mon.apply_hp(3)
 		state_machine.transition_state("hurt")
 	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
 		var attacking_summon = area.owner.emitter

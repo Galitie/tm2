@@ -42,6 +42,8 @@ var debug_mode : bool
 var facing : String = "right"
 var target_point : Vector2
 
+var base_color: Color
+
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 
 # attacks can be short range, long range or 
@@ -56,6 +58,9 @@ func _ready():
 	#$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
 	generate_random_name()
 	state_machine.monster = self
+	
+	base_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
+	$root.modulate = base_color
 
 
 func SetCollisionRefs() -> void:

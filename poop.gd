@@ -5,7 +5,7 @@ class_name Summon
 var is_a_summon : bool = false
 var move_speed : int
 var collision_added : bool = false
-var poop_shoot_interval : float = 5.0
+var poop_shoot_interval : float 
 var poop_shoot_timer : float = 0.0
 var base_damage: int = 1
 var crit_multiplier: float = 1
@@ -19,6 +19,7 @@ func _ready():
 	if not is_a_summon:
 		collision.disabled = true
 	velocity = Vector2.ZERO
+	poop_shoot_interval = randf_range(5,10)
 
 
 func _physics_process(delta):

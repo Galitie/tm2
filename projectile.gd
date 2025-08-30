@@ -2,7 +2,7 @@ extends Node2D
 class_name Projectile
 var speed = 300
 
-var lifespan: float = 1.5
+var lifespan: float
 var life: float = 0.0
 
 var direction: Vector2
@@ -11,7 +11,7 @@ var emitter
 
 
 func _ready() -> void:
-	pass
+	lifespan = randf_range(1,1.5)
 
 
 func _physics_process(delta: float) -> void:

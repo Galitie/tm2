@@ -5,12 +5,10 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	should the runs affect bombs or be offered if pooping is not on the table?
-	should summons have a lifetime
+	How to know when a block is a spiky block? How to know when an attack is vamp attack?
+	Chase to the side of a monster, not just nearby
 	Summon mechanics
-	
 	charge attack need to do bigger attacks
-	
 	Add accessory to creature (Raam)
 	More cards to test
 	Show winner at end of round - make them dance

@@ -7,7 +7,7 @@ var states : Dictionary = {}
 
 
 var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other"]
-var weights = PackedFloat32Array([1,1,1,1,1,1,1])
+var weights = PackedFloat32Array([1,1.75,1,1,1,1,1])
 
 var wander_values = ["wander"]
 var chase_values = ["chase"]

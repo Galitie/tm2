@@ -9,11 +9,12 @@ var target_radius : float
 
 func randomize_chase():
 	chase_time = randf_range(3,8)
-	
-	
+
+
 func Enter():
 	select_target()
 	randomize_chase()
+
 
 func Exit():
 	monster.move_speed -= move_speed_adjust

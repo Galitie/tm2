@@ -4,6 +4,7 @@ class_name Game
 @export var total_rounds : int = 10
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
+@export var override_sudden_death_time : float
 
 @onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
 @onready var monsters: Array[Monster]
@@ -32,7 +33,6 @@ func debug_stuff():
 			target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-		
 
 
 func _init():
@@ -56,6 +56,7 @@ func SortByY(a, b):
 
 
 func _ready():
+	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
@@ -204,16 +205,16 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.larger_poops = true
 			"chaser":
 				var chase_index = player.monster.state_machine.keys.find("chase")
-				player.monster.state_machine.weights[chase_index] += 1
+				player.monster.state_machine.weights[chase_index] += .25
 			"blocker":
 				var block_index = player.monster.state_machine.keys.find("block")
-				player.monster.state_machine.weights[block_index] += 1
+				player.monster.state_machine.weights[block_index] += .25
 			"attacker":
 				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
-				player.monster.state_machine.weights[basic_attack_index] += 1
+				player.monster.state_machine.weights[basic_attack_index] += .25
 			"pooper":
 				var other_index = player.monster.state_machine.keys.find("other")
-				player.monster.state_machine.weights[other_index] += 1
+				player.monster.state_machine.weights[other_index] += .25
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

@@ -19,7 +19,7 @@ func _ready():
 	if not is_a_summon:
 		collision.disabled = true
 	velocity = Vector2.ZERO
-	poop_shoot_interval = randf_range(5,10)
+	poop_shoot_interval = randf_range(5,15)
 
 
 func _physics_process(delta):

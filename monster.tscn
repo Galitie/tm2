@@ -33,7 +33,7 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 radius = 15.52
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
-radius = 47.0
+radius = 55.0
 height = 160.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7j2b"]
@@ -150,6 +150,12 @@ shape = SubResource("CircleShape2D_lqt3o")
 [node name="body" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5105l")
+
+[node name="right_target" type="Node2D" parent="body"]
+position = Vector2(-0.00050354, -158)
+
+[node name="left_target" type="Node2D" parent="body"]
+position = Vector2(0.000549316, 161)
 
 [node name="Vision" type="Area2D" parent="."]
 

@@ -27,6 +27,7 @@ animations = [{
 radius = 55.0
 
 [node name="Bomb" type="Node2D" groups=["CleanUp"]]
+z_index = 2
 script = ExtResource("1_4fn8o")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]

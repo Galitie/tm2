@@ -315,7 +315,7 @@ func spawn_bomb(monster):
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
 	if monster.player.larger_poops:
-		bomb.scale += Vector2(.25, .25)
+		bomb.scale += Vector2(.50, .50)
 	add_child(bomb)	
 
 

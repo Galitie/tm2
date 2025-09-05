@@ -215,6 +215,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"pooper":
 				var other_index = player.monster.state_machine.keys.find("other")
 				player.monster.state_machine.weights[other_index] += .25
+			"thorns":
+				player.monster.thorns = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

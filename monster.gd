@@ -11,6 +11,8 @@ var crit_chance: int = 1
 var crit_multiplier: float = 1.5
 var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
+var thorns : bool = false
+
 var mon_name : String
 var main_color
 var secondary_color
@@ -84,7 +86,7 @@ func _physics_process(_delta):
 
 func apply_hp(amount):
 	if amount < 0:
-		$Damage.text = str(amount)
+		$Damage.text = str(abs(amount))
 		animation_player_damage.play("damage")
 	current_hp += amount
 	if current_hp >= max_hp:
@@ -116,6 +118,9 @@ func _on_hurtbox_area_entered(area):
 			"bitelifesteal":
 				take_damage_from(attacking_mon)
 				attacking_mon.apply_hp(3)
+		if thorns:
+			attacking_mon.apply_hp(-1)
+			attacking_mon.state_machine.transition_state("hurt")
 		state_machine.transition_state("hurt")
 	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
 		var attacking_summon = area.owner.emitter

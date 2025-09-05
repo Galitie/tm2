@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_yq1ji")
 card_name = "CRIT RATE"
-description = ""
+description = "CRIT more, but for less DMG"
 Type = "immediate"
 state_id = ""
 unique = true

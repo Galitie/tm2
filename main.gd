@@ -304,7 +304,7 @@ func spawn_poop(monster):
 	if monster.player.poop_summons:
 		poop.is_a_summon = true
 	if monster.player.larger_poops:
-		poop.scale += Vector2(.25, .25)
+		poop.scale += Vector2(.50, .50)
 	add_child(poop)
 	poop.add_to_group("CleanUp")
 

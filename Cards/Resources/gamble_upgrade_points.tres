@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_o25rm")
 card_name = "GAMBLE UPG POINTS"
-description = "Starting next round, instead of 3, randomly get 1-5 upgrade points"
+description = "Starting next round, instead of 3, randomly get 1-5 UPGRADE POINTS"
 Type = "passive"
 state_id = ""
 unique = true

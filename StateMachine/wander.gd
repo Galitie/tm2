@@ -8,7 +8,7 @@ var wander_time: float
 # --- Avoidance tuning ---
 var avoidance_radius: float = 96.0
 var avoidance_strength: float = 1.0
-var max_accel: float = 1200.0
+var max_accel: float = 5000.0
 
 func randomize_wander():
 	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()

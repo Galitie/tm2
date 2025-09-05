@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("2_gc576")
 card_name = "LOADED"
-description = "All POOPS are a little bit bigger"
+description = "All POOPS are BIGGER"
 Type = "passive"
 state_id = "larger_poops"
-unique = false
+unique = true
 remove_specific_states = Array[int]([])
 attribute_1 = 0
 attribute_label_1 = ""

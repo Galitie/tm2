@@ -7,9 +7,9 @@ var chase_time: float
 var move_speed_adjust: int = 10
 
 # --- Avoidance tuning ---
-var avoidance_radius: float = 96.0      # how far to "feel" other monsters
-var avoidance_strength: float = 1.0     # how strongly to push away
-var max_accel: float = 1200.0           # acceleration cap for steering
+var avoidance_radius: float = 96.0     
+var avoidance_strength: float = 1.0     
+var max_accel: float = 5000.0           
 
 func randomize_chase():
 	chase_time = randf_range(3, 8)

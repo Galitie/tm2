@@ -5,7 +5,6 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	How to know when a block is a spiky block? How to know when an attack is vamp attack?
 	Chase to the side of a monster, not just nearby
 	Summon mechanics
 	charge attack need to do bigger attacks
@@ -66,6 +65,7 @@ General Ideas:
 	Have multiple creatures? If so, they will need player outlines or something
 	Different Idle options? Could bop, or dance or zone out etc.
 	Do upgrade cards determine looks? Does's it tell you?
+	Maybe on sudden death, zoom in / bounds get smaller
 
 
 Potential issues:
@@ -84,3 +84,20 @@ Builds:
 	Summons
 		Poop
 			Poops twice as much
+
+
+Playtest Notes:
+	Carson solo play 9/4/2025
+		Didn't know what poops do - add guns to ones that do damage?
+		Didn't know what was shooting out the bullets (poops) confusing that it went through some folks and not others
+		Wasn't clear on bomb card that it will hit himself
+		couldn't read healthbar on green background
+		Didn't know what crit mult was
+		Success feedback on block needed
+		Spiky block
+			Animation + sound needed to show it happened
+		Didn't know reroll rolled all cards
+		Speed feels slow still - steering slows and speeds them up. add more? reduce lag?
+		Carson didn't notice or know what sudden death is
+			Sudden death caaaaan be long sometimes
+		Bombs should flash before going off

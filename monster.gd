@@ -13,11 +13,11 @@ var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
 var mon_name : String
 var main_color
-var secondary_color
 
 @export_range(-1, 1) var hue_shift : float
 @export var player : Player
 
+@onready var root = $root
 @onready var state_machine = $StateMachine
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
@@ -32,10 +32,15 @@ var secondary_color
 @onready var body_collision = $body
 @onready var vision = $Vision
 
+@onready var audio_player = $AudioStreamPlayer
+
 var hitbox_collision
 var hurtbox_collision
 var hurtbox
 var hitbox 
+
+var sent_flying: bool = false
+var knockback: float
 
 var debug_mode : bool
 @export var pre_loaded_cards : Array[Resource]
@@ -43,6 +48,7 @@ var facing : String = "right"
 var target_point : Vector2
 
 var base_color: Color
+var secondary_color: Color
 
 # attacks have stats: speed, mp amount, base damage, size, distance, pierce
 
@@ -60,8 +66,7 @@ func _ready():
 	state_machine.monster = self
 	
 	base_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
-	$root.modulate = base_color
-
+	secondary_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox
@@ -79,6 +84,9 @@ func _physics_process(_delta):
 	if velocity.length() > 0 and velocity.x < 0:
 		monster_container.scale = Vector2(-1,1)
 		facing = "left"
+		
+	var line_thickness: float = 4.0 * Globals.game.camera.zoom.x
+	root.material.set_shader_parameter("line_thickness", line_thickness)
 
 
 func apply_hp(amount):
@@ -96,31 +104,47 @@ func apply_hp(amount):
 
 
 func _on_hurtbox_area_entered(area):
+	var attacker: Node
+	var attacked: bool = false
 	if area.is_in_group("Attack") and area != hitbox:
+		attacked = true
 		var current_state = state_machine.current_state.name
-		var attacking_mon : Node = area.get_parent().get_parent()
+		attacker = area.get_parent().get_parent()
 		match current_state.to_lower():
 			"spikyblock":
-				attacking_mon.take_damage_from(self)
-				attacking_mon.state_machine.transition_state("hurt")
+				attacker.take_damage_from(self)
+				attacker.state_machine.transition_state("hurt")
 				return
-		var attack : String = attacking_mon.state_machine.current_state.name
+		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"punch":
-				take_damage_from(attacking_mon)
+				take_damage_from(attacker)
 			"bitelifesteal":
-				take_damage_from(attacking_mon)
-				attacking_mon.apply_hp(1)
+				take_damage_from(attacker)
+				attacker.apply_hp(1)
 		state_machine.transition_state("hurt")
 	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
-		var attacking_summon = area.owner.emitter
-		take_damage_from(attacking_summon)
+		attacked = true
+		attacker = area.owner.emitter
+		take_damage_from(attacker)
 		state_machine.transition_state("hurt")
 	if area.is_in_group("Bomb") and area != hitbox:
-		var attacking_bomb = area.owner
-		take_damage_from(attacking_bomb)
+		attacked = true
+		attacker = area.owner
+		take_damage_from(attacker)
 		state_machine.transition_state("hurt")
 
+	if attacked && Globals.is_sudden_death_mode:
+		send_flying(attacker)
+		
+func send_flying(attacker: Node) -> void:
+	sent_flying = true
+	state_machine.transition_state("knockedout")
+	audio_player.play()
+	Globals.game.camera.global_position = global_position
+	Globals.game.camera.zoom = Vector2(2.0, 2.0)
+	knockback = (global_position - attacker.global_position).normalized().x
+	get_tree().paused = true
 
 func take_damage_from(enemy):
 	var critted = roll_crit()

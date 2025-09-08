@@ -9,8 +9,16 @@ class_name Game
 @onready var monsters: Array[Monster]
 @onready var player_count : int = players.size()
 @onready var upgrade_menu : Node = $UpgradePanel
-@onready var sudden_death_label: Label = $SuddenDeathLabel
+@onready var sudden_death_label: RichTextLabel = $Camera2D/CanvasLayer/SuddenDeathLabel
 @onready var sudden_death_timer: Timer = $SuddenDeathTimer
+
+@onready var sudden_death_overlay: Sprite2D = $Camera2D/CanvasLayer/SuddenDeath
+const SUDDEN_DEATH_MAX_RADIUS: float = 1.279
+
+@onready var camera: Camera2D = $Camera2D
+var camera_tracking: bool = false
+var camera_zoom_trauma: float = 0.0 
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var dead_monsters : int
 var current_round : int
@@ -25,11 +33,15 @@ func debug_stuff():
 		var monster_collection : Array[Node] = get_tree().get_nodes_in_group("Monster")
 		for monster in monster_collection:
 			var state_machine = monster.get_node("StateMachine")
-			if state_machine.current_state != state_machine.states["knockedout"]:
+			if monster.current_hp > 0:
 				targetable_monsters.append(monster)
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
-			target_monster.state_machine.transition_state("knockedout")
+			target_monster.take_damage_from(target_monster)
+			if Globals.is_sudden_death_mode:
+				target_monster.send_flying(target_monster)
+			else:
+				target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
 		
@@ -38,8 +50,7 @@ func debug_stuff():
 func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
-
-
+	
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
@@ -54,17 +65,33 @@ func _physics_process(_delta: float) -> void:
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
 
+func _unfreeze() -> void:
+	camera_tracking = false
+	get_tree().paused = false
+	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
+	await get_tree().create_timer(0.5).timeout
+	camera_tracking = true
+	if dead_monsters == player_count - 1:
+		camera_tracking = false
+		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
+		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
+		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
+		get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, 5.5).set_trans(Tween.TRANS_EXPO)
+		await get_tree().create_timer(5.5).timeout
+		audio_player.playing = false
+		audio_player.volume_db = 0.0
 
 func _ready():
+	$FreezeTimer.timeout.connect(_unfreeze)
+	
+	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
+	sudden_death_label.visible = false;
+	sudden_death_label.scale = Vector2(4.0, 4.0)
+	
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
-		
-	for monster in monsters:
-		MonsterGeneration.Generate(monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
-		monster.SetCollisionRefs()
-		monster.state_machine.initialize()
 
 	if debug_mode:
 		Globals.game.debug_mode = true
@@ -77,6 +104,12 @@ func _ready():
 	for player_index in players.size():
 		var player = players[player_index]
 		player.controller_port = player_index
+		
+	for monster in monsters:
+		MonsterGeneration.Generate(monster, monster.base_color, monster.secondary_color, monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
+		MonsterGeneration.SetColors(monster)
+		monster.SetCollisionRefs()
+		monster.state_machine.initialize()
 	
 	var upgrade_cards = upgrade_menu.get_tree().get_nodes_in_group("UpgradeCard")
 	var player_upgrade_panels = upgrade_menu.get_tree().get_nodes_in_group("PlayerUpgradePanel")
@@ -93,19 +126,24 @@ func _ready():
 func _process(_delta):
 	if debug_mode:
 		debug_stuff()
-	if sudden_death_timer.is_stopped():
-		sudden_death_label.text = "Sudden Death"
-	else:
-		var time_left = sudden_death_timer.time_left
-		sudden_death_label.text = "Sudden Death: %d" % time_left
-
+		
+	if Globals.is_sudden_death_mode:
+		if camera_tracking:
+			var monster_avg_position: Vector2
+			var alive_monsters: int
+			for monster: Monster in monsters:
+				if monster.current_hp > 0:
+					monster_avg_position += monster.global_position
+					alive_monsters += 1
+			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
+			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 
 func count_death(monster: Monster):
 	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
 	if dead_monsters == player_count - 1:
+		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
-
 
 func set_upgrade_mode():
 	sudden_death_label.visible = false
@@ -136,7 +174,6 @@ func set_upgrade_mode():
 
 
 func set_fight_mode():
-	sudden_death_label.visible = true
 	current_mode = Modes.FIGHT
 	current_round += 1
 	sudden_death_timer.start()
@@ -148,10 +185,17 @@ func set_fight_mode():
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
 
-
 func _on_sudden_death_timer_timeout():
+	camera_tracking = true
 	Globals.is_sudden_death_mode = true
-
+	audio_player.stream = await load("uid://bnd7vmemesdbl")
+	audio_player.play()
+	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", SUDDEN_DEATH_MAX_RADIUS, 0.8).set_trans(Tween.TRANS_EXPO)
+	get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.2, 1.2), 0.8).set_trans(Tween.TRANS_ELASTIC)
+	get_tree().create_tween().tween_property(sudden_death_label, "visible", true, 0.0).set_delay(0.4)
+	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(0.4)
+	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(3.0)
+	get_tree().create_tween().tween_property(sudden_death_label, "visible", false, 0.0).set_delay(3.2)
 
 func _on_round_over_delay_timer_timeout():
 	for player in players:

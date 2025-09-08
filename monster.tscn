@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=32 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
@@ -7,12 +7,14 @@
 [ext_resource type="Script" path="res://StateMachine/bombing.gd" id="18_a7j2b"]
 [ext_resource type="Script" uid="uid://bp80m3jubyud6" path="res://StateMachine/state_machine.gd" id="18_cjpl6"]
 [ext_resource type="Script" uid="uid://caefbbot3pqn4" path="res://StateMachine/wander.gd" id="19_jjfbp"]
-[ext_resource type="Texture2D" uid="uid://c03daih7paasg" path="res://UI/healthbar.png" id="19_rorsi"]
+[ext_resource type="Texture2D" uid="uid://coqxiph21qm2m" path="res://UI/health_bg.png" id="19_rorsi"]
 [ext_resource type="Script" uid="uid://dg7e4rqh2bmw7" path="res://StateMachine/chase.gd" id="20_6py8i"]
 [ext_resource type="Texture2D" uid="uid://dki20lop2oyb5" path="res://UI/health.png" id="20_7qa85"]
 [ext_resource type="Script" uid="uid://buxkyj050pe6q" path="res://StateMachine/idle.gd" id="20_772v6"]
+[ext_resource type="Texture2D" uid="uid://c03daih7paasg" path="res://UI/healthbar.png" id="20_u8wmr"]
 [ext_resource type="Script" uid="uid://cxwy6h8ky36h" path="res://StateMachine/hurt.gd" id="21_j21k1"]
 [ext_resource type="Script" uid="uid://ljj4p0w8v65v" path="res://StateMachine/punch.gd" id="22_lrr1d"]
+[ext_resource type="AudioStream" uid="uid://dfjgpdho3lcvd" path="res://sounds/homerun.ogg" id="23_6py8i"]
 [ext_resource type="Script" uid="uid://cwu4k2733qfhb" path="res://StateMachine/block.gd" id="23_x38pf"]
 [ext_resource type="Script" uid="uid://ichhacuebitb" path="res://StateMachine/charge.gd" id="24_pu8g8"]
 [ext_resource type="Script" uid="uid://cfc0n2o6rngal" path="res://StateMachine/knocked_out.gd" id="24_u8wmr"]
@@ -23,7 +25,10 @@
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://StateMachine/fight_start.gd" id="28_hqfdu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
+resource_local_to_scene = true
 shader = ExtResource("2_5105l")
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/line_thickness = 3.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 
@@ -215,7 +220,8 @@ offset_right = 46.0
 offset_bottom = 75.0
 grow_horizontal = 2
 rounded = true
-texture_over = ExtResource("19_rorsi")
+texture_under = ExtResource("19_rorsi")
+texture_over = ExtResource("20_u8wmr")
 texture_progress = ExtResource("20_7qa85")
 
 [node name="MarginContainer" type="MarginContainer" parent="HPBar"]
@@ -302,3 +308,7 @@ horizontal_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_k1bq2")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("23_6py8i")

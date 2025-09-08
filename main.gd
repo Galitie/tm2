@@ -89,7 +89,7 @@ func _ready():
 	sudden_death_label.scale = Vector2(4.0, 4.0)
 	
 	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time
-    
+	
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)

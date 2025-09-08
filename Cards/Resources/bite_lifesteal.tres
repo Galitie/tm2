@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://3aquqn25lskq"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://3aquqn25lskq"]
 
 [ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_0blak"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_syuw0"]
-[ext_resource type="Resource" uid="uid://ksytcn7eqhrl" path="res://parts/bat_head.tres" id="2_qw5bx"]
 
 [resource]
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
-description = "Replaces BASIC ATK. Bites enemy and HEALS +1 HP"
+description = "Bites enemy and HEALS +3 HP"
 Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true
@@ -22,4 +21,3 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 accessories = Array[ExtResource("1_0blak")]([])
-part = ExtResource("2_qw5bx")

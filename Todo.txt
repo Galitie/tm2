@@ -5,9 +5,11 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Upward and downward attacks
+	Chase to the side of a monster, not just nearby?
 	Summon mechanics
+	Charge attack need to do bigger attacks -> should these be more dramatic?
 	Add accessory to creature (Raam)
-	More cards to test
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Log that prints the cards chosen by players, dictionary
@@ -20,6 +22,7 @@ Todo:
 	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part
+	Sound - Background, effects etc.
 	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus - sound, etc.
 	Variable player amount
@@ -30,8 +33,10 @@ Todo:
 
 
 Card ideas:
+	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
 	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
+	and does affect range / damage
 	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
 	Drop bombs, traps, bananas
 	Turn all attacks into blocks
@@ -60,6 +65,7 @@ General Ideas:
 	Have multiple creatures? If so, they will need player outlines or something
 	Different Idle options? Could bop, or dance or zone out etc.
 	Do upgrade cards determine looks? Does's it tell you?
+	Maybe on sudden death, zoom in / bounds get smaller
 
 
 Potential issues:
@@ -78,3 +84,20 @@ Builds:
 	Summons
 		Poop
 			Poops twice as much
+
+
+Playtest Notes:
+	Carson solo play 9/4/2025
+		Didn't know what poops do - add guns to ones that do damage?
+		Didn't know what was shooting out the bullets (poops) confusing that it went through some folks and not others
+		Wasn't clear on bomb card that it will hit himself
+		couldn't read healthbar on green background
+		Didn't know what crit mult was
+		Success feedback on block needed
+		Spiky block
+			Animation + sound needed to show it happened
+		Didn't know reroll rolled all cards
+		Speed feels slow still - steering slows and speeds them up. add more? reduce lag?
+		Carson didn't notice or know what sudden death is
+			Sudden death caaaaan be long sometimes
+		Bombs should flash before going off

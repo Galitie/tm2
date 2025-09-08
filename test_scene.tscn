@@ -26,6 +26,8 @@ shader_parameter/Freq = 10.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
+debug_mode = false
+override_sudden_death_time = 60.0
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
@@ -61,7 +63,6 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player1" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(262, 192)
 player = NodePath("..")
-pre_loaded_cards = Array[Resource]([ExtResource("4_2nij2")])
 
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 575)
@@ -78,7 +79,6 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 player = NodePath("..")
-pre_loaded_cards = Array[Resource]([ExtResource("4_2nij2")])
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 575)
@@ -95,7 +95,6 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player3" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(251, 439)
 player = NodePath("..")
-pre_loaded_cards = Array[Resource]([ExtResource("4_2nij2")])
 
 [node name="UpgradePos" type="Node2D" parent="Player3"]
 position = Vector2(720, 575)
@@ -112,7 +111,6 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player4" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(864, 459)
 player = NodePath("..")
-pre_loaded_cards = Array[Resource]([ExtResource("4_2nij2")])
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
 position = Vector2(1000, 575)

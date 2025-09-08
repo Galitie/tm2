@@ -4,6 +4,7 @@ class_name Game
 @export var total_rounds : int = 10
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
+@export var override_sudden_death_time : float
 
 @onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
 @onready var monsters: Array[Monster]
@@ -44,7 +45,6 @@ func debug_stuff():
 				target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-		
 
 
 func _init():
@@ -88,6 +88,8 @@ func _ready():
 	sudden_death_label.visible = false;
 	sudden_death_label.scale = Vector2(4.0, 4.0)
 	
+	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time
+    
 	for player in players:
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
@@ -238,15 +240,30 @@ func apply_card_resource_effects(card_resource : Resource, player):
 	if card_resource.state_id:
 		match card_resource.state_id:
 			"poop_summon":
-				player.poop_summons = true
-				player.monster.state_machine.state_choices[card_resource.Type] = "pooping"
+				player.poop_summons = true 
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
 				player.monster.damage_dealt_mult = 2.0
 				player.monster.damage_received_mult = 2.0
-			_: # Default replace a slot if no matching ID
-				player.monster.state_machine.state_choices[card_resource.Type] = card_resource.state_id
+			"larger_poops":
+				player.larger_poops = true
+			"chaser":
+				var chase_index = player.monster.state_machine.keys.find("chase")
+				player.monster.state_machine.weights[chase_index] += .25
+			"blocker":
+				var block_index = player.monster.state_machine.keys.find("block")
+				player.monster.state_machine.weights[block_index] += .25
+			"attacker":
+				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
+				player.monster.state_machine.weights[basic_attack_index] += .25
+			"pooper":
+				var other_index = player.monster.state_machine.keys.find("other")
+				player.monster.state_machine.weights[other_index] += .25
+			"thorns":
+				player.monster.thorns = true
+			_:
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
 		for state_index in card_resource.remove_specific_states:
 			player.monster.state_machine.weights[state_index] = 0
@@ -333,6 +350,8 @@ func spawn_poop(monster):
 	poop.global_position = monster.poop_checker.global_position
 	if monster.player.poop_summons:
 		poop.is_a_summon = true
+	if monster.player.larger_poops:
+		poop.scale += Vector2(.50, .50)
 	add_child(poop)
 	poop.add_to_group("CleanUp")
 
@@ -342,6 +361,8 @@ func spawn_bomb(monster):
 	bomb.z_index = 1
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
+	if monster.player.larger_poops:
+		bomb.scale += Vector2(.50, .50)
 	add_child(bomb)	
 
 

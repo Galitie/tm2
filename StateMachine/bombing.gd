@@ -23,6 +23,8 @@ func animation_finished(anim_name: String):
 			monster.animation_player.play("charge_idle")
 		else:
 			emit_signal("spawn_bomb", monster) # Caught in main game scene
+			if monster.player.more_poops and randi() % 2 == 0:
+				emit_signal("spawn_bomb", monster) # Caught in main game scene
 			ChooseNewState.emit() 
 	
 	elif anim_name == "charge_idle":

@@ -54,12 +54,11 @@ func _init():
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
-	monsters.sort_custom(SortByY)
-	for i: int in range(monsters.size()):
-		if monsters[i].current_hp > 0:
-			monsters[i].z_index = i
-		else:
-			monsters[i].z_index = -1
+	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
+	depth_entities.sort_custom(SortByY)
+	for i: int in range(depth_entities.size()):
+		var entity = depth_entities[i]
+		entity.z_index = i
 
 
 func SortByY(a, b):
@@ -344,7 +343,7 @@ func clear_knocked_out_monsters():
 
 func spawn_poop(monster):
 	var poop = preload("uid://b03qji6okxywb").instantiate()
-	poop.z_index = -1
+	poop.add_to_group("DepthEntity")
 	poop.monster = monster
 	poop.move_speed = monster.move_speed
 	poop.global_position = monster.poop_checker.global_position
@@ -358,7 +357,7 @@ func spawn_poop(monster):
 
 func spawn_bomb(monster):
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
-	bomb.z_index = 1
+	bomb.z_index = monster.z_index
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
 	if monster.player.larger_poops:

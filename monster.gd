@@ -58,6 +58,8 @@ var secondary_color: Color
 # give them preferences? melee, range, etc.
 
 func _ready():
+	add_to_group("DepthEntity")
+	
 	current_hp_label.text = str(max_hp)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp

@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bkgtuu1m8soho"]
 
-[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_5rp5m"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_yq1ji"]
 
 [resource]
@@ -20,4 +19,3 @@ attribute_amount_2 = 0
 attribute_3 = 7
 attribute_label_3 = "CRIT MULT"
 attribute_amount_3 = -0.25
-accessories = Array[ExtResource("1_5rp5m")]([])

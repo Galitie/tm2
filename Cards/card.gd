@@ -58,7 +58,6 @@ func choose_card_resource(card_resource):
 		%Tags.text += "UNIQUE"
 
 	for accessory in chosen_resource.parts_and_acc:
-		print("making accessory buttons")
 		var panel = PanelContainer.new()
 		var button = Button.new()
 		# attach signal _on_button_pressed ?

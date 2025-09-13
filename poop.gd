@@ -21,6 +21,8 @@ func _ready():
 	
 	if not is_a_summon:
 		collision.disabled = true
+		$Lifetime.wait_time = 5
+		$Lifetime.start()
 	velocity = Vector2.ZERO
 	poop_shoot_interval = randf_range(5,15)
 	$AnimationPlayer.play("idle")
@@ -76,3 +78,7 @@ func shoot_projectile():
 	projectile.position = position + Vector2(17 * projectile.direction.x, -5)
 	projectile.z_index = self.z_index
 	Globals.game.add_child(projectile)
+
+
+func _on_lifetime_timeout():
+	queue_free()

@@ -219,6 +219,9 @@ func _on_upgrade_over_delay_timer_timeout():
 
 func card_pressed(card : PanelContainer):
 	var player : Player = card.upgrade_panel.player
+	if card.chosen_resource.parts_and_acc.size() > 0:
+		var part : MonsterPart = card.chosen_resource.parts_and_acc[0]
+		MonsterGeneration.AddPartToMonster(player.monster, part) #temp to test
 	var resource_array : Array[Resource] = card.upgrade_panel.resource_array
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"

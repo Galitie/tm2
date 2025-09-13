@@ -58,13 +58,15 @@ func _physics_process(_delta):
 				_on_button_pressed()
 			else:
 				# For navigating the accessory menu
-				if button.chosen_resource.accessories.size() > 0:
+				if button.chosen_resource.parts_and_acc.size() > 0:
 					if in_accessory_menu:
+						# already in the acc menu and pressed something
 						in_accessory_menu = false
 						button._on_button_pressed()
 						button.card_info_panel.show()
 						button.accessory_panel.hide()
 					else:
+						#Not yet in the acc menu, but will enter it now
 						button.card_info_panel.hide()
 						button.accessory_panel.show()
 						current_user_position_in_accessory_array = 0

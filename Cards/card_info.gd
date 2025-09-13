@@ -7,7 +7,7 @@ class_name CardResourceScript
 @export var state_id : String
 @export var unique : bool
 @export var remove_specific_states : Array[int]
-
+@export var parts_and_acc: Array[MonsterPart]
 @export_group("Attributes")
 enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS, CRIT_PERCENT, CRIT_MULTIPLIER}
 @export var attribute_1 : Attributes
@@ -21,6 +21,6 @@ enum Attributes {NONE, HP, MOVE_SPEED, BASE_DAMAGE, REROLL, UPGRADE_POINTS, CRIT
 @export var attribute_3 : Attributes
 @export var attribute_label_3 : String
 @export var attribute_amount_3: float
-
-@export var accessories: Array[AccessoryInfo]
-@export var part: MonsterPart
+# Can't delete below because of dependencies, sadge
+@export var do_not_use_accessories: Array[AccessoryInfo]
+@export var do_not_use_part: MonsterPart

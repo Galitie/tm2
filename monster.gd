@@ -32,7 +32,6 @@ var main_color
 
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body
-@onready var vision = $Vision
 
 @onready var audio_player = $AudioStreamPlayer
 
@@ -48,7 +47,6 @@ var debug_mode : bool
 @export var pre_loaded_cards : Array[Resource]
 var facing : String = "right"
 var target_point : Vector2
-
 
 var base_color: Color
 var secondary_color: Color

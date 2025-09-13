@@ -71,6 +71,7 @@ func _ready():
 	base_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 	secondary_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 
+
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox
 	hurtbox = $root/body/hurtbox
@@ -146,7 +147,8 @@ func _on_hurtbox_area_entered(area):
 
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
-		
+
+
 func send_flying(attacker: Node) -> void:
 	sent_flying = true
 	state_machine.transition_state("knockedout")
@@ -155,6 +157,7 @@ func send_flying(attacker: Node) -> void:
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
 	knockback = (global_position - attacker.global_position).normalized().x
 	get_tree().paused = true
+
 
 func take_damage_from(enemy):
 	var critted = roll_crit()

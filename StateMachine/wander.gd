@@ -14,9 +14,11 @@ func randomize_wander():
 	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	wander_time = randf_range(1, 5)
 
+
 func Enter():
 	monster.animation_player.play("walk")
 	randomize_wander()
+
 
 func Update(delta: float):
 	if wander_time > 0:
@@ -24,13 +26,12 @@ func Update(delta: float):
 	else:
 		ChooseNewState.emit()
 
+
 func Physics_Update(delta: float):
 	if monster:
-		# Base wander velocity
 		var desired_dir = move_direction
-
-		# Add avoidance contribution
 		var avoidance = get_avoidance_vector()
+		
 		if avoidance.length() > 0.0001:
 			desired_dir = (desired_dir + avoidance).normalized()
 
@@ -41,7 +42,7 @@ func Physics_Update(delta: float):
 
 		monster.velocity = monster.velocity + steering * delta
 
-# --- Avoidance helpers (same as in Chase) ---
+
 func get_avoidance_vector() -> Vector2:
 	var push_sum = Vector2()
 	var neighbors = get_neighbor_monsters()
@@ -56,6 +57,7 @@ func get_avoidance_vector() -> Vector2:
 	if push_sum.length() > 0.0001:
 		return push_sum.normalized()
 	return Vector2()
+
 
 func get_neighbor_monsters() -> Array[CharacterBody2D]:
 	var neighbors: Array[CharacterBody2D] = []

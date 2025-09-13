@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_5nty5"]
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_l0ugc"]
-[ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://test_parts/bunny_foreleg.png" id="3_l0ugc"]
+[ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="3_l0ugc"]
 
 [resource]
 script = ExtResource("2_l0ugc")
-monster_type = 0
+monster_type = 1
 type = 5
 texture = ExtResource("3_l0ugc")
 offset = Vector2(0.76, 27.775)

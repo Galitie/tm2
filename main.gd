@@ -108,8 +108,8 @@ func _ready():
 		player.controller_port = player_index
 		
 	for monster in monsters:
-		MonsterGeneration.Generate(monster, monster.base_color, monster.secondary_color, monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
-		MonsterGeneration.SetColors(monster)
+		MonsterGeneration.Generate(monster, monster.get_node("root"), MonsterGeneration.parts[MonsterPart.MONSTER_TYPE.BUNNY][MonsterPart.PART_TYPE.BODY])
+		#MonsterGeneration.SetColors(monster)
 		monster.SetCollisionRefs()
 		monster.state_machine.initialize()
 	

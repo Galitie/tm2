@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://dkyd3ni1npf2c"]
 
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="1_0pjmi"]
-[ext_resource type="Texture2D" uid="uid://bfwkwfchvyo8f" path="res://test_parts/bat_body.png" id="2_5s65s"]
-[ext_resource type="Texture2D" uid="uid://nyn8lqnjdno8" path="res://test_parts/bat_head.png" id="3_1e43q"]
-[ext_resource type="Texture2D" uid="uid://c1to8kfpgo355" path="res://test_parts/bat_eye.png" id="4_c1ris"]
-[ext_resource type="Texture2D" uid="uid://bpsr1guwuvv2y" path="res://test_parts/bat_hindleg.png" id="5_e67ls"]
+[ext_resource type="Texture2D" uid="uid://bfwkwfchvyo8f" path="res://parts/bat_body.png" id="2_5s65s"]
+[ext_resource type="Texture2D" uid="uid://nyn8lqnjdno8" path="res://parts/bat_head.png" id="3_1e43q"]
+[ext_resource type="Texture2D" uid="uid://c1to8kfpgo355" path="res://parts/bat_eye.png" id="4_c1ris"]
+[ext_resource type="Texture2D" uid="uid://bpsr1guwuvv2y" path="res://parts/bat_hindleg.png" id="5_e67ls"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://back.gdshader" id="6_v8i1r"]
-[ext_resource type="Texture2D" uid="uid://b7e6thjm0wa50" path="res://test_parts/bat_ear.png" id="7_txfi0"]
-[ext_resource type="Texture2D" uid="uid://qsslcnv41lfj" path="res://test_parts/bat_arm.png" id="8_anpsy"]
+[ext_resource type="Texture2D" uid="uid://b7e6thjm0wa50" path="res://parts/bat_ear.png" id="7_txfi0"]
+[ext_resource type="Texture2D" uid="uid://qsslcnv41lfj" path="res://parts/bat_arm.png" id="8_anpsy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wn24n"]
 shader = ExtResource("1_0pjmi")

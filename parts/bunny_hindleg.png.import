@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qsslcnv41lfj"
-path="res://.godot/imported/bat_arm.png-93873111bcfcf5e4d355bbfc90e2ef6c.ctex"
+uid="uid://d0olomib4o3l5"
+path="res://.godot/imported/bunny_hindleg.png-cc03ebedf791efb67878d0d2a9d446d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_parts/bat_arm.png"
-dest_files=["res://.godot/imported/bat_arm.png-93873111bcfcf5e4d355bbfc90e2ef6c.ctex"]
+source_file="res://parts/bunny_hindleg.png"
+dest_files=["res://.godot/imported/bunny_hindleg.png-cc03ebedf791efb67878d0d2a9d446d4.ctex"]
 
 [params]
 

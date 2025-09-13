@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_tmif4"]
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_4db5g"]
-[ext_resource type="Texture2D" uid="uid://c1to8kfpgo355" path="res://test_parts/bat_eye.png" id="3_4db5g"]
+[ext_resource type="Texture2D" uid="uid://c1to8kfpgo355" path="res://parts/bat_eye.png" id="3_4db5g"]
 
 [resource]
 script = ExtResource("2_4db5g")
-monster_type = 1
+monster_type = 2
 type = 7
 texture = ExtResource("3_4db5g")
 offset = Vector2(0, 0)
 connections = Array[ExtResource("1_tmif4")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

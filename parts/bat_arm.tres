@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_jftdr"]
 [ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_ybodw"]
-[ext_resource type="Texture2D" uid="uid://qsslcnv41lfj" path="res://test_parts/bat_arm.png" id="2_ybodw"]
+[ext_resource type="Texture2D" uid="uid://qsslcnv41lfj" path="res://parts/bat_arm.png" id="2_ybodw"]
 
 [resource]
 script = ExtResource("1_jftdr")

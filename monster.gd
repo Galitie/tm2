@@ -73,7 +73,7 @@ func _ready():
 
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox
-	hurtbox = $root/body/hurtbox
+	hurtbox = $root/BODY/hurtbox
 	hitbox_collision = hitbox.get_node("shape")
 	hurtbox_collision = hurtbox.get_node("shape")
 	hurtbox.area_entered.connect(_on_hurtbox_area_entered)

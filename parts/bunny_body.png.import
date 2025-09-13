@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5r4wfwwjtybl"
-path="res://.godot/imported/bunny_outline.png-3908b07b641ce13bf0178e79df90d446.ctex"
+uid="uid://cwfb74jc5u0fe"
+path="res://.godot/imported/bunny_body.png-469fdffd6ce042c5eb8ec06c0d73597d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_parts/bunny_outline.png"
-dest_files=["res://.godot/imported/bunny_outline.png-3908b07b641ce13bf0178e79df90d446.ctex"]
+source_file="res://parts/bunny_body.png"
+dest_files=["res://.godot/imported/bunny_body.png-469fdffd6ce042c5eb8ec06c0d73597d.ctex"]
 
 [params]
 

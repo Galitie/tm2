@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1to8kfpgo355"
-path="res://.godot/imported/bat_eye.png-7341f063360a9579142ae69251678dae.ctex"
+uid="uid://b5r4wfwwjtybl"
+path="res://.godot/imported/bunny_outline.png-89fb89495eebf2b79a7e0ad9cbb0411c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_parts/bat_eye.png"
-dest_files=["res://.godot/imported/bat_eye.png-7341f063360a9579142ae69251678dae.ctex"]
+source_file="res://parts/bunny_outline.png"
+dest_files=["res://.godot/imported/bunny_outline.png-89fb89495eebf2b79a7e0ad9cbb0411c.ctex"]
 
 [params]
 

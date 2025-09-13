@@ -22,46 +22,36 @@ var parts: Dictionary[MonsterPart.MONSTER_TYPE, Dictionary] = {
 	#},
 }
 
+var accessories: Array[MonsterPart] = [
+	load("uid://ntacomuarces")
+]
+
 var body_animations: Dictionary[MonsterPart.MONSTER_TYPE, AnimationLibrary] = {
-	MonsterPart.MONSTER_TYPE.BUNNY : load("uid://q44b3cgf6gx6"),
-	MonsterPart.MONSTER_TYPE.BAT : load("uid://q44b3cgf6gx6"),
+	MonsterPart.MONSTER_TYPE.BUNNY : load("uid://b227pe6g7ai2g"),
+	MonsterPart.MONSTER_TYPE.BAT : load("uid://b227pe6g7ai2g"),
 }
 
 func _ready() -> void:
 	back_shader.shader = load("uid://3uoclq0ivabh")
 
-func GeneratePart(base_color: Color, secondary_color: Color, part: MonsterPart, connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
+func GeneratePart(monster: Monster, part: MonsterPart, connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
 	var position_node: Node2D = Node2D.new()
 	var part_sprite: Sprite2D = Sprite2D.new()
 	
 	if part.type != MonsterPart.PART_TYPE.EYE:
 		match part.type:
 			MonsterPart.PART_TYPE.FORELEG:
-				part_sprite.self_modulate = base_color
+				part_sprite.self_modulate = monster.base_color
 			MonsterPart.PART_TYPE.HINDLEG:
-				part_sprite.self_modulate = base_color
+				part_sprite.self_modulate = monster.base_color
 			MonsterPart.PART_TYPE.BODY:
-				part_sprite.self_modulate = base_color
+				part_sprite.self_modulate = monster.base_color
+			MonsterPart.PART_TYPE.HAT:
+				pass
 			_:
-				part_sprite.self_modulate = secondary_color
-		
-	match part.type:
-		MonsterPart.PART_TYPE.BODY:
-			position_node.name = "body"
-		MonsterPart.PART_TYPE.TAIL:
-			position_node.name = "tail"
-		MonsterPart.PART_TYPE.FORELEG:
-			position_node.name = "foreleg"
-		MonsterPart.PART_TYPE.HINDLEG:
-			position_node.name = "hindleg"
-		MonsterPart.PART_TYPE.HEAD:
-			position_node.name = "head"
-		MonsterPart.PART_TYPE.EAR:
-			position_node.name = "ear"
-		MonsterPart.PART_TYPE.EYE:
-			position_node.name = "eye"
-		MonsterPart.PART_TYPE.ARM:
-			position_node.name = "arm"
+				part_sprite.self_modulate = monster.secondary_color
+				
+	position_node.name = MonsterPart.PART_TYPE.keys()[part.type];
 	
 	if connection != null:
 		if connection.is_back:
@@ -75,7 +65,7 @@ func GeneratePart(base_color: Color, secondary_color: Color, part: MonsterPart, 
 	part_sprite.name = "sprite"
 	
 	part_sprite.offset = part.offset
-	if parent_part != null && part.monster_type != parent_part.monster_type:
+	if part.monster_type != MonsterPart.MONSTER_TYPE.ACCESSORY && parent_part != null && part.monster_type != parent_part.monster_type:
 		part_sprite.offset = (part.offset + parts[parent_part.monster_type][part.type].offset) * 0.5
 	
 	if part.hurtbox_size:
@@ -113,19 +103,42 @@ func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 # TODO: Only supports one player per monster
 func GetMonsterPartsGroupName(monster: Monster) -> String:
 	return "monster%f_parts" % monster.player.controller_port
+	
+func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
+	var part_found: bool = false
+	
+	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
+		if monster_part.type == part.type:
+			var part_sprite: Sprite2D = part.get_child(0).get_child(0)
+			part_sprite.offset = monster_part.offset
+			part_sprite.texture = monster_part.texture
+			
+			part_found = true
+			break
+			
+	if !part_found:
+		print("Part with type %s not found on monster: discarding part" % monster.name)
 
-func Generate(monster: Monster, base_color: Color, secondary_color: Color, parent: Node2D, new_part: MonsterPart, _connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
+func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
 	if parent is CanvasGroup && new_part.type == MonsterPart.PART_TYPE.BODY:
 		var anim_player: AnimationPlayer = parent.get_node("anim_player")
 		if anim_player.has_animation_library(""):
 			anim_player.remove_animation_library("")
 		anim_player.add_animation_library("", body_animations[new_part.monster_type])
 	
-	var new_part_node: Node2D = GeneratePart(base_color, secondary_color, new_part, _connection, parent_part)
+	var new_part_node: Node2D = GeneratePart(monster, new_part, _connection, parent_part)
 	
 	for connection: MonsterConnection in new_part.connections:
-		var part: MonsterPart = GetRandomPart(connection.part_type)
-		var part_node: Node2D = Generate(monster, base_color, secondary_color, new_part_node, part, connection, new_part)
+		var part: MonsterPart = null
+		
+		if connection.part_type == MonsterPart.PART_TYPE.HAT:
+			#part = accessories[0];
+			pass
+		else:
+			part = GetRandomPart(connection.part_type)
+			
+		if part != null:
+			var part_node: Node2D = Generate(monster, new_part_node, part, connection, new_part)
 	
 	if parent_part != null && parent_part.type != MonsterPart.PART_TYPE.BODY:
 		var anim_offset_node: Node2D = parent.get_child(0)

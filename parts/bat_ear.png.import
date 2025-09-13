@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b23nwbglaf6d"
-path="res://.godot/imported/bunny_head.png-e2b267fb87ec52348e185e142fac7ee7.ctex"
+uid="uid://b7e6thjm0wa50"
+path="res://.godot/imported/bat_ear.png-a5dbb478b85010a27f76495be0c893d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_parts/bunny_head.png"
-dest_files=["res://.godot/imported/bunny_head.png-e2b267fb87ec52348e185e142fac7ee7.ctex"]
+source_file="res://parts/bat_ear.png"
+dest_files=["res://.godot/imported/bat_ear.png-a5dbb478b85010a27f76495be0c893d4.ctex"]
 
 [params]
 

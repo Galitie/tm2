@@ -49,6 +49,7 @@ func _physics_process(delta):
 		
 		if monster.current_hp <= 0:
 			is_a_summon = false
+			queue_free()
 		
 		poop_shoot_timer += delta
 		if poop_shoot_timer >= poop_shoot_interval:

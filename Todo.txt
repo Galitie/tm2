@@ -9,7 +9,6 @@ Features to make it playtest ready:
 	Customizing creature screen
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic?
-	Add accessory to creature (Raam)
 	Show winner at end of round - make them dance
 	Show winner at the end of the game
 	Log that prints the cards chosen by players, dictionary

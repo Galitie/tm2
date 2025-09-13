@@ -104,12 +104,13 @@ func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 func GetMonsterPartsGroupName(monster: Monster) -> String:
 	return "monster%f_parts" % monster.player.controller_port
 	
+# TODO: This doesn't take back parts into account since they're named [PART_back]
 func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 	var part_found: bool = false
 	
 	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
 		var monster_part_index = MonsterPart.PART_TYPE.keys().find(part.name)
-		if monster_part.type == MonsterPart.PART_TYPE.values()[monster_part_index]:
+		if monster_part_index != -1 && monster_part.type == MonsterPart.PART_TYPE.values()[monster_part_index]:
 			var part_sprite: Sprite2D = part.get_child(0).get_child(0)
 			part_sprite.offset = monster_part.offset
 			part_sprite.texture = monster_part.texture
@@ -134,12 +135,12 @@ func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connecti
 		
 		if connection.part_type == MonsterPart.PART_TYPE.HAT:
 			#part = accessories[0];
-			pass
+			part = MonsterPart.new()
+			part.type = MonsterPart.PART_TYPE.HAT
 		else:
 			part = GetRandomPart(connection.part_type)
 			
-		if part != null:
-			var part_node: Node2D = Generate(monster, new_part_node, part, connection, new_part)
+		var part_node: Node2D = Generate(monster, new_part_node, part, connection, new_part)
 	
 	if parent_part != null && parent_part.type != MonsterPart.PART_TYPE.BODY:
 		var anim_offset_node: Node2D = parent.get_child(0)

@@ -107,8 +107,10 @@ func GetMonsterPartsGroupName(monster: Monster) -> String:
 func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 	var part_found: bool = false
 	
+	
 	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
-		if monster_part.type == part.type:
+		var monster_part_index = MonsterPart.PART_TYPE.keys().find(part.name)
+		if monster_part_index != -1 && monster_part.type == MonsterPart.PART_TYPE.keys()[monster_part_index]:
 			var part_sprite: Sprite2D = part.get_child(0).get_child(0)
 			part_sprite.offset = monster_part.offset
 			part_sprite.texture = monster_part.texture

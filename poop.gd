@@ -11,15 +11,19 @@ var base_damage: int = 1
 var crit_multiplier: float = 1
 var damage_dealt_mult: float = 1.0
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $CanvasGroup/Sprite2D
 @onready var collision = $BodyCollision
 @onready var projectile = load("res://projectile.tscn")
 
 func _ready():
+	if is_a_summon:
+		sprite.play("gun")
+	
 	if not is_a_summon:
 		collision.disabled = true
 	velocity = Vector2.ZERO
 	poop_shoot_interval = randf_range(5,15)
+	$AnimationPlayer.play("idle")
 
 
 func _physics_process(delta):
@@ -35,10 +39,10 @@ func _physics_process(delta):
 			velocity = Vector2()
 		
 		if velocity.length() > 0 and velocity.x > 0:
-			sprite.scale = Vector2(1,1)
+			sprite.flip_h = false
 		if velocity.length() > 0 and velocity.x < 0:
-			sprite.scale = Vector2(-1,1)
-
+			sprite.flip_h = true
+			
 		move_and_slide()
 		
 		if monster.current_hp <= 0:
@@ -63,11 +67,12 @@ func shoot_projectile():
 	var projectile = projectile.instantiate()
 	projectile.emitter = self
 	projectile.monster = monster
-	if sprite.scale == Vector2(1,1):
+	if !sprite.flip_h:
 		projectile.direction = Vector2.RIGHT
-	elif sprite.scale == Vector2(-1,1):
+	elif sprite.flip_h:
 		projectile.direction = Vector2.LEFT
 	else:
 		projectile.direction = Vector2.RIGHT
-	projectile.position = position + Vector2(0, -2) + (projectile.direction * 6)
+	projectile.position = position + Vector2(17 * projectile.direction.x, -5)
+	projectile.z_index = self.z_index
 	Globals.game.add_child(projectile)

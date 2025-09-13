@@ -173,4 +173,4 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 
-[connection signal="pressed" from="CardInfo" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CardInfo" to="." method="_on_button_pressed" binds= [0]]

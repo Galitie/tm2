@@ -11,8 +11,9 @@ func _process(_delta):
 	pass
 
 
-func _on_button_pressed():
-	emit_signal("card_pressed", self) #Caught by game scene
+func _on_button_pressed(acc_index : int = 0):
+	print(acc_index)
+	emit_signal("card_pressed", self, acc_index) #Caught by game scene
 
 
 func choose_card_resource(card_resource):

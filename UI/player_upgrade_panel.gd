@@ -62,7 +62,8 @@ func _physics_process(_delta):
 					if in_accessory_menu:
 						# already in the acc menu and pressed something
 						in_accessory_menu = false
-						button._on_button_pressed()
+						
+						button._on_button_pressed(current_user_position_in_accessory_array) #for now
 						button.card_info_panel.show()
 						button.accessory_panel.hide()
 					else:

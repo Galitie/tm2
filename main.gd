@@ -216,11 +216,13 @@ func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()
 
 
-func card_pressed(card : PanelContainer):
+func card_pressed(card : PanelContainer, acc_index : int):
 	var player : Player = card.upgrade_panel.player
 	if card.chosen_resource.parts_and_acc.size() > 0:
-		var part : MonsterPart = card.chosen_resource.parts_and_acc[0]
-		MonsterGeneration.AddPartToMonster(player.monster, part) #temp to test
+		print("found monster part to add")
+		print(acc_index)
+		var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]
+		MonsterGeneration.AddPartToMonster(player.monster, part) #TODO:temp to test, needs to pass index
 	var resource_array : Array[Resource] = card.upgrade_panel.resource_array
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"

@@ -43,20 +43,14 @@ func _physics_process(delta):
 
 
 # connected to "ChooseNewState" signal in state.gd
-func choose_new_state():
-	var new_state = keys[rng.rand_weighted(weights)]
-	transition_state(state_choices[new_state].pick_random())
+func choose_new_state(specific_state : String = ""):
+	if specific_state == "":
+		var new_state : String = keys[rng.rand_weighted(weights)] #randmly choose their next state collection
+		transition_state(state_choices[new_state].pick_random())
+		return
+	transition_state(state_choices[specific_state].pick_random())
 
-#TODO: Scenarios for state if I want smarter creatures?
-# Doesn't see a creature
-# -> Wander or idle
-
-# See a creature 
-# -> if far > chase or attack
-# -> if close > run away, block or attack
-# -> if creature is charging up > run away or block
-
-# connected to "Transitioned" signal in state.gd
+# connected to "Transitioned" signal in state.gd, transitions to specific state node, not collection
 func transition_state(new_state_name):
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state:

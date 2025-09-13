@@ -6,39 +6,39 @@ var target_mon: CharacterBody2D
 var chase_time: float
 var move_speed_adjust: int = 10
 
-# --- Avoidance tuning ---
 var avoidance_radius: float = 96.0     
 var avoidance_strength: float = 1.0     
 var max_accel: float = 5000.0           
 
+
 func randomize_chase():
 	chase_time = randf_range(3, 8)
+
 
 func Enter():
 	select_target()
 	randomize_chase()
 
+
 func Exit():
 	monster.move_speed -= move_speed_adjust
+
 
 func Physics_Update(delta: float) -> void:
 	if target_mon:
 		var to_target = target_mon.global_position - monster.global_position
 		var dist = to_target.length()
 		chase_time -= delta
-
-		if dist > 200.0 and target_mon.current_hp > 0.0 and chase_time > 0.0:
-			# Base desired direction toward target
+		#TODO: Make distance based on mon's hitbox radius or collision?
+		if dist > 175.0 and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
 			if to_target.length() > 0.0:
 				desired_dir = to_target.normalized()
 
-			# Add avoidance (separation) from nearby monsters
 			var avoidance = get_avoidance_vector()
 			if avoidance.length() > 0.0001:
 				desired_dir = (desired_dir + avoidance).normalized()
 
-			# Keep full move speed; steer with an accel cap
 			var desired_velocity = desired_dir * monster.move_speed
 			var steering = desired_velocity - monster.velocity
 			if steering.length() > max_accel:
@@ -47,7 +47,12 @@ func Physics_Update(delta: float) -> void:
 			monster.velocity = monster.velocity + steering * delta
 		else:
 			monster.velocity = Vector2()
-			ChooseNewState.emit()
+			var rand = [1,2].pick_random()
+			if rand == 1:
+				ChooseNewState.emit("basic_attack")
+				return
+			ChooseNewState.emit("charge_attack")
+
 
 func select_target():
 	var targetable_monsters: Array = get_targetable_monsters()
@@ -58,6 +63,7 @@ func select_target():
 	else:
 		ChooseNewState.emit()
 
+
 func get_targetable_monsters() -> Array[CharacterBody2D]:
 	var targetable_monsters: Array[CharacterBody2D] = []
 	var monster_collection = get_tree().get_nodes_in_group("Monster")
@@ -67,7 +73,7 @@ func get_targetable_monsters() -> Array[CharacterBody2D]:
 			targetable_monsters.append(mon)
 	return targetable_monsters
 
-# --- NEW: avoidance helpers ---
+
 func get_avoidance_vector() -> Vector2:
 	var push_sum = Vector2()
 	var neighbors = get_neighbor_monsters()
@@ -84,6 +90,7 @@ func get_avoidance_vector() -> Vector2:
 	if push_sum.length() > 0.0001:
 		return push_sum.normalized()
 	return Vector2()
+
 
 func get_neighbor_monsters() -> Array[CharacterBody2D]:
 	var neighbors: Array[CharacterBody2D] = []

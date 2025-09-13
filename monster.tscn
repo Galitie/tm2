@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=31 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
@@ -40,9 +40,6 @@ radius = 15.52
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 55.0
 height = 160.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_a7j2b"]
-radius = 85.09
 
 [sub_resource type="Animation" id="Animation_itwwk"]
 length = 0.001
@@ -161,11 +158,6 @@ position = Vector2(-0.00050354, -158)
 
 [node name="left_target" type="Node2D" parent="body"]
 position = Vector2(0.000549316, 161)
-
-[node name="Vision" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
-shape = SubResource("CircleShape2D_a7j2b")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("18_cjpl6")

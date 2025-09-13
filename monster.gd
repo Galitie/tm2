@@ -39,6 +39,7 @@ var hitbox_collision
 var hurtbox_collision
 var hurtbox
 var hitbox 
+var attacked : bool = false
 
 var sent_flying: bool = false
 var knockback: float
@@ -113,37 +114,45 @@ func apply_hp(amount):
 
 func _on_hurtbox_area_entered(area):
 	var attacker: Node
-	var attacked: bool = false
-	if area.is_in_group("Attack") and area != hitbox:
-		attacked = true
-		var current_state = state_machine.current_state.name
-		attacker = area.get_parent().get_parent()
-		match current_state.to_lower():
-			"spikyblock":
-				attacker.take_damage_from(attacker)
+	attacked = false
+	if area != hitbox:
+		var current_state = state_machine.current_state.name.to_lower()
+		var area_that_can_damage : bool = area.is_in_group("Attack") or area.is_in_group("Projectile") or area.is_in_group("Bomb")
+		if current_state.contains("block") and area_that_can_damage:
+			attacker = area.get_parent().get_parent()
+			match current_state.to_lower():
+				"spikyblock":
+					if attacker == Monster:
+						attacker.take_damage_from(attacker)
+						attacker.state_machine.transition_state("hurt")
+					return
+				_:
+					return
+		if area.is_in_group("Attack"):
+			attacked = true
+			attacker = area.get_parent().get_parent()
+			var attack : String = attacker.state_machine.current_state.name
+			match attack.to_lower():
+				"punch":
+					take_damage_from(attacker)
+				"bitelifesteal":
+					take_damage_from(attacker)
+					attacker.apply_hp(3)
+			if thorns:
+				attacker.attacked = true
+				attacker.apply_hp(-1)
 				attacker.state_machine.transition_state("hurt")
-				return
-		var attack : String = attacker.state_machine.current_state.name
-		match attack.to_lower():
-			"punch":
-				take_damage_from(attacker)
-			"bitelifesteal":
-				take_damage_from(attacker)
-				attacker.apply_hp(3)
-		if thorns:
-			attacker.apply_hp(-1)
-			attacker.state_machine.transition_state("hurt")
-		state_machine.transition_state("hurt")
-	if area.is_in_group("Projectile") and area != hitbox and area.owner.monster != self:
-		attacked = true
-		attacker = area.owner.emitter
-		take_damage_from(attacker)
-		state_machine.transition_state("hurt")
-	if area.is_in_group("Bomb") and area != hitbox:
-		attacked = true
-		attacker = area.owner
-		take_damage_from(attacker)
-		state_machine.transition_state("hurt")
+			state_machine.transition_state("hurt")
+		if area.is_in_group("Projectile") and area.owner.monster != self:
+			attacked = true
+			attacker = area.owner.emitter
+			take_damage_from(attacker)
+			state_machine.transition_state("hurt")
+		if area.is_in_group("Bomb"):
+			attacked = true
+			attacker = area.owner
+			take_damage_from(attacker)
+			state_machine.transition_state("hurt")
 
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)

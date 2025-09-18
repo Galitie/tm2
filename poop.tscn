@@ -138,3 +138,8 @@ shape = SubResource("CircleShape2D_a7brd")
 libraries = {
 &"": SubResource("AnimationLibrary_uuxsx")
 }
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://b1yf5pmgknoky"]
 
-[ext_resource type="Script" uid="uid://cbkjotjeilkcj" path="res://Cards/Accessories/accessories_info.gd" id="1_7bdyh"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_88tgj"]
 
 [resource]
@@ -20,4 +19,3 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-accessories = Array[ExtResource("1_7bdyh")]([])

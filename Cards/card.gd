@@ -11,8 +11,9 @@ func _process(_delta):
 	pass
 
 
-func _on_button_pressed():
-	emit_signal("card_pressed", self) #Caught by game scene
+func _on_button_pressed(acc_index : int = 0):
+	print(acc_index)
+	emit_signal("card_pressed", self, acc_index) #Caught by game scene
 
 
 func choose_card_resource(card_resource):
@@ -55,17 +56,12 @@ func choose_card_resource(card_resource):
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
-	#if chosen_resource.state_id: This isn't true for all resources with a state_id
-		#if %Tags.text == "":
-			#%Tags.text = "SWAP"
-		#else:
-			#%Tags.text += ", SWAP"
-		
-	
-	for accessory in chosen_resource.accessories:
+
+	for accessory in chosen_resource.parts_and_acc:
 		var panel = PanelContainer.new()
 		var button = Button.new()
-		button.icon = accessory.image
+		# attach signal _on_button_pressed ?
+		button.icon = accessory.texture
 		panel.add_child(button)
 		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
 		accessories.append(panel)

@@ -186,7 +186,6 @@ func set_fight_mode():
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
 
-# TODO: Sudden death animation should pause the game until it's finished
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
 	Globals.is_sudden_death_mode = true

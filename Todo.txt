@@ -6,12 +6,11 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Oct 1st goals:
-		Upward and downward attack - do we take the hit collision as a seperate data type?
 		Customizing creature screen - color and name, if time, body randomizer?
 		More Accessories
 		1 more body type - redo the bat
 		Rotate correct body parts
-		Show winner at the end of the game
+		End/Show winner + restart at the end of the game
 		
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic?

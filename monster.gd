@@ -141,6 +141,7 @@ func _on_hurtbox_area_entered(area):
 			if thorns:
 				attacker.attacked = true
 				attacker.apply_hp(-1)
+				attacker.state_machine.transition_state("hurt")
 			state_machine.transition_state("hurt")
 		if area.is_in_group("Projectile") and area.owner.monster != self:
 			attacked = true

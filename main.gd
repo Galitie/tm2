@@ -50,7 +50,8 @@ func debug_stuff():
 func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
-	
+
+
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
@@ -63,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
+
 
 func _unfreeze() -> void:
 	camera_tracking = false
@@ -79,6 +81,7 @@ func _unfreeze() -> void:
 		await get_tree().create_timer(5.5).timeout
 		audio_player.playing = false
 		audio_player.volume_db = 0.0
+
 
 func _ready():
 	$FreezeTimer.timeout.connect(_unfreeze)
@@ -139,12 +142,14 @@ func _process(_delta):
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 
+
 func count_death(monster: Monster):
 	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
 	if dead_monsters == player_count - 1:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
+
 
 func set_upgrade_mode():
 	sudden_death_label.visible = false
@@ -186,6 +191,7 @@ func set_fight_mode():
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
 
+
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
 	Globals.is_sudden_death_mode = true
@@ -197,6 +203,7 @@ func _on_sudden_death_timer_timeout():
 	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(0.4)
 	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(3.0)
 	get_tree().create_tween().tween_property(sudden_death_label, "visible", false, 0.0).set_delay(3.2)
+
 
 func _on_round_over_delay_timer_timeout():
 	for player in players:

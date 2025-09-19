@@ -15,9 +15,12 @@ var spin_sign: float
 var distance: float
 
 @onready var monster : Monster
-
+@onready var sprite: AnimatedSprite2D = $CanvasGroup/Sprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
+	animation_player.play("idle")
+	
 	if monster.facing == "right":
 		direction = Vector2(-1, 0)
 		target = position - Vector2(randi_range(50,125),0)
@@ -30,25 +33,25 @@ func _ready():
 	$ExplosionCountdown.wait_time = randf_range(3,5)
 	$ExplosionCountdown.start()
 
+	await get_tree().create_timer(2.5).timeout
+	animation_player.play("freakout")
 
 func _physics_process(delta: float) -> void:
 	var decay = position.distance_to(target) / distance
 	position.x = move_toward(position.x, target.x, speed * delta)
 	rotation += spin_speed * spin_sign * delta * decay
-	
-	if exploding:
-		overlapping_areas = $Area2D.get_overlapping_areas()
-		for area in overlapping_areas:
-			if area.name == "hurtbox":
-				queue_free()
 
 func _on_explosion_countdown_timeout():
 	$Area2D/ExplosionHitBox.disabled = false
 	$ExplosionTime.start()
-	$Sprite2D.play("explode")
+	animation_player.play("explode")
 	exploding = true
-
+	$AudioStreamPlayer.play()
 
 func _on_explosion_time_timeout():
+	remove_from_group("DepthEntity")
+	z_index = 50
 	exploding = false
+	visible = false
+	await $AudioStreamPlayer.finished
 	queue_free()

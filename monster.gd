@@ -111,8 +111,10 @@ func apply_hp(amount):
 	if current_hp >= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)
 
+# BUG: Hurt state looping sometimes with 0 damage
 # Hurt logic should be in take_damage_from, not this collision function
 func _on_hurtbox_area_entered(area):
+	var crit: bool = false
 	var attacker: Node
 	attacked = false
 	if area != hitbox:
@@ -122,11 +124,19 @@ func _on_hurtbox_area_entered(area):
 			attacker = area.get_parent().get_parent()
 			match current_state.to_lower():
 				"spikyblock":
+					thorn_effect()
 					if attacker == Monster:
-						attacker.take_damage_from(attacker)
+						attacker.take_damage_from(attacker, true)
 						attacker.state_machine.transition_state("hurt")
+						#TODO: Because of current logic, the attacker is knocked out first, 
+						# so they lose the tie in sudden death
+						if Globals.is_sudden_death_mode:
+							attacker.send_flying(attacker)
 					return
 				_:
+					play_generic_sound("uid://cf8aw1xy3pg34")
+					root.modulate = Color("3467ff")
+					get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
 					return
 		if area.is_in_group("Attack"):
 			attacked = true
@@ -134,45 +144,71 @@ func _on_hurtbox_area_entered(area):
 			var attack : String = attacker.state_machine.current_state.name
 			match attack.to_lower():
 				"punch":
-					take_damage_from(attacker)
+					crit = take_damage_from(attacker)
 				"bitelifesteal":
-					take_damage_from(attacker)
+					crit = take_damage_from(attacker)
 					attacker.apply_hp(3)
 			if thorns:
+				thorn_effect()
 				attacker.attacked = true
-				attacker.take_damage_from(self, 1)
+				attacker.take_damage_from(self, true, 1)
 				attacker.state_machine.transition_state("hurt")
-				# Because of current logic, the attacker is knocked out first, so they lose
-				# the tie in sudden death
+				attacker.hit_effect()
+				# Here too
 				if Globals.is_sudden_death_mode:
 					attacker.send_flying(attacker)
+			else:
+				hit_effect(crit)
 			state_machine.transition_state("hurt")
 		if area.is_in_group("Projectile") and area.owner.monster != self:
 			attacked = true
 			attacker = area.owner.emitter
-			take_damage_from(attacker)
+			take_damage_from(attacker, true)
 			state_machine.transition_state("hurt")
+			hit_effect()
 		if area.is_in_group("Bomb"):
 			attacked = true
 			attacker = area.owner
-			take_damage_from(attacker)
+			take_damage_from(attacker, true)
 			state_machine.transition_state("hurt")
+			hit_effect()
 
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
-
+			
+func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
+	audio_player.stream = load(uid)
+	audio_player.pitch_scale = randf_range(0.8, 1.2)
+	audio_player.volume_db = volume_db
+	audio_player.play()
+	await audio_player.finished
+	audio_player.pitch_scale = 1.0
+	
+func thorn_effect() -> void:
+	play_generic_sound("uid://can2y656sbycd", -5.0)
+	root.modulate = Color("6bff7d")
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+	
+func hit_effect(crit: bool = false) -> void:
+	if crit:
+		play_generic_sound("uid://dfjgpdho3lcvd", -5.0)
+	else:
+		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
+	root.modulate = Color("ff0e1b")
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.3).set_trans(Tween.TRANS_BOUNCE)
 
 func send_flying(attacker: Node) -> void:
 	sent_flying = true
 	state_machine.transition_state("knockedout")
+	audio_player.stream = load("uid://dfjgpdho3lcvd")
 	audio_player.play()
 	
 	knockback = (global_position - attacker.global_position).normalized().x
 	Globals.game.freeze_frame(self)
 
-func take_damage_from(enemy, override_damage: int = 0):
+func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) -> bool:
 	var critted = roll_crit()
-	var crit_text = " CRIT" if critted else ""
+	var crit_text = " CRIT" if critted && !no_crit else ""
 	var random_modifier : int = randi_range(0,3)
 	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
 	if override_damage:
@@ -184,6 +220,7 @@ func take_damage_from(enemy, override_damage: int = 0):
 	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
+	return critted && !no_crit
 
 
 func check_low_hp():

@@ -49,7 +49,7 @@ func _physics_process(delta):
 		
 		if monster.current_hp <= 0:
 			is_a_summon = false
-			queue_free()
+			_on_lifetime_timeout()
 		
 		poop_shoot_timer += delta
 		if poop_shoot_timer >= poop_shoot_interval:
@@ -82,6 +82,5 @@ func shoot_projectile():
 
 
 func _on_lifetime_timeout():
-	var transparent: Color = Color(modulate.r, modulate.g, modulate.b, 0.0)
-	await get_tree().create_tween().tween_property(self, "modulate", transparent, 1.0).finished
+	await get_tree().create_tween().tween_property(sprite, "scale", Vector2(1.0, 0.0), 1.0).finished
 	queue_free()

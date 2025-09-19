@@ -153,6 +153,8 @@ func _process(_delta):
 
 
 func count_death(monster: Monster):
+	monster.remove_from_group("DepthEntity")
+	monster.z_index = -1
 	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
 	if dead_monsters == player_count - 1 || dead_monsters == player_count:
@@ -175,6 +177,8 @@ func set_upgrade_mode():
 		var upgrade_pos = player.get_node("UpgradePos")
 		monster.target_point = upgrade_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
+		if !monster.is_in_group("DepthEntity"):
+			monster.add_to_group("DepthEntity")
 		if player.randomize_upgrade_points:
 			player.upgrade_points = randi_range(1,5)
 		else:
@@ -365,6 +369,7 @@ func clear_knocked_out_monsters():
 
 
 func spawn_poop(monster):
+	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
 	var poop = preload("uid://b03qji6okxywb").instantiate()
 	poop.add_to_group("DepthEntity")
 	poop.monster = monster
@@ -379,6 +384,7 @@ func spawn_poop(monster):
 
 
 func spawn_bomb(monster):
+	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
 	bomb.z_index = monster.z_index
 	bomb.monster = monster

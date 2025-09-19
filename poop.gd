@@ -67,6 +67,7 @@ func is_not_colliding() -> bool:
 
 
 func shoot_projectile():
+	$AudioStreamPlayer.play()
 	var projectile = projectile.instantiate()
 	projectile.emitter = self
 	projectile.monster = monster

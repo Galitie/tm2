@@ -14,9 +14,7 @@ var damage_dealt_mult: float = 1.0
 var thorns : bool = false
 
 var mon_name : String
-var main_color
 
-@export_range(-1, 1) var hue_shift : float
 @export var player : Player
 
 @onready var root = $root
@@ -249,7 +247,18 @@ func generate_random_name():
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	var whole_name: String =  " ".join(name_parts)
 	$Name.text = whole_name
+	$NameUpgrade.text = whole_name
 	mon_name = whole_name
+
+func move_name_upgrade():
+	$NameUpgrade.visible = true
+	$Name.visible = false
+
+
+func move_name_fight():
+	$NameUpgrade.visible = false
+	$Name.visible = true
+
 
 func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.set_deferred("disabled", !is_enabled)

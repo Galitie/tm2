@@ -1,0 +1,175 @@
+[gd_scene load_steps=3 format=3 uid="uid://laiyva0qmjkd"]
+
+[ext_resource type="Script" uid="uid://ddofft047bvq4" path="res://UI/player_customize_panel.gd" id="1_j53iu"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="2_j53iu"]
+
+[node name="PlayerCustomizePanel" type="MarginContainer" groups=["PlayerCustomizePanel"]]
+offset_left = -1.0
+offset_right = 123.0
+offset_bottom = 429.0
+size_flags_horizontal = 3
+script = ExtResource("1_j53iu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/Title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "CUSTOMIZE"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="Custom1" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_j53iu")
+
+[node name="CardInfo" type="Button" parent="VBoxContainer/Custom1"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Custom1/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j53iu")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Custom1/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Custom1/CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Custom1/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+theme_override_font_sizes/font_size = 22
+text = "CHANGE COLOR"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="VBoxContainer/Custom1/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Get a random new color"
+autowrap_mode = 3
+
+[node name="Custom2" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_j53iu")
+
+[node name="CardInfo" type="Button" parent="VBoxContainer/Custom2"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Custom2/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j53iu")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Custom2/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Custom2/CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Custom2/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+theme_override_font_sizes/font_size = 22
+text = "CHANGE NAME"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="VBoxContainer/Custom2/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Generate a new name"
+autowrap_mode = 3
+
+[node name="Done" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_j53iu")
+
+[node name="CardInfo" type="Button" parent="VBoxContainer/Done"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Done/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j53iu")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Done/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+
+[node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2_j53iu")
+theme_override_font_sizes/font_size = 22
+text = "DONE"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "I'm finished customizing!"
+autowrap_mode = 3
+
+[node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/Custom1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/Custom2/CardInfo" to="." method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/Done/CardInfo" to="." method="_on_button_pressed" binds= [0]]

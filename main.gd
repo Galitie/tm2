@@ -5,6 +5,7 @@ class_name Game
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
 @export var override_sudden_death_time : float
+@export var disable_customizer : bool
 
 @onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
 @onready var monsters: Array[Monster]
@@ -15,18 +16,20 @@ class_name Game
 
 @onready var sudden_death_overlay: Sprite2D = $Camera2D/CanvasLayer/SuddenDeath
 const SUDDEN_DEATH_MAX_RADIUS: float = 1.279
+var sudden_death_speed_set : bool = false
+var sudden_death_speed : int = 100
 
 @onready var camera: Camera2D = $Camera2D
 var camera_tracking: bool = false
 var camera_zoom_trauma: float = 0.0 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var dead_monsters : int
 var current_round : int
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
-enum Modes {FIGHT, UPGRADE}
+enum Modes {FIGHT, UPGRADE, CUSTOMIZE}
 
+var ready_players : Array[Node] = []
 
 func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.FIGHT:
@@ -64,15 +67,18 @@ func _physics_process(_delta: float) -> void:
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
-	
+
+
 func _unpause() -> void:
 	get_tree().paused = false
-	
+
+
 func pause_game(length: float = 0.0) -> void:
 	get_tree().paused = true
 	if length > 0:
 		$PauseTimer.start(length)
-		
+
+
 func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
@@ -82,7 +88,7 @@ func freeze_frame(monster: Monster) -> void:
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
-	if dead_monsters == player_count - 1 || dead_monsters == player_count:
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
 		camera_tracking = false
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
@@ -106,7 +112,9 @@ func _ready():
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
-
+		player.customize_panel.connect("finished_customizing", _add_ready_player)
+		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
+		
 	if debug_mode:
 		Globals.game.debug_mode = true
 		for player in players:
@@ -114,6 +122,7 @@ func _ready():
 			if player.monster.pre_loaded_cards.size():
 				for pre_loaded_card in player.monster.pre_loaded_cards:
 					apply_card_resource_effects(pre_loaded_card, player)
+	
 	
 	for player_index in players.size():
 		var player = players[player_index]
@@ -131,16 +140,28 @@ func _ready():
 		card.connect("card_pressed", card_pressed)
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
+	
+	if disable_customizer:
+		$CustomizeMenu.hide()
+		$CustomizeMenu.disable()
+	else:
+		set_customize_mode()
+		
 	if start_in_fight_mode:
 		set_fight_mode()
-	else:
+	elif !start_in_fight_mode and disable_customizer:
 		set_upgrade_mode()
+
 
 func _process(_delta):
 	if debug_mode:
 		debug_stuff()
 		
 	if Globals.is_sudden_death_mode:
+		if sudden_death_speed_set == false:
+			sudden_death_speed_set = true
+			for player in players:
+				player.monster.move_speed += sudden_death_speed
 		if camera_tracking:
 			var monster_avg_position: Vector2
 			var alive_monsters: int
@@ -150,20 +171,48 @@ func _process(_delta):
 					alive_monsters += 1
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
-
+	if ready_players.size() == 4 and current_mode == Modes.CUSTOMIZE:
+		$CustomizeMenu.disable()
+		$CustomizeMenu.hide()
+		if start_in_fight_mode:
+			set_fight_mode()
+		else:
+			set_upgrade_mode()
+	if ready_players.size() == 1 and current_mode == Modes.CUSTOMIZE and debug_mode:
+		$CustomizeMenu.disable()
+		$CustomizeMenu.hide()
+		if start_in_fight_mode:
+			set_fight_mode()
+		else:
+			set_upgrade_mode()
 
 func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
-	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
-	if dead_monsters == player_count - 1 || dead_monsters == player_count:
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
 
 
+func set_customize_mode():
+	$CustomizeMenu.show()
+	sudden_death_label.visible = false
+	current_mode = Modes.CUSTOMIZE
+	for player in players:
+		var monster = player.get_node("Monster")
+		monster.move_name_upgrade()
+		var upgrade_pos = player.get_node("UpgradePos")
+		monster.target_point = upgrade_pos.global_position
+		monster.state_machine.transition_state("upgradestart")
+
+
 func set_upgrade_mode():
 	sudden_death_label.visible = false
+	if sudden_death_speed_set:
+		sudden_death_speed_set = false
+		for player in players:
+			player.monster.move_speed -= sudden_death_speed
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -174,6 +223,7 @@ func set_upgrade_mode():
 	var rerolls_amount_counter = 0
 	for player in players:
 		var monster = player.get_node("Monster")
+		monster.move_name_upgrade()
 		var upgrade_pos = player.get_node("UpgradePos")
 		monster.target_point = upgrade_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
@@ -196,13 +246,14 @@ func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
 	sudden_death_timer.start()
-	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
+		monster.move_name_fight()
 		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
+
 
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
@@ -219,11 +270,10 @@ func _on_sudden_death_timer_timeout():
 	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).finished
 	sudden_death_label.visible = false
 
-# TODO: Change dead_monsters to an array to replace current_knocked_out_monsters
-# Fix victory point shenanigans
+
 func _on_round_over_delay_timer_timeout():
 	for player in players:
-		if player.monster.current_hp > 0:
+		if player.monster.current_hp > 0 and player.monster not in current_knocked_out_monsters:
 			current_knocked_out_monsters.append(player.monster)
 			break
 	var victory_points_gained = 0
@@ -231,9 +281,10 @@ func _on_round_over_delay_timer_timeout():
 		monster.player.victory_points += victory_points_gained
 		victory_points_gained += 1
 	set_upgrade_mode()
-	for i: int in range(players.size()):
-		var debug_point_label: String = "%s (%s) : %d" % [players[i].name, monsters[i].mon_name, players[i].victory_points]
-		print(debug_point_label)
+	print("Current Round: ", current_round)
+	for player in players:
+		print(player.name, "(", player.monster.mon_name, ") : ", player.victory_points, " points")
+	print("\n")
 
 
 func _on_upgrade_over_delay_timer_timeout():
@@ -398,3 +449,11 @@ func clean_up_screen():
 	var items = get_tree().get_nodes_in_group("CleanUp")
 	for item in items:
 		item.queue_free()
+
+
+func _add_ready_player(player):
+	ready_players.append(player)
+
+func _remove_ready_player(player):
+	var index = ready_players.find(player)
+	ready_players.remove_at(index)

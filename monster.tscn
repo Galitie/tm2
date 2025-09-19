@@ -209,6 +209,7 @@ script = ExtResource("18_a7j2b")
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -263,6 +264,21 @@ offset_left = -52.5
 offset_top = 72.0
 offset_right = 52.5
 offset_bottom = 122.0
+grow_horizontal = 2
+theme = ExtResource("25_s0vvg")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 16
+text = "NAME"
+horizontal_alignment = 1
+
+[node name="NameUpgrade" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_top = 47.0
+offset_right = 52.5
+offset_bottom = 97.0
 grow_horizontal = 2
 theme = ExtResource("25_s0vvg")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

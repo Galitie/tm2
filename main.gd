@@ -16,6 +16,8 @@ class_name Game
 
 @onready var sudden_death_overlay: Sprite2D = $Camera2D/CanvasLayer/SuddenDeath
 const SUDDEN_DEATH_MAX_RADIUS: float = 1.279
+var sudden_death_speed_set : bool = false
+var sudden_death_speed : int = 100
 
 @onready var camera: Camera2D = $Camera2D
 var camera_tracking: bool = false
@@ -156,6 +158,10 @@ func _process(_delta):
 		debug_stuff()
 		
 	if Globals.is_sudden_death_mode:
+		if sudden_death_speed_set == false:
+			sudden_death_speed_set = true
+			for player in players:
+				player.monster.move_speed += sudden_death_speed
 		if camera_tracking:
 			var monster_avg_position: Vector2
 			var alive_monsters: int
@@ -201,6 +207,10 @@ func set_customize_mode():
 
 func set_upgrade_mode():
 	sudden_death_label.visible = false
+	if sudden_death_speed_set:
+		sudden_death_speed_set = false
+		for player in players:
+			player.monster.move_speed -= sudden_death_speed
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -239,6 +249,7 @@ func set_fight_mode():
 		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
+
 
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true

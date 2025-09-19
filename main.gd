@@ -215,7 +215,6 @@ func _on_sudden_death_timer_timeout():
 	sudden_death_label.visible = false
 
 
-#TODO: Fix victory point shenanigans
 func _on_round_over_delay_timer_timeout():
 	for player in players:
 		if player.monster.current_hp > 0 and player.monster not in current_knocked_out_monsters:
@@ -226,9 +225,10 @@ func _on_round_over_delay_timer_timeout():
 		monster.player.victory_points += victory_points_gained
 		victory_points_gained += 1
 	set_upgrade_mode()
+	print("Current Round: ", current_round)
 	for player in players:
 		print(player.name, "(", player.monster.mon_name, ") : ", player.victory_points, " points")
-
+	print("\n")
 
 func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()

@@ -1,14 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://gxo3acon6q5t"]
+[gd_scene load_steps=17 format=4 uid="uid://gxo3acon6q5t"]
 
 [ext_resource type="Script" uid="uid://c06lrcrekqq58" path="res://bomb.gd" id="1_4fn8o"]
 [ext_resource type="Texture2D" uid="uid://c137kcvc34wxb" path="res://bomb.png" id="1_573fp"]
-[ext_resource type="Texture2D" uid="uid://p4xsmg6fse3a" path="res://explosion.png" id="3_nfxiy"]
+[ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_6w74q"]
+[ext_resource type="Texture2D" uid="uid://deo1bt8d6ho2n" path="res://bomb_glance.png" id="4_apr5j"]
+[ext_resource type="Texture2D" uid="uid://cgrc4jxdyeooy" path="res://bomb_explode.png" id="5_ugjkb"]
+[ext_resource type="Texture2D" uid="uid://crcn1voj1t5mj" path="res://bomb_freakout.png" id="6_r0wls"]
+[ext_resource type="Texture2D" uid="uid://cosnq7cq02bji" path="res://bomb_freakout_flash.png" id="7_a3tha"]
+[ext_resource type="AudioStream" uid="uid://boyc823kxorwi" path="res://sounds/bomb.ogg" id="8_ugjkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwkwj"]
+shader = ExtResource("2_6w74q")
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/line_thickness = 2.5
+shader_parameter/line_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6w74q"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 5.0,
 "texture": ExtResource("1_573fp")
+}, {
+"duration": 1.5,
+"texture": ExtResource("4_apr5j")
 }],
 "loop": true,
 "name": &"default",
@@ -16,23 +31,164 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_nfxiy")
+"texture": ExtResource("5_ugjkb")
 }],
 "loop": true,
 "name": &"explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.4,
+"texture": ExtResource("6_r0wls")
+}, {
+"duration": 0.4,
+"texture": ExtResource("7_a3tha")
+}],
+"loop": true,
+"name": &"freakout",
 "speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4fn8o"]
 radius = 55.0
 
+[sub_resource type="Animation" id="Animation_1g03t"]
+resource_name = "freakout"
+length = 0.08
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"freakout"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-9.77, -10.6), Vector2(-9.77, -9.42), Vector2(-11.1, -11.35), Vector2(-8.525, -13.3), Vector2(-9.575, -11.46)]
+}
+
+[sub_resource type="Animation" id="Animation_pmxwx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"freakout"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.77, -10.6)]
+}
+
+[sub_resource type="Animation" id="Animation_3x5no"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.77, -5.05)]
+}
+
+[sub_resource type="Animation" id="Animation_6vq3x"]
+resource_name = "explode"
+length = 0.04
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.04),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2.79, -2.99), Vector2(-5.72, -5.91), Vector2(3.495, -5.845), Vector2(-3.18, 0.61), Vector2(5.2, -6.72)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akjo0"]
+_data = {
+&"RESET": SubResource("Animation_pmxwx"),
+&"explode": SubResource("Animation_6vq3x"),
+&"freakout": SubResource("Animation_1g03t"),
+&"idle": SubResource("Animation_3x5no")
+}
+
 [node name="Bomb" type="Node2D" groups=["CleanUp"]]
 z_index = 2
 script = ExtResource("1_4fn8o")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_bwkwj")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CanvasGroup"]
 sprite_frames = SubResource("SpriteFrames_6w74q")
+animation = &"freakout"
 autoplay = "default"
+offset = Vector2(-9.77, -10.6)
 
 [node name="ExplosionCountdown" type="Timer" parent="."]
 wait_time = 5.0
@@ -47,6 +203,14 @@ disabled = true
 [node name="ExplosionTime" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_akjo0")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ugjkb")
 
 [connection signal="timeout" from="ExplosionCountdown" to="." method="_on_explosion_countdown_timeout"]
 [connection signal="timeout" from="ExplosionTime" to="." method="_on_explosion_time_timeout"]

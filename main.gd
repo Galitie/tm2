@@ -50,7 +50,8 @@ func debug_stuff():
 func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
-	
+
+
 func _physics_process(_delta: float) -> void:
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
@@ -90,6 +91,7 @@ func freeze_frame(monster: Monster) -> void:
 		await get_tree().create_timer(5.5).timeout
 		audio_player.playing = false
 		audio_player.volume_db = 0.0
+
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -149,12 +151,14 @@ func _process(_delta):
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 
+
 func count_death(monster: Monster):
 	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
 	if dead_monsters == player_count - 1 || dead_monsters == player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
+
 
 func set_upgrade_mode():
 	sudden_death_label.visible = false
@@ -196,7 +200,6 @@ func set_fight_mode():
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position
 
-# TODO: Sudden death animation should pause the game until it's finished
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
 	Globals.is_sudden_death_mode = true

@@ -180,7 +180,7 @@ func take_damage_from(enemy, override_damage: int = 0):
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
-		apply_hp(-damage * damage_received_mult)
+		apply_hp(-(damage * damage_received_mult))
 	$Damage.text = str(damage) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()

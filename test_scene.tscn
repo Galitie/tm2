@@ -35,21 +35,21 @@ centered = false
 [node name="Walls" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
-position = Vector2(577, 26)
+position = Vector2(577, 47)
 shape = SubResource("RectangleShape2D_vp4v2")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
-position = Vector2(577, 619)
+position = Vector2(577, 602)
 shape = SubResource("RectangleShape2D_vp4v2")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
-position = Vector2(26, 322)
+position = Vector2(43, 322)
 rotation = -1.57155
 scale = Vector2(0.560061, 1)
 shape = SubResource("RectangleShape2D_vp4v2")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
-position = Vector2(1123, 321)
+position = Vector2(1106, 321)
 rotation = -1.57155
 scale = Vector2(0.560061, 1)
 shape = SubResource("RectangleShape2D_vp4v2")

@@ -21,7 +21,6 @@ var camera_tracking: bool = false
 var camera_zoom_trauma: float = 0.0 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var dead_monsters : int
 var current_round : int
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
@@ -82,7 +81,7 @@ func freeze_frame(monster: Monster) -> void:
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
-	if dead_monsters == player_count - 1 || dead_monsters == player_count:
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
 		camera_tracking = false
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
@@ -153,9 +152,8 @@ func _process(_delta):
 
 
 func count_death(monster: Monster):
-	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
-	if dead_monsters == player_count - 1 || dead_monsters == player_count:
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
 
@@ -193,7 +191,6 @@ func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
 	sudden_death_timer.start()
-	dead_monsters = 0
 	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
@@ -217,11 +214,11 @@ func _on_sudden_death_timer_timeout():
 	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).finished
 	sudden_death_label.visible = false
 
-# TODO: Change dead_monsters to an array to replace current_knocked_out_monsters
-# Fix victory point shenanigans
+
+#TODO: Fix victory point shenanigans
 func _on_round_over_delay_timer_timeout():
 	for player in players:
-		if player.monster.current_hp > 0:
+		if player.monster.current_hp > 0 and player.monster not in current_knocked_out_monsters:
 			current_knocked_out_monsters.append(player.monster)
 			break
 	var victory_points_gained = 0
@@ -229,9 +226,8 @@ func _on_round_over_delay_timer_timeout():
 		monster.player.victory_points += victory_points_gained
 		victory_points_gained += 1
 	set_upgrade_mode()
-	for i: int in range(players.size()):
-		var debug_point_label: String = "%s (%s) : %d" % [players[i].name, monsters[i].mon_name, players[i].victory_points]
-		print(debug_point_label)
+	for player in players:
+		print(player.name, "(", player.monster.mon_name, ") : ", player.victory_points, " points")
 
 
 func _on_upgrade_over_delay_timer_timeout():

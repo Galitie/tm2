@@ -163,6 +163,7 @@ func set_upgrade_mode():
 	var rerolls_amount_counter = 0
 	for player in players:
 		var monster = player.get_node("Monster")
+		monster.move_name_upgrade()
 		var upgrade_pos = player.get_node("UpgradePos")
 		monster.target_point = upgrade_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
@@ -187,6 +188,7 @@ func set_fight_mode():
 	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
+		monster.move_name_fight()
 		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
 		monster.global_position = fight_pos.global_position

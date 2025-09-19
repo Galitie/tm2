@@ -7,10 +7,11 @@ Guiding lights:
 Features to make it playtest ready:
 	Oct 1st goals:
 		Customizing creature screen - color and name, if time, body randomizer?
+		End/Show winner + restart at the end of the game
 		More Accessories
 		1 more body type - redo the bat
 		Rotate correct body parts
-		End/Show winner + restart at the end of the game
+		
 		
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic?

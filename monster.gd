@@ -209,6 +209,15 @@ func generate_random_name():
 	$Name.text = (" ".join(name_parts))
 
 
+func move_name_upgrade():
+	pass
+
+
+func move_name_fight():
+	pass
+
+
+
 func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.set_deferred("disabled", !is_enabled)
 	body_collision.set_deferred("disabled", !is_enabled)

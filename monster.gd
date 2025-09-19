@@ -212,15 +212,17 @@ func generate_random_name():
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	var whole_name: String =  " ".join(name_parts)
 	$Name.text = whole_name
+	$NameUpgrade.text = whole_name
 	mon_name = whole_name
 
 func move_name_upgrade():
-	pass
+	$NameUpgrade.visible = true
+	$Name.visible = false
 
 
 func move_name_fight():
-	pass
-
+	$NameUpgrade.visible = false
+	$Name.visible = true
 
 
 func toggle_collisions(is_enabled: bool):

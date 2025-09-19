@@ -11,6 +11,7 @@ func Enter():
 	monster.get_node("HPBar").visible = true
 	monster.z_index = 1
 	Transitioned.emit("wander")
+	monster.name_label.show()
 
 # Don't remove these
 func animation_finished(anim_name: String) -> void:

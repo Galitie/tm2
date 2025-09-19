@@ -10,7 +10,6 @@ var at_target: bool = false
 func Enter():
 	got_up = false
 	monster.get_node("HPBar").visible = false
-	
 	monster.sent_flying = false
 	monster.rotation = 0.0
 	var viewport_size: Vector2i = get_viewport().size

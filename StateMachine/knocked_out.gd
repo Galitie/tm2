@@ -12,6 +12,7 @@ func Enter():
 	monster.z_index = -10
 	monster.get_node("HPBar").visible = false
 	Globals.game.count_death(monster)
+	monster.name_label.hide()
 	
 	if !Globals.is_sudden_death_mode:
 		monster.animation_player.play("faint")

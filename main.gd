@@ -63,14 +63,25 @@ func _physics_process(_delta: float) -> void:
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
-
-func _unfreeze() -> void:
-	camera_tracking = false
+	
+func _unpause() -> void:
 	get_tree().paused = false
+	
+func pause_game(length: float = 0.0) -> void:
+	get_tree().paused = true
+	if length > 0:
+		$PauseTimer.start(length)
+		
+func freeze_frame(monster: Monster) -> void:
+	Globals.game.camera.global_position = monster.global_position
+	Globals.game.camera.zoom = Vector2(2.0, 2.0)
+	Globals.game.pause_game(1.0)
+	
+	camera_tracking = false
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
-	if dead_monsters == player_count - 1:
+	if dead_monsters == player_count - 1 || dead_monsters == player_count:
 		camera_tracking = false
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
@@ -81,7 +92,7 @@ func _unfreeze() -> void:
 		audio_player.volume_db = 0.0
 
 func _ready():
-	$FreezeTimer.timeout.connect(_unfreeze)
+	$PauseTimer.timeout.connect(_unpause)
 	
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	sudden_death_label.visible = false;
@@ -123,7 +134,6 @@ func _ready():
 	else:
 		set_upgrade_mode()
 
-
 func _process(_delta):
 	if debug_mode:
 		debug_stuff()
@@ -142,7 +152,7 @@ func _process(_delta):
 func count_death(monster: Monster):
 	dead_monsters += 1
 	current_knocked_out_monsters.append(monster)
-	if dead_monsters == player_count - 1:
+	if dead_monsters == player_count - 1 || dead_monsters == player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
 
@@ -190,15 +200,20 @@ func set_fight_mode():
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
 	Globals.is_sudden_death_mode = true
+	
 	audio_player.stream = await load("uid://bnd7vmemesdbl")
 	audio_player.play()
+	
 	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", SUDDEN_DEATH_MAX_RADIUS, 0.8).set_trans(Tween.TRANS_EXPO)
 	get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.2, 1.2), 0.8).set_trans(Tween.TRANS_ELASTIC)
 	get_tree().create_tween().tween_property(sudden_death_label, "visible", true, 0.0).set_delay(0.4)
-	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(0.4)
-	get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(3.0)
-	get_tree().create_tween().tween_property(sudden_death_label, "visible", false, 0.0).set_delay(3.2)
+	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(0.4).finished
+	pause_game(1.0)
+	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).finished
+	sudden_death_label.visible = false
 
+# TODO: Change dead_monsters to an array to replace current_knocked_out_monsters
+# Fix victory point shenanigans
 func _on_round_over_delay_timer_timeout():
 	for player in players:
 		if player.monster.current_hp > 0:
@@ -209,8 +224,9 @@ func _on_round_over_delay_timer_timeout():
 		monster.player.victory_points += victory_points_gained
 		victory_points_gained += 1
 	set_upgrade_mode()
-	for player in players:
-		print(player.name, " : " ,player.victory_points)
+	for i: int in range(players.size()):
+		var debug_point_label: String = "%s (%s) : %d" % [players[i].name, monsters[i].mon_name, players[i].victory_points]
+		print(debug_point_label)
 
 
 func _on_upgrade_over_delay_timer_timeout():

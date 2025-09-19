@@ -111,7 +111,7 @@ func apply_hp(amount):
 	if current_hp >= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)
 
-
+# Hurt logic should be in take_damage_from, not this collision function
 func _on_hurtbox_area_entered(area):
 	var attacker: Node
 	attacked = false
@@ -140,8 +140,12 @@ func _on_hurtbox_area_entered(area):
 					attacker.apply_hp(3)
 			if thorns:
 				attacker.attacked = true
-				attacker.apply_hp(-1)
+				attacker.take_damage_from(self, 1)
 				attacker.state_machine.transition_state("hurt")
+				# Because of current logic, the attacker is knocked out first, so they lose
+				# the tie in sudden death
+				if Globals.is_sudden_death_mode:
+					attacker.send_flying(attacker)
 			state_machine.transition_state("hurt")
 		if area.is_in_group("Projectile") and area.owner.monster != self:
 			attacked = true
@@ -162,17 +166,17 @@ func send_flying(attacker: Node) -> void:
 	sent_flying = true
 	state_machine.transition_state("knockedout")
 	audio_player.play()
-	Globals.game.camera.global_position = global_position
-	Globals.game.camera.zoom = Vector2(2.0, 2.0)
+	
 	knockback = (global_position - attacker.global_position).normalized().x
-	get_tree().paused = true
+	Globals.game.freeze_frame(self)
 
-
-func take_damage_from(enemy):
+func take_damage_from(enemy, override_damage: int = 0):
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted else ""
 	var random_modifier : int = randi_range(0,3)
 	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
+	if override_damage:
+		damage = override_damage
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:
@@ -206,8 +210,9 @@ func generate_random_name():
 	name_parts.append(first_name)
 	if randi() % 4 == 0:
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
-	$Name.text = (" ".join(name_parts))
-
+	var whole_name: String =  " ".join(name_parts)
+	$Name.text = whole_name
+	mon_name = whole_name
 
 func toggle_collisions(is_enabled: bool):
 	hurtbox_collision.set_deferred("disabled", !is_enabled)

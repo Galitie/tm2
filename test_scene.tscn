@@ -134,11 +134,13 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 position = Vector2(575, 325)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="SuddenDeath" type="Sprite2D" parent="Camera2D/CanvasLayer"]
+process_mode = 3
 z_index = 98
 material = SubResource("ShaderMaterial_8pr8v")
 scale = Vector2(1153.78, 650)
@@ -146,6 +148,7 @@ texture = ExtResource("3_buypi")
 centered = false
 
 [node name="SuddenDeathLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
+process_mode = 3
 z_index = 100
 anchors_preset = 8
 anchor_left = 0.5
@@ -181,9 +184,8 @@ horizontal_alignment = 1
 process_mode = 3
 stream = ExtResource("10_vr1i5")
 
-[node name="FreezeTimer" type="Timer" parent="."]
+[node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2
-autostart = true
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]

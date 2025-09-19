@@ -14,9 +14,7 @@ var damage_dealt_mult: float = 1.0
 var thorns : bool = false
 
 var mon_name : String
-var main_color
 
-@export_range(-1, 1) var hue_shift : float
 @export var player : Player
 
 @onready var root = $root

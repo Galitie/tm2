@@ -3,6 +3,7 @@ class_name Player
 
 @export var monster : Monster
 var upgrade_panel : PlayerUpgradePanel
+var customize_panel : PlayerCustomizePanel
 var controller_port: int = -1
 
 var upgrade_points : int = 0

@@ -5,6 +5,7 @@ class_name Game
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
 @export var override_sudden_death_time : float
+@export var disable_customizer : bool
 
 @onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
 @onready var monsters: Array[Monster]
@@ -24,8 +25,9 @@ var camera_zoom_trauma: float = 0.0
 var current_round : int
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
-enum Modes {FIGHT, UPGRADE}
+enum Modes {FIGHT, UPGRADE, CUSTOMIZE}
 
+var ready_players : Array[Node] = []
 
 func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.FIGHT:
@@ -63,15 +65,18 @@ func _physics_process(_delta: float) -> void:
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
-	
+
+
 func _unpause() -> void:
 	get_tree().paused = false
-	
+
+
 func pause_game(length: float = 0.0) -> void:
 	get_tree().paused = true
 	if length > 0:
 		$PauseTimer.start(length)
-		
+
+
 func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
@@ -105,7 +110,9 @@ func _ready():
 		monsters.push_back(player.monster)
 		player.monster.state_machine.find_child("Pooping").connect("spawn_poop", spawn_poop)
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
-
+		player.customize_panel.connect("finished_customizing", _add_ready_player)
+		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
+		
 	if debug_mode:
 		Globals.game.debug_mode = true
 		for player in players:
@@ -113,6 +120,7 @@ func _ready():
 			if player.monster.pre_loaded_cards.size():
 				for pre_loaded_card in player.monster.pre_loaded_cards:
 					apply_card_resource_effects(pre_loaded_card, player)
+	
 	
 	for player_index in players.size():
 		var player = players[player_index]
@@ -130,10 +138,18 @@ func _ready():
 		card.connect("card_pressed", card_pressed)
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
+	
+	if disable_customizer:
+		$CustomizeMenu.hide()
+		$CustomizeMenu.disable()
+	else:
+		set_customize_mode()
+		
 	if start_in_fight_mode:
 		set_fight_mode()
-	else:
+	elif !start_in_fight_mode and disable_customizer:
 		set_upgrade_mode()
+
 
 func _process(_delta):
 	if debug_mode:
@@ -149,13 +165,38 @@ func _process(_delta):
 					alive_monsters += 1
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
-
+	if ready_players.size() == 4 and current_mode == Modes.CUSTOMIZE:
+		$CustomizeMenu.disable()
+		$CustomizeMenu.hide()
+		if start_in_fight_mode:
+			set_fight_mode()
+		else:
+			set_upgrade_mode()
+	if ready_players.size() == 1 and current_mode == Modes.CUSTOMIZE and debug_mode:
+		$CustomizeMenu.disable()
+		$CustomizeMenu.hide()
+		if start_in_fight_mode:
+			set_fight_mode()
+		else:
+			set_upgrade_mode()
 
 func count_death(monster: Monster):
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
+
+
+func set_customize_mode():
+	$CustomizeMenu.show()
+	sudden_death_label.visible = false
+	current_mode = Modes.CUSTOMIZE
+	for player in players:
+		var monster = player.get_node("Monster")
+		monster.move_name_upgrade()
+		var upgrade_pos = player.get_node("UpgradePos")
+		monster.target_point = upgrade_pos.global_position
+		monster.state_machine.transition_state("upgradestart")
 
 
 func set_upgrade_mode():
@@ -229,6 +270,7 @@ func _on_round_over_delay_timer_timeout():
 	for player in players:
 		print(player.name, "(", player.monster.mon_name, ") : ", player.victory_points, " points")
 	print("\n")
+
 
 func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()
@@ -390,3 +432,11 @@ func clean_up_screen():
 	var items = get_tree().get_nodes_in_group("CleanUp")
 	for item in items:
 		item.queue_free()
+
+
+func _add_ready_player(player):
+	ready_players.append(player)
+
+func _remove_ready_player(player):
+	var index = ready_players.find(player)
+	ready_players.remove_at(index)

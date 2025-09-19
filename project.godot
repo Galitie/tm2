@@ -37,6 +37,7 @@ Player=""
 Projectile=""
 Bomb=""
 CleanUp=""
+PlayerCustomizePanel=""
 
 [rendering]
 

@@ -103,7 +103,14 @@ func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 # TODO: Only supports one player per monster
 func GetMonsterPartsGroupName(monster: Monster) -> String:
 	return "monster%f_parts" % monster.player.controller_port
-	
+
+# TODO: Used right now for the placeholder customizer, needs work to be more flexible
+func RandomizeColor(monster: Monster):
+	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
+		var part_sprite = part.get_child(0).get_child(0)
+		if part_sprite is Sprite2D:
+			part_sprite.self_modulate = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
+
 # TODO: This doesn't take back parts into account since they're named [PART_back]
 func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 	var part_found: bool = false

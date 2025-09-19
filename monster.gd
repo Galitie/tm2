@@ -118,6 +118,7 @@ func _on_hurtbox_area_entered(area):
 	attacked = false
 	if area != hitbox:
 		var current_state = state_machine.current_state.name.to_lower()
+		# TODO: Monsters technically block attacks from their own summons
 		var area_that_can_damage : bool = area.is_in_group("Attack") or area.is_in_group("Projectile") or area.is_in_group("Bomb")
 		if current_state.contains("block") and area_that_can_damage:
 			attacker = area.get_parent().get_parent()
@@ -199,6 +200,7 @@ func hit_effect(crit: bool = false) -> void:
 func send_flying(attacker: Node) -> void:
 	sent_flying = true
 	state_machine.transition_state("knockedout")
+	audio_player.pitch_scale = 1.0
 	audio_player.stream = load("uid://dfjgpdho3lcvd")
 	audio_player.play()
 	

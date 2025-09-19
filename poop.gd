@@ -82,4 +82,6 @@ func shoot_projectile():
 
 
 func _on_lifetime_timeout():
+	var transparent: Color = Color(modulate.r, modulate.g, modulate.b, 0.0)
+	await get_tree().create_tween().tween_property(self, "modulate", transparent, 1.0).finished
 	queue_free()

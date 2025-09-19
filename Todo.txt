@@ -6,6 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Oct 1st goals:
+		Fix diagonal / chase issue (chase thinks it found it's target so gets stuck)
 		More Accessories
 		End/Show winner + restart at the end of the game
 		Fix color customization / randomization

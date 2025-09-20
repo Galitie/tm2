@@ -27,7 +27,7 @@ var camera_zoom_trauma: float = 0.0
 var current_round : int
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
-enum Modes {FIGHT, UPGRADE, CUSTOMIZE}
+enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 
@@ -48,6 +48,14 @@ func debug_stuff():
 				target_monster.state_machine.transition_state("knockedout")
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
+	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
+		$CustomizeMenu.disable()
+		$CustomizeMenu.hide()
+		if start_in_fight_mode:
+			set_fight_mode()
+		else:
+			set_upgrade_mode()
+		
 
 
 func _init():
@@ -185,6 +193,9 @@ func _process(_delta):
 			set_fight_mode()
 		else:
 			set_upgrade_mode()
+	#TODO: Make a real game end scene, placeholder for playtesting
+	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
+		get_tree().reload_current_scene()
 
 func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
@@ -217,7 +228,6 @@ func set_upgrade_mode():
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
 	current_mode = Modes.UPGRADE
-	check_if_game_over()
 	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
 	var rerolls_amount_counter = 0
@@ -240,6 +250,7 @@ func set_upgrade_mode():
 		rerolls_amount_counter += 1
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
+	check_if_game_over()
 
 
 func set_fight_mode():
@@ -400,19 +411,28 @@ func reroll_pressed(upgrade_panel):
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
 
-
+#TODO: Make a real game over scene, placeholder for playtesting
 func check_if_game_over():
 	if current_round >= total_rounds:
+		current_mode = Modes.GAME_END
+		$UpgradePanel.hide()
+		$WinnersLabel.show()
 		print("game over")
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
 			print("Winner:", winners[0].name)
+			for player in players:
+				if player not in winners:
+					player.get_child(0).hide()
 		else:
 			print("It's a tie between:")
 			for p in winners:
 				print("- ", p.name)
+			for player in players:
+				if player not in winners:
+					player.get_child(0).hide()
 
 
 func clear_knocked_out_monsters():

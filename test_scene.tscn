@@ -27,7 +27,6 @@ shader_parameter/Freq = 10.0
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
 override_sudden_death_time = 60.0
-disable_customizer = true
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
@@ -190,6 +189,17 @@ stream = ExtResource("10_vr1i5")
 
 [node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2
+
+[node name="WinnersLabel" type="Label" parent="."]
+visible = false
+offset_left = 254.0
+offset_top = 153.0
+offset_right = 899.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 50
+text = "WINNER(S)!
+(Press START to play again)"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]

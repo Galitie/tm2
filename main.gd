@@ -263,7 +263,8 @@ func set_fight_mode():
 		monster.move_name_fight()
 		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
-		monster.global_position = fight_pos.global_position
+		monster.target_point = fight_pos.global_position
+
 
 
 func _on_sudden_death_timer_timeout():

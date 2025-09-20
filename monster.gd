@@ -142,7 +142,7 @@ func _on_hurtbox_area_entered(area):
 					crit = take_damage_from(attacker)
 				"bitelifesteal":
 					crit = take_damage_from(attacker)
-					attacker.apply_hp(3)
+					attacker.apply_hp(5)
 				"basiccharge":
 					crit = take_damage_from(attacker)
 			if thorns:
@@ -229,11 +229,6 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 func check_low_hp():
 	if current_hp <= (max_hp / 3.0):
 		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)
-
-
-func update_slot(current_slot_id : String, replacement_slot_id : String):
-	state_machine.state_choices.erase(current_slot_id)
-	state_machine.state_choices.append(replacement_slot_id)
 
 
 func generate_random_name():

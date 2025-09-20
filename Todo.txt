@@ -28,9 +28,8 @@ Todo:
 	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus - sound, etc.
 	Variable player amount
-	Menu for naming creatures / creature colorss
 	Backgrounds
-	Save, play games to unlock accessories
+	Save, play games to get achievements to unlock accessories
 	Achievements, like get 0 points, total kills > 100 etc.
 
 

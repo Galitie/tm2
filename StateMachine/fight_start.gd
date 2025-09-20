@@ -10,7 +10,11 @@ func Enter():
 	monster.toggle_collisions(true)
 	monster.get_node("HPBar").visible = true
 	monster.z_index = 1
-	Transitioned.emit("wander")
+	var random = [1,2].pick_random()
+	if random == 1:
+		Transitioned.emit("chase")
+	else:
+		Transitioned.emit("wander")
 	monster.name_label.show()
 
 # Don't remove these

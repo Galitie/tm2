@@ -42,7 +42,7 @@ func _physics_process(delta):
 		current_state.Physics_Update(delta)
 
 
-# connected to "ChooseNewState" signal in state.gd
+# connected to "ChooseNewState" signal in state.gd, transitions to a state collection
 func choose_new_state(specific_state : String = ""):
 	if specific_state == "":
 		var new_state : String = keys[rng.rand_weighted(weights)] #randmly choose their next state collection

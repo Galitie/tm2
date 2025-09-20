@@ -9,7 +9,6 @@ Features to make it playtest ready:
 		Fix diagonal / chase issue (chase thinks it found it's target so gets stuck) (Galit)
 		More Accessories (Raam)
 		Poop shooting sprite animation (Raam)
-		End/Show winner + restart at the end of the game (Galit)
 		Fix color customization / randomization functionality (Raam)
 		
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon

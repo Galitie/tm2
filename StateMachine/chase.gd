@@ -6,9 +6,14 @@ var target_mon: CharacterBody2D
 var chase_time: float
 var move_speed_adjust: int = 10
 
-var avoidance_radius: float = 96.0     
-var avoidance_strength: float = 1.0     
-var max_accel: float = 5000.0           
+var avoidance_radius: float = 96.0
+var avoidance_strength: float = 2.0
+var max_accel: float = 5000.0
+
+# --- Side-chase settings ---
+var side_offset: float = 72.0     # how far to the side of the target to aim
+var side_sign: int = 1            # +1 = target's right, -1 = target's left
+var lead_time: float = 0.15       # small predictive lead, optional
 
 
 func randomize_chase():
@@ -26,15 +31,36 @@ func Exit():
 
 func Physics_Update(delta: float) -> void:
 	if target_mon:
-		var to_target = target_mon.global_position - monster.global_position
-		var dist = to_target.length()
+		# Predict target slightly ahead
+		var predicted = target_mon.global_position + target_mon.velocity * lead_time
+
+		# Forward vector
+		var forward: Vector2
+		if target_mon.velocity.length() > 1.0:
+			forward = target_mon.velocity.normalized()
+		else:
+			var to_target_now = predicted - monster.global_position
+			if to_target_now.length() > 0.0:
+				forward = to_target_now.normalized()
+			else:
+				forward = Vector2(1, 0)
+
+		# Right vector (perpendicular)
+		var right_vec = forward.orthogonal()
+
+		# Side goal position
+		var side_goal = predicted + right_vec * side_offset * side_sign
+
+		var to_goal = side_goal - monster.global_position
+		var dist = to_goal.length()
 		chase_time -= delta
-		#TODO: Make distance based on mon's hitbox radius or collision?
+
 		if dist > 175.0 and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
-			if to_target.length() > 0.0:
-				desired_dir = to_target.normalized()
+			if dist > 0.0:
+				desired_dir = to_goal.normalized()
 
+			# Avoidance contribution
 			var avoidance = get_avoidance_vector()
 			if avoidance.length() > 0.0001:
 				desired_dir = (desired_dir + avoidance).normalized()
@@ -47,19 +73,26 @@ func Physics_Update(delta: float) -> void:
 			monster.velocity = monster.velocity + steering * delta
 		else:
 			monster.velocity = Vector2()
-			var rand = [1,2].pick_random()
+			var rand = [1, 2].pick_random()
 			if rand == 1:
 				ChooseNewState.emit("basic_attack")
 				return
-			ChooseNewState.emit("charge_attack")
+			else:
+				ChooseNewState.emit("charge_attack")
 
 
 func select_target():
 	var targetable_monsters: Array = get_targetable_monsters()
-	if targetable_monsters.size():
+	if targetable_monsters.size() > 0:
 		target_mon = targetable_monsters.pick_random()
 		monster.animation_player.play("walk", -1.0, 1.5)
 		monster.move_speed += move_speed_adjust
+
+		# Pick left or right side once per target
+		if randf() < 0.5:
+			side_sign = -1
+		else:
+			side_sign = 1
 	else:
 		ChooseNewState.emit()
 
@@ -79,14 +112,12 @@ func get_avoidance_vector() -> Vector2:
 	var neighbors = get_neighbor_monsters()
 
 	for other in neighbors:
-		var offset = monster.global_position - other.global_position  # push away from other
+		var offset = monster.global_position - other.global_position
 		var d = offset.length()
 		if d > 0.0 and d < avoidance_radius:
-			# Weight falls off linearly with distance; stronger when closer
 			var weight = (1.0 - (d / avoidance_radius)) * avoidance_strength
 			push_sum = push_sum + offset.normalized() * weight
 
-	# Normalize to keep it as a direction contribution
 	if push_sum.length() > 0.0001:
 		return push_sum.normalized()
 	return Vector2()
@@ -101,6 +132,7 @@ func get_neighbor_monsters() -> Array[CharacterBody2D]:
 			if d < avoidance_radius:
 				neighbors.append(other)
 	return neighbors
+
 
 # Don't remove these
 func animation_finished(anim_name: String) -> void:

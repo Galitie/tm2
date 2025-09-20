@@ -19,8 +19,9 @@ func animation_finished(anim_name: String):
 		if !done_charging:
 			monster.animation_player.play("charge_idle")
 		else:
-			# Needs to be changed to charge attack eventually
-			Transitioned.emit(monster.state_machine.state_choices["basic_attack"].pick_random())
+			# Needs to be changed to charge attack animation eventually, maybe hits a wider area?
+			monster.animation_player.play("basic_attack")
+			monster.velocity = Vector2.ZERO
 	elif anim_name == "charge_idle":
 		charge_cycles += 1
 		if charge_cycles >= cycle_threshold:
@@ -28,3 +29,5 @@ func animation_finished(anim_name: String):
 			done_charging = true
 		else:
 			monster.animation_player.play("charge_idle")
+	if anim_name == "basic_attack" and done_charging:
+		ChooseNewState.emit()

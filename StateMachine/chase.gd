@@ -31,10 +31,7 @@ func Exit():
 
 func Physics_Update(delta: float) -> void:
 	if target_mon:
-		# Predict target slightly ahead
 		var predicted = target_mon.global_position + target_mon.velocity * lead_time
-
-		# Forward vector
 		var forward: Vector2
 		if target_mon.velocity.length() > 1.0:
 			forward = target_mon.velocity.normalized()
@@ -45,16 +42,13 @@ func Physics_Update(delta: float) -> void:
 			else:
 				forward = Vector2(1, 0)
 
-		# Right vector (perpendicular)
 		var right_vec = forward.orthogonal()
-
-		# Side goal position
 		var side_goal = predicted + right_vec * side_offset * side_sign
 
 		var to_goal = side_goal - monster.global_position
 		var dist = to_goal.length()
 		chase_time -= delta
-
+		#TODO: base this off of the target's collision radius?
 		if dist > 175.0 and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
 			if dist > 0.0:
@@ -88,7 +82,6 @@ func select_target():
 		monster.animation_player.play("walk", -1.0, 1.5)
 		monster.move_speed += move_speed_adjust
 
-		# Pick left or right side once per target
 		if randf() < 0.5:
 			side_sign = -1
 		else:

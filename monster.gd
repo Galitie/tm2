@@ -51,11 +51,6 @@ var target_point : Vector2
 var base_color: Color
 var secondary_color: Color
 
-# attacks have stats: speed, mp amount, base damage, size, distance, pierce
-
-# attacks can be short range, long range or 
-# specials with a charge up
-# give them preferences? melee, range, etc.
 
 func _ready():
 	add_to_group("DepthEntity")
@@ -148,6 +143,8 @@ func _on_hurtbox_area_entered(area):
 				"bitelifesteal":
 					crit = take_damage_from(attacker)
 					attacker.apply_hp(3)
+				"basiccharge":
+					crit = take_damage_from(attacker)
 			if thorns:
 				thorn_effect()
 				attacker.attacked = true
@@ -175,7 +172,8 @@ func _on_hurtbox_area_entered(area):
 
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
-			
+
+
 func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.stream = load(uid)
 	audio_player.pitch_scale = randf_range(0.8, 1.2)
@@ -183,12 +181,14 @@ func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.play()
 	await audio_player.finished
 	audio_player.pitch_scale = 1.0
-	
+
+
 func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	root.modulate = Color("6bff7d")
 	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
-	
+
+
 func hit_effect(crit: bool = false) -> void:
 	if crit:
 		play_generic_sound("uid://dfjgpdho3lcvd", -5.0)
@@ -196,6 +196,7 @@ func hit_effect(crit: bool = false) -> void:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
 	root.modulate = Color("ff0e1b")
 	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.3).set_trans(Tween.TRANS_BOUNCE)
+
 
 func send_flying(attacker: Node) -> void:
 	sent_flying = true
@@ -206,6 +207,7 @@ func send_flying(attacker: Node) -> void:
 	
 	knockback = (global_position - attacker.global_position).normalized().x
 	Globals.game.freeze_frame(self)
+
 
 func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) -> bool:
 	var critted = roll_crit()
@@ -252,6 +254,7 @@ func generate_random_name():
 	$Name.text = whole_name
 	$NameUpgrade.text = whole_name
 	mon_name = whole_name
+
 
 func move_name_upgrade():
 	$NameUpgrade.visible = true

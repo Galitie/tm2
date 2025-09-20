@@ -6,7 +6,6 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Oct 1st goals: (Set to fight mode / remove debug mode)
-		Fix diagonal / chase issue (chase thinks it found it's target so gets stuck) (Galit)
 		More Accessories (Raam)
 		Poop shooting sprite animation (Raam)
 		Fix color customization / randomization functionality (Raam)

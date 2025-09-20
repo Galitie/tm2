@@ -414,6 +414,10 @@ func reroll_pressed(upgrade_panel):
 #TODO: Make a real game over scene, placeholder for playtesting
 func check_if_game_over():
 	if current_round >= total_rounds:
+		for player in players:
+			var monster = player.get_node("Monster")
+			var customize_pos = player.get_node("CustomizePos")
+			monster.target_point = customize_pos.global_position
 		current_mode = Modes.GAME_END
 		$UpgradePanel.hide()
 		$WinnersLabel.show()

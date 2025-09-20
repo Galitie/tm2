@@ -25,8 +25,8 @@ func _physics_process(_delta):
 			new_stylebox_normal.border_color = Color.SKY_BLUE
 			new_stylebox_normal.bg_color = Color.WEB_GRAY
 			not_finished_customizing.emit(player)
-			done_text.text = "DONE"
-			done_description.text = "I'm finished customizing!!"
+			done_text.text = "READY UP!"
+			done_description.text = "I'm finished customizing"
 			disabled = false
 			current_user_position_in_button_array = 0
 			button = button_array[current_user_position_in_button_array]

@@ -213,8 +213,8 @@ func set_customize_mode():
 	for player in players:
 		var monster = player.get_node("Monster")
 		monster.move_name_upgrade()
-		var upgrade_pos = player.get_node("UpgradePos")
-		monster.target_point = upgrade_pos.global_position
+		var customize_pos = player.get_node("CustomizePos")
+		monster.target_point = customize_pos.global_position
 		monster.state_machine.transition_state("upgradestart")
 
 

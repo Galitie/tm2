@@ -64,6 +64,10 @@ monster = NodePath("Monster")
 position = Vector2(262, 192)
 player = NodePath("..")
 
+[node name="CustomizePos" type="Node2D" parent="Player1"]
+position = Vector2(149, 400)
+metadata/_edit_lock_ = true
+
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 575)
 metadata/_edit_lock_ = true
@@ -79,6 +83,10 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 player = NodePath("..")
+
+[node name="CustomizePos" type="Node2D" parent="Player2"]
+position = Vector2(436, 400)
+metadata/_edit_lock_ = true
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 575)
@@ -100,6 +108,10 @@ player = NodePath("..")
 position = Vector2(720, 575)
 metadata/_edit_lock_ = true
 
+[node name="CustomizePos" type="Node2D" parent="Player3"]
+position = Vector2(720, 400)
+metadata/_edit_lock_ = true
+
 [node name="FightPos" type="Node2D" parent="Player3"]
 position = Vector2(240, 427)
 metadata/_edit_lock_ = true
@@ -114,6 +126,10 @@ player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
 position = Vector2(1000, 575)
+metadata/_edit_lock_ = true
+
+[node name="CustomizePos" type="Node2D" parent="Player4"]
+position = Vector2(1000, 400)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player4"]

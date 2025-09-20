@@ -22,6 +22,8 @@ func _physics_process(_delta):
 	var button = button_array[current_user_position_in_button_array]
 	if disabled:
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B):
+			new_stylebox_normal.border_color = Color.SKY_BLUE
+			new_stylebox_normal.bg_color = Color.WEB_GRAY
 			not_finished_customizing.emit(player)
 			done_text.text = "DONE"
 			done_description.text = "I'm finished customizing!!"
@@ -61,7 +63,8 @@ func create_stylebox():
 	new_stylebox_normal.border_width_left = 5
 	new_stylebox_normal.border_width_right = 5
 	new_stylebox_normal.border_color = Color.SKY_BLUE
-
+	
+	
 
 func _on_button_pressed(button_index):
 	match button_index:
@@ -70,6 +73,9 @@ func _on_button_pressed(button_index):
 		1:
 			player.monster.generate_random_name()
 		2:
+			disabled = true
+			new_stylebox_normal.border_color = Color.GREEN
+			new_stylebox_normal.bg_color = Color.GREEN
 			finished_customizing.emit(player)
 			done_text.text = "Please Wait..."
 			done_description.text = "Press 'B' to go back to customizing"

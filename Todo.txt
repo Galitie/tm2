@@ -6,13 +6,14 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Oct 1st goals: (Set to fight mode / remove debug mode)
+		More Cards (Galit)
 		More Accessories (Raam)
 		Poop shooting sprite animation (Raam)
 		Fix color customization / randomization functionality (Raam)
 		
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
-	Charge attack need to do bigger attacks -> should these be more dramatic?
-	Show winner at end of round - make them dance
+	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
+	Show winner at end of round - make them dance (Raam)
 	Log that prints the cards chosen by players, dictionary
 
 

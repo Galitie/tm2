@@ -80,7 +80,9 @@ func shoot_projectile():
 	projectile.position = position + Vector2(17 * projectile.direction.x, -5)
 	projectile.z_index = self.z_index
 	Globals.game.add_child(projectile)
-
+	$AnimationPlayer.play("shoot")
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play("idle")
 
 func _on_lifetime_timeout():
 	await get_tree().create_tween().tween_property(sprite, "scale", Vector2(1.0, 0.0), 1.0).finished

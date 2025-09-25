@@ -106,7 +106,7 @@ func apply_hp(amount):
 		hp_bar.add_theme_stylebox_override("fill", max_health_fill_style)
 
 # BUG: Hurt state looping sometimes with 0 damage
-# Hurt logic should be in take_damage_from, not this collision function
+# TODO: Hurt logic should be in take_damage_from, not this collision function
 func _on_hurtbox_area_entered(area):
 	var crit: bool = false
 	var attacker: Node

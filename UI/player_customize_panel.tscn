@@ -33,7 +33,6 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("2_j53iu")
 
 [node name="CardInfo" type="Button" parent="VBoxContainer/Custom1"]
@@ -80,7 +79,6 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("2_j53iu")
 
 [node name="CardInfo" type="Button" parent="VBoxContainer/Custom2"]
@@ -121,11 +119,14 @@ theme_override_font_sizes/font_size = 14
 text = "Generate a new name"
 autowrap_mode = 3
 
+[node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="Done" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource("2_j53iu")
 
 [node name="CardInfo" type="Button" parent="VBoxContainer/Done"]
@@ -157,18 +158,14 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("2_j53iu")
 theme_override_font_sizes/font_size = 22
-text = "DONE"
+text = "READY UP!"
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "I'm finished customizing!"
+text = "I'm finished customizing"
 autowrap_mode = 3
-
-[node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/Custom1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="VBoxContainer/Custom2/CardInfo" to="." method="_on_button_pressed" binds= [0]]

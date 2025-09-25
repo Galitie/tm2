@@ -26,8 +26,8 @@ shader_parameter/Freq = 10.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
+total_rounds = 2
 override_sudden_death_time = 60.0
-disable_customizer = true
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -99
@@ -64,6 +64,10 @@ monster = NodePath("Monster")
 position = Vector2(262, 192)
 player = NodePath("..")
 
+[node name="CustomizePos" type="Node2D" parent="Player1"]
+position = Vector2(149, 400)
+metadata/_edit_lock_ = true
+
 [node name="UpgradePos" type="Node2D" parent="Player1"]
 position = Vector2(149, 575)
 metadata/_edit_lock_ = true
@@ -79,6 +83,10 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 player = NodePath("..")
+
+[node name="CustomizePos" type="Node2D" parent="Player2"]
+position = Vector2(436, 400)
+metadata/_edit_lock_ = true
 
 [node name="UpgradePos" type="Node2D" parent="Player2"]
 position = Vector2(436, 575)
@@ -100,6 +108,10 @@ player = NodePath("..")
 position = Vector2(720, 575)
 metadata/_edit_lock_ = true
 
+[node name="CustomizePos" type="Node2D" parent="Player3"]
+position = Vector2(720, 400)
+metadata/_edit_lock_ = true
+
 [node name="FightPos" type="Node2D" parent="Player3"]
 position = Vector2(240, 427)
 metadata/_edit_lock_ = true
@@ -114,6 +126,10 @@ player = NodePath("..")
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
 position = Vector2(1000, 575)
+metadata/_edit_lock_ = true
+
+[node name="CustomizePos" type="Node2D" parent="Player4"]
+position = Vector2(1000, 400)
 metadata/_edit_lock_ = true
 
 [node name="FightPos" type="Node2D" parent="Player4"]
@@ -190,6 +206,17 @@ stream = ExtResource("10_vr1i5")
 
 [node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2
+
+[node name="WinnersLabel" type="Label" parent="."]
+visible = false
+offset_left = 254.0
+offset_top = 153.0
+offset_right = 899.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 50
+text = "WINNER(S)!
+(Press START to play again)"
+horizontal_alignment = 1
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]

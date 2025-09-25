@@ -51,11 +51,6 @@ var target_point : Vector2
 var base_color: Color
 var secondary_color: Color
 
-# attacks have stats: speed, mp amount, base damage, size, distance, pierce
-
-# attacks can be short range, long range or 
-# specials with a charge up
-# give them preferences? melee, range, etc.
 
 func _ready():
 	add_to_group("DepthEntity")
@@ -147,7 +142,9 @@ func _on_hurtbox_area_entered(area):
 					crit = take_damage_from(attacker)
 				"bitelifesteal":
 					crit = take_damage_from(attacker)
-					attacker.apply_hp(3)
+					attacker.apply_hp(5)
+				"basiccharge":
+					crit = take_damage_from(attacker)
 			if thorns:
 				thorn_effect()
 				attacker.attacked = true
@@ -175,7 +172,8 @@ func _on_hurtbox_area_entered(area):
 
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
-			
+
+
 func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.stream = load(uid)
 	audio_player.pitch_scale = randf_range(0.8, 1.2)
@@ -183,12 +181,14 @@ func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.play()
 	await audio_player.finished
 	audio_player.pitch_scale = 1.0
-	
+
+
 func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	root.modulate = Color("6bff7d")
 	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
-	
+
+
 func hit_effect(crit: bool = false) -> void:
 	if crit:
 		play_generic_sound("uid://dfjgpdho3lcvd", -5.0)
@@ -196,6 +196,7 @@ func hit_effect(crit: bool = false) -> void:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
 	root.modulate = Color("ff0e1b")
 	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.3).set_trans(Tween.TRANS_BOUNCE)
+
 
 func send_flying(attacker: Node) -> void:
 	sent_flying = true
@@ -206,6 +207,7 @@ func send_flying(attacker: Node) -> void:
 	
 	knockback = (global_position - attacker.global_position).normalized().x
 	Globals.game.freeze_frame(self)
+
 
 func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) -> bool:
 	var critted = roll_crit()
@@ -229,17 +231,12 @@ func check_low_hp():
 		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)
 
 
-func update_slot(current_slot_id : String, replacement_slot_id : String):
-	state_machine.state_choices.erase(current_slot_id)
-	state_machine.state_choices.append(replacement_slot_id)
-
-
 func generate_random_name():
 	var name_parts = []
-	var title_start_list = ["Sir", "Madam", "Lord", "My Lady", "Baron", "Baroness", "Count", "Countess", "Duke", "Princess", "Duchess", "Emperor", "Empress", "King", "Queen", "Prince", "Dark Lord", "Archduke", "High Priest", "Commander", "Captain", "Major", "General", "Colonel", "Admiral", "Professor", "Dr.", "Reverend", "The Honorable", "Your Grace", "Warden", "Inquisitor", "Chancellor", "Vizier", "Grandmaster", "Sovereign", "Archmage", "Mystic", "The Unyielding", "Lil'", "The Gentle", "The Great", "Super", "O'", "Dear", "Darling" ]
-	var first_name_prefixes = ["Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub", "Batty", "Bobo", "Piggy", "Shmeckle","Lily", "Dale", "Egg", "Humpy", "Mac", "Fitz", "Von", "Van", "Pickle", "Baby", "Sabun"]
-	var last_name_suffixes = ["wump", "humps" , "wuff", "kins", "poo", "buns", "muff", "wubby", "wuzzy", "boo", "bean", "puff", "snug", "wiggles", "socks", "nugget", "bop", "tush", "sniff", "chub", "nubs", "flop", "snick", "pookie", "bloop", "giggles", "lumps", "floops", "tickles", "munch", "lolly", "hug", "nuzzle", "tots", "zoo", "binky", "sweetie", "nib", "toes", "twix", "peeps", "bubbles", "piddles", "gushs", "wubs", "sprig", "doodles", "noms", "bits", "squeaks", "mon", "nips", "butts", "cheeks", "frog", "shmoops", "shrimps", "prickles", "ween", "burt", "smeeks", "licky", "wax", "pops", "nops", "tits", "shnicky", "hots", "shits", "dicks", "poopsy", "poops"]
-	var end_name_suffixes = ["Jr.", "Sr.", "II", "III", "Esq.", "PhD", "The Undying", "The Maw", "The Forsaken", "The Cute", "The Unbearable", "The Cruel", "The Worn", "The Loved", "The Joyful", "The Kind", "The Stinky", "The Opulent", "The Grim", "The Cursed", "The Faded", "The Burdened", "The Adorable", "The Weird", "The Beefy", "The Elderly", "The Bloodthirsty", "The Sexy", "The Horny", "The Terrible", "The Hideous", "The Vile", "The Cutie", "The Beefcake", "The Hunk", "The Twinkly", "The Generous", "The Gulliable", "The Handsome", "The Shitty", "The Dark", "of Fuckshire", "of Yore", "of Legend", "The Wicked", "The Fabulous", "The Baby", "The Ghastly", "The Timid", "The Hunk", "The Poopy", "The Godly", "The Shafted"]
+	var title_start_list = ["Sir", "Madam", "Lord", "My Lady", "Baron", "Baroness", "Count", "Countess", "Duke", "Princess", "Duchess", "Emperor", "Empress", "King", "Queen", "Prince", "Dark Lord", "Archduke", "High Priest", "Commander", "Captain", "Major", "General", "Colonel", "Admiral", "Professor", "Dr.", "Reverend", "The Honorable", "Your Grace", "Warden", "Inquisitor", "Chancellor", "Vizier", "Grandmaster", "Sovereign", "Archmage", "Mystic", "The Unyielding", "Lil'", "The Gentle", "The Great", "Super", "O'", "Dear", "Darling", "Mega", "Champion", "Mr.", "Miss", "Dame", "Overlord", "Warlord", "Sheriff"]
+	var first_name_prefixes = ["Scooby","Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub", "Batty", "Bobo", "Piggy", "Shmeckle","Lily", "Dale", "Egg", "Humpy", "Mac", "Fitz", "Von", "Van", "Pickle", "Baby", "Sabun", "Goober", "Gob", "Robo", "Niblet", "Bongo", "Noodle"]
+	var last_name_suffixes = ["roo","wump", "humps" , "wuff", "kins", "poo", "buns", "muff", "wubby", "wuzzy", "boo", "bean", "puff", "snug", "wiggles", "socks", "nugget", "bop", "tush", "sniff", "chub", "nubs", "flop", "snick", "pookie", "bloop", "giggles", "lumps", "floops", "tickles", "munch", "lolly", "hug", "nuzzle", "tots", "zoo", "binky", "sweetie", "nib", "toes", "twix", "peeps", "bubbles", "piddles", "gushs", "wubs", "sprig", "doodles", "noms", "bits", "squeaks", "mon", "nips", "butts", "cheeks", "frog", "shmoops", "shrimps", "prickles", "ween", "burt", "smeeks", "licky", "wax", "pops", "nops", "tits", "shnicky", "hots", "shits", "dicks", "poopsy", "poops", "pug", "pips", "legs", "vicky", "goobs", "goober"]
+	var end_name_suffixes = ["Jr.", "Sr.", "II", "III", "Esq.", "PhD", "The Undying", "The Maw", "The Forsaken", "The Cute", "The Unbearable", "The Cruel", "The Worn", "The Loved", "The Joyful", "The Kind", "The Stinky", "The Opulent", "The Grim", "The Cursed", "The Faded", "The Burdened", "The Adorable", "The Weird", "The Beefy", "The Elderly", "The Bloodthirsty", "The Sexy", "The Horny", "The Terrible", "The Hideous", "The Vile", "The Cutie", "The Beefcake", "The Hunk", "The Twinkly", "The Generous", "The Gulliable", "The Handsome", "The Shitty", "The Dark", "of Fuckshire", "of Yore", "of Legend", "The Wicked", "The Fabulous", "The Baby", "The Ghastly", "The Timid", "The Hunk", "The Poopy", "The Godly", "The Shafted", "The Treasure", "V", "MD", "The Mighty", "of Chaos", "of Shadows", "The Cringe"]
 	if randi() % 4 == 0:
 		name_parts.append(title_start_list[randi() % title_start_list.size()])
 	var first_name = first_name_prefixes[randi() % first_name_prefixes.size()]
@@ -252,6 +249,7 @@ func generate_random_name():
 	$Name.text = whole_name
 	$NameUpgrade.text = whole_name
 	mon_name = whole_name
+
 
 func move_name_upgrade():
 	$NameUpgrade.visible = true

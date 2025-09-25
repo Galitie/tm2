@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 2
+var max_hp : int = 3
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
@@ -221,7 +221,7 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted && !no_crit else ""
 	var random_modifier : int = randi_range(0,3)
-	var damage
+	var damage : int
 	if override_damage:
 		damage = override_damage
 	else:

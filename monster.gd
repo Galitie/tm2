@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 10
+var max_hp : int = 2
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
@@ -169,7 +169,15 @@ func _on_hurtbox_area_entered(area):
 			take_damage_from(attacker, true)
 			state_machine.transition_state("hurt")
 			hit_effect()
-
+		#TODO:(Raam, probably just treat this as an attack?)
+		if area.is_in_group("TEMP_EXPLOSION"):
+			attacked = true
+			attacker = area.owner
+			print("attacker: ", attacker )
+			take_damage_from(attacker, false, randi_range(1,20))
+			state_machine.transition_state("hurt")
+			hit_effect()
+		
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
 
@@ -213,9 +221,11 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted && !no_crit else ""
 	var random_modifier : int = randi_range(0,3)
-	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
+	var damage
 	if override_damage:
 		damage = override_damage
+	else:
+		damage = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:

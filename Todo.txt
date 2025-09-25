@@ -50,7 +50,6 @@ Card ideas:
 	Teleport
 	Chain lightning
 	Ghost twin, after death summon a ghost version of you that fights
-	Exploding on death
 	Crazy damage, only one hp
 	Moves faster every 5 seconds of a round
 	First hit is reflected back to the aggresor

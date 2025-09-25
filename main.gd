@@ -351,6 +351,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.state_machine.weights[other_index] += .25
 			"thorns":
 				player.monster.thorns = true
+			"death_explode":
+				player.death_explode = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

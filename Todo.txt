@@ -6,6 +6,8 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Oct 1st goals: (Set to fight mode / remove debug mode)
+		Part icons need to be 50x50 size
+		Optional to take accessory or not
 		More Cards (Galit)
 		More Accessories (Raam)
 		Poop shooting sprite animation (Raam)

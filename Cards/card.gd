@@ -60,7 +60,9 @@ func choose_card_resource(card_resource):
 		var panel = PanelContainer.new()
 		var button = Button.new()
 		# attach signal _on_button_pressed ?
-		button.icon = accessory.texture
+		var resized_acc : Vector2 = accessory.texture.size
+		resized_acc = Vector2(50,50)
+		button.icon = resized_acc
 		panel.add_child(button)
 		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
 		accessories.append(panel)

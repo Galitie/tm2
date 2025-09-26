@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://2dwrrigu8sux"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_sef8m"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_rdoa5"]
 
 [resource]
 script = ExtResource("2_rdoa5")
 card_name = "BOMBER"
-description = "Sometimes POOPS POOP BOMBS. POOP BOMBS DMG everyone including SELF."
+description = "Chance of POOPING BOMBS. BOMBS DMG everyone including SELF."
 Type = "other"
 state_id = "bombing"
 unique = true
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_sef8m")]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

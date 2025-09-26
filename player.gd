@@ -13,7 +13,9 @@ var bonus_rerolls: int = 0
 var victory_points :int = 0
 
 var poop_summons : bool = false
-var more_poops :bool = false
-var larger_poops:bool = false
+var more_poops : bool = false
+var larger_poops : bool = false
+var death_explode : bool = false
+var matrix : bool = false
 
 var caltrops: bool = false

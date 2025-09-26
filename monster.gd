@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Monster
 
-var max_hp : int = 10
+var max_hp : int = 3
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
@@ -26,11 +26,10 @@ var mon_name : String
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player : AnimationPlayer = $root/anim_player
-@onready var monster_container : CanvasGroup = $root
 @onready var animation_player_damage = $AnimationPlayer_Damage
 
 @onready var poop_checker = $root/PoopChecker
-@onready var body_collision = $body
+@onready var body_collision = $body_collision
 
 @onready var audio_player = $AudioStreamPlayer
 
@@ -77,13 +76,14 @@ func SetCollisionRefs() -> void:
 
 func _physics_process(_delta):
 	move_and_slide()
+	var s: Vector2 = root.scale
 	if velocity.length() > 0 and velocity.x > 0:
-		monster_container.scale = Vector2(1,1)
+		s.x = abs(s.x)
 		facing = "right"
 	if velocity.length() > 0 and velocity.x < 0:
-		monster_container.scale = Vector2(-1,1)
+		s.x = -abs(s.x) 
 		facing = "left"
-		
+	root.scale = s
 	var line_thickness: float = 4.0 * Globals.game.camera.zoom.x
 	root.material.set_shader_parameter("line_thickness", line_thickness)
 
@@ -158,18 +158,39 @@ func _on_hurtbox_area_entered(area):
 				hit_effect(crit)
 			state_machine.transition_state("hurt")
 		if area.is_in_group("Projectile") and area.owner.monster != self:
-			attacked = true
 			attacker = area.owner.emitter
-			take_damage_from(attacker, true)
-			state_machine.transition_state("hurt")
-			hit_effect()
+			if player.matrix:
+				var rand = [1,2].pick_random()
+				if rand == 1:
+					take_damage_from(attacker, true)
+					attacked = true
+					state_machine.transition_state("hurt")
+					hit_effect()
+				else:
+					play_generic_sound("uid://cf8aw1xy3pg34")
+					root.modulate = Color("3467ff")
+					get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+					return
+			else:
+				take_damage_from(attacker, true)
+				attacked = true
+				state_machine.transition_state("hurt")
+				hit_effect()
 		if area.is_in_group("Bomb"):
 			attacked = true
 			attacker = area.owner
 			take_damage_from(attacker, true)
 			state_machine.transition_state("hurt")
 			hit_effect()
-
+		#TODO:(Raam, probably just treat this as an attack?)
+		if area.is_in_group("TEMP_EXPLOSION"):
+			attacked = true
+			attacker = area.owner
+			print("attacker: ", attacker )
+			take_damage_from(attacker, false, randi_range(1,20))
+			state_machine.transition_state("hurt")
+			hit_effect()
+		
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
 
@@ -213,9 +234,11 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 	var critted = roll_crit()
 	var crit_text = " CRIT" if critted && !no_crit else ""
 	var random_modifier : int = randi_range(0,3)
-	var damage : int = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
+	var damage : int
 	if override_damage:
 		damage = override_damage
+	else:
+		damage = round(enemy.base_damage * (enemy.crit_multiplier if critted else 1.0) * enemy.damage_dealt_mult) + random_modifier
 	if Globals.is_sudden_death_mode:
 		apply_hp(-max_hp)
 	else:

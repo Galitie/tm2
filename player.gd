@@ -19,3 +19,6 @@ var death_explode : bool = false
 var matrix : bool = false
 
 var caltrops: bool = false
+
+var current_small_cards : int = 0
+var current_big_cards : int = 0

@@ -36,6 +36,7 @@ func Enter():
 		temp_area.add_child(temp_collision)
 		temp_area.add_child(temp_timer)
 		temp_area.add_child(temp_sprite)
+		monster.call_deferred("add_child", temp_area)
 		monster.add_child(temp_area)
 		temp_timer.start()
 		# temp to be removed ^^^^^^^^^^

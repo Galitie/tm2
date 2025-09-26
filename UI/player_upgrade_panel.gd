@@ -143,3 +143,8 @@ func create_stylebox():
 	new_stylebox_normal.border_width_left = 5
 	new_stylebox_normal.border_width_right = 5
 	new_stylebox_normal.border_color = Color.SKY_BLUE
+
+
+func remove_from_card_pool(resource):
+	var found_index = resource_array.find(resource)
+	resource_array.remove_at(found_index)

@@ -43,13 +43,13 @@ func Physics_Update(delta: float) -> void:
 				forward = Vector2(1, 0)
 
 		var right_vec = forward.orthogonal()
+		side_offset = target_mon.body_collision.shape.radius * 1.25
 		var side_goal = predicted + right_vec * side_offset * side_sign
 
 		var to_goal = side_goal - monster.global_position
 		var dist = to_goal.length()
 		chase_time -= delta
-		#TODO: base this off of the target's collision radius?
-		if dist > 175.0 and target_mon.current_hp > 0.0 and chase_time > 0.0:
+		if dist > (target_mon.body_collision.shape.radius * 1.25) and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
 			if dist > 0.0:
 				desired_dir = to_goal.normalized()

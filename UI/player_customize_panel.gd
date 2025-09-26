@@ -11,6 +11,7 @@ var waiting_for_ready_up : bool = false
 @onready var done_text = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Title
 @onready var done_description = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Description
 
+
 signal finished_customizing(player)
 signal not_finished_customizing(player)
 

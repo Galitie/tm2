@@ -357,9 +357,15 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"larger":
 				player.monster.root.scale += Vector2(.15, .15)
 				player.monster.body_collision.scale += Vector2(.15, .15)
+				player.current_big_cards += 1
+				if player.current_big_cards >= 3:
+					player.upgrade_panel.remove_from_card_pool(card_resource)
 			"smaller":
 				player.monster.root.scale -= Vector2(.15, .15)
 				player.monster.body_collision.scale -= Vector2(.15, .15)
+				player.current_small_cards += 1
+				if player.current_small_cards >= 3:
+					player.upgrade_panel.remove_from_card_pool(card_resource)
 			"matrix":
 				player.matrix = true
 			_:

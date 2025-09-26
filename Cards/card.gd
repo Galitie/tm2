@@ -6,6 +6,7 @@ var upgrade_panel : PlayerUpgradePanel
 @onready var accessory_panel = $AccessoryInfo
 @onready var card_info_panel = $CardInfo
 var accessories  = []
+@onready var x_texture = load("res://none_icon.png")
 
 func _process(_delta):
 	pass
@@ -57,25 +58,9 @@ func choose_card_resource(card_resource):
 		%Tags.text += "UNIQUE"
 	
 	if chosen_resource.parts_and_acc.size():
-		for accessory in chosen_resource.parts_and_acc:
-			var panel = PanelContainer.new()
-			var button = Button.new()
-			button.icon = accessory.texture
-			button.expand_icon = true
-			button.custom_minimum_size = Vector2(50,50)
-			button.size = Vector2(50,50)
-			panel.add_child(button)
-			$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
-			accessories.append(panel)
-		var panel = PanelContainer.new()
-		var button = Button.new()
-		button.icon = load("uid://djnv6gcu6l0li")
-		button.expand_icon = true
-		button.custom_minimum_size = Vector2(50,50)
-		button.size = Vector2(50,50)
-		panel.add_child(button)
-		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
-		accessories.append(panel)
+		for accessory : MonsterPart in chosen_resource.parts_and_acc:
+			make_acc_button(accessory.texture)
+		make_acc_button(x_texture)
 
 func reset_card():
 	%Description.visible = false
@@ -102,3 +87,14 @@ func disable():
 
 func enable():
 	$CardInfo.disabled = false
+
+func make_acc_button(texture : Texture2D):
+		var panel = PanelContainer.new()
+		var button = Button.new()
+		button.icon = texture
+		button.expand_icon = true
+		button.custom_minimum_size = Vector2(50,50)
+		button.size = Vector2(50,50)
+		panel.add_child(button)
+		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
+		accessories.append(panel)	

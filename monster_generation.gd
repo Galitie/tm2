@@ -48,6 +48,10 @@ func GeneratePart(monster: Monster, part: MonsterPart, connection: MonsterConnec
 				part_sprite.self_modulate = monster.base_color
 			MonsterPart.PART_TYPE.HAT:
 				pass
+			MonsterPart.PART_TYPE.CAPE:
+				pass
+			MonsterPart.PART_TYPE.GLASSES:
+				pass
 			_:
 				part_sprite.self_modulate = monster.secondary_color
 				
@@ -140,12 +144,19 @@ func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connecti
 	for connection: MonsterConnection in new_part.connections:
 		var part: MonsterPart = null
 		
-		if connection.part_type == MonsterPart.PART_TYPE.HAT:
-			#part = accessories[0];
-			part = MonsterPart.new()
-			part.type = MonsterPart.PART_TYPE.HAT
-		else:
-			part = GetRandomPart(connection.part_type)
+		# TODO: This can be better
+		match connection.part_type:
+			MonsterPart.PART_TYPE.HAT:
+				part = MonsterPart.new()
+				part.type = MonsterPart.PART_TYPE.HAT
+			MonsterPart.PART_TYPE.CAPE:
+				part = MonsterPart.new()
+				part.type = MonsterPart.PART_TYPE.CAPE
+			MonsterPart.PART_TYPE.GLASSES:
+				part = MonsterPart.new()
+				part.type = MonsterPart.PART_TYPE.GLASSES
+			_:
+				part = GetRandomPart(connection.part_type)
 			
 		var part_node: Node2D = Generate(monster, new_part_node, part, connection, new_part)
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://7gu2g6yyeyis"]
+[gd_scene load_steps=21 format=4 uid="uid://7gu2g6yyeyis"]
 
 [ext_resource type="Texture2D" uid="uid://cwfb74jc5u0fe" path="res://parts/bunny_body.png" id="1_dvrf6"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="1_g7ptr"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://back.gdshader" id="6_vonwv"]
 [ext_resource type="Texture2D" uid="uid://d0olomib4o3l5" path="res://parts/bunny_hindleg.png" id="7_qx6ai"]
+[ext_resource type="Texture2D" uid="uid://csfnvshi7c1bf" path="res://parts/monocle.png" id="8_6sma1"]
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
+[ext_resource type="Texture2D" uid="uid://djmbj2s1ovlvo" path="res://parts/turtle_shell.png" id="11_km0dj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -94,6 +96,17 @@ texture = ExtResource("4_vonwv")
 offset = Vector2(-9.09, -27.42)
 metadata/_edit_lock_ = true
 
+[node name="GLASSES" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
+position = Vector2(31.53, -15.52)
+
+[node name="GLASSES_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES"]
+rotation = 0.226893
+
+[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset"]
+texture = ExtResource("8_6sma1")
+offset = Vector2(-7.9, 15.73)
+metadata/_edit_lock_ = true
+
 [node name="FORELEG" type="Node2D" parent="BODY"]
 position = Vector2(39, -17)
 
@@ -146,6 +159,16 @@ position = Vector2(-36, 9)
 [node name="sprite" type="Sprite2D" parent="BODY/TAIL/TAIL_anim_offset"]
 texture = ExtResource("8_jsbfh")
 offset = Vector2(-10.595, -1.035)
+metadata/_edit_lock_ = true
+
+[node name="CAPE" type="Node2D" parent="BODY"]
+position = Vector2(-15.065, -31.86)
+
+[node name="CAPE_anim_offset" type="Node2D" parent="BODY/CAPE"]
+
+[node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
+texture = ExtResource("11_km0dj")
+offset = Vector2(-0.91, 9.585)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" groups=["HurtBox"]]

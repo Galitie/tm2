@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://bbl3gfk2tdsed"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_yhuba"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_34ke6"]
+[ext_resource type="Texture2D" uid="uid://dudiampk5bw4f" path="res://parts/sick_shades.png" id="3_yhuba"]
+
+[resource]
+script = ExtResource("2_34ke6")
+monster_type = 0
+type = 10
+texture = ExtResource("3_yhuba")
+offset = Vector2(-11.21, -6.365)
+connections = Array[ExtResource("1_yhuba")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

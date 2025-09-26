@@ -32,10 +32,13 @@ func Enter():
 func animation_finished(anim_name: String):
 	if anim_name == "get_up":
 		got_up = true
+		var root: Node2D = monster.get_node("root")
+		var s: Vector2 = root.scale
 		if monster.target_point.x < monster.global_position.x:
-			monster.get_node("root").scale = Vector2(-1, 1)
+			s.x = -abs(s.x)
 		else:
-			monster.get_node("root").scale = Vector2(1, 1)
+			s.x = abs(s.x)  
+		root.scale = s
 		# Should be "run", but it's debatable if I should make run animations
 		monster.animation_player.play("walk", -1.0, 2.0)
 
@@ -45,6 +48,9 @@ func Physics_Update(_delta:float):
 		monster.global_position = monster.global_position.move_toward(monster.target_point, 800 * _delta)
 		
 	if monster.global_position.is_equal_approx(monster.target_point):
-		monster.get_node("root").scale = Vector2(1, 1)
+		var root: Node2D = monster.get_node("root")
+		var s: Vector2 = root.scale
+		s.x = abs(s.x)
+		root.scale = s
 		monster.global_position = monster.target_point
 		monster.animation_player.play("idle")

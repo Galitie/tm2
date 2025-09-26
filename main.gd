@@ -353,6 +353,12 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.thorns = true
 			"death_explode":
 				player.death_explode = true
+			"larger":
+				player.monster.root.scale += Vector2(.15, .15)
+				player.monster.body_collision.scale += Vector2(.15, .15)
+			"smaller":
+				player.monster.root.scale -= Vector2(.15, .15)
+				player.monster.body_collision.scale -= Vector2(.15, .15)
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

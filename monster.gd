@@ -26,11 +26,10 @@ var mon_name : String
 @onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player : AnimationPlayer = $root/anim_player
-@onready var monster_container : CanvasGroup = $root
 @onready var animation_player_damage = $AnimationPlayer_Damage
 
 @onready var poop_checker = $root/PoopChecker
-@onready var body_collision = $body
+@onready var body_collision = $body_collision
 
 @onready var audio_player = $AudioStreamPlayer
 
@@ -77,13 +76,14 @@ func SetCollisionRefs() -> void:
 
 func _physics_process(_delta):
 	move_and_slide()
+	var s: Vector2 = root.scale
 	if velocity.length() > 0 and velocity.x > 0:
-		monster_container.scale = Vector2(1,1)
+		s.x = abs(s.x)
 		facing = "right"
 	if velocity.length() > 0 and velocity.x < 0:
-		monster_container.scale = Vector2(-1,1)
+		s.x = -abs(s.x) 
 		facing = "left"
-		
+	root.scale = s
 	var line_thickness: float = 4.0 * Globals.game.camera.zoom.x
 	root.material.set_shader_parameter("line_thickness", line_thickness)
 

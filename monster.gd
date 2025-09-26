@@ -183,13 +183,13 @@ func _on_hurtbox_area_entered(area):
 			state_machine.transition_state("hurt")
 			hit_effect()
 		#TODO:(Raam, probably just treat this as an attack?)
-		if area.is_in_group("TEMP_EXPLOSION"):
-			attacked = true
-			attacker = area.owner
-			print("attacker: ", attacker )
-			take_damage_from(attacker, false, randi_range(1,20))
-			state_machine.transition_state("hurt")
-			hit_effect()
+		#if area.is_in_group("TEMP_EXPLOSION"):
+			#attacked = true
+			#attacker = area.owner
+			#print("attacker: ", attacker )
+			#take_damage_from(attacker, false, randi_range(1,20))
+			#state_machine.transition_state("hurt")
+			#hit_effect()
 		
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)

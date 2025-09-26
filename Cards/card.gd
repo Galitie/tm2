@@ -55,17 +55,18 @@ func choose_card_resource(card_resource):
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE"
+	
+	if chosen_resource.parts_and_acc.size():
+		for accessory in chosen_resource.parts_and_acc:
+			var panel = PanelContainer.new()
+			var button = Button.new()
+			button.icon = accessory.texture
+			#button.expand_icon = true
+			button.size = Vector2(75,75)
+			panel.add_child(button)
+			$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
+			accessories.append(panel)
 
-	for accessory in chosen_resource.parts_and_acc:
-		var panel = PanelContainer.new()
-		var button = Button.new()
-		# attach signal _on_button_pressed ?
-		var resized_acc : Vector2 = accessory.texture.size
-		resized_acc = Vector2(50,50)
-		button.icon = resized_acc
-		panel.add_child(button)
-		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
-		accessories.append(panel)
 
 func reset_card():
 	%Description.visible = false
@@ -79,6 +80,11 @@ func reset_card():
 	%PosNeg2.visible = false
 	%PosNeg3.visible = false
 	%Tags.text = ""
+	accessories = []
+	var accessories_panel = $AccessoryInfo/MarginContainer/VBoxContainer/Accessories
+	for panel in accessories_panel.get_children():
+		panel.queue_free()
+	
 
 
 func disable():

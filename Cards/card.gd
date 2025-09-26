@@ -61,8 +61,9 @@ func choose_card_resource(card_resource):
 			var panel = PanelContainer.new()
 			var button = Button.new()
 			button.icon = accessory.texture
-			#button.expand_icon = true
-			button.size = Vector2(75,75)
+			button.expand_icon = true
+			button.custom_minimum_size = Vector2(50,50)
+			button.size = Vector2(50,50)
 			panel.add_child(button)
 			$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
 			accessories.append(panel)

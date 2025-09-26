@@ -2,7 +2,7 @@ class_name MonsterPart
 extends Resource
 
 enum MONSTER_TYPE { ACCESSORY, BUNNY, BAT }
-enum PART_TYPE { BODY, HEAD, EAR, TAIL, ARM, FORELEG, HINDLEG, EYE, HAT }
+enum PART_TYPE { BODY, HEAD, EAR, TAIL, ARM, FORELEG, HINDLEG, EYE, HAT, CAPE, GLASSES }
 
 @export var monster_type: MONSTER_TYPE
 @export var type : PART_TYPE

@@ -67,7 +67,15 @@ func choose_card_resource(card_resource):
 			panel.add_child(button)
 			$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
 			accessories.append(panel)
-
+		var panel = PanelContainer.new()
+		var button = Button.new()
+		button.icon = load("uid://djnv6gcu6l0li")
+		button.expand_icon = true
+		button.custom_minimum_size = Vector2(50,50)
+		button.size = Vector2(50,50)
+		panel.add_child(button)
+		$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
+		accessories.append(panel)
 
 func reset_card():
 	%Description.visible = false

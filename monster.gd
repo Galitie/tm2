@@ -158,11 +158,24 @@ func _on_hurtbox_area_entered(area):
 				hit_effect(crit)
 			state_machine.transition_state("hurt")
 		if area.is_in_group("Projectile") and area.owner.monster != self:
-			attacked = true
 			attacker = area.owner.emitter
-			take_damage_from(attacker, true)
-			state_machine.transition_state("hurt")
-			hit_effect()
+			if player.matrix:
+				var rand = [1,2].pick_random()
+				if rand == 1:
+					take_damage_from(attacker, true)
+					attacked = true
+					state_machine.transition_state("hurt")
+					hit_effect()
+				else:
+					play_generic_sound("uid://cf8aw1xy3pg34")
+					root.modulate = Color("3467ff")
+					get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+					return
+			else:
+				take_damage_from(attacker, true)
+				attacked = true
+				state_machine.transition_state("hurt")
+				hit_effect()
 		if area.is_in_group("Bomb"):
 			attacked = true
 			attacker = area.owner

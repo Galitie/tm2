@@ -16,5 +16,6 @@ var poop_summons : bool = false
 var more_poops : bool = false
 var larger_poops : bool = false
 var death_explode : bool = false
+var matrix : bool = false
 
 var caltrops: bool = false

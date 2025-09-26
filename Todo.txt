@@ -37,10 +37,8 @@ Todo:
 Card ideas:
 	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
-	Change creature size, really big or really small - is this interesting? Was a little funny in TM1
-	and does affect range / damage
 	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
-	Drop bombs, traps, bananas
+	Drop traps, bananas
 	Turn all attacks into blocks
 	Turn all attacks into charge attacks
 	If you are in last place get bonus, first place get penalty

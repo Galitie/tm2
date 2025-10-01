@@ -218,6 +218,10 @@ text = "WINNER(S)!
 (Press START to play again)"
 horizontal_alignment = 1
 
+[node name="RoundLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]
 [connection signal="timeout" from="SuddenDeathTimer" to="." method="_on_sudden_death_timer_timeout"]

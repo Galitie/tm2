@@ -243,7 +243,7 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 		apply_hp(-max_hp)
 	else:
 		apply_hp(-(damage * damage_received_mult))
-	$Damage.text = str(damage) + crit_text
+	$Damage.text = str(int(damage * damage_received_mult)) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
 	return critted && !no_crit

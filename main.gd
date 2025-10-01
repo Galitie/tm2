@@ -256,7 +256,7 @@ func set_upgrade_mode():
 func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
-	$RoundLabel.text = str(current_round) + " / " + str(total_rounds)
+	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:

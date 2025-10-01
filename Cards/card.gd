@@ -55,9 +55,10 @@ func choose_card_resource(card_resource):
 			%PosNeg3.text = "+"
 	
 	if chosen_resource.unique:
-		%Tags.text += "UNIQUE"
+		%Tags.text += "UNIQUE "
 	
 	if chosen_resource.parts_and_acc.size():
+		%Tags.text += "🎩"
 		for accessory : MonsterPart in chosen_resource.parts_and_acc:
 			make_acc_button(accessory.texture)
 		make_acc_button(x_texture)

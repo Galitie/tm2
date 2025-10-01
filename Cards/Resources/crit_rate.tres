@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bkgtuu1m8soho"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_5rp5m"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_yq1ji"]
 
 [resource]
 script = ExtResource("2_yq1ji")
 card_name = "CRIT RATE"
-description = "CRIT more, but for less DMG"
+description = ""
 Type = "immediate"
 state_id = ""
 unique = true
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_5rp5m")]([])
 attribute_1 = 6
 attribute_label_1 = "CRIT %"
 attribute_amount_1 = 25

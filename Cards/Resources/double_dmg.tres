@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_pyie5")
 card_name = "GLASS CANNON"
-description = "Double DMG dealt and DMG recieved"
+description = "1.25x DMG dealt and 2x DMG recieved"
 Type = "immediate"
 state_id = "dbl_dmg"
 unique = true

@@ -340,8 +340,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
-				player.monster.damage_dealt_mult = 2.0
-				player.monster.damage_received_mult = 2.0
+				player.monster.damage_dealt_mult *= 1.25
+				player.monster.damage_received_mult *= 2.0
 			"larger_poops":
 				player.larger_poops = true
 			"chaser":

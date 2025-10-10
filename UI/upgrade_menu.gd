@@ -13,3 +13,4 @@ func setup():
 		player_upgrade_panel.setup_cards()
 		player_upgrade_panel.setup_rerolls()
 		player_upgrade_panel.upgrade_title.text = "ADD ABILITY [x" + str(player_upgrade_panel.player.upgrade_points) + "]"
+		player_upgrade_panel.update_victory_points()

@@ -86,6 +86,7 @@ func pause_game(length: float = 0.0) -> void:
 	if length > 0:
 		$PauseTimer.start(length)
 
+
 func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
@@ -223,8 +224,6 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	$Rankings.visible = false
 	$Rankings.text = "Previous round points:\n"
-	for player in players:
-		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -233,6 +232,7 @@ func set_upgrade_mode():
 	Globals.is_sudden_death_mode = false
 	var rerolls_amount_counter = 0
 	for player in players:
+		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		monster.move_name_upgrade()
 		var upgrade_pos = player.get_node("UpgradePos")

@@ -56,7 +56,7 @@ func choose_card_resource(card_resource):
 			%PosNeg3.text = "+"
 	
 	if chosen_resource.unique:
-		%Tags.text += "UNIQUE ⭐ "
+		%Tags.text += "UNIQUE 🌟 "
 	
 	if chosen_resource.parts_and_acc.size():
 		%Tags.text += "ACC 🎩"

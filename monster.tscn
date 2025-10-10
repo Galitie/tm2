@@ -27,9 +27,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
 resource_local_to_scene = true
 shader = ExtResource("2_5105l")
+shader_parameter/alpha = 1.0
 shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/line_thickness = 3.0
+shader_parameter/line_thickness = 4.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/outer_color = Color(0, 0, 0, 0)
 

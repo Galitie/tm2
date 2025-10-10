@@ -11,11 +11,10 @@ var avoidance_strength: float = 4.0
 var max_accel: float = 5000.0
 
 # --- Side-chase settings ---
-var side_offset: float = 50     # how far to the side of the target to aim
+var side_offset: float = 72.0     # how far to the side of the target to aim
 var side_sign: int = 1            # +1 = target's right, -1 = target's left
 var lead_time: float = 0.15       # small predictive lead, optional
-var chose_side: bool = false
-var side_goal
+
 
 func randomize_chase():
 	chase_time = randf_range(3, 8)
@@ -44,25 +43,12 @@ func Physics_Update(delta: float) -> void:
 				forward = Vector2(1, 0)
 
 		var right_vec = forward.orthogonal()
-		side_offset = target_mon.body_collision.shape.radius
-
-		if !chose_side:
-			var side_goal_option_1 = predicted + right_vec * side_offset * -(side_sign)
-			var side_goal_option_2 = predicted + right_vec * side_offset * side_sign
-			var to_goal_option_1 = side_goal_option_1 - monster.global_position
-			var to_goal_option_2 = side_goal_option_2 - monster.global_position
-			print(to_goal_option_1, " ", to_goal_option_2)
-			if to_goal_option_1 >= to_goal_option_2:
-				print("option 2 is smaller, go right")
-				side_goal = side_goal_option_2
-			else:
-				print("option 1 is smaller, go left")
-				side_goal = side_goal_option_1
-			chose_side = true
+		side_offset = target_mon.body_collision.shape.radius * 1.25
+		var side_goal = predicted + right_vec * side_offset * side_sign
 		var to_goal = side_goal - monster.global_position
 		var dist = to_goal.length()
 		chase_time -= delta
-		if dist > (target_mon.body_collision.shape.radius * 1.25) and target_mon.current_hp > 0.0 and chase_time > 0.0:
+		if dist > (target_mon.body_collision.shape.radius * 1.50) and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
 			if dist > 0.0:
 				desired_dir = to_goal.normalized()
@@ -79,7 +65,6 @@ func Physics_Update(delta: float) -> void:
 
 			monster.velocity = monster.velocity + steering * delta
 		else:
-			chose_side = false
 			monster.velocity = Vector2()
 			var rand = [1, 2].pick_random()
 			if rand == 1:
@@ -96,6 +81,10 @@ func select_target():
 		monster.animation_player.play("walk", -1.0, 1.5)
 		monster.move_speed += move_speed_adjust
 
+		if randf() < 0.5:
+			side_sign = -1
+		else:
+			side_sign = 1
 	else:
 		ChooseNewState.emit()
 

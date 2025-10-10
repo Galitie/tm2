@@ -24,8 +24,6 @@ Features to make it playtest ready:
 		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 		Stats? What you have picked previously? (Galit)
 		Special move that a player can activate once per round? (Galit)
-		Slide collisions for slower bunnies need tweaking (Galit)
-		Interrupts when hit (Galit)
 		Damage function issues (send help) phantom damage and misreported damage (Galit)
 
 

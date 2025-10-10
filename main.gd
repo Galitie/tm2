@@ -55,7 +55,19 @@ func debug_stuff():
 			set_fight_mode()
 		else:
 			set_upgrade_mode()
-		
+
+
+func listen_for_special_trigger():
+	if current_mode == Modes.FIGHT:
+		var specials = $Specials.get_children()
+		var index = 0
+		for player in players:
+			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used:
+				player.monster.state_machine.use_special()
+				player.special_used = true
+				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
+				specials[index].text = "Special used!"
+			index += 1
 
 
 func _init():
@@ -64,6 +76,7 @@ func _init():
 
 
 func _physics_process(_delta: float) -> void:
+	listen_for_special_trigger()
 	# Sort monsters by Y position every second (for performance reasons)
 	await get_tree().create_timer(1.0).timeout
 	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
@@ -104,6 +117,7 @@ func freeze_frame(monster: Monster) -> void:
 		await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, 5.5).set_trans(Tween.TRANS_EXPO).finished
 		audio_player.playing = false
 		audio_player.volume_db = 0.0
+
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -217,6 +231,7 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
+	current_mode = Modes.UPGRADE
 	sudden_death_label.visible = false
 	if sudden_death_speed_set:
 		sudden_death_speed_set = false
@@ -224,14 +239,15 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	$Rankings.visible = false
 	$Rankings.text = "Previous round points:\n"
+	$Specials.visible = false
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
-	current_mode = Modes.UPGRADE
 	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
 	var rerolls_amount_counter = 0
 	for player in players:
+		player.special_used = false
 		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		monster.move_name_upgrade()
@@ -258,7 +274,9 @@ func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
 	$Rankings.visible = true
+	$Specials.visible = true
 	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+	reset_specials_text()
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -370,6 +388,9 @@ func apply_card_resource_effects(card_resource : Resource, player):
 					player.upgrade_panel.remove_from_card_pool(card_resource)
 			"matrix":
 				player.matrix = true
+			"specialblock":
+				player.monster.state_machine.state_choices[card_resource.Type].clear()
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -426,7 +447,7 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "🎲 Reroll Upgrades " + "[x" + str(player.rerolls) + "]"
+		upgrade_panel.reroll_button.text = "🎲 Reroll All Upgrades " + "[x" + str(player.rerolls) + "]"
 	else:
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
@@ -503,6 +524,18 @@ func clean_up_screen():
 func _add_ready_player(player):
 	ready_players.append(player)
 
+
 func _remove_ready_player(player):
 	var index = ready_players.find(player)
 	ready_players.remove_at(index)
+
+
+func reset_specials_text():
+	var specials = $Specials.get_children()
+	var index = 0
+	for player in players:
+		specials[index].text = ""
+		if player.monster.state_machine.special_values != []:
+			specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
+			specials[index].text = "Press Ⓨ to use: " + player.monster.state_machine.special_values[0]
+		index += 1

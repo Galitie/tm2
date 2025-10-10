@@ -20,7 +20,6 @@ Features to make it playtest ready:
 		Needs music and sound effects (Raam)
 		Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
 		Poops have player main color around them? (Raam)
-		Knocked out bunnies fade a bit, they are too promiment (Raam)
 		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 		Stats? What you have picked previously? (Galit)
 		Special move that a player can activate once per round? (Galit)
@@ -28,7 +27,6 @@ Features to make it playtest ready:
 
 
 Todo:
-	Reroll should just be a dice icon? Or dice with reroll?
 	Make controller joystick work (eventually)
 	GDC talks on party games
 	Add dancing

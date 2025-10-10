@@ -6,8 +6,8 @@ var states : Dictionary = {}
 @onready var current_state_label = $"../CurrentState"
 
 
-var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other"]
-var weights = PackedFloat32Array([1,1.75,1,1,1,1,1])
+var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other", "special"]
+var weights = PackedFloat32Array([1,1.75,1,1,1,1,1,0])
 
 var wander_values = ["wander"]
 var chase_values = ["chase"]
@@ -16,7 +16,8 @@ var charge_attack_values = ["basiccharge"]
 var basic_attack_values = ["punch"]
 var block_values = ["block"]
 var other_values = ["pooping"]
-var state_choices : Dictionary = {"wander" : wander_values, "chase" : chase_values, "idle" : idle_values, "charge_attack" : charge_attack_values, "basic_attack" : basic_attack_values, "block" : block_values, "other" : other_values}
+var special_values = []
+var state_choices : Dictionary = {"wander" : wander_values, "chase" : chase_values, "idle" : idle_values, "charge_attack" : charge_attack_values, "basic_attack" : basic_attack_values, "block" : block_values, "other" : other_values, "special" : special_values}
 
 var rng = RandomNumberGenerator.new()
 
@@ -64,3 +65,7 @@ func transition_state(new_state_name):
 
 func _animation_finished(anim_name: String) -> void:
 	current_state.animation_finished(anim_name)
+
+func use_special():
+	if special_values != [] and monster.current_hp > 0:
+		choose_new_state("special")

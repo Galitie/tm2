@@ -86,7 +86,6 @@ func pause_game(length: float = 0.0) -> void:
 	if length > 0:
 		$PauseTimer.start(length)
 
-
 func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
@@ -101,11 +100,9 @@ func freeze_frame(monster: Monster) -> void:
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
 		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
-		get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, 5.5).set_trans(Tween.TRANS_EXPO)
-		await get_tree().create_timer(5.5).timeout
+		await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, 5.5).set_trans(Tween.TRANS_EXPO).finished
 		audio_player.playing = false
 		audio_player.volume_db = 0.0
-
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -266,12 +263,10 @@ func set_fight_mode():
 		monster.target_point = fight_pos.global_position
 
 
-
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
-	Globals.is_sudden_death_mode = true
 	
-	audio_player.stream = await load("uid://bnd7vmemesdbl")
+	audio_player.stream = load("uid://bnd7vmemesdbl")
 	audio_player.play()
 	
 	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", SUDDEN_DEATH_MAX_RADIUS, 0.8).set_trans(Tween.TRANS_EXPO)
@@ -280,6 +275,7 @@ func _on_sudden_death_timer_timeout():
 	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(0.4).finished
 	pause_game(1.0)
 	await get_tree().create_tween().tween_property(sudden_death_label, "scale", Vector2(100.0, 100.0), 0.2).set_trans(Tween.TRANS_EXPO).finished
+	Globals.is_sudden_death_mode = true
 	sudden_death_label.visible = false
 
 

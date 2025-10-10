@@ -18,6 +18,7 @@ var damage_dealt_mult: float = 1.0
 func _ready():
 	if is_a_summon:
 		sprite.play("gun")
+		$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)
 	
 	if not is_a_summon:
 		collision.disabled = true
@@ -26,7 +27,6 @@ func _ready():
 	velocity = Vector2.ZERO
 	poop_shoot_interval = randf_range(5,15)
 	$AnimationPlayer.play("idle")
-
 
 func _physics_process(delta):
 	if is_a_summon and is_not_colliding() and not collision_added:

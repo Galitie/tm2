@@ -12,20 +12,18 @@ Features to make it playtest ready:
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
 	Show winner at end of round - make them dance (Raam)
-	Log that prints the cards chosen by players, dictionary
+	Log that prints the cards chosen by players, dictionary (Galit)
 	Playtest todos: 
 		Charging looks like humping, leg thumb instead? (Raam)
 		Block is unclear (Raam)
 		Menu, hard to know if something is selected (Raam)
 		Needs music and sound effects (Raam)
 		Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
-		Change the 'monster' term - something else? (Galit)
 		Poops have player main color around them? (Raam)
+		Knocked out bunnies fade a bit, they are too promiment (Raam)
 		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
-		Double damage too strong, reduce (Galit)
 		Stats? What you have picked previously? (Galit)
 		Special move that a player can activate once per round? (Galit)
-		Knocked out bunnies fade a bit, they are too promiment (Raam)
 		Slide collisions for slower bunnies need tweaking (Galit)
 		Interrupts when hit (Galit)
 		Damage function issues (send help) phantom damage and misreported damage (Galit)

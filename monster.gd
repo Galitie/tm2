@@ -146,7 +146,7 @@ func _on_hurtbox_area_entered(area):
 				"basiccharge":
 					crit = take_damage_from(attacker)
 			if thorns:
-				thorn_effect()
+				#thorn_effect()
 				attacker.attacked = true
 				attacker.take_damage_from(self, true, 1)
 				attacker.state_machine.transition_state("hurt")
@@ -207,7 +207,7 @@ func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	root.modulate = Color("6bff7d")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_delay(0.3)
 
 
 func hit_effect(crit: bool = false) -> void:
@@ -216,7 +216,7 @@ func hit_effect(crit: bool = false) -> void:
 	else:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
 	root.modulate = Color("ff0e1b")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.3).set_trans(Tween.TRANS_BOUNCE)
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_trans(Tween.TRANS_BOUNCE)
 
 
 func send_flying(attacker: Node) -> void:

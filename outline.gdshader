@@ -8,6 +8,8 @@ const vec2 OFFSETS[16] = {
 	vec2(0.71, -0.71), vec2(1, 0), vec2(0.71, 0.71)
 };
 
+uniform float alpha = 1.0;
+
 uniform vec2 positions[10];
 uniform vec4 colors[10];
 
@@ -65,9 +67,11 @@ void fragment() {
 
 	if (outline > 0.0) {
 		COLOR = mix(color, line_color, outline - color.a);
+		COLOR.a *= alpha;
 	}
 	else if (outer_outline > 0.0) {
 		COLOR = mix(color, outer_color, outer_outline - color.a);
+		COLOR.a *= alpha;
 	}
 	else {
 		COLOR = vec4(0.0);

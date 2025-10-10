@@ -85,8 +85,6 @@ func _physics_process(_delta):
 		s.x = -abs(s.x) 
 		facing = "left"
 	root.scale = s
-	var line_thickness: float = 4.0 * Globals.game.camera.zoom.x
-	root.material.set_shader_parameter("line_thickness", line_thickness)
 
 
 func apply_hp(amount):

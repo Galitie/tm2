@@ -20,9 +20,8 @@ func Enter():
 	if monster.current_hp <= 0:
 		monster.animation_player.play("get_up")
 		
-		get_tree().create_tween().tween_property(monster, "modulate", Color(monster.modulate, 1.0), 0.25)
-		monster.root.material.set_shader_parameter("outer_color", monster.player_color)
-		monster.root.material.set_shader_parameter("line_color", Color(0.0, 0.0, 0.0, 1.0))
+		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("alpha", value), 0.5, 1.0, 0.25)
+		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("outer_color", value), Color(0.0, 0.0, 0.0, 0.0), monster.player_color, 0.25)
 	else:
 		got_up = true
 		# Should be "run", but it's debatable if I should make run animations

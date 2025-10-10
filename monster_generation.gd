@@ -60,7 +60,7 @@ func GeneratePart(monster: Monster, part: MonsterPart, connection: MonsterConnec
 	if connection != null:
 		if connection.is_back:
 			position_node.name += "_back"
-			position_node.z_index = -1
+			position_node.show_behind_parent = true
 			part_sprite.material = back_shader
 			
 		position_node.position = connection.position

@@ -1,7 +1,9 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-const vec2 OFFSETS[8] = {
+const vec2 OFFSETS[16] = {
+	vec2(0.45, 0.89), vec2(0.89, 0.45), vec2(0.89, -0.45), vec2(0.45, -0.89),
+	vec2(-0.45, -0.89), vec2(-0.89, -0.45), vec2(-0.89, 0.45), vec2(-0.45, 0.89),
 	vec2(-0.71, -0.71), vec2(-1, 0), vec2(-0.71, 0.71), vec2(0, -1), vec2(0, 1),
 	vec2(0.71, -0.71), vec2(1, 0), vec2(0.71, 0.71)
 };

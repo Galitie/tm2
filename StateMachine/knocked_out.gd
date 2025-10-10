@@ -18,10 +18,6 @@ func Enter():
 	monster.get_node("HPBar").visible = false
 	Globals.game.count_death(monster)
 	monster.name_label.hide()
-	
-	get_tree().create_tween().tween_property(monster, "modulate", Color(monster.modulate, 0.5), 1.0)
-	monster.root.material.set_shader_parameter("outer_color", Color(0.0, 0.0, 0.0, 0.0))
-	monster.root.material.set_shader_parameter("line_color", Color(0.0, 0.0, 0.0, 0.5))
 
 	
 	#if monster.player.death_explode:
@@ -49,6 +45,10 @@ func Enter():
 
 	if !Globals.is_sudden_death_mode:
 		monster.animation_player.play("faint")
+		
+		get_tree().create_tween().tween_property(monster, "modulate", Color(monster.modulate, 0.5), 1.0)
+		monster.root.material.set_shader_parameter("outer_color", Color(0.0, 0.0, 0.0, 0.0))
+		monster.root.material.set_shader_parameter("line_color", Color(0.0, 0.0, 0.0, 0.5))
 	else:
 		monster.root.modulate = Color("ff0e1b")
 	

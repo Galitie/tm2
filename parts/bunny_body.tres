@@ -4,13 +4,6 @@
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_relyp"]
 [ext_resource type="Texture2D" uid="uid://cwfb74jc5u0fe" path="res://parts/bunny_body.png" id="2_fcibb"]
 
-[sub_resource type="Resource" id="Resource_f4dbq"]
-script = ExtResource("1_f4dbq")
-part_type = 5
-position = Vector2(39, -17)
-is_back = false
-metadata/_custom_type_script = "uid://cgcguylqkisf"
-
 [sub_resource type="Resource" id="Resource_3b2q1"]
 script = ExtResource("1_f4dbq")
 part_type = 5
@@ -18,10 +11,10 @@ position = Vector2(27, -17)
 is_back = true
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
-[sub_resource type="Resource" id="Resource_3vuqk"]
+[sub_resource type="Resource" id="Resource_f4dbq"]
 script = ExtResource("1_f4dbq")
-part_type = 6
-position = Vector2(-16, 4)
+part_type = 5
+position = Vector2(39, -17)
 is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
@@ -30,6 +23,13 @@ script = ExtResource("1_f4dbq")
 part_type = 6
 position = Vector2(-22, 4)
 is_back = true
+metadata/_custom_type_script = "uid://cgcguylqkisf"
+
+[sub_resource type="Resource" id="Resource_3vuqk"]
+script = ExtResource("1_f4dbq")
+part_type = 6
+position = Vector2(-16, 4)
+is_back = false
 metadata/_custom_type_script = "uid://cgcguylqkisf"
 
 [sub_resource type="Resource" id="Resource_c0o7f"]
@@ -59,7 +59,7 @@ monster_type = 1
 type = 0
 texture = ExtResource("2_fcibb")
 offset = Vector2(0, 0)
-connections = Array[ExtResource("1_f4dbq")]([SubResource("Resource_f4dbq"), SubResource("Resource_3b2q1"), SubResource("Resource_3vuqk"), SubResource("Resource_f06q4"), SubResource("Resource_c0o7f"), SubResource("Resource_4b4xw"), SubResource("Resource_id7lv")])
+connections = Array[ExtResource("1_f4dbq")]([SubResource("Resource_3b2q1"), SubResource("Resource_f4dbq"), SubResource("Resource_f06q4"), SubResource("Resource_3vuqk"), SubResource("Resource_c0o7f"), SubResource("Resource_4b4xw"), SubResource("Resource_id7lv")])
 hurtbox_offset = Vector2(-1.075, -2.725)
 hurtbox_size = Vector2(89.255, 77.36)
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

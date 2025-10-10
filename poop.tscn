@@ -8,11 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://d34o21umbbvac" path="res://poop_shoot.png" id="5_xsvd0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a7brd"]
+resource_local_to_scene = true
 shader = ExtResource("1_a7brd")
 shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/line_thickness = 2.5
 shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(0, 0, 0, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uuxsx"]
 atlas = ExtResource("1_lpi03")

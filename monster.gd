@@ -49,7 +49,7 @@ var target_point : Vector2
 
 var base_color: Color
 var secondary_color: Color
-
+@export var player_color: Color
 
 func _ready():
 	add_to_group("DepthEntity")
@@ -65,6 +65,7 @@ func _ready():
 	base_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 	secondary_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 
+	root.material.set_shader_parameter("outer_color", player_color)
 
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox

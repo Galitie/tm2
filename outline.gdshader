@@ -11,12 +11,14 @@ uniform vec4 colors[10];
 
 uniform float line_thickness : hint_range(0.0, 10.0);
 uniform vec4 line_color : source_color = vec4(1.0);
+uniform vec4 outer_color : source_color = vec4(0.0);
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
 void fragment() {
 	// Get the size of the pixels on screen, and create a variable for out outline
 	vec2 size = line_thickness * SCREEN_PIXEL_SIZE;
 	float outline = 0.0;
+	float outer_outline = 0.0;
 
 	// Get the texture from the screen
 	vec4 color = texture(screen_texture, SCREEN_UV);
@@ -27,6 +29,9 @@ void fragment() {
 	for (int i = 0; i < OFFSETS.length(); i++) {
 		vec2 coordinate_offset = SCREEN_UV + size * OFFSETS[i];
 		outline += texture(screen_texture, coordinate_offset).a;
+		
+		vec2 outer_offset = SCREEN_UV + size * 2.0 * OFFSETS[i];
+		outer_outline += texture(screen_texture, outer_offset).a;
 	}
 
 	// Force outline to 1 or 0
@@ -56,5 +61,13 @@ void fragment() {
 		color.rgb /= color.a;
 	}
 
-	COLOR = mix(color, line_color, outline - color.a);
+	if (outline > 0.0) {
+		COLOR = mix(color, line_color, outline - color.a);
+	}
+	else if (outer_outline > 0.0) {
+		COLOR = mix(color, outer_color, outer_outline - color.a);
+	}
+	else {
+		COLOR = vec4(0.0);
+	}
 }

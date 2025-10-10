@@ -16,11 +16,11 @@ var new_stylebox_normal = StyleBoxFlat.new()
 var current_user_position_in_accessory_array : int = 0
 var in_accessory_menu = false
 
+
 func _ready():
 	for card in upgrade_cards:
 		card.upgrade_panel = self
 	create_stylebox()
-
 
 func _physics_process(_delta):
 	if player.upgrade_points > 0:
@@ -122,6 +122,10 @@ func setup_cards():
 			temp_resources.erase(random_resource)
 		card.choose_card_resource(random_resource)
 		card.enable()
+
+
+func update_victory_points():
+	$VBoxContainer/DudeWindow/VBoxContainer/Label.text = "👑 Points: " + str(player.victory_points)
 
 
 func setup_rerolls():

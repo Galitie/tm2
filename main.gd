@@ -62,7 +62,9 @@ func listen_for_special_trigger():
 		var specials = $Specials.get_children()
 		var index = 0
 		for player in players:
-			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used:
+			if player.monster.current_hp <= 0:
+				specials[index].text = ""
+			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0:
 				player.monster.state_machine.use_special()
 				player.special_used = true
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)

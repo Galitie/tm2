@@ -147,7 +147,7 @@ func _on_hurtbox_area_entered(area):
 				"basiccharge":
 					crit = take_damage_from(attacker)
 			if thorns:
-				thorn_effect()
+				#thorn_effect()
 				attacker.attacked = true
 				attacker.take_damage_from(self, true, 1)
 				attacker.state_machine.transition_state("hurt")
@@ -184,13 +184,13 @@ func _on_hurtbox_area_entered(area):
 			state_machine.transition_state("hurt")
 			hit_effect()
 		#TODO:(Raam, probably just treat this as an attack?)
-		if area.is_in_group("TEMP_EXPLOSION"):
-			attacked = true
-			attacker = area.owner
-			print("attacker: ", attacker )
-			take_damage_from(attacker, false, randi_range(1,20))
-			state_machine.transition_state("hurt")
-			hit_effect()
+		#if area.is_in_group("TEMP_EXPLOSION"):
+			#attacked = true
+			#attacker = area.owner
+			#print("attacker: ", attacker )
+			#take_damage_from(attacker, false, randi_range(1,20))
+			#state_machine.transition_state("hurt")
+			#hit_effect()
 		
 	if attacked && Globals.is_sudden_death_mode:
 		send_flying(attacker)
@@ -208,7 +208,7 @@ func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	root.modulate = Color("6bff7d")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_delay(0.3)
 
 
 func hit_effect(crit: bool = false) -> void:
@@ -217,7 +217,7 @@ func hit_effect(crit: bool = false) -> void:
 	else:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
 	root.modulate = Color("ff0e1b")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.3).set_trans(Tween.TRANS_BOUNCE)
+	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_trans(Tween.TRANS_BOUNCE)
 
 
 func send_flying(attacker: Node) -> void:
@@ -244,7 +244,7 @@ func take_damage_from(enemy, no_crit: bool = false, override_damage: int = 0) ->
 		apply_hp(-max_hp)
 	else:
 		apply_hp(-(damage * damage_received_mult))
-	$Damage.text = str(damage) + crit_text
+	$Damage.text = str(int(damage * damage_received_mult)) + crit_text
 	animation_player_damage.play("damage")
 	check_low_hp()
 	return critted && !no_crit

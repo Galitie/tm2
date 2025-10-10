@@ -4,14 +4,14 @@ class_name Chase
 var monster: CharacterBody2D
 var target_mon: CharacterBody2D
 var chase_time: float
-var move_speed_adjust: int = 10
+var move_speed_adjust: int = 15
 
 var avoidance_radius: float = 96.0
-var avoidance_strength: float = 2.0
+var avoidance_strength: float = 4.0
 var max_accel: float = 5000.0
 
 # --- Side-chase settings ---
-var side_offset: float = 72.0     # how far to the side of the target to aim
+var side_offset: float = 50     # how far to the side of the target to aim
 var side_sign: int = 1            # +1 = target's right, -1 = target's left
 var lead_time: float = 0.15       # small predictive lead, optional
 
@@ -45,11 +45,11 @@ func Physics_Update(delta: float) -> void:
 		var right_vec = forward.orthogonal()
 		side_offset = target_mon.body_collision.shape.radius * 1.25
 		var side_goal = predicted + right_vec * side_offset * side_sign
-
+		
 		var to_goal = side_goal - monster.global_position
 		var dist = to_goal.length()
 		chase_time -= delta
-		if dist > (target_mon.body_collision.shape.radius * 1.25) and target_mon.current_hp > 0.0 and chase_time > 0.0:
+		if dist > (target_mon.body_collision.shape.radius * 1.15) and target_mon.current_hp > 0.0 and chase_time > 0.0:
 			var desired_dir = Vector2()
 			if dist > 0.0:
 				desired_dir = to_goal.normalized()

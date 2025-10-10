@@ -105,21 +105,18 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "5"
 
 [node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "5"
 
 [node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "Damage"
 
 [node name="Stat2" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
@@ -130,21 +127,18 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "5"
 
 [node name="Amount2" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "5"
 
 [node name="Stat2" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat2"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
-text = "Damage"
 
 [node name="Stat3" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
@@ -168,7 +162,11 @@ visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
 
-[node name="Tags" type="Label" parent="CardInfo/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CardInfo/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Tags" type="Label" parent="CardInfo/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12

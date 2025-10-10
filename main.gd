@@ -221,6 +221,10 @@ func set_upgrade_mode():
 		sudden_death_speed_set = false
 		for player in players:
 			player.monster.move_speed -= sudden_death_speed
+	$Rankings.visible = false
+	$Rankings.text = "Previous round points:\n"
+	for player in players:
+		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -253,6 +257,8 @@ func set_upgrade_mode():
 func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
+	$Rankings.visible = true
+	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -330,8 +336,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
-				player.monster.damage_dealt_mult = 2.0
-				player.monster.damage_received_mult = 2.0
+				player.monster.damage_dealt_mult *= 1.25
+				player.monster.damage_received_mult *= 2.0
 			"larger_poops":
 				player.larger_poops = true
 			"chaser":
@@ -436,7 +442,12 @@ func check_if_game_over():
 		$UpgradePanel.hide()
 		$WinnersLabel.show()
 		print("game over")
+		
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
+		$Rankings.visible = true
+		$Rankings.text = "Rankings:\n"
+		for player in players:
+			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:

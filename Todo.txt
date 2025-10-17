@@ -6,6 +6,8 @@ Guiding lights:
 
 Features to make it playtest ready:
 	More Cards (Galit)
+	More Specials (Galit)
+	Update special names so they make more sense lol
 	More Accessories (Raam)
 	Fix color customization / randomization functionality (Raam)
 	Add back in explode on death
@@ -23,7 +25,6 @@ Features to make it playtest ready:
 		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 		Stats? What you have picked previously? (Galit)
 		Special move that a player can activate once per round? (Galit)
-		Damage function issues (send help) phantom damage and misreported damage (Galit)
 
 
 Todo:

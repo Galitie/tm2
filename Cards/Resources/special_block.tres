@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_skv6c")
 card_name = "NO WAY JOSE"
-description = "Once per round, if triggered, immediately block"
+description = "Once per round, if triggered, immediately BLOCK"
 Type = "special"
 state_id = "specialblock"
 unique = true

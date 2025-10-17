@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bnduresmutm6t"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_wp4es"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_pi5m0"]
+
+[resource]
+script = ExtResource("2_pi5m0")
+card_name = "BLAM!"
+description = "Once per round, if triggered, immediately ATTACK"
+Type = "special"
+state_id = "specialattack"
+unique = true
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_wp4es")]([])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0

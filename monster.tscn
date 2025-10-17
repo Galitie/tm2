@@ -1,8 +1,10 @@
-[gd_scene load_steps=32 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=34 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
 [ext_resource type="Script" uid="uid://dyu6tu7ni8b48" path="res://StateMachine/special_block.gd" id="8_u8wmr"]
+[ext_resource type="Script" uid="uid://tslk8jsuh3ys" path="res://StateMachine/special_attack.gd" id="9_s0vvg"]
+[ext_resource type="Script" uid="uid://vbeaxcuqrnkg" path="res://StateMachine/special_poop.gd" id="10_o122v"]
 [ext_resource type="Script" uid="uid://btxypp2upng2q" path="res://Cards/Scripts/spiky_block.gd" id="16_5105l"]
 [ext_resource type="Script" uid="uid://qbs8cikjj5vp" path="res://StateMachine/pooping.gd" id="17_lqt3o"]
 [ext_resource type="Script" uid="uid://cueda0va4rji" path="res://StateMachine/bombing.gd" id="18_a7j2b"]
@@ -174,6 +176,12 @@ script = ExtResource("23_x38pf")
 
 [node name="SpecialBlock" type="Node" parent="StateMachine"]
 script = ExtResource("8_u8wmr")
+
+[node name="SpecialAttack" type="Node" parent="StateMachine"]
+script = ExtResource("9_s0vvg")
+
+[node name="SpecialPoop" type="Node" parent="StateMachine"]
+script = ExtResource("10_o122v")
 
 [node name="BasicCharge" type="Node" parent="StateMachine"]
 script = ExtResource("24_pu8g8")

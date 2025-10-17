@@ -271,10 +271,10 @@ func set_upgrade_mode():
 func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
+	reset_specials_text()
 	$Rankings.visible = true
 	$Specials.visible = true
 	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
-	reset_specials_text()
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -387,6 +387,12 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"matrix":
 				player.matrix = true
 			"specialblock":
+				player.monster.state_machine.state_choices[card_resource.Type].clear()
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+			"specialattack":
+				player.monster.state_machine.state_choices[card_resource.Type].clear()
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+			"specialpoop":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 			_:
@@ -535,5 +541,5 @@ func reset_specials_text():
 		specials[index].text = ""
 		if player.monster.state_machine.special_values != []:
 			specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
-			specials[index].text = "Press Ⓨ to use: " + player.monster.state_machine.special_values[0]
+			specials[index].text = "Press Y to use: " + player.monster.state_machine.special_values[0]
 		index += 1

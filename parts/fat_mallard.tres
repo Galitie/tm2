@@ -13,4 +13,5 @@ offset = Vector2(-6.665, -16.095)
 connections = Array[ExtResource("1_xgpa6")]([])
 hurtbox_offset = Vector2(0, 0)
 hurtbox_size = Vector2(0, 0)
+is_accessory = true
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

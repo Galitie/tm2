@@ -13,4 +13,5 @@ offset = Vector2(-0.205, -12.79)
 connections = Array[ExtResource("1_lxcb0")]([])
 hurtbox_offset = Vector2(0, 0)
 hurtbox_size = Vector2(0, 0)
+is_accessory = true
 metadata/_custom_type_script = "uid://bba020kqbcn8s"

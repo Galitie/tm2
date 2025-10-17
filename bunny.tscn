@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://7gu2g6yyeyis"]
+[gd_scene load_steps=22 format=4 uid="uid://7gu2g6yyeyis"]
 
 [ext_resource type="Texture2D" uid="uid://cwfb74jc5u0fe" path="res://parts/bunny_body.png" id="1_dvrf6"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="1_g7ptr"]
 [ext_resource type="Texture2D" uid="uid://b23nwbglaf6d" path="res://parts/bunny_head.png" id="2_e4qck"]
+[ext_resource type="Script" uid="uid://cwh7rpj3fn4nl" path="res://monster_part_node.gd" id="3_m81kn"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="4_vonwv"]
 [ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="5_5ecvt"]
 [ext_resource type="Texture2D" uid="uid://bqwf0vmacytjd" path="res://parts/top_hat.png" id="5_11snv"]
@@ -49,6 +50,7 @@ metadata/_edit_lock_ = true
 
 [node name="HEAD" type="Node2D" parent="BODY"]
 position = Vector2(21, -22)
+script = ExtResource("3_m81kn")
 
 [node name="HEAD_anim_offset" type="Node2D" parent="BODY/HEAD"]
 

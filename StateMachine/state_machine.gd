@@ -6,18 +6,20 @@ var states : Dictionary = {}
 @onready var current_state_label = $"../CurrentState"
 
 
-var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "other", "special"]
+var keys = ["wander", "chase", "idle", "charge_attack", "basic_attack", "block", "poop", "special"]
 var weights = PackedFloat32Array([1,1.75,1,1,1,1,1,0])
 
+# Starting deck
 var wander_values = ["wander"]
 var chase_values = ["chase"]
 var idle_values = ["idle"]
 var charge_attack_values = ["basiccharge"]
 var basic_attack_values = ["punch"]
 var block_values = ["block"]
-var other_values = ["pooping"]
+var poop_values = ["pooping"]
 var special_values = []
-var state_choices : Dictionary = {"wander" : wander_values, "chase" : chase_values, "idle" : idle_values, "charge_attack" : charge_attack_values, "basic_attack" : basic_attack_values, "block" : block_values, "other" : other_values, "special" : special_values}
+
+var state_choices : Dictionary = {"wander" : wander_values, "chase" : chase_values, "idle" : idle_values, "charge_attack" : charge_attack_values, "basic_attack" : basic_attack_values, "block" : block_values, "poop" : poop_values, "special" : special_values}
 
 var rng = RandomNumberGenerator.new()
 

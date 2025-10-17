@@ -66,6 +66,7 @@ func init(monster: Monster, part: MonsterPart, parent: Node2D, front_shader: Sha
 			sprite.material.set_shader_parameter("parent_part_color", parent_part.sprite.material.get_shader_parameter("part_color"))
 		
 		# NOTE: https://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
+		# Randomly select a fixed palette and generate colors from there
 		var part_color: Color = Color(randf_range(0.0, 1), randf_range(0.0, 1), randf_range(0.0, 1))
 		sprite.material.set_shader_parameter("part_color", part_color)
 		

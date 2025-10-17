@@ -28,7 +28,7 @@ func Enter():
 		monster.animation_player.play("walk", -1.0, 2.0)
 	monster.toggle_collisions(false)
 	monster.velocity = Vector2()
-	monster.apply_hp(monster.max_hp)
+	monster.modify_hp(monster.max_hp)
 	monster.z_index = 1
 	
 

@@ -41,11 +41,7 @@ func debug_stuff():
 				targetable_monsters.append(monster)
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
-			target_monster.take_damage_from(target_monster)
-			if Globals.is_sudden_death_mode:
-				target_monster.send_flying(target_monster)
-			else:
-				target_monster.state_machine.transition_state("knockedout")
+			target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
@@ -405,8 +401,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 func apply_card_attribute(attribute, amount, player):
 	match attribute:
 		CardResourceScript.Attributes.HP:
-			player.monster.max_hp += amount
-			player.monster.apply_hp(player.monster.max_hp)
+			player.monster.modify_max_hp(amount)
+			player.monster.modify_hp(player.monster.max_hp)
 		CardResourceScript.Attributes.MOVE_SPEED:
 			player.monster.move_speed += amount
 		CardResourceScript.Attributes.BASE_DAMAGE:

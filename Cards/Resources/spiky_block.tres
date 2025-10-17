@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://dyvymb65crfuv"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_2cjdi"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_q4vpd"]
 
 [resource]
 script = ExtResource("2_q4vpd")
 card_name = "SPIKY BLOCK"
-description = "BLOCKS and reflects DMG on successful BLOCKs"
+description = "BLOCKS longer and reflects DMG on successful BLOCKs"
 Type = "block"
 state_id = "spikyblock"
 unique = true
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_2cjdi")]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

@@ -6,7 +6,7 @@ var monster: CharacterBody2D
 var health_fill_style := load("uid://b1cqxdsndopa") as StyleBox
 
 func Enter():
-	monster.apply_hp(monster.max_hp)
+	monster.modify_hp(monster.max_hp)
 	monster.animation_player.play("get_up")
 	monster.get_node("HPBar").visible = true
 	monster.hp_bar.add_theme_stylebox_override("fill", health_fill_style)

@@ -11,9 +11,17 @@ var avoidance_strength: float = 4.0
 var max_accel: float = 5000.0
 
 # --- Side-chase settings ---
-var side_offset: float = 72.0     # how far to the side of the target to aim
-var side_sign: int = 1            # +1 = target's right, -1 = target's left
-var lead_time: float = 0.15       # small predictive lead, optional
+var side_offset: float = 72.0      # lateral offset from target center
+var side_sign: int = 1             # +1 right, -1 left (sticky but can swap)
+var lead_time: float = 0.15
+
+# --- Side selection stability & attack reach ---
+var side_stick_bias: float = 24.0      # other side must be this many px closer to flip
+var side_reselect_cooldown: float = 0.25
+var side_reselect_timer: float = 0.0
+
+var attack_range_scale: float = 1.5        # can attack if within r * scale of target center
+var side_arrive_radius_factor: float = 0.55 # can attack if within this fraction of side_offset
 
 
 func randomize_chase():
@@ -30,48 +38,111 @@ func Exit():
 
 
 func Physics_Update(delta: float) -> void:
-	if target_mon:
-		var predicted = target_mon.global_position + target_mon.velocity * lead_time
-		var forward: Vector2
-		if target_mon.velocity.length() > 1.0:
-			forward = target_mon.velocity.normalized()
+	if target_mon == null:
+		return
+
+	side_reselect_timer = max(0.0, side_reselect_timer - delta)
+
+	# Predict target and derive forward/right vectors
+	var predicted = target_mon.global_position + target_mon.velocity * lead_time
+	var forward: Vector2
+
+	if target_mon.velocity.length() > 1.0:
+		forward = target_mon.velocity.normalized()
+	else:
+		var to_target_now = predicted - monster.global_position
+		if to_target_now.length() > 0.0:
+			forward = to_target_now.normalized()
 		else:
-			var to_target_now = predicted - monster.global_position
-			if to_target_now.length() > 0.0:
-				forward = to_target_now.normalized()
-			else:
-				forward = Vector2(1, 0)
+			forward = Vector2(1, 0)
 
-		var right_vec = forward.orthogonal()
-		side_offset = target_mon.body_collision.shape.radius * 1.25
-		var side_goal = predicted + right_vec * side_offset * side_sign
-		var to_goal = side_goal - monster.global_position
-		var dist = to_goal.length()
-		chase_time -= delta
-		if dist > (target_mon.body_collision.shape.radius * 1.50) and target_mon.current_hp > 0.0 and chase_time > 0.0:
-			var desired_dir = Vector2()
-			if dist > 0.0:
-				desired_dir = to_goal.normalized()
+	var right_vec = forward.orthogonal()
 
-			# Avoidance contribution
-			var avoidance = get_avoidance_vector()
-			if avoidance.length() > 0.0001:
-				desired_dir = (desired_dir + avoidance).normalized()
+	# Robust target radius (fallback if body_collision/radius not present)
+	var target_r := 32.0
+	if "body_collision" in target_mon and target_mon.body_collision and "shape" in target_mon.body_collision:
+		if "radius" in target_mon.body_collision.shape:
+			target_r = float(target_mon.body_collision.shape.radius)
 
-			var desired_velocity = desired_dir * monster.move_speed
-			var steering = desired_velocity - monster.velocity
-			if steering.length() > max_accel:
-				steering = steering.normalized() * max_accel
+	# Dynamic offsets & thresholds
+	side_offset = max(side_offset, target_r * 1.25)
+	var attack_radius = target_r * attack_range_scale
+	var side_arrive_radius = max(8.0, side_offset * side_arrive_radius_factor)
 
-			monster.velocity = monster.velocity + steering * delta
+	# Compute both side goals relative to current facing
+	var side_goal_right = predicted + right_vec * side_offset
+	var side_goal_left  = predicted - right_vec * side_offset
+
+	var to_right = side_goal_right - monster.global_position
+	var to_left  = side_goal_left  - monster.global_position
+	var d_right  = to_right.length()
+	var d_left   = to_left.length()
+
+	# --- Attack no matter what side we end up on ---
+	var center_dist = (predicted - monster.global_position).length()
+	var near_either_side = false
+	if d_right <= side_arrive_radius or d_left <= side_arrive_radius:
+		near_either_side = true
+
+	chase_time -= delta
+	var can_keep_chasing = target_mon.current_hp > 0.0 and chase_time > 0.0
+
+	if (center_dist <= attack_radius or near_either_side) and can_keep_chasing:
+		monster.velocity = Vector2.ZERO
+		var rand = [1, 2].pick_random()
+		if rand == 1:
+			ChooseNewState.emit("basic_attack")
+			return
 		else:
-			monster.velocity = Vector2()
-			var rand = [1, 2].pick_random()
-			if rand == 1:
-				ChooseNewState.emit("basic_attack")
-				return
-			else:
-				ChooseNewState.emit("charge_attack")
+			ChooseNewState.emit("charge_attack")
+			return
+
+	# --- Choose side with hysteresis (prevent flip-flop when target spins) ---
+	if side_reselect_timer == 0.0:
+		var cur_d: float
+		var other_d: float
+		if side_sign >= 0:
+			cur_d = d_right
+			other_d = d_left
+		else:
+			cur_d = d_left
+			other_d = d_right
+
+		if other_d < cur_d - side_stick_bias:
+			side_sign = -side_sign
+			side_reselect_timer = side_reselect_cooldown
+
+	# Pursue current side
+	var side_goal: Vector2
+	if side_sign >= 0:
+		side_goal = side_goal_right
+	else:
+		side_goal = side_goal_left
+
+	var to_goal = side_goal - monster.global_position
+	var dist = to_goal.length()
+
+	if dist > 1.0 and can_keep_chasing:
+		var desired_dir = to_goal.normalized()
+
+		# Avoidance contribution
+		var avoidance = get_avoidance_vector()
+		if avoidance.length() > 0.0001:
+			desired_dir = (desired_dir + avoidance).normalized()
+
+		var desired_velocity = desired_dir * monster.move_speed
+		var steering = desired_velocity - monster.velocity
+		if steering.length() > max_accel:
+			steering = steering.normalized() * max_accel
+
+		monster.velocity += steering * delta
+	else:
+		monster.velocity = Vector2.ZERO
+		var rand2 = [1, 2].pick_random()
+		if rand2 == 1:
+			ChooseNewState.emit("basic_attack")
+		else:
+			ChooseNewState.emit("charge_attack")
 
 
 func select_target():
@@ -108,11 +179,11 @@ func get_avoidance_vector() -> Vector2:
 		var d = offset.length()
 		if d > 0.0 and d < avoidance_radius:
 			var weight = (1.0 - (d / avoidance_radius)) * avoidance_strength
-			push_sum = push_sum + offset.normalized() * weight
+			push_sum += offset.normalized() * weight
 
 	if push_sum.length() > 0.0001:
 		return push_sum.normalized()
-	return Vector2()
+	return Vector2.ZERO
 
 
 func get_neighbor_monsters() -> Array[CharacterBody2D]:

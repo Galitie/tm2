@@ -33,68 +33,6 @@ var body_animations: Dictionary[MonsterPart.MONSTER_TYPE, AnimationLibrary] = {
 
 func _ready() -> void:
 	back_shader.shader = load("uid://3uoclq0ivabh")
-
-func GeneratePart(monster: Monster, part: MonsterPart, connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
-	var position_node: Node2D = Node2D.new()
-	var part_sprite: Sprite2D = Sprite2D.new()
-	
-	if part.type != MonsterPart.PART_TYPE.EYE:
-		match part.type:
-			MonsterPart.PART_TYPE.FORELEG:
-				part_sprite.self_modulate = monster.base_color
-			MonsterPart.PART_TYPE.HINDLEG:
-				part_sprite.self_modulate = monster.base_color
-			MonsterPart.PART_TYPE.BODY:
-				part_sprite.self_modulate = monster.base_color
-			MonsterPart.PART_TYPE.HAT:
-				pass
-			MonsterPart.PART_TYPE.CAPE:
-				pass
-			MonsterPart.PART_TYPE.GLASSES:
-				pass
-			_:
-				part_sprite.self_modulate = monster.secondary_color
-				
-	position_node.name = MonsterPart.PART_TYPE.keys()[part.type];
-	
-	if connection != null:
-		if connection.is_back:
-			position_node.name += "_back"
-			position_node.show_behind_parent = true
-			part_sprite.material = back_shader
-			
-		position_node.position = connection.position
-	
-	part_sprite.texture = part.texture
-	part_sprite.name = "sprite"
-	
-	part_sprite.offset = part.offset
-	if part.monster_type != MonsterPart.MONSTER_TYPE.ACCESSORY && parent_part != null && part.monster_type != parent_part.monster_type:
-		part_sprite.offset = (part.offset + parts[parent_part.monster_type][part.type].offset) * 0.5
-	
-	if part.hurtbox_size:
-		var hurtbox: Area2D = Area2D.new()
-		hurtbox.add_to_group("HurtBox")
-		hurtbox.name = "hurtbox"
-		
-		var shape: CollisionShape2D = CollisionShape2D.new()
-		shape.name = "shape"
-		
-		var rect: RectangleShape2D = RectangleShape2D.new()
-		
-		rect.size = part.hurtbox_size
-		shape.shape = rect
-		shape.position = part.hurtbox_offset
-		
-		hurtbox.add_child(shape)
-		position_node.add_child(hurtbox)
-	
-	var anim_offset: Node2D = Node2D.new()
-	anim_offset.name = position_node.name + "_anim_offset"
-	anim_offset.add_child(part_sprite)
-	position_node.add_child(anim_offset)
-	
-	return position_node
 	
 func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 	var parts_of_type: Array[MonsterPart] = []
@@ -110,27 +48,33 @@ func GetMonsterPartsGroupName(monster: Monster) -> String:
 
 # TODO: Used right now for the placeholder customizer, needs work to be more flexible
 func RandomizeColor(monster: Monster):
-	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
-		var part_sprite = part.get_child(0).get_child(0)
-		if part_sprite is Sprite2D:
-			part_sprite.self_modulate = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
+	for part: MonsterPartNode in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
+		part.sprite.self_modulate = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
 
-# TODO: This doesn't take back parts into account since they're named [PART_back]
 func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
-	var part_found: bool = false
+	var part_to_replace: MonsterPartNode
+	var front_part_to_replace: MonsterPartNode
+	var back_part_to_replace: MonsterPartNode
 	
 	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
-		var monster_part_index = MonsterPart.PART_TYPE.keys().find(part.name)
-		if monster_part_index != -1 && monster_part.type == MonsterPart.PART_TYPE.values()[monster_part_index]:
-			var part_sprite: Sprite2D = part.get_child(0).get_child(0)
-			part_sprite.offset = monster_part.offset
-			part_sprite.texture = monster_part.texture
+			if part is MonsterPartNode:
+				if monster_part.type == part.part_ref.type:
+					if part.connection_ref.is_back:
+						back_part_to_replace = part
+					else:
+						front_part_to_replace = part
+						
+	if front_part_to_replace != null && back_part_to_replace != null:
+		var add_back_part: bool = randi() % 2
+		part_to_replace = back_part_to_replace if add_back_part else front_part_to_replace
+	else:
+		part_to_replace = front_part_to_replace if back_part_to_replace == null else back_part_to_replace
 			
-			part_found = true
-			break
-			
-	if !part_found:
-		print("Part with type %s not found on monster: discarding part" % monster.name)
+	if part_to_replace != null:
+		part_to_replace.sprite.offset = monster_part.offset
+		part_to_replace.sprite.texture = monster_part.texture
+	else:
+		print("Part with type %s not found on monster: discarding part" % MonsterPart.PART_TYPE.keys()[monster_part.type])
 
 func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
 	if parent is CanvasGroup && new_part.type == MonsterPart.PART_TYPE.BODY:
@@ -139,89 +83,26 @@ func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connecti
 			anim_player.remove_animation_library("")
 		anim_player.add_animation_library("", body_animations[new_part.monster_type])
 	
-	var new_part_node: Node2D = GeneratePart(monster, new_part, _connection, parent_part)
+	var new_part_node: MonsterPartNode = MonsterPartNode.new()
+	new_part_node.init(monster, new_part, back_shader, _connection)
 	
 	for connection: MonsterConnection in new_part.connections:
-		var part: MonsterPart = null
+		var part: MonsterPart
 		
-		# TODO: This can be better
-		match connection.part_type:
-			MonsterPart.PART_TYPE.HAT:
-				part = MonsterPart.new()
-				part.type = MonsterPart.PART_TYPE.HAT
-			MonsterPart.PART_TYPE.CAPE:
-				part = MonsterPart.new()
-				part.type = MonsterPart.PART_TYPE.CAPE
-			MonsterPart.PART_TYPE.GLASSES:
-				part = MonsterPart.new()
-				part.type = MonsterPart.PART_TYPE.GLASSES
-			_:
-				part = GetRandomPart(connection.part_type)
+		if connection.is_accessory:
+			part = MonsterPart.new()
+			part.type = connection.part_type
+		else:
+			part = GetRandomPart(connection.part_type)
 			
 		var part_node: Node2D = Generate(monster, new_part_node, part, connection, new_part)
 	
 	if parent_part != null && parent_part.type != MonsterPart.PART_TYPE.BODY:
-		var anim_offset_node: Node2D = parent.get_child(0)
-		anim_offset_node.add_child(new_part_node)
+		if parent is MonsterPartNode:
+			parent.anim_offset.add_child(new_part_node)
 	else:
 		parent.add_child(new_part_node)
 		
 	new_part_node.add_to_group(GetMonsterPartsGroupName(monster))
 	
 	return parent
-	
-
-# TODO: Figure out this color nonsense
-func SetColors(monster: Monster) -> void:
-	var canvas_rect: Array[float] = [get_viewport().size.x, get_viewport().size.y, 0.0, 0.0];
-	
-	for part in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
-		var child = part.get_child(0)
-		
-		# Skip animation offset nodes
-		if child is Node2D:
-			child = child.get_child(0)
-			
-		if child is Sprite2D:
-			var min_x: float = child.global_position.x - (child.texture.get_width() / 2)
-			if min_x < canvas_rect[0]:
-				canvas_rect[0] = min_x
-				
-			var max_x: float = child.global_position.x + (child.texture.get_width() / 2)
-			if max_x > canvas_rect[2]:
-				canvas_rect[2] = max_x
-				
-			var min_y: float = child.global_position.y - (child.texture.get_height() / 2)
-			if min_y < canvas_rect[1]:
-				canvas_rect[1] = min_y
-				
-			var max_y: float = child.global_position.y + (child.texture.get_height() / 2)
-			if max_y > canvas_rect[3]:
-				canvas_rect[3] = max_y
-				
-			var test = "%f, %f, %f, %f"
-			var format = test % [min_x, max_x, min_y, max_y]
-	
-	var part_positions_in_canvas_space: Array[Vector2] = [];
-	part_positions_in_canvas_space.resize(10)
-	part_positions_in_canvas_space.fill(Vector2.ZERO)
-	
-	var part_colors: Array[Vector4] = [];
-	part_colors.resize(10)
-	part_colors.fill(Vector4.ZERO)
-	
-	var parts: Array[Node] = get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster))
-	
-	for i in range(parts.size()):
-		var child = parts[i].get_child(0)
-		if child is Node2D && child.get_child(0) != null:
-			child = child.get_child(0)
-			
-		part_positions_in_canvas_space[i].x = remap(child.global_position.x, canvas_rect[0], canvas_rect[2], 0.0, 1.0)
-		part_positions_in_canvas_space[i].y = remap(child.global_position.y, canvas_rect[1], canvas_rect[3], 0.0, 1.0)
-		
-		var random_color: Color = Color(randf(), randf(), randf())
-		part_colors[i] = Vector4(random_color.r, random_color.g, random_color.b, 1.0)
-
-	monster.root.material.set_shader_parameter("positions", part_positions_in_canvas_space)
-	monster.root.material.set_shader_parameter("colors", part_colors)

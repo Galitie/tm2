@@ -37,12 +37,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
 text = "Reroll Upgrades"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
 [node name="DudeWindow" type="MarginContainer" parent="VBoxContainer"]

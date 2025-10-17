@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
 
 [node name="Panel" type="PanelContainer"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(100, 120)
 offset_right = 121.0
 offset_bottom = 113.0
 size_flags_horizontal = 3
@@ -74,6 +74,7 @@ theme = ExtResource("1_8erfr")
 
 [node name="TitleDescription" type="VBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="Title" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 unique_name_in_owner = true
@@ -88,6 +89,7 @@ autowrap_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+theme_override_constants/line_spacing = 2
 theme_override_font_sizes/font_size = 14
 text = "Description"
 autowrap_mode = 3
@@ -95,6 +97,7 @@ autowrap_mode = 3
 [node name="Items" type="VBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_8erfr")
+theme_override_constants/separation = 2
 
 [node name="Stat1" type="HBoxContainer" parent="CardInfo/MarginContainer/VBoxContainer/Items"]
 layout_mode = 2
@@ -105,12 +108,14 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
+theme_override_constants/line_spacing = 2
 
 [node name="Amount" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("1_8erfr")
+theme_override_constants/line_spacing = 2
 
 [node name="Stat" type="Label" parent="CardInfo/MarginContainer/VBoxContainer/Items/Stat1"]
 unique_name_in_owner = true
@@ -170,5 +175,6 @@ alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+vertical_alignment = 2
 
 [connection signal="pressed" from="CardInfo" to="." method="_on_button_pressed" binds= [0]]

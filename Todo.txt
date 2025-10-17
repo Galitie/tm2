@@ -41,6 +41,7 @@ Todo:
 
 
 Card ideas:
+	Poop on getting hit
 	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
 	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?

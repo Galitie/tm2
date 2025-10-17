@@ -95,6 +95,8 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
+			if area.is_in_group("Projectile") and area.owner.monster == self:
+				return
 			take_damage(attacker, current_state, true)
 			return
 	
@@ -126,10 +128,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var crit_text : String
 	var mod_text : String
 	var random_modifier : int
-	if Globals.is_sudden_death_mode:
-		modify_hp(-max_hp)
-		send_flying(attacker)
-		return
 	if override_damage:
 		modify_hp(-override_damage)
 		$Damage.text = str(override_damage)
@@ -145,6 +143,10 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		play_generic_sound("uid://cf8aw1xy3pg34")
 		root.modulate = Color("3467ff")
 		get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+		return
+	if Globals.is_sudden_death_mode:
+		modify_hp(-max_hp)
+		send_flying(attacker)
 		return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name

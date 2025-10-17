@@ -7,7 +7,7 @@ Guiding lights:
 Features to make it playtest ready:
 	More Cards (Galit)
 	More Specials (Galit)
-	Update special names so they make more sense lol
+	Update special names so they make more sense lol (Galit)
 	More Accessories (Raam)
 	Fix color customization / randomization functionality (Raam)
 	Add back in explode on death
@@ -22,17 +22,13 @@ Features to make it playtest ready:
 		Menu, hard to know if something is selected (Raam)
 		Needs music and sound effects (Raam)
 		Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
-		Poops have player main color around them? (Raam)
 		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 		Stats? What you have picked previously? (Galit)
-		Special move that a player can activate once per round? (Galit)
 
 
 Todo:
 	Make controller joystick work (eventually)
-	GDC talks on party games
 	Add dancing
-	Press left to show stats (?) if folks care about this?
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part
 	Sound - Background, effects etc.

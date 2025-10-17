@@ -6,6 +6,7 @@ var upgrade_panel : PlayerUpgradePanel
 var customize_panel : PlayerCustomizePanel
 var controller_port: int = -1
 
+var special_name: String = ""
 var special_used : bool = false
 
 var upgrade_points : int = 0

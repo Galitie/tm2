@@ -7,7 +7,7 @@
 script = ExtResource("2_rdoa5")
 card_name = "BOMBER"
 description = "Chance of POOPING BOMBS. BOMBS DMG everyone including SELF."
-Type = "other"
+Type = "poop"
 state_id = "bombing"
 unique = true
 remove_specific_states = Array[int]([])

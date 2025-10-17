@@ -1,15 +1,17 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://x788fm7x6b4i"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_is20c"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_sqi73"]
 
 [resource]
 script = ExtResource("2_sqi73")
 card_name = "POOPER"
 description = "Will POOP all POOPS more often"
-Type = "other"
+Type = "poop"
 state_id = "pooper"
 unique = false
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_is20c")]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

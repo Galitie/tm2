@@ -7,7 +7,7 @@
 script = ExtResource("2_k3gwj")
 card_name = "LOCKED & LOADED"
 description = "Turn POOPS into SUMMONS that fight for you and SHOOT PROJECTILES"
-Type = "other"
+Type = "poop"
 state_id = "poop_summon"
 unique = true
 remove_specific_states = Array[int]([])

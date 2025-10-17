@@ -389,12 +389,15 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"specialblock":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+				player.special_name = "BLOCKED UP"
 			"specialattack":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+				player.special_name = "QUICK(ER) ATTACK"
 			"specialpoop":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+				player.special_name = "SQUEEZE ONE OUT"
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -541,5 +544,5 @@ func reset_specials_text():
 		specials[index].text = ""
 		if player.monster.state_machine.special_values != []:
 			specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
-			specials[index].text = "Press Y to use: " + player.monster.state_machine.special_values[0]
+			specials[index].text = "Press Y: " + player.special_name
 		index += 1

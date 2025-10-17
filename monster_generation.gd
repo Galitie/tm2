@@ -84,7 +84,7 @@ func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connecti
 		anim_player.add_animation_library("", body_animations[new_part.monster_type])
 	
 	var new_part_node: MonsterPartNode = MonsterPartNode.new()
-	new_part_node.init(monster, new_part, back_shader, _connection)
+	new_part_node.init(monster, new_part, parent, load("uid://b1h6un00sweia"), back_shader, _connection)
 	
 	for connection: MonsterConnection in new_part.connections:
 		var part: MonsterPart
@@ -92,6 +92,7 @@ func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connecti
 		if connection.is_accessory:
 			part = MonsterPart.new()
 			part.type = connection.part_type
+			part.is_accessory = true
 		else:
 			part = GetRandomPart(connection.part_type)
 			

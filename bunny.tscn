@@ -195,7 +195,6 @@ position = Vector2(4, -30)
 texture = ExtResource("11_76uj3")
 
 [node name="hitbox" type="Area2D" parent="." groups=["Attack"]]
-visible = false
 
 [node name="shape" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource("RectangleShape2D_g5rs1")

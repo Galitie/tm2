@@ -161,7 +161,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-(damage * damage_received_mult))
 	elif type == attack_type.THORN:
 		damage = 1
-		mod_text = "THORN"
+		mod_text = " THORN"
 		modify_hp(-damage)
 	elif type == attack_type.BOMB:
 		damage = 10

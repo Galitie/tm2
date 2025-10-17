@@ -220,7 +220,14 @@ func send_flying(attacker: Node) -> void:
 	audio_player.stream = load("uid://dfjgpdho3lcvd")
 	audio_player.play()
 	
-	knockback = (global_position - attacker.global_position).normalized().x
+	var attacker_position: Vector2
+	if attacker != null:
+		attacker_position = attacker.global_position
+	else:
+		attacker_position = global_position
+		
+	knockback = (global_position - attacker_position).normalized().x
+	
 	Globals.game.freeze_frame(self)
 
 

@@ -17,3 +17,5 @@ func animation_finished(anim_name: String):
 			ChooseNewState.emit("poop")
 		else:
 			ChooseNewState.emit()
+	else:
+		ChooseNewState.emit()

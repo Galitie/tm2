@@ -7,14 +7,12 @@ Guiding lights:
 Features to make it playtest ready:
 	More Cards (Galit)
 	More Specials (Galit)
-	Update special names so they make more sense lol (Galit)
 	More Accessories (Raam)
 	Fix color customization / randomization functionality (Raam)
-	Add back in explode on death
+	Add back in explode on death (Galit)
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
 	Show winner at end of round - make them dance (Raam)
-	Log that prints the cards chosen by players, dictionary (Galit)
 	
 	Playtest todos: 
 		Charging looks like humping, leg thumb instead? (Raam)
@@ -41,7 +39,6 @@ Todo:
 
 
 Card ideas:
-	Poop on getting hit
 	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
 	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
@@ -73,10 +70,6 @@ General Ideas:
 	Maybe on sudden death, zoom in / bounds get smaller
 
 
-Potential issues:
-	Not getting enough HP boosts -> can you get this from other cards? Secondary attributte
-	Does HP matter if you're not dealing enough damage because we now have sudden death
-
 
 Builds:
 	Crit
@@ -87,8 +80,6 @@ Builds:
 	Damage
 	Attack Rate
 	Summons
-		Poop
-			Poops twice as much
 
 
 Playtest Notes:
@@ -96,7 +87,6 @@ Playtest Notes:
 		Didn't know what poops do - add guns to ones that do damage?
 		Didn't know what was shooting out the bullets (poops) confusing that it went through some folks and not others
 		Wasn't clear on bomb card that it will hit himself
-		couldn't read healthbar on green background
 		Didn't know what crit mult was
 		Success feedback on block needed
 		Spiky block

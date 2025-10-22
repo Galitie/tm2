@@ -10,5 +10,5 @@ func _ready():
 
 
 func disable():
-	for players in player_customize_panels:
-		players.disabled = true
+	for player in player_customize_panels:
+		player.disabled = true

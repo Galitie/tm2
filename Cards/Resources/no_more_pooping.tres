@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://0fnohogd0jnj"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_jsl2o"]
+[ext_resource type="Resource" uid="uid://cwa076t5bv4ir" path="res://parts/fat_mallard.tres" id="2_5emit"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="3_rhubh"]
+
+[resource]
+script = ExtResource("3_rhubh")
+card_name = "CONSTIPATED"
+description = "Monster is CONSTIPATED and will not POOP unless you add CARDS to do so"
+Type = "passive"
+state_id = ""
+unique = true
+remove_specific_states = Array[int]([6])
+parts_and_acc = Array[ExtResource("1_jsl2o")]([ExtResource("2_5emit")])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0

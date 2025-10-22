@@ -398,6 +398,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "SQUEEZE ONE OUT"
+			"poop_on_hit":
+				player.poop_on_hit = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

@@ -51,7 +51,6 @@ Card ideas:
 	If you are in last place get bonus, first place get penalty
 	Sparkles, glowing
 	Extra damage at low health
-	Blocking reflects damage
 	Teleport
 	Chain lightning
 	Ghost twin, after death summon a ghost version of you that fights

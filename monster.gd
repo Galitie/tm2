@@ -152,6 +152,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bitelifesteal":
+				#TODO: Add a heal notification / text
 				attacker.modify_hp(5)
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
@@ -159,8 +160,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		critted = roll_crit()
 		crit_text = " CRIT" if critted && !ignore_crit else ""
 		random_modifier = randi_range(0,3)
-		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult) + random_modifier
-		modify_hp(-(damage * damage_received_mult))
+		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult * damage_received_mult) + random_modifier 
+		modify_hp(-(damage))
 	elif type == attack_type.THORN:
 		damage = 1
 		mod_text = " THORN"
@@ -171,7 +172,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	elif type == attack_type.PROJECTILE:
 		damage = 1
 		modify_hp(-damage)
-	$Damage.text = str(int(damage * damage_received_mult)) + crit_text + mod_text
+	$Damage.text = str(int(damage)) + crit_text + mod_text
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")

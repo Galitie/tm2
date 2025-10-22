@@ -20,6 +20,7 @@ var more_poops : bool = false
 var larger_poops : bool = false
 var death_explode : bool = false
 var matrix : bool = false
+var poop_on_hit: bool = false
 
 var caltrops: bool = false
 

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bw5vr4ucfdgof" path="res://player.gd" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="3_buypi"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_sasra"]
-[ext_resource type="Resource" uid="uid://4pdhr1tis8vw" path="res://Cards/Resources/poop_on_hit.tres" id="5_rpuu0"]
+[ext_resource type="Resource" uid="uid://3aquqn25lskq" path="res://Cards/Resources/bite_lifesteal.tres" id="5_rpuu0"]
 [ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="6_vr1i5"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="9_vr1i5"]
 [ext_resource type="AudioStream" uid="uid://bnd7vmemesdbl" path="res://sounds/sudden_death.ogg" id="10_vr1i5"]

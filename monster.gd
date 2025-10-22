@@ -28,6 +28,8 @@ var mon_name : String
 @onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player : AnimationPlayer = $root/anim_player
 @onready var animation_player_damage = $AnimationPlayer_Damage
+@onready var animation_player_heal = $AnimationPlayer_Heal
+@onready var heal_label = $Heal
 
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body_collision
@@ -152,8 +154,9 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bitelifesteal":
-				#TODO: Add a heal notification / text
-				attacker.modify_hp(5)
+				attacker.modify_hp(max_hp)
+				attacker.heal_label.text = "HEAL MAX HP"
+				attacker.animation_player_heal.play("heal")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)

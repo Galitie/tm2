@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
-description = "Bites enemy and HEALS +5 HP"
+description = "Bites enemy and HEALS self to MAX HP"
 Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true

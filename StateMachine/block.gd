@@ -10,7 +10,7 @@ var block_threshold: int
 func Enter():
 	done_blocking = false
 	block_cycles = 0
-	block_threshold = 1
+	block_threshold = 1.25
 	monster.animation_player.play("block")
 	monster.velocity = Vector2.ZERO
 

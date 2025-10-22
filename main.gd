@@ -238,6 +238,7 @@ func set_upgrade_mode():
 	$Rankings.visible = false
 	$Rankings.text = "Previous round points:\n"
 	$Specials.visible = false
+	$SlimeTimer.stop()
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -283,6 +284,7 @@ func set_fight_mode():
 		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
 		monster.target_point = fight_pos.global_position
+	$SlimeTimer.start()
 
 
 func _on_sudden_death_timer_timeout():
@@ -400,6 +402,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.special_name = "SQUEEZE ONE OUT"
 			"poop_on_hit":
 				player.poop_on_hit = true
+			"slime_trail":
+				player.slime_trail = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -513,6 +517,15 @@ func spawn_poop(monster):
 	poop.add_to_group("CleanUp")
 
 
+func spawn_slime(monster):
+	var slime = preload("uid://upayf74ibwcl").instantiate()
+	slime.monster = monster
+	slime.global_position = monster.poop_checker.global_position
+	add_child(slime)
+	slime.add_to_group("Slime")
+	slime.add_to_group("CleanUp")
+
+
 func spawn_bomb(monster):
 	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
@@ -548,3 +561,10 @@ func reset_specials_text():
 			specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 			specials[index].text = "Press Y: " + player.special_name
 		index += 1
+
+
+func _on_slime_timer_timeout():
+	for player in players:
+		if player.slime_trail and player.monster.current_hp > 0:
+			spawn_slime(player.monster)
+		

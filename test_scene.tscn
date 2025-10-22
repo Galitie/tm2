@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=14 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="PackedScene" uid="uid://d3fkc0o45x3ja" path="res://monster.tscn" id="1_7a21h"]
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://sudden_death.gdshader" id="1_8pr8v"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bw5vr4ucfdgof" path="res://player.gd" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="3_buypi"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_sasra"]
+[ext_resource type="Resource" uid="uid://beo0p0kljyb5g" path="res://Cards/Resources/slime_trail.tres" id="5_rpuu0"]
 [ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="6_vr1i5"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="9_vr1i5"]
 [ext_resource type="AudioStream" uid="uid://bnd7vmemesdbl" path="res://sounds/sudden_death.ogg" id="10_vr1i5"]
@@ -62,6 +63,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player1" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(262, 192)
 player = NodePath("..")
+pre_loaded_cards = Array[Resource]([ExtResource("5_rpuu0")])
 player_color = Color(1, 0, 0, 1)
 
 [node name="CustomizePos" type="Node2D" parent="Player1"]
@@ -83,6 +85,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player2" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(878, 185)
 player = NodePath("..")
+pre_loaded_cards = Array[Resource]([ExtResource("5_rpuu0")])
 player_color = Color(0, 0, 1, 1)
 
 [node name="CustomizePos" type="Node2D" parent="Player2"]
@@ -104,6 +107,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player3" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(251, 439)
 player = NodePath("..")
+pre_loaded_cards = Array[Resource]([ExtResource("5_rpuu0")])
 player_color = Color(1, 1, 0, 1)
 
 [node name="UpgradePos" type="Node2D" parent="Player3"]
@@ -125,6 +129,7 @@ monster = NodePath("Monster")
 [node name="Monster" parent="Player4" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
 position = Vector2(864, 459)
 player = NodePath("..")
+pre_loaded_cards = Array[Resource]([ExtResource("5_rpuu0")])
 player_color = Color(0, 1, 0, 1)
 
 [node name="UpgradePos" type="Node2D" parent="Player4"]
@@ -266,6 +271,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 18
 
+[node name="SlimeTimer" type="Timer" parent="."]
+wait_time = 0.75
+
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]
 [connection signal="timeout" from="SuddenDeathTimer" to="." method="_on_sudden_death_timer_timeout"]
+[connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]

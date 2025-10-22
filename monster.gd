@@ -12,7 +12,7 @@ var crit_multiplier: float = 1.5
 var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
 var thorns : bool = false
-enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN}
+enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME}
 
 var mon_name : String
 @onready var name_label = $Name
@@ -53,6 +53,8 @@ var target_point : Vector2
 var base_color: Color
 var secondary_color: Color
 @export var player_color: Color
+
+signal spawn_slime(monster)
 
 func _ready():
 	add_to_group("DepthEntity")
@@ -99,6 +101,8 @@ func _on_hurtbox_area_entered(area):
 			attacker = area.get_parent().get_parent()
 			if area.is_in_group("Projectile") and area.owner.monster == self:
 				return
+			if area.is_in_group("Slime") and area.owner.monster == self:
+				return
 			take_damage(attacker, current_state, true)
 			return
 	
@@ -122,7 +126,9 @@ func _on_hurtbox_area_entered(area):
 				
 		if area.is_in_group("Bomb"):
 			take_damage(null, current_state, true, attack_type.BOMB)
-
+		
+		if area.is_in_group("Slime") and area.owner.monster != self:
+			take_damage(null, current_state, true, attack_type.SLIME)
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
@@ -175,6 +181,10 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	elif type == attack_type.PROJECTILE:
 		damage = 1
 		modify_hp(-damage)
+	if type == attack_type.SLIME:
+		damage = 1
+		mod_text = " SLIME"
+		modify_hp(-damage)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
 	animation_player_damage.play("damage")
 	hit_effect(critted)
@@ -216,7 +226,6 @@ func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	root.modulate = Color("6bff7d")
 	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_delay(0.3)
-
 
 
 func send_flying(attacker: Node) -> void:

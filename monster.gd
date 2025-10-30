@@ -135,8 +135,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var crit_text : String
 	var mod_text : String
 	var random_modifier : int
-	if override_damage:
-		modify_hp(-override_damage)
 	if current_state.contains("block"):
 		match current_state.to_lower():
 			"spikyblock":
@@ -147,8 +145,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		root.modulate = Color("3467ff")
 		get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
 		return
-	if Globals.is_sudden_death_mode:
-		modify_hp(-max_hp)
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
@@ -178,17 +174,20 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 1
 		mod_text = " SLIME"
 		modify_hp(-damage)
+	if override_damage:
+		modify_hp(-override_damage)
+		damage = 999
+	if Globals.is_sudden_death_mode:
+		modify_hp(-max_hp)
+	$Damage.text = str(int(damage)) + crit_text + mod_text
+	animation_player_damage.play("damage")
+	hit_effect(critted)
+	state_machine.transition_state("hurt")
 	if current_hp <= 0:
 		toggle_collisions(false)
 		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
 			send_flying(attacker)
-			return
-	$Damage.text = str(int(damage)) + crit_text + mod_text
-	animation_player_damage.play("damage")
-	hit_effect(critted)
-	state_machine.transition_state("hurt")
-
 
 func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)

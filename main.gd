@@ -209,7 +209,6 @@ func _process(_delta):
 
 
 func count_death(monster: Monster):
-	print("hello?")
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
 	current_knocked_out_monsters.append(monster)

@@ -99,9 +99,7 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
-			if area.is_in_group("Projectile") and area.owner.monster == self:
-				return
-			if area.is_in_group("Slime") and area.owner.monster == self:
+			if area.is_in_group("Projectile") or area.is_in_group("Slime") and area.owner.monster == self:
 				return
 			take_damage(attacker, current_state, true)
 			return
@@ -129,6 +127,7 @@ func _on_hurtbox_area_entered(area):
 		
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
+
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
@@ -181,7 +180,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	elif type == attack_type.PROJECTILE:
 		damage = 1
 		modify_hp(-damage)
-	if type == attack_type.SLIME:
+	elif type == attack_type.SLIME:
 		damage = 1
 		mod_text = " SLIME"
 		modify_hp(-damage)

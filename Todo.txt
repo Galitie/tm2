@@ -5,7 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Make slime trail not shitty (Galit)
+	Slimes need floor hitbox (Galit)
 	Add explode on death back in (Galit)
 	More Cards (Galit)
 	More Specials (Galit)

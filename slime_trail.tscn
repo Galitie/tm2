@@ -25,6 +25,7 @@ script = ExtResource("1_ppcr1")
 position = Vector2(0, 14)
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CanvasGroup"]
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xsvd0")
 offset = Vector2(0, -19)
 

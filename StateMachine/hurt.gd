@@ -7,6 +7,7 @@ func Enter():
 	monster.velocity = Vector2.ZERO
 	monster.animation_player.play("hurt")
 
+
 func animation_finished(anim_name: String):
 	if monster.current_hp <= 0:
 		Transitioned.emit("knockedout")
@@ -15,7 +16,5 @@ func animation_finished(anim_name: String):
 		var rand = [0,1].pick_random()
 		if rand:
 			ChooseNewState.emit("poop")
-		else:
-			ChooseNewState.emit()
-	else:
-		ChooseNewState.emit()
+			return
+	ChooseNewState.emit()

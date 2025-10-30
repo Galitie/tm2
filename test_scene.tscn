@@ -211,6 +211,7 @@ horizontal_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_vr1i5")
+parameters/looping = true
 
 [node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2

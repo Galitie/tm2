@@ -21,7 +21,6 @@ var sudden_death_speed : int = 100
 
 @onready var camera: Camera2D = $Camera2D
 var camera_tracking: bool = false
-var camera_zoom_trauma: float = 0.0 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var current_round : int
@@ -50,6 +49,7 @@ func debug_stuff():
 		if start_in_fight_mode:
 			set_fight_mode()
 		else:
+			transition_audio("uid://bnfvpcj04flvs", 0.0)
 			set_upgrade_mode()
 
 
@@ -71,7 +71,6 @@ func listen_for_special_trigger():
 func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
-
 
 func _physics_process(_delta: float) -> void:
 	listen_for_special_trigger()
@@ -107,15 +106,12 @@ func freeze_frame(monster: Monster) -> void:
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
-	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
+	
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
 		camera_tracking = false
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
 		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
-		await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, 5.5).set_trans(Tween.TRANS_EXPO).finished
-		audio_player.playing = false
-		audio_player.volume_db = 0.0
-
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -211,9 +207,11 @@ func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
 	current_knocked_out_monsters.append(monster)
-	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() == player_count:
+	print('death counted')
+	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
 		sudden_death_timer.stop()
 		$RoundOverDelayTimer.start()
+		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
 
 func set_customize_mode():
@@ -229,6 +227,9 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
+	#audio_player.stream = load("uid://bnfvpcj04flvs")
+	#audio_player.play()
+	
 	current_mode = Modes.UPGRADE
 	sudden_death_label.visible = false
 	if sudden_death_speed_set:
@@ -268,8 +269,15 @@ func set_upgrade_mode():
 	upgrade_menu.visible = true
 	check_if_game_over()
 
+func transition_audio(dest_uid: String, length: float = 1.0) -> void:
+	await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, length).finished
+	audio_player.volume_db = 0.0
+	audio_player.stream = load(dest_uid)
+	audio_player.play()
 
 func set_fight_mode():
+	transition_audio("uid://mysomdex1y7k", 0.5)
+	
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()

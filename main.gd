@@ -30,6 +30,7 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 
+
 func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.FIGHT:
 		var targetable_monsters: Array[CharacterBody2D] = []
@@ -137,7 +138,6 @@ func _ready():
 				for pre_loaded_card in player.monster.pre_loaded_cards:
 					apply_card_resource_effects(pre_loaded_card, player)
 	
-	
 	for player_index in players.size():
 		var player = players[player_index]
 		player.controller_port = player_index
@@ -202,6 +202,7 @@ func _process(_delta):
 	#TODO: Make a real game end scene, placeholder for playtesting
 	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
+
 
 func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
@@ -528,7 +529,7 @@ func spawn_poop(monster):
 func spawn_slime(monster):
 	var slime = preload("uid://upayf74ibwcl").instantiate()
 	slime.monster = monster
-	slime.global_position = monster.poop_checker.global_position
+	slime.global_position = monster.global_position + Vector2(0,30)
 	add_child(slime)
 	slime.add_to_group("Slime")
 	slime.add_to_group("CleanUp")
@@ -573,6 +574,5 @@ func reset_specials_text():
 
 func _on_slime_timer_timeout():
 	for player in players:
-		if player.slime_trail and player.monster.current_hp > 0:
+		if player.slime_trail and player.monster.current_hp > 0 and player.monster.velocity != Vector2.ZERO:
 			spawn_slime(player.monster)
-		

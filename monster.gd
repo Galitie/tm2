@@ -99,9 +99,7 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
-			if area.is_in_group("Projectile") and area.owner.monster == self:
-				return
-			if area.is_in_group("Slime") and area.owner.monster == self:
+			if area.is_in_group("Projectile") or area.is_in_group("Slime") and area.owner.monster == self:
 				return
 			take_damage(attacker, current_state, true)
 			return
@@ -130,18 +128,13 @@ func _on_hurtbox_area_entered(area):
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
 
+
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
 	var critted : bool
 	var crit_text : String
 	var mod_text : String
 	var random_modifier : int
-	if override_damage:
-		modify_hp(-override_damage)
-		$Damage.text = str(override_damage)
-		animation_player_damage.play("damage")
-		state_machine.transition_state("hurt")
-		return
 	if current_state.contains("block"):
 		match current_state.to_lower():
 			"spikyblock":
@@ -151,10 +144,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		play_generic_sound("uid://cf8aw1xy3pg34")
 		root.modulate = Color("3467ff")
 		get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
-		return
-	if Globals.is_sudden_death_mode:
-		modify_hp(-max_hp)
-		send_flying(attacker)
 		return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
@@ -181,15 +170,24 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	elif type == attack_type.PROJECTILE:
 		damage = 1
 		modify_hp(-damage)
-	if type == attack_type.SLIME:
+	elif type == attack_type.SLIME:
 		damage = 1
 		mod_text = " SLIME"
 		modify_hp(-damage)
+	if override_damage:
+		modify_hp(-override_damage)
+		damage = 999
+	if Globals.is_sudden_death_mode:
+		modify_hp(-max_hp)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
-
+	if current_hp <= 0:
+		toggle_collisions(false)
+		Globals.game.count_death(self)
+		if Globals.is_sudden_death_mode:
+			send_flying(attacker)
 
 func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)
@@ -234,15 +232,12 @@ func send_flying(attacker: Node) -> void:
 	audio_player.pitch_scale = 1.0
 	audio_player.stream = load("uid://dfjgpdho3lcvd")
 	audio_player.play()
-	
 	var attacker_position: Vector2
 	if attacker != null:
 		attacker_position = attacker.global_position
 	else:
 		attacker_position = global_position
-		
 	knockback = (global_position - attacker_position).normalized().x
-	
 	Globals.game.freeze_frame(self)
 
 

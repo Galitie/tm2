@@ -137,10 +137,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var random_modifier : int
 	if override_damage:
 		modify_hp(-override_damage)
-		$Damage.text = str(override_damage)
-		animation_player_damage.play("damage")
-		state_machine.transition_state("hurt")
-		return
 	if current_state.contains("block"):
 		match current_state.to_lower():
 			"spikyblock":
@@ -192,8 +188,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
-	
-
 
 
 func modify_hp(amount):

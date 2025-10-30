@@ -153,8 +153,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		return
 	if Globals.is_sudden_death_mode:
 		modify_hp(-max_hp)
-		send_flying(attacker)
-		return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
@@ -184,10 +182,18 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 1
 		mod_text = " SLIME"
 		modify_hp(-damage)
+	if current_hp <= 0:
+		toggle_collisions(false)
+		Globals.game.count_death(self)
+		if Globals.is_sudden_death_mode:
+			send_flying(attacker)
+			return
 	$Damage.text = str(int(damage)) + crit_text + mod_text
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
+	
+
 
 
 func modify_hp(amount):
@@ -233,15 +239,12 @@ func send_flying(attacker: Node) -> void:
 	audio_player.pitch_scale = 1.0
 	audio_player.stream = load("uid://dfjgpdho3lcvd")
 	audio_player.play()
-	
 	var attacker_position: Vector2
 	if attacker != null:
 		attacker_position = attacker.global_position
 	else:
 		attacker_position = global_position
-		
 	knockback = (global_position - attacker_position).normalized().x
-	
 	Globals.game.freeze_frame(self)
 
 

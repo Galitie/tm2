@@ -8,6 +8,7 @@ class_name SlimeTrail
 func _ready():
 	#$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)	
 	$Lifetime.start()
+	modulate = monster.player_color
 	
 
 func _physics_process(delta):

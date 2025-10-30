@@ -5,6 +5,8 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Make slime trail not shitty (Galit)
+	Add explode on death back in (Galit)
 	More Cards (Galit)
 	More Specials (Galit)
 	More Accessories (Raam)
@@ -13,7 +15,7 @@ Features to make it playtest ready:
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
 	Show winner at end of round - make them dance (Raam)
-	Add explode on death back in
+
 	
 	Playtest todos: 
 		Charging looks like humping, leg thumb instead? (Raam)

@@ -5,18 +5,16 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Slimes need floor hitbox (Galit)
+	Slimes need floor hitbox (Raam)
 	Add explode on death back in (Galit)
 	More Cards (Galit)
 	More Specials (Galit)
 	More Accessories (Raam)
 	Fix color customization / randomization functionality (Raam)
-	Add back in explode on death (Galit)
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
 	Show winner at end of round - make them dance (Raam)
 
-	
 	Playtest todos: 
 		Charging looks like humping, leg thumb instead? (Raam)
 		Block is unclear (Raam)

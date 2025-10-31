@@ -56,6 +56,10 @@ var secondary_color: Color
 
 signal spawn_slime(monster)
 
+#TODO: Raam, temp stuff for explode on death
+var temp_timer = Timer.new()
+var temp_area = Area2D.new()
+
 func _ready():
 	add_to_group("DepthEntity")
 	
@@ -127,7 +131,8 @@ func _on_hurtbox_area_entered(area):
 		
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
-
+		
+		
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
@@ -176,7 +181,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 	if override_damage:
 		modify_hp(-override_damage)
-		damage = 999
+		damage = override_damage
 	if Globals.is_sudden_death_mode:
 		modify_hp(-max_hp)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
@@ -188,6 +193,34 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
 			send_flying(attacker)
+		elif player.death_explode:
+			explode_on_death()
+
+
+#TODO: Raam explosion animation???
+func explode_on_death():
+	temp_area = Area2D.new()
+	var temp_collision = CollisionShape2D.new()
+	var temp_shape_resource = CircleShape2D.new()
+	var temp_sprite = Sprite2D.new()
+	temp_sprite.texture = load("uid://cgrc4jxdyeooy")
+	temp_sprite.scale = Vector2(3,3)
+	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.50
+	temp_collision.shape = temp_shape_resource
+	temp_area.add_to_group("Bomb")
+	temp_area.add_child(temp_collision)
+	temp_timer = Timer.new()
+	temp_timer.timeout.connect(_on_temp_timer_timeout)
+	temp_timer.wait_time = .40
+	temp_timer.autostart = true
+	temp_area.add_child(temp_timer)
+	temp_area.add_child(temp_sprite)
+	call_deferred("add_child", temp_area)
+
+#TODO: Raam explosion animation???
+func _on_temp_timer_timeout():
+	temp_area.queue_free()
+
 
 func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)

@@ -5,6 +5,10 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Slime build?
+		Bigger?
+		Longer?
+		Kills summons?
 	Add dance animation (hook up in dance state) (Raam)
 	Thorns, explode on death shouldn't happen on sudden death??? Not sure, kept these in for now
 	Zombie Effect (zombify function on monster)(Raam)

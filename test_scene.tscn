@@ -147,7 +147,7 @@ metadata/_edit_lock_ = true
 [node name="CustomizeMenu" parent="." instance=ExtResource("6_vr1i5")]
 
 [node name="RoundOverDelayTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
 one_shot = true
 
 [node name="UpgradeOverDelayTimer" type="Timer" parent="."]

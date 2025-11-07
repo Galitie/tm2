@@ -143,7 +143,7 @@ func update_victory_points():
 
 func setup_rerolls():
 	if player.rerolls > 0:
-		reroll_button.text = "🎲 Reroll All Upgrades " + "[x" + str(player.rerolls) + "]"
+		reroll_button.text = "🎲 Reroll All Abilities " + "[x" + str(player.rerolls) + "]"
 		reroll_button.disabled = false
 	else:
 		reroll_button.text = "No 🎲 Available"

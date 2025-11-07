@@ -208,9 +208,12 @@ func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
 	current_knocked_out_monsters.append(monster)
-	print('death counted')
 	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
 		sudden_death_timer.stop()
+		for winner in monsters:
+			if !current_knocked_out_monsters.has(winner):
+				winner.state_machine.transition_state("dance")
+				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
@@ -474,7 +477,7 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "🎲 Reroll All Upgrades " + "[x" + str(player.rerolls) + "]"
+		upgrade_panel.reroll_button.text = "🎲 Reroll All Abilities " + "[x" + str(player.rerolls) + "]"
 	else:
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
@@ -499,14 +502,16 @@ func check_if_game_over():
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
+			winners[1].monster.state_machine.transition_state("dance")
 			print("Winner:", winners[0].name)
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
 		else:
 			print("It's a tie between:")
-			for p in winners:
-				print("- ", p.name)
+			for winner in winners:
+				print("- ", winner.name)
+				winner.monster.state_machine.transition_state("dance")
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()

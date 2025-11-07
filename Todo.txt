@@ -5,41 +5,35 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Thorns, explode on death shouldn't happen on sudden death?
-	Zombie Effect (Raam)
+	Add dance animation (hook up in dance state) (Raam)
+	Thorns, explode on death shouldn't happen on sudden death??? Not sure, kept these in for now
+	Zombie Effect (zombify function on monster)(Raam)
 	Slimes need floor hitbox (Raam)
-	Replace temp explode on death (Raam)
+	Replace temp explode on death animation (monster) (Raam)
 	More Cards (Galit)
 	More Specials (Galit)
 	More Accessories (Raam)
 	Fix color customization / randomization functionality (Raam)
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
-	Show winner at end of round - make them dance (Raam)
-
-
-Playtest todos: 
 	Charging looks like humping, leg thumb instead? (Raam)
 	Block is unclear (Raam)
 	Menu, hard to know if something is selected (Raam)
 	Needs music and sound effects (Raam)
-	Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
 	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
-	Stats? What you have picked previously? (Galit)
-
-
-Todo:
-	Make controller joystick work (eventually)
-	Add dancing
+	Make controller joystick work (eventually?)
 	Place logic - 1st, 2nd, 3rd etc. based off of total player points
-	Show preview of accessory or body part
+	Show preview of accessory or body part (Raam)
 	Sound - Background, effects etc.
-	Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 	Menus - sound, etc.
-	Variable player amount
-	Backgrounds
-	Save, play games to get achievements to unlock accessories
-	Achievements, like get 0 points, total kills > 100 etc.
+
+	Bonuses:
+		Variable player amount?
+		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
+		Bots
+		Backgrounds
+		Save, play games to get achievements to unlock accessories
+		Achievements, like get 0 points, total kills > 100 etc.
 
 
 Card ideas:
@@ -53,7 +47,6 @@ Card ideas:
 	Extra damage at low health
 	Teleport
 	Chain lightning
-	Ghost twin, after death summon a ghost version of you that fights
 	Crazy damage, only one hp
 	Moves faster every 5 seconds of a round
 	Auto repair bots

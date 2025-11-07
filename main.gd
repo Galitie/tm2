@@ -249,6 +249,7 @@ func set_upgrade_mode():
 	var rerolls_amount_counter = 0
 	for player in players:
 		player.special_used = false
+		player.monster.unzombify()
 		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		monster.move_name_upgrade()
@@ -415,6 +416,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.slime_trail = true
 			"block_longer":
 				player.block_longer = true
+			"zombie":
+				player.zombie = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

@@ -191,6 +191,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
 	if current_hp <= 0:
+		if player.zombie and !player.revived:
+			zombify()
+			state_machine.transition_state("wander")
+			return
+		state_machine.transition_state("knockedout")
 		toggle_collisions(false)
 		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
@@ -219,10 +224,23 @@ func explode_on_death():
 	temp_area.add_child(temp_sprite)
 	call_deferred("add_child", temp_area)
 
+
 #TODO: Raam explosion animation???
 func _on_temp_timer_timeout():
 	temp_area.queue_free()
 
+
+func zombify():
+	player.revived = true
+	modify_hp(1)
+	root.modulate = Color.DARK_GREEN
+	$Heal.text = "+1 HP ZOMBIE"
+	animation_player_heal.play("heal")
+
+
+func unzombify():
+	player.revived = false
+	root.modulate = Color.WHITE
 
 func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)

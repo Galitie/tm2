@@ -6,6 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Thorns, explode on death shouldn't happen on sudden death?
+	Zombie Effect (Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death (Raam)
 	More Cards (Galit)
@@ -44,7 +45,6 @@ Todo:
 Card ideas:
 	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
-	Poison slime trails? Slippery slime trails that speed the velocity up momentarily?
 	Drop traps, bananas
 	Turn all attacks into blocks
 	Turn all attacks into charge attacks

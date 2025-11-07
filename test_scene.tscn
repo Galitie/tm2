@@ -147,7 +147,7 @@ metadata/_edit_lock_ = true
 [node name="CustomizeMenu" parent="." instance=ExtResource("6_vr1i5")]
 
 [node name="RoundOverDelayTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
 one_shot = true
 
 [node name="UpgradeOverDelayTimer" type="Timer" parent="."]
@@ -214,13 +214,14 @@ process_mode = 2
 
 [node name="WinnersLabel" type="Label" parent="."]
 visible = false
-offset_left = 254.0
-offset_top = 153.0
-offset_right = 899.0
-offset_bottom = 294.0
+offset_left = 128.0
+offset_top = 173.0
+offset_right = 1001.0
+offset_bottom = 314.0
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 50
-text = "WINNER(S)!
-(Press START to play again)"
+text = "WINNER! (Press START to play again)
+"
 horizontal_alignment = 1
 
 [node name="RoundLabel" type="Label" parent="."]

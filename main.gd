@@ -73,6 +73,7 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
+
 func _physics_process(_delta: float) -> void:
 	listen_for_special_trigger()
 	# Sort monsters by Y position every second (for performance reasons)
@@ -113,6 +114,7 @@ func freeze_frame(monster: Monster) -> void:
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
 		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
+
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -208,9 +210,12 @@ func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
 	current_knocked_out_monsters.append(monster)
-	print('death counted')
 	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
 		sudden_death_timer.stop()
+		for winner in monsters:
+			if !current_knocked_out_monsters.has(winner):
+				winner.state_machine.transition_state("dance")
+				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
@@ -285,7 +290,12 @@ func set_fight_mode():
 	reset_specials_text()
 	$Rankings.visible = true
 	$Specials.visible = true
-	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+	if current_round == total_rounds:
+		$RoundLabel.add_theme_color_override("font_color", Color.RED)
+		$RoundLabel.add_theme_font_size_override("font_size", 36)
+		$RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+	else:
+		$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -474,7 +484,7 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "🎲 Reroll All Upgrades " + "[x" + str(player.rerolls) + "]"
+		upgrade_panel.reroll_button.text = "🎲 Reroll All Abilities " + "[x" + str(player.rerolls) + "]"
 	else:
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true
@@ -482,15 +492,9 @@ func reroll_pressed(upgrade_panel):
 #TODO: Make a real game over scene, placeholder for playtesting
 func check_if_game_over():
 	if current_round >= total_rounds:
-		for player in players:
-			var monster = player.get_node("Monster")
-			var customize_pos = player.get_node("CustomizePos")
-			monster.target_point = customize_pos.global_position
 		current_mode = Modes.GAME_END
 		$UpgradePanel.hide()
-		$WinnersLabel.show()
 		print("game over")
-		
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 		$Rankings.visible = true
 		$Rankings.text = "Rankings:\n"
@@ -500,17 +504,24 @@ func check_if_game_over():
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
 			print("Winner:", winners[0].name)
+			$WinnersLabel.text = "WINNER! (Press START to play again)"
+			$WinnersLabel.show()
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
 		else:
 			print("It's a tie between:")
-			for p in winners:
-				print("- ", p.name)
+			$WinnersLabel.text = "WINNERS! (Press START to play again)"
+			$WinnersLabel.show()
+			for winner in winners:
+				print("- ", winner.name)
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
-
+		for player in players:
+			var monster = player.get_node("Monster")
+			var customize_pos = player.get_node("CustomizePos")
+			monster.target_point = customize_pos.global_position
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()

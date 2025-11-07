@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=36 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
 [ext_resource type="Script" uid="uid://dyu6tu7ni8b48" path="res://StateMachine/special_block.gd" id="8_u8wmr"]
+[ext_resource type="Script" uid="uid://dy8rl26wljjca" path="res://StateMachine/dance.gd" id="9_7mvib"]
 [ext_resource type="Script" uid="uid://tslk8jsuh3ys" path="res://StateMachine/special_attack.gd" id="9_s0vvg"]
 [ext_resource type="Script" uid="uid://vbeaxcuqrnkg" path="res://StateMachine/special_poop.gd" id="10_o122v"]
 [ext_resource type="Script" uid="uid://btxypp2upng2q" path="res://Cards/Scripts/spiky_block.gd" id="16_5105l"]
@@ -217,6 +218,9 @@ script = ExtResource("23_x38pf")
 [node name="SpecialBlock" type="Node" parent="StateMachine"]
 script = ExtResource("8_u8wmr")
 
+[node name="Dance" type="Node" parent="StateMachine"]
+script = ExtResource("9_7mvib")
+
 [node name="SpecialAttack" type="Node" parent="StateMachine"]
 script = ExtResource("9_s0vvg")
 
@@ -247,7 +251,7 @@ script = ExtResource("28_hqfdu")
 [node name="BiteLifeSteal" type="Node" parent="StateMachine"]
 script = ExtResource("25_ce3e3")
 
-[node name="SpikyBlock" type="Node" parent="StateMachine"]
+[node name="MirrorBlock" type="Node" parent="StateMachine"]
 script = ExtResource("16_5105l")
 
 [node name="Pooping" type="Node" parent="StateMachine"]

@@ -1,12 +1,13 @@
 extends State
-class_name Dance
+class_name GetupandGo
 
 var monster: CharacterBody2D
 
-#TODO: Raam, add dance animation here
 func Enter():
+	monster.animation_player.play("get_up")
 	monster.velocity = Vector2.ZERO
-	monster.animation_player.play("idle")
+
 
 func animation_finished(anim_name: String) -> void:
-	pass
+	if anim_name == "get_up":
+		ChooseNewState.emit()

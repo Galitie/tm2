@@ -1,7 +1,9 @@
-[gd_scene load_steps=36 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=38 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
+[ext_resource type="Script" uid="uid://dqxdicc1n2yxv" path="res://StateMachine/zombie.gd" id="7_3x5v3"]
+[ext_resource type="Script" uid="uid://cf6ii5kxgqg8h" path="res://StateMachine/getupand_wander.gd" id="8_14274"]
 [ext_resource type="Script" uid="uid://dyu6tu7ni8b48" path="res://StateMachine/special_block.gd" id="8_u8wmr"]
 [ext_resource type="Script" uid="uid://dy8rl26wljjca" path="res://StateMachine/dance.gd" id="9_7mvib"]
 [ext_resource type="Script" uid="uid://tslk8jsuh3ys" path="res://StateMachine/special_attack.gd" id="9_s0vvg"]
@@ -212,6 +214,12 @@ script = ExtResource("20_6py8i")
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("20_772v6")
 
+[node name="Zombie" type="Node" parent="StateMachine"]
+script = ExtResource("7_3x5v3")
+
+[node name="GetupandGo" type="Node" parent="StateMachine"]
+script = ExtResource("8_14274")
+
 [node name="Block" type="Node" parent="StateMachine"]
 script = ExtResource("23_x38pf")
 
@@ -405,3 +413,9 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("23_6py8i")
+
+[node name="ZombieTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]

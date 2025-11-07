@@ -235,7 +235,6 @@ func set_customize_mode():
 func set_upgrade_mode():
 	#audio_player.stream = load("uid://bnfvpcj04flvs")
 	#audio_player.play()
-	
 	current_mode = Modes.UPGRADE
 	sudden_death_label.visible = false
 	if sudden_death_speed_set:

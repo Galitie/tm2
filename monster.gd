@@ -175,7 +175,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
 		random_modifier = randi_range(1,5)
-		damage = round(random_modifier)
+		damage = random_modifier
 		modify_hp(-damage)
 	elif type == attack_type.SLIME:
 		damage = 1
@@ -193,9 +193,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	if current_hp <= 0:
 		if player.zombie and !player.revived:
 			zombify()
-			state_machine.transition_state("wander")
 			return
-		state_machine.transition_state("knockedout")
 		toggle_collisions(false)
 		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
@@ -231,16 +229,27 @@ func _on_temp_timer_timeout():
 
 
 func zombify():
+	state_machine.transition_state("zombie")
+	toggle_collisions(false)
 	player.revived = true
 	modify_hp(1)
 	root.modulate = Color.DARK_GREEN
-	$Heal.text = "+1 HP ZOMBIE"
-	animation_player_heal.play("heal")
+	$ZombieTimer.start()
 
 
 func unzombify():
 	player.revived = false
 	root.modulate = Color.WHITE
+
+
+func _on_zombie_timer_timeout():
+	$Heal.text = "+1 HP ZOMBIE"
+	animation_player_heal.play("heal")
+	toggle_collisions(true)
+	if Globals.game.current_mode != Globals.game.Modes.UPGRADE:
+		state_machine.transition_state("getupandgo")
+	else:
+		state_machine.transition_state("upgradestart")
 
 
 func modify_hp(amount):

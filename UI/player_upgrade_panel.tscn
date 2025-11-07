@@ -1,9 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=11 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
+[ext_resource type="Shader" uid="uid://davklb2fj1p3n" path="res://UI/burn.gdshader" id="3_vv5o0"]
+[ext_resource type="AudioStream" uid="uid://cqg3cxtk5uaua" path="res://sounds/fire.ogg" id="4_22x0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7bc8n"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w0fdq"]
+noise = SubResource("FastNoiseLite_7bc8n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuncv"]
+resource_local_to_scene = true
+shader = ExtResource("3_vv5o0")
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_w0fdq")
+shader_parameter/burnColor = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aacw"]
+resource_local_to_scene = true
+shader = ExtResource("3_vv5o0")
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_w0fdq")
+shader_parameter/burnColor = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ad54b"]
+resource_local_to_scene = true
+shader = ExtResource("3_vv5o0")
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_w0fdq")
+shader_parameter/burnColor = Color(1, 0, 0, 1)
 
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
 offset_left = -1.0
@@ -37,14 +75,17 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
 text = "Reroll Upgrades"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+material = SubResource("ShaderMaterial_cuncv")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+material = SubResource("ShaderMaterial_5aacw")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+material = SubResource("ShaderMaterial_ad54b")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
@@ -57,5 +98,9 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/DudeWindow/VBoxContainer"]
 layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_22x0x")
 
 [connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_button_pressed"]

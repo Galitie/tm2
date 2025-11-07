@@ -13,11 +13,17 @@ func _process(_delta):
 
 
 func _on_button_pressed(acc_index : int = 0):
+	hide_text()
+	await get_tree().create_tween().tween_method(set_radius, 0.0, 1.0, 1.0).finished
 	emit_signal("card_pressed", self, acc_index) #Caught by game scene
-
+	await get_tree().create_tween().tween_method(set_radius, 1.0, 0.0, 0.0).finished
+	
+func set_radius(radius: float) -> void:
+	material.set_shader_parameter("radius", radius)
 
 func choose_card_resource(card_resource):
 	reset_card()
+	%Title.visible = true
 	chosen_resource = card_resource
 	%Title.text = chosen_resource.card_name
 	%Description.text = chosen_resource.description
@@ -64,7 +70,8 @@ func choose_card_resource(card_resource):
 			make_acc_button(accessory.texture)
 		make_acc_button(x_texture)
 
-func reset_card():
+func hide_text() -> void:
+	%Title.visible = false
 	%Description.visible = false
 	%Stat.visible = false
 	%Stat2.visible = false
@@ -76,16 +83,21 @@ func reset_card():
 	%PosNeg2.visible = false
 	%PosNeg3.visible = false
 	%Tags.text = ""
+	
+func disabled() -> bool:
+	return card_info_panel.disabled
+
+func reset_card():
+	hide_text()
+	%Title.visible = true
+	%Tags.text = ""
 	accessories = []
 	var accessories_panel = $AccessoryInfo/MarginContainer/VBoxContainer/Accessories
 	for panel in accessories_panel.get_children():
 		panel.queue_free()
 	
-
-
 func disable():
 	$CardInfo.disabled = true
-
 
 func enable():
 	$CardInfo.disabled = false

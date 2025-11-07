@@ -16,6 +16,7 @@ var new_stylebox_normal = StyleBoxFlat.new()
 var current_user_position_in_accessory_array : int = 0
 var in_accessory_menu = false
 
+var input_paused: bool = false
 
 func _ready():
 	for card in upgrade_cards:
@@ -23,6 +24,9 @@ func _ready():
 	create_stylebox()
 
 func _physics_process(_delta):
+	if input_paused:
+		return
+	
 	if player.upgrade_points > 0:
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
@@ -63,9 +67,13 @@ func _physics_process(_delta):
 						# already in the acc menu and pressed something
 						in_accessory_menu = false
 						
+						%AudioStreamPlayer.play()
 						button._on_button_pressed(current_user_position_in_accessory_array) #for now
 						button.card_info_panel.show()
 						button.accessory_panel.hide()
+						input_paused = true
+						await get_tree().create_timer(1.0).timeout
+						input_paused = false
 					else:
 						#Not yet in the acc menu, but will enter it now
 						button.card_info_panel.hide()
@@ -78,7 +86,11 @@ func _physics_process(_delta):
 							if other_button != accessory_button:
 								other_button.remove_theme_stylebox_override("panel")
 				else:
+					%AudioStreamPlayer.play()
 					button._on_button_pressed()
+					input_paused = true
+					await get_tree().create_timer(1.0).timeout
+					input_paused = false
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
@@ -111,6 +123,7 @@ func _physics_process(_delta):
 func disable_cards():
 	for card in upgrade_cards:
 		card.disable()
+		card.hide_text()
 
 
 func setup_cards():

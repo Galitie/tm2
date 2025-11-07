@@ -1,9 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgbiaduauaghx"]
+[gd_scene load_steps=7 format=3 uid="uid://dgbiaduauaghx"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_8erfr"]
+[ext_resource type="Shader" uid="uid://davklb2fj1p3n" path="res://UI/burn.gdshader" id="1_trd61"]
 [ext_resource type="Script" uid="uid://cq8swxb4ogvaj" path="res://Cards/card.gd" id="2_0simy"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7bc8n"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w0fdq"]
+noise = SubResource("FastNoiseLite_7bc8n")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p0ugb"]
+resource_local_to_scene = true
+shader = ExtResource("1_trd61")
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_w0fdq")
+shader_parameter/burnColor = Color(1, 0, 0, 1)
+
 [node name="Panel" type="PanelContainer"]
+material = SubResource("ShaderMaterial_p0ugb")
 custom_minimum_size = Vector2(100, 120)
 offset_right = 121.0
 offset_bottom = 113.0

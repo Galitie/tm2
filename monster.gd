@@ -117,7 +117,7 @@ func _on_hurtbox_area_entered(area):
 			if player.matrix:
 				var rand = [1,2].pick_random()
 				if rand == 1:
-					take_damage(attacker, current_state, true, attack_type.PROJECTILE)
+					take_damage(null, current_state, true, attack_type.PROJECTILE)
 				else:
 					play_generic_sound("uid://cf8aw1xy3pg34")
 					root.modulate = Color("3467ff")
@@ -174,7 +174,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
-		damage = round(attacker.base_damage)
+		random_modifier = randi_range(1,5)
+		damage = round(random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.SLIME:
 		damage = 1

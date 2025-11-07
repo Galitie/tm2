@@ -5,7 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Thorns, explode on death shouldn't happen on sudden death
+	Thorns, explode on death shouldn't happen on sudden death?
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death (Raam)
 	More Cards (Galit)

@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_kocdb")
-card_name = "STONE"
+card_name = "STONE WALL"
 description = "Will BLOCK for longer"
 Type = "block"
 state_id = "block_longer"

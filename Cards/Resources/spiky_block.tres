@@ -5,10 +5,10 @@
 
 [resource]
 script = ExtResource("2_q4vpd")
-card_name = "SPIKY BLOCK"
-description = "Chance to BLOCK and reflect DMG on successful BLOCKs"
+card_name = "MIRROR BLOCK"
+description = "Chance to reflect DMG on successful BLOCK"
 Type = "block"
-state_id = "spikyblock"
+state_id = "mirrorblock"
 unique = true
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_2cjdi")]([])

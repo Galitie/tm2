@@ -251,7 +251,7 @@ script = ExtResource("28_hqfdu")
 [node name="BiteLifeSteal" type="Node" parent="StateMachine"]
 script = ExtResource("25_ce3e3")
 
-[node name="SpikyBlock" type="Node" parent="StateMachine"]
+[node name="MirrorBlock" type="Node" parent="StateMachine"]
 script = ExtResource("16_5105l")
 
 [node name="Pooping" type="Node" parent="StateMachine"]

@@ -1,5 +1,5 @@
 extends State
-class_name SpikyBlock
+class_name MirrorBlock
 
 var monster: CharacterBody2D
 var done_blocking: bool

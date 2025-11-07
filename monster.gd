@@ -142,7 +142,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var random_modifier : int
 	if current_state.contains("block"):
 		match current_state.to_lower():
-			"spikyblock":
+			"mirrorblock":
 				if attacker is Monster:
 					var attacker_state = attacker.state_machine.current_state.name.to_lower()
 					attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)

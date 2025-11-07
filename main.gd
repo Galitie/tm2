@@ -502,7 +502,7 @@ func check_if_game_over():
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
-			winners[1].monster.state_machine.transition_state("dance")
+			winners[0].monster.state_machine.transition_state("dance")
 			print("Winner:", winners[0].name)
 			for player in players:
 				if player not in winners:

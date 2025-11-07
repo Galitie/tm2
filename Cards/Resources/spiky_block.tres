@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_q4vpd")
 card_name = "SPIKY BLOCK"
-description = "BLOCKS longer and reflects DMG on successful BLOCKs"
+description = "Chance to BLOCK and reflect DMG on successful BLOCKs"
 Type = "block"
 state_id = "spikyblock"
 unique = true

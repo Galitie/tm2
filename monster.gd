@@ -103,7 +103,7 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
-			if area.is_in_group("Projectile") or area.is_in_group("Slime") and area.owner.monster == self:
+			if (area.is_in_group("Projectile") or area.is_in_group("Slime")) and area.owner.monster == self:
 				return
 			take_damage(attacker, current_state, true)
 			return
@@ -127,7 +127,7 @@ func _on_hurtbox_area_entered(area):
 				take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		if area.is_in_group("Bomb"):
-			take_damage(null, current_state, true, attack_type.BOMB)
+			take_damage(attacker, current_state, true, attack_type.BOMB)
 		
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
@@ -170,10 +170,12 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		mod_text = " THORN"
 		modify_hp(-damage)
 	elif type == attack_type.BOMB:
-		damage = 10
+		random_modifier = randi_range(0,5)
+		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
-		damage = 1
+		random_modifier = randi_range(1,5)
+		damage = round(random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.SLIME:
 		damage = 1
@@ -189,6 +191,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
 	if current_hp <= 0:
+		if player.zombie and !player.revived:
+			zombify()
+			state_machine.transition_state("wander")
+			return
+		state_machine.transition_state("knockedout")
 		toggle_collisions(false)
 		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
@@ -217,10 +224,23 @@ func explode_on_death():
 	temp_area.add_child(temp_sprite)
 	call_deferred("add_child", temp_area)
 
+
 #TODO: Raam explosion animation???
 func _on_temp_timer_timeout():
 	temp_area.queue_free()
 
+
+func zombify():
+	player.revived = true
+	modify_hp(1)
+	root.modulate = Color.DARK_GREEN
+	$Heal.text = "+1 HP ZOMBIE"
+	animation_player_heal.play("heal")
+
+
+func unzombify():
+	player.revived = false
+	root.modulate = Color.WHITE
 
 func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)
@@ -230,7 +250,7 @@ func modify_hp(amount):
 
 
 func modify_max_hp(amount):
-	max_hp = clamp(max_hp + amount, 1, max_hp + amount)
+	max_hp = clamp(max_hp + amount, 1, 1000)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 
@@ -260,6 +280,7 @@ func thorn_effect() -> void:
 
 
 func send_flying(attacker: Node) -> void:
+	root.modulate = Color("ff0e1b")
 	sent_flying = true
 	state_machine.transition_state("knockedout")
 	audio_player.pitch_scale = 1.0

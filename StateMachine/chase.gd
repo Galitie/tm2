@@ -25,7 +25,7 @@ var side_arrive_radius_factor: float = 0.55 # can attack if within this fraction
 
 
 func randomize_chase():
-	chase_time = randf_range(3, 8)
+	chase_time = randf_range(2, 5)
 
 
 func Enter():

@@ -68,6 +68,7 @@ func transition_state(new_state_name):
 func _animation_finished(anim_name: String) -> void:
 	current_state.animation_finished(anim_name)
 
+
 func use_special():
 	if special_values != [] and monster.current_hp > 0:
 		choose_new_state("special")

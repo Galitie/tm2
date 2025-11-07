@@ -483,7 +483,10 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards()
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		upgrade_panel.reroll_button.text = "🎲 Reroll All Abilities " + "[x" + str(player.rerolls) + "]"
+		var bonus_text = ""
+		if player.bonus_rerolls > 0:
+			bonus_text = " Includes Bonus"
+		upgrade_panel.reroll_button.text = "🎲 Reroll All " + "x" + str(player.rerolls) + bonus_text
 	else:
 		upgrade_panel.reroll_button.text = "Out of 🎲"
 		upgrade_panel.reroll_button.disabled = true

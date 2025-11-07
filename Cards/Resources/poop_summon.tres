@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_k3gwj")
 card_name = "LOCKED & LOADED"
-description = "Turn POOPS into SUMMONS that fight for you and SHOOT PROJECTILES"
+description = "Turn POOPS into SUMMONS that fight for you and shoot PROJECTILES"
 Type = "poop"
 state_id = "poop_summon"
 unique = true

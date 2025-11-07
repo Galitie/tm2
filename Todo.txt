@@ -5,8 +5,9 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Thorns, explode on death shouldn't happen on sudden death
 	Slimes need floor hitbox (Raam)
-	Add explode on death back in (Galit)
+	Replace temp explode on death (Raam)
 	More Cards (Galit)
 	More Specials (Galit)
 	More Accessories (Raam)
@@ -15,14 +16,15 @@ Features to make it playtest ready:
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
 	Show winner at end of round - make them dance (Raam)
 
-	Playtest todos: 
-		Charging looks like humping, leg thumb instead? (Raam)
-		Block is unclear (Raam)
-		Menu, hard to know if something is selected (Raam)
-		Needs music and sound effects (Raam)
-		Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
-		Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
-		Stats? What you have picked previously? (Galit)
+
+Playtest todos: 
+	Charging looks like humping, leg thumb instead? (Raam)
+	Block is unclear (Raam)
+	Menu, hard to know if something is selected (Raam)
+	Needs music and sound effects (Raam)
+	Burn effect after using a unique card? The uniqueness/reoccuring is not clear (Raam)
+	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
+	Stats? What you have picked previously? (Galit)
 
 
 Todo:
@@ -54,7 +56,6 @@ Card ideas:
 	Ghost twin, after death summon a ghost version of you that fights
 	Crazy damage, only one hp
 	Moves faster every 5 seconds of a round
-	First hit is reflected back to the aggresor
 	Auto repair bots
 	Drop an egg, will hatch in 1 rounds and fight for you unless destroyed
 
@@ -69,7 +70,6 @@ General Ideas:
 	Different Idle options? Could bop, or dance or zone out etc.
 	Do upgrade cards determine looks? Does's it tell you?
 	Maybe on sudden death, zoom in / bounds get smaller
-
 
 
 Builds:

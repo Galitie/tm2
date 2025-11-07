@@ -6,14 +6,14 @@
 [resource]
 script = ExtResource("2_yq1ji")
 card_name = "CRIT RATE"
-description = ""
+description = "CRIT more often, but for less DMG"
 Type = "immediate"
 state_id = ""
 unique = true
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_5rp5m")]([])
 attribute_1 = 6
-attribute_label_1 = "CRIT %"
+attribute_label_1 = "% CRIT"
 attribute_amount_1 = 10
 attribute_2 = 0
 attribute_label_2 = ""

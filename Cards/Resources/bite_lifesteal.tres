@@ -7,15 +7,15 @@
 [resource]
 script = ExtResource("1_syuw0")
 card_name = "VAMPIRE BITE"
-description = "Bites enemy and HEALS self to MAX HP"
+description = "Chance to bite enemy and HEAL self to MAX HP"
 Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_bl12o")]([ExtResource("2_0blak")])
-attribute_1 = 3
-attribute_label_1 = "BASE DMG"
-attribute_amount_1 = 3
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
 attribute_2 = 0
 attribute_label_2 = ""
 attribute_amount_2 = 0

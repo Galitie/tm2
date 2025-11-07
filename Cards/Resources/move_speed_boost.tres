@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_6hnit")
 card_name = "SPEED BOOST"
-description = ""
+description = "Gotta go fast"
 Type = "immediate"
 state_id = ""
 unique = false
@@ -17,7 +17,7 @@ attribute_label_1 = "MOV SPD"
 attribute_amount_1 = 25
 attribute_2 = 1
 attribute_label_2 = "MAX HP"
-attribute_amount_2 = 3
+attribute_amount_2 = 5
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0

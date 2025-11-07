@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://c37d7vyo0m6jb"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_0n8w0"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="1_mklda"]
 
 [resource]
@@ -10,6 +11,7 @@ Type = "immediate"
 state_id = ""
 unique = false
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_0n8w0")]([])
 attribute_1 = 1
 attribute_label_1 = "MAX HP"
 attribute_amount_1 = 10

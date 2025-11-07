@@ -369,16 +369,16 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.larger_poops = true
 			"chaser":
 				var chase_index = player.monster.state_machine.keys.find("chase")
-				player.monster.state_machine.weights[chase_index] += .25
+				player.monster.state_machine.weights[chase_index] += .50
 			"blocker":
 				var block_index = player.monster.state_machine.keys.find("block")
-				player.monster.state_machine.weights[block_index] += .25
+				player.monster.state_machine.weights[block_index] += .50
 			"attacker":
 				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
-				player.monster.state_machine.weights[basic_attack_index] += .25
+				player.monster.state_machine.weights[basic_attack_index] += .50
 			"pooper":
 				var other_index = player.monster.state_machine.keys.find("poop")
-				player.monster.state_machine.weights[other_index] += .25
+				player.monster.state_machine.weights[other_index] += .50
 			"thorns":
 				player.monster.thorns = true
 			"death_explode":
@@ -413,6 +413,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.poop_on_hit = true
 			"slime_trail":
 				player.slime_trail = true
+			"block_longer":
+				player.block_longer = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -521,7 +523,7 @@ func spawn_poop(monster):
 	if monster.player.poop_summons:
 		poop.is_a_summon = true
 	if monster.player.larger_poops:
-		poop.scale += Vector2(randf_range(.50,.65), randf_range(.50,.65))
+		poop.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
 	add_child(poop)
 	poop.add_to_group("CleanUp")
 

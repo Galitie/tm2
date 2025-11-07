@@ -103,7 +103,7 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
-			if area.is_in_group("Projectile") or area.is_in_group("Slime") and area.owner.monster == self:
+			if (area.is_in_group("Projectile") or area.is_in_group("Slime")) and area.owner.monster == self:
 				return
 			take_damage(attacker, current_state, true)
 			return
@@ -117,7 +117,7 @@ func _on_hurtbox_area_entered(area):
 			if player.matrix:
 				var rand = [1,2].pick_random()
 				if rand == 1:
-					take_damage(null, current_state, true, attack_type.PROJECTILE)
+					take_damage(attacker, current_state, true, attack_type.PROJECTILE)
 				else:
 					play_generic_sound("uid://cf8aw1xy3pg34")
 					root.modulate = Color("3467ff")
@@ -127,7 +127,7 @@ func _on_hurtbox_area_entered(area):
 				take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		if area.is_in_group("Bomb"):
-			take_damage(null, current_state, true, attack_type.BOMB)
+			take_damage(attacker, current_state, true, attack_type.BOMB)
 		
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
@@ -170,10 +170,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		mod_text = " THORN"
 		modify_hp(-damage)
 	elif type == attack_type.BOMB:
-		damage = 10
+		random_modifier = randi_range(0,5)
+		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
-		damage = 1
+		damage = round(attacker.base_damage)
 		modify_hp(-damage)
 	elif type == attack_type.SLIME:
 		damage = 1
@@ -230,7 +231,7 @@ func modify_hp(amount):
 
 
 func modify_max_hp(amount):
-	max_hp = clamp(max_hp + amount, 1, max_hp + amount)
+	max_hp = clamp(max_hp + amount, 1, 1000)
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 
@@ -260,6 +261,7 @@ func thorn_effect() -> void:
 
 
 func send_flying(attacker: Node) -> void:
+	root.modulate = Color("ff0e1b")
 	sent_flying = true
 	state_machine.transition_state("knockedout")
 	audio_player.pitch_scale = 1.0

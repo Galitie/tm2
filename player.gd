@@ -23,6 +23,7 @@ var matrix : bool = false
 var poop_on_hit: bool = false
 var slime_trail : bool = false
 var caltrops: bool = false
+var block_longer: bool = false
 
 var current_small_cards : int = 0
 var current_big_cards : int = 0

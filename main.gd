@@ -290,7 +290,12 @@ func set_fight_mode():
 	reset_specials_text()
 	$Rankings.visible = true
 	$Specials.visible = true
-	$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+	if current_round == total_rounds:
+		$RoundLabel.add_theme_color_override("font_color", Color.RED)
+		$RoundLabel.add_theme_font_size_override("font_size", 36)
+		$RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+	else:
+		$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
@@ -487,14 +492,9 @@ func reroll_pressed(upgrade_panel):
 #TODO: Make a real game over scene, placeholder for playtesting
 func check_if_game_over():
 	if current_round >= total_rounds:
-		for player in players:
-			var monster = player.get_node("Monster")
-			var customize_pos = player.get_node("CustomizePos")
-			monster.target_point = customize_pos.global_position
 		current_mode = Modes.GAME_END
 		$UpgradePanel.hide()
 		print("game over")
-		
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 		$Rankings.visible = true
 		$Rankings.text = "Rankings:\n"
@@ -503,7 +503,6 @@ func check_if_game_over():
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
-			winners[0].monster.state_machine.transition_state("dance")
 			print("Winner:", winners[0].name)
 			$WinnersLabel.text = "WINNER! (Press START to play again)"
 			$WinnersLabel.show()
@@ -516,11 +515,13 @@ func check_if_game_over():
 			$WinnersLabel.show()
 			for winner in winners:
 				print("- ", winner.name)
-				winner.monster.state_machine.transition_state("dance")
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
-
+		for player in players:
+			var monster = player.get_node("Monster")
+			var customize_pos = player.get_node("CustomizePos")
+			monster.target_point = customize_pos.global_position
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()

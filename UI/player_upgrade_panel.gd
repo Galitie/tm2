@@ -18,10 +18,35 @@ var in_accessory_menu = false
 
 var input_paused: bool = false
 
+var stamp_sfx = load("uid://o81tlwdlwbgw")
+var fire_sfx = load("uid://cqg3cxtk5uaua")
+
 func _ready():
 	for card in upgrade_cards:
 		card.upgrade_panel = self
 	create_stylebox()
+	
+func press_card(button, acc_idx: int = 0) -> void:
+	input_paused = true
+	%Stamp.visible = true
+	%Stamp.global_position = button.global_position + button.size * 0.5
+	%Stamp.scale = Vector2(2.0, 2.0)
+	await get_tree().create_tween().tween_property(%Stamp, "scale", Vector2(1.0, 1.0), 0.1).finished
+	get_tree().create_tween().tween_property(%Stamp, "visible", false, 1.0)
+	%AudioStreamPlayer.stream = stamp_sfx
+	%AudioStreamPlayer.play()
+	
+	if button.is_unique():
+		await %AudioStreamPlayer.finished
+		%AudioStreamPlayer.stream = fire_sfx
+		%AudioStreamPlayer.play()
+		button.burn_vfx()
+		await get_tree().create_timer(1.0).timeout
+	else:
+		await get_tree().create_timer(0.5).timeout
+		
+	input_paused = false
+	button._on_button_pressed(acc_idx)
 
 func _physics_process(_delta):
 	if input_paused:
@@ -67,13 +92,9 @@ func _physics_process(_delta):
 						# already in the acc menu and pressed something
 						in_accessory_menu = false
 						
-						%AudioStreamPlayer.play()
-						button._on_button_pressed(current_user_position_in_accessory_array) #for now
+						press_card(button, current_user_position_in_accessory_array)
 						button.card_info_panel.show()
 						button.accessory_panel.hide()
-						input_paused = true
-						await get_tree().create_timer(1.0).timeout
-						input_paused = false
 					else:
 						#Not yet in the acc menu, but will enter it now
 						button.card_info_panel.hide()
@@ -86,11 +107,7 @@ func _physics_process(_delta):
 							if other_button != accessory_button:
 								other_button.remove_theme_stylebox_override("panel")
 				else:
-					%AudioStreamPlayer.play()
-					button._on_button_pressed()
-					input_paused = true
-					await get_tree().create_timer(1.0).timeout
-					input_paused = false
+					press_card(button)
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:

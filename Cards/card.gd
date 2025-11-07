@@ -1,7 +1,7 @@
 extends PanelContainer
 
 signal card_pressed(resource, player)
-var chosen_resource : Resource
+var chosen_resource : CardResourceScript
 var upgrade_panel : PlayerUpgradePanel
 @onready var accessory_panel = $AccessoryInfo
 @onready var card_info_panel = $CardInfo
@@ -13,13 +13,18 @@ func _process(_delta):
 
 
 func _on_button_pressed(acc_index : int = 0):
+	emit_signal("card_pressed", self, acc_index) #Caught by game scene
+	
+func burn_vfx() -> void:
 	hide_text()
 	await get_tree().create_tween().tween_method(set_radius, 0.0, 1.0, 1.0).finished
-	emit_signal("card_pressed", self, acc_index) #Caught by game scene
 	await get_tree().create_tween().tween_method(set_radius, 1.0, 0.0, 0.0).finished
 	
 func set_radius(radius: float) -> void:
 	material.set_shader_parameter("radius", radius)
+	
+func is_unique() -> bool:
+	return chosen_resource.unique
 
 func choose_card_resource(card_resource):
 	reset_card()

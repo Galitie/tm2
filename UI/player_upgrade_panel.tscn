@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=12 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
 [ext_resource type="Shader" uid="uid://davklb2fj1p3n" path="res://UI/burn.gdshader" id="3_vv5o0"]
-[ext_resource type="AudioStream" uid="uid://cqg3cxtk5uaua" path="res://sounds/fire.ogg" id="4_22x0x"]
+[ext_resource type="AudioStream" uid="uid://o81tlwdlwbgw" path="res://sounds/stamp.ogg" id="4_22x0x"]
+[ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 
@@ -102,5 +103,12 @@ layout_mode = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_22x0x")
+
+[node name="Stamp" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(62, 171)
+rotation = -0.436332
+texture = ExtResource("5_22x0x")
 
 [connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_button_pressed"]

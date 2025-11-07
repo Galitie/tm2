@@ -73,6 +73,7 @@ func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
 
+
 func _physics_process(_delta: float) -> void:
 	listen_for_special_trigger()
 	# Sort monsters by Y position every second (for performance reasons)
@@ -113,6 +114,7 @@ func freeze_frame(monster: Monster) -> void:
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
 		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
+
 
 func _ready():
 	$PauseTimer.timeout.connect(_unpause)
@@ -491,7 +493,6 @@ func check_if_game_over():
 			monster.target_point = customize_pos.global_position
 		current_mode = Modes.GAME_END
 		$UpgradePanel.hide()
-		$WinnersLabel.show()
 		print("game over")
 		
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
@@ -504,11 +505,15 @@ func check_if_game_over():
 		if winners.size() == 1:
 			winners[0].monster.state_machine.transition_state("dance")
 			print("Winner:", winners[0].name)
+			$WinnersLabel.text = "WINNER! (Press START to play again)"
+			$WinnersLabel.show()
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
 		else:
 			print("It's a tie between:")
+			$WinnersLabel.text = "WINNERS! (Press START to play again)"
+			$WinnersLabel.show()
 			for winner in winners:
 				print("- ", winner.name)
 				winner.monster.state_machine.transition_state("dance")

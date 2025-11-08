@@ -3,10 +3,11 @@ class_name SlimeTrail
 
 @onready var monster : Monster
 @onready var sprite = $CanvasGroup/Sprite2D
-
+@onready var lifetime = 3
 
 func _ready():
 	modulate = monster.player_color
+	$Lifetime.wait_time = lifetime
 	$Lifetime.start()
 	
 	

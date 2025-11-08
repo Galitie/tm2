@@ -427,6 +427,10 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.block_longer = true
 			"zombie":
 				player.zombie = true
+			"larger_slimes":
+				player.larger_slimes = true
+			"longer_slime":
+				player.longer_slimes = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -548,6 +552,10 @@ func spawn_slime(monster):
 	var slime = preload("uid://upayf74ibwcl").instantiate()
 	slime.monster = monster
 	slime.global_position = monster.global_position + Vector2(0,30)
+	if monster.player.larger_slimes:
+		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
+	if monster.player.longer_slimes:
+		slime.lifetime = 5
 	add_child(slime)
 	slime.add_to_group("Slime")
 	slime.add_to_group("CleanUp")

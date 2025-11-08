@@ -102,7 +102,7 @@ func pause_game(length: float = 0.0) -> void:
 func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
-	Globals.game.pause_game(1.0)
+	Globals.game.pause_game(1.25)
 	
 	camera_tracking = false
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
@@ -342,8 +342,16 @@ func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()
 
 
-func card_pressed(card : PanelContainer, acc_index : int):
+func card_pressed(card : PanelContainer, acc_index : int, input, button):
 	var player : Player = card.upgrade_panel.player
+	if input == JOY_BUTTON_Y and player.banish_amount > 0:
+		player.banish_amount -= 1
+		await player.upgrade_panel.burn_card(button)
+		player.upgrade_panel.resource_array.erase(card.chosen_resource)
+		check_if_upgrade_round_over(card, player)
+		return
+	if input == JOY_BUTTON_Y:
+		return
 	if card.chosen_resource.parts_and_acc.size() > 0:
 		if acc_index < card.chosen_resource.parts_and_acc.size() :
 			var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]

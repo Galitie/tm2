@@ -25,28 +25,39 @@ func _ready():
 	for card in upgrade_cards:
 		card.upgrade_panel = self
 	create_stylebox()
-	
-func press_card(button, acc_idx: int = 0) -> void:
+
+
+func press_card(button, acc_idx: int = 0, input = null) -> void:
 	input_paused = true
-	%Stamp.visible = true
-	%Stamp.global_position = button.global_position + button.size * 0.5
-	%Stamp.scale = Vector2(2.0, 2.0)
-	await get_tree().create_tween().tween_property(%Stamp, "scale", Vector2(1.0, 1.0), 0.1).finished
-	get_tree().create_tween().tween_property(%Stamp, "visible", false, 1.0)
-	%AudioStreamPlayer.stream = stamp_sfx
-	%AudioStreamPlayer.play()
-	
-	if button.is_unique():
-		await %AudioStreamPlayer.finished
-		%AudioStreamPlayer.stream = fire_sfx
+	if input == JOY_BUTTON_A:
+		input_paused = true
+		%Stamp.visible = true
+		%Stamp.global_position = button.global_position + button.size * 0.5
+		%Stamp.scale = Vector2(2.0, 2.0)
+		await get_tree().create_tween().tween_property(%Stamp, "scale", Vector2(1.0, 1.0), 0.1).finished
+		get_tree().create_tween().tween_property(%Stamp, "visible", false, 1.0)
+		%AudioStreamPlayer.stream = stamp_sfx
 		%AudioStreamPlayer.play()
-		button.burn_vfx()
-		await get_tree().create_timer(1.0).timeout
-	else:
-		await get_tree().create_timer(0.5).timeout
 		
+		if button.is_unique():
+			await %AudioStreamPlayer.finished
+			%AudioStreamPlayer.stream = fire_sfx
+			%AudioStreamPlayer.play()
+			button.burn_vfx()
+			await get_tree().create_timer(1.0).timeout
+		else:
+			await get_tree().create_timer(0.5).timeout
 	input_paused = false
-	button._on_button_pressed(acc_idx)
+	button._on_button_pressed(acc_idx, input, button)
+
+
+
+func burn_card(button):
+	%AudioStreamPlayer.stream = fire_sfx
+	%AudioStreamPlayer.play()
+	button.burn_vfx()
+	await get_tree().create_timer(1.0).timeout
+
 
 func _physics_process(_delta):
 	if input_paused:
@@ -80,9 +91,17 @@ func _physics_process(_delta):
 				if other_button != button:
 					other_button.remove_theme_stylebox_override("panel")
 			in_accessory_menu = false
+		
+		# To banish cards
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !in_accessory_menu:
+			var button = button_array[current_user_position_in_button_array]
+			var input = JOY_BUTTON_Y
+			if button != reroll_button:
+				press_card(button, 0, input)
 			
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			var button = button_array[current_user_position_in_button_array]
+			var input = JOY_BUTTON_A
 			if button == reroll_button:
 				_on_button_pressed()
 			else:
@@ -92,7 +111,7 @@ func _physics_process(_delta):
 						# already in the acc menu and pressed something
 						in_accessory_menu = false
 						
-						press_card(button, current_user_position_in_accessory_array)
+						press_card(button, current_user_position_in_accessory_array, input)
 						button.card_info_panel.show()
 						button.accessory_panel.hide()
 					else:
@@ -107,7 +126,7 @@ func _physics_process(_delta):
 							if other_button != accessory_button:
 								other_button.remove_theme_stylebox_override("panel")
 				else:
-					press_card(button)
+					press_card(button, 0, input)
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:

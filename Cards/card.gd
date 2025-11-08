@@ -1,6 +1,6 @@
 extends PanelContainer
 
-signal card_pressed(resource, player)
+signal card_pressed(resource, player, input, button)
 var chosen_resource : CardResourceScript
 var upgrade_panel : PlayerUpgradePanel
 @onready var accessory_panel = $AccessoryInfo
@@ -8,23 +8,28 @@ var upgrade_panel : PlayerUpgradePanel
 var accessories  = []
 @onready var x_texture = load("res://none_icon.png")
 
+
 func _process(_delta):
 	pass
 
 
-func _on_button_pressed(acc_index : int = 0):
-	emit_signal("card_pressed", self, acc_index) #Caught by game scene
+func _on_button_pressed(acc_index : int = 0, input = null, button = null):
+	emit_signal("card_pressed", self, acc_index, input, button) #Caught by game scene
+
 	
 func burn_vfx() -> void:
 	hide_text()
 	await get_tree().create_tween().tween_method(set_radius, 0.0, 1.0, 1.0).finished
 	await get_tree().create_tween().tween_method(set_radius, 1.0, 0.0, 0.0).finished
 	
+	
 func set_radius(radius: float) -> void:
 	material.set_shader_parameter("radius", radius)
 	
+	
 func is_unique() -> bool:
 	return chosen_resource.unique
+
 
 func choose_card_resource(card_resource):
 	reset_card()
@@ -45,26 +50,35 @@ func choose_card_resource(card_resource):
 	if chosen_resource.attribute_label_1:
 		%Stat.visible = true
 	if chosen_resource.attribute_amount_1:
+		%Amount.text = str(abs(int(%Amount.text)))
 		%Amount.visible = true
 		%PosNeg.visible = true
 		if chosen_resource.attribute_amount_1 > 0:
 			%PosNeg.text = "+"
+		else:
+			%PosNeg.text = "-"
 	
 	if chosen_resource.attribute_label_2:
 		%Stat2.visible = true
 	if chosen_resource.attribute_amount_2:
+		%Amount2.text = str(abs(int(%Amount2.text)))
 		%Amount2.visible = true
 		%PosNeg2.visible = true
 		if chosen_resource.attribute_amount_2 > 0:
 			%PosNeg2.text = "+"
+		else:
+			%PosNeg2.text = "-"
 	
 	if chosen_resource.attribute_label_3:
 		%Stat3.visible = true
 	if chosen_resource.attribute_amount_3:
+		%Amount3.text = str(abs(float(%Amount3.text)))
 		%Amount3.visible = true
 		%PosNeg3.visible = true
 		if chosen_resource.attribute_amount_3 > 0:
 			%PosNeg3.text = "+"
+		else:
+			%PosNeg3.text = "-"
 	
 	if chosen_resource.unique:
 		%Tags.text += "UNIQUE 🌟 "
@@ -74,6 +88,7 @@ func choose_card_resource(card_resource):
 		for accessory : MonsterPart in chosen_resource.parts_and_acc:
 			make_acc_button(accessory.texture)
 		make_acc_button(x_texture)
+
 
 func hide_text() -> void:
 	%Title.visible = false
@@ -89,8 +104,10 @@ func hide_text() -> void:
 	%PosNeg3.visible = false
 	%Tags.text = ""
 	
+	
 func disabled() -> bool:
 	return card_info_panel.disabled
+
 
 func reset_card():
 	hide_text()
@@ -101,11 +118,14 @@ func reset_card():
 	for panel in accessories_panel.get_children():
 		panel.queue_free()
 	
+	
 func disable():
 	$CardInfo.disabled = true
 
+
 func enable():
 	$CardInfo.disabled = false
+
 
 func make_acc_button(texture : Texture2D):
 		var panel = PanelContainer.new()

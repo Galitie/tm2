@@ -192,7 +192,7 @@ alignment = 2
 [node name="Tags" type="Label" parent="CardInfo/MarginContainer/VBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 11
 vertical_alignment = 2
 
 [connection signal="pressed" from="CardInfo" to="." method="_on_button_pressed" binds= [0]]

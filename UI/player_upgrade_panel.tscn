@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
+content_margin_left = 5.0
+content_margin_right = 5.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7bc8n"]
 noise_type = 3
@@ -70,10 +72,24 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[node name="Reroll" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Reroll" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
-text = "Reroll Upgrades"
+text = "🎲 x3"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Banish" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "🔥 BANISH [x3]"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
 material = SubResource("ShaderMaterial_cuncv")
@@ -111,4 +127,4 @@ position = Vector2(62, 171)
 rotation = -0.436332
 texture = ExtResource("5_22x0x")
 
-[connection signal="pressed" from="VBoxContainer/Reroll" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Reroll" to="." method="_on_button_pressed"]

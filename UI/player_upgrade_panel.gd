@@ -3,7 +3,7 @@ class_name PlayerUpgradePanel
 
 signal reroll_pressed(upgrade_panel)
 
-@onready var reroll_button : Button = $VBoxContainer/Reroll
+@onready var reroll_button : Button = $VBoxContainer/HBoxContainer/Reroll
 @onready var upgrade_cards = [$VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3 ]
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
@@ -174,18 +174,19 @@ func setup_cards():
 
 
 func update_victory_points():
-	$VBoxContainer/DudeWindow/VBoxContainer/Label.text = "👑 Points: " + str(player.victory_points)
+	$VBoxContainer/DudeWindow/VBoxContainer/Label.text = "👑 : " + str(player.victory_points)
 
 
 func setup_rerolls():
 	var bonus_text = ""
 	if player.bonus_rerolls > 0:
-		bonus_text = " Includes Bonus"
+		pass
+		#bonus_text = " Includes Bonus"
 	if player.rerolls > 0:
-		reroll_button.text = "🎲 Reroll All " + "x" + str(player.rerolls) + bonus_text
+		reroll_button.text = "🎲 ALL " + "[x" + str(player.rerolls) + "]" + bonus_text
 		reroll_button.disabled = false
 	else:
-		reroll_button.text = "No 🎲 Available"
+		reroll_button.text = "NO 🎲 LEFT"
 		reroll_button.disabled = true
 
 # reroll button
@@ -204,3 +205,11 @@ func create_stylebox():
 func remove_from_card_pool(resource):
 	var found_index = resource_array.find(resource)
 	resource_array.remove_at(found_index)
+
+func update_banish_text():
+	%Banish.text = ""
+	if player.banish_amount > 0:
+		%Banish.text = "🔥" + " BANISH " + "[x" + str(player.banish_amount) + "]"
+	else:
+		%Banish.add_theme_color_override("font_color", Color(1,1,1,.5))
+		%Banish.text = "NO 🔥 LEFT"

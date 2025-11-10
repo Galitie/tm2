@@ -346,6 +346,7 @@ func card_pressed(card : PanelContainer, acc_index : int, input, button):
 	var player : Player = card.upgrade_panel.player
 	if input == JOY_BUTTON_Y and player.banish_amount > 0:
 		player.banish_amount -= 1
+		card.upgrade_panel.update_banish_text()
 		await player.upgrade_panel.burn_card(button)
 		player.upgrade_panel.resource_array.erase(card.chosen_resource)
 		check_if_upgrade_round_over(card, player)
@@ -477,7 +478,7 @@ func check_if_upgrade_round_over(card, player):
 		card.choose_card_resource(deep_copy.pick_random())
 	else:
 		upgrade_panel.disable_cards()
-		upgrade_panel.reroll_button.text = "Out of 🎲"
+		upgrade_panel.reroll_button.text = "NO 🎲 LEFT"
 		upgrade_panel.reroll_button.disabled = true
 		upgrade_panel.upgrade_title.text = "DONE UPGRADING"
 	var players_have_no_points = true
@@ -497,10 +498,11 @@ func reroll_pressed(upgrade_panel):
 	if player.rerolls != 0 and player.upgrade_points > 0:
 		var bonus_text = ""
 		if player.bonus_rerolls > 0:
-			bonus_text = " Includes Bonus"
-		upgrade_panel.reroll_button.text = "🎲 Reroll All " + "x" + str(player.rerolls) + bonus_text
+			#bonus_text = " Includes Bonus"
+			pass
+		upgrade_panel.reroll_button.text = "🎲 ALL " + "[x" + str(player.rerolls) + "]" + bonus_text
 	else:
-		upgrade_panel.reroll_button.text = "Out of 🎲"
+		upgrade_panel.reroll_button.text = "NO 🎲 LEFT"
 		upgrade_panel.reroll_button.disabled = true
 
 #TODO: Make a real game over scene, placeholder for playtesting

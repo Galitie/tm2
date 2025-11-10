@@ -156,6 +156,7 @@ func _ready():
 		card.connect("card_pressed", card_pressed)
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
+		player_upgrade_panel.update_banish_text()
 	
 	if disable_customizer:
 		$CustomizeMenu.hide()

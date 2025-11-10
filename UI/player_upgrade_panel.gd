@@ -159,13 +159,14 @@ func _physics_process(_delta):
 func disable_cards():
 	for card in upgrade_cards:
 		card.disable()
-		card.hide_text()
+		card.hide()
 
 
 func setup_cards():
 	current_user_position_in_button_array = 0
 	var temp_resources = resource_array.duplicate(true)
 	for card in upgrade_cards:
+		card.show()
 		var random_resource = temp_resources.pick_random()
 		if random_resource.unique:
 			temp_resources.erase(random_resource)
@@ -207,7 +208,6 @@ func remove_from_card_pool(resource):
 	resource_array.remove_at(found_index)
 
 func update_banish_text():
-	%Banish.text = ""
 	if player.banish_amount > 0:
 		%Banish.text = "🔥" + " BANISH " + "[x" + str(player.banish_amount) + "]"
 	else:

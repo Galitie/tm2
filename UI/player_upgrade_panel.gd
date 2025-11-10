@@ -175,7 +175,7 @@ func setup_cards():
 
 
 func update_victory_points():
-	$VBoxContainer/DudeWindow/VBoxContainer/Victory.text = "👑 : " + str(player.victory_points)
+	$VBoxContainer/DudeWindow/VBoxContainer/Victory.text = "👑 " + str(player.victory_points)
 
 
 func setup_rerolls():

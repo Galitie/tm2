@@ -164,6 +164,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		crit_text = " CRIT" if critted && !ignore_crit else ""
 		random_modifier = randi_range(0,3)
 		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult * damage_received_mult) + random_modifier 
+		if damage == 0:
+			damage = 1
 		modify_hp(-(damage))
 	elif type == attack_type.THORN:
 		damage = 1

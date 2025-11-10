@@ -16,7 +16,7 @@ var side_sign: int = 1             # +1 right, -1 left (sticky but can swap)
 var lead_time: float = 0.15
 
 # --- Side selection stability & attack reach ---
-var side_stick_bias: float = 24.0      # other side must be this many px closer to flip
+var side_stick_bias: float = 40.0      # other side must be this many px closer to flip
 var side_reselect_cooldown: float = 0.25
 var side_reselect_timer: float = 0.0
 
@@ -25,7 +25,7 @@ var side_arrive_radius_factor: float = 0.9 # can attack if within this fraction 
 
 
 func randomize_chase():
-	chase_time = randf_range(5, 7)
+	chase_time = randf_range(3, 5)
 
 
 func Enter():
@@ -88,6 +88,7 @@ func Physics_Update(delta: float) -> void:
 	var can_keep_chasing = target_mon.current_hp > 0.0 and chase_time > 0.0
 
 	if (center_dist <= attack_radius or near_either_side) and can_keep_chasing:
+		print("I'm close enough!", monster.mon_name, ", ", target_mon.mon_name )
 		monster.velocity = Vector2.ZERO
 		var rand = [1, 2].pick_random()
 		if rand == 1:

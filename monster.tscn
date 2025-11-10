@@ -176,7 +176,7 @@ _data = {
 [node name="Monster" type="CharacterBody2D" groups=["Monster"]]
 y_sort_enabled = true
 motion_mode = 1
-wall_min_slide_angle = 0.0872665
+wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
 
 [node name="root" type="CanvasGroup" parent="."]

@@ -6,7 +6,6 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Cards that are dependent on other cards? Unlocked? ex, slime cards appear when you add a slime trail
-	Banish cards?
 	Add dance animation (hook up in dance state) (Raam)
 	Thorns, explode on death shouldn't happen on sudden death??? Not sure, kept these in for now
 	Zombie Effect (zombify function on monster)(Raam)

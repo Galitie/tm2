@@ -236,6 +236,7 @@ func count_death(monster: Monster):
 
 
 func set_customize_mode():
+	$UpgradePanel.pause_all_inputs()
 	$CustomizeMenu.show()
 	sudden_death_label.visible = false
 	current_mode = Modes.CUSTOMIZE

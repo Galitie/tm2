@@ -15,6 +15,16 @@ func setup():
 		player_upgrade_panel.update_victory_points()
 
 
+func pause_all_inputs():
+	for player_upgrade_panel in player_upgrade_panels:
+		player_upgrade_panel.input_paused = true
+
+
+func unpause_all_inputs():
+	for player_upgrade_panel in player_upgrade_panels:
+		player_upgrade_panel.input_paused = false
+
+
 func set_upgrade_panels(players):
 	for player in players:
 		var panel = load("res://UI/player_upgrade_panel.tscn").instantiate() as PlayerUpgradePanel

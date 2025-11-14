@@ -246,6 +246,7 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
+	$UpgradePanel.unpause_all_inputs()
 	if current_round == 0:
 		audio_player.stream = load("uid://bnfvpcj04flvs")
 		audio_player.play()
@@ -306,7 +307,7 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 func set_fight_mode():
 	transition_audio("uid://mysomdex1y7k", 0.5)
-	
+	$UpgradePanel.pause_all_inputs()
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()

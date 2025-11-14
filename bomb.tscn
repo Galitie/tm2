@@ -180,7 +180,7 @@ _data = {
 }
 
 [node name="Bomb" type="Node2D" groups=["CleanUp"]]
-z_index = 100
+z_index = 4095
 script = ExtResource("1_4fn8o")
 
 [node name="CanvasGroup" type="CanvasGroup" parent="."]

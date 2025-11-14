@@ -587,7 +587,7 @@ func spawn_slime(monster):
 func spawn_bomb(monster):
 	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
-	bomb.z_index = monster.z_index
+	#bomb.z_index = monster.z_index
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
 	if monster.player.larger_poops:

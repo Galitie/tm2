@@ -271,6 +271,8 @@ script = ExtResource("18_a7j2b")
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 4096
+z_as_relative = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -318,6 +320,7 @@ theme_override_font_sizes/font_size = 12
 text = "0"
 
 [node name="Name" type="Label" parent="."]
+z_as_relative = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

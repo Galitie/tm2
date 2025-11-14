@@ -13,7 +13,6 @@ func init(monster: Monster, part: MonsterPart, parent: Node2D, front_shader: Sha
 	name = prefix
 	
 	anim_offset = Node2D.new()
-	anim_offset.name = prefix + "_anim_offset"
 	add_child(anim_offset)
 	
 	sprite = Sprite2D.new()
@@ -31,6 +30,8 @@ func init(monster: Monster, part: MonsterPart, parent: Node2D, front_shader: Sha
 			sprite.material = back_shader
 			
 		position = connection_ref.position
+		
+	anim_offset.name = name + "_anim_offset"
 		
 	if part_ref.hurtbox_size:
 		var hurtbox: Area2D = Area2D.new()

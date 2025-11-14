@@ -50,9 +50,8 @@ var debug_mode : bool
 var facing : String = "right"
 var target_point : Vector2
 
-var base_color: Color
-var secondary_color: Color
 @export var player_color: Color
+var mod_color: Color = Color.TRANSPARENT
 
 signal spawn_slime(monster)
 
@@ -71,9 +70,6 @@ func _ready():
 	generate_random_name()
 	state_machine.monster = self
 	
-	base_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
-	secondary_color = Color(randf_range(0.5, 1), randf_range(0.5, 1), randf_range(0.5, 1))
-
 	root.material.set_shader_parameter("outer_color", player_color)
 
 func SetCollisionRefs() -> void:
@@ -120,8 +116,8 @@ func _on_hurtbox_area_entered(area):
 					take_damage(null, current_state, true, attack_type.PROJECTILE)
 				else:
 					play_generic_sound("uid://cf8aw1xy3pg34")
-					root.modulate = Color("3467ff")
-					get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+					mod_monster(Color("3467ff"))
+					get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 					return
 			else:
 				take_damage(null, current_state, true, attack_type.PROJECTILE)
@@ -147,8 +143,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 					var attacker_state = attacker.state_machine.current_state.name.to_lower()
 					attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
 		play_generic_sound("uid://cf8aw1xy3pg34")
-		root.modulate = Color("3467ff")
-		get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 0.6).set_delay(0.3)
+		mod_monster(Color("3467ff"))
+		get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 		return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
@@ -235,13 +231,13 @@ func zombify():
 	toggle_collisions(false)
 	player.revived = true
 	modify_hp(1)
-	root.modulate = Color.DARK_GREEN
 	$ZombieTimer.start()
 
 
 func unzombify():
 	player.revived = false
-	root.modulate = Color.WHITE
+	mod_color = Color.TRANSPARENT
+	mod_monster(mod_color)
 
 
 func _on_zombie_timer_timeout():
@@ -250,6 +246,8 @@ func _on_zombie_timer_timeout():
 	toggle_collisions(true)
 	if Globals.game.current_mode != Globals.game.Modes.UPGRADE:
 		state_machine.transition_state("getupandgo")
+		mod_color = Color(0.0, 0.39, 0.0, 0.7)
+		mod_monster(mod_color)
 	else:
 		state_machine.transition_state("upgradestart")
 
@@ -272,9 +270,11 @@ func hit_effect(crit: bool = false) -> void:
 		play_generic_sound("uid://dfjgpdho3lcvd", -5.0)
 	else:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
-	root.modulate = Color("ff0e1b")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_trans(Tween.TRANS_BOUNCE)
+	mod_monster(Color("ff0e1b"))
+	get_tree().create_tween().tween_method(mod_monster, Color("ff0e1b"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 
+func mod_monster(color: Color) -> void:
+	MonsterGeneration.ModulateMonster(self, color)
 
 func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.stream = load(uid)
@@ -287,12 +287,12 @@ func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 
 func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
-	root.modulate = Color("6bff7d")
-	get_tree().create_tween().tween_property(root, "modulate", Color.WHITE, 1).set_delay(0.3)
+	mod_monster(Color("6bff7d"))
+	get_tree().create_tween().tween_method(mod_monster, Color("6bff7d"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 
 
 func send_flying(attacker: Node) -> void:
-	root.modulate = Color("ff0e1b")
+	mod_monster(Color("ff0e1b"))
 	sent_flying = true
 	state_machine.transition_state("knockedout")
 	audio_player.pitch_scale = 1.0

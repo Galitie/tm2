@@ -13,7 +13,8 @@ func Enter():
 	monster.sent_flying = false
 	monster.rotation = 0.0
 	var viewport_size: Vector2i = get_viewport().size
-	monster.root.modulate = Color.WHITE
+	monster.mod_color = Color.TRANSPARENT
+	monster.mod_monster(monster.mod_color)
 	monster.global_position.x = clampf(monster.global_position.x, -100.0, viewport_size.x + 100.0)
 	monster.global_position.y = clampf(monster.global_position.y, -100.0, viewport_size.y + 100.0)
 	

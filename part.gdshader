@@ -4,6 +4,7 @@ uniform vec2 parent_part_world_pos;
 uniform vec4 parent_part_color;
 
 uniform vec4 part_color;
+uniform vec4 modulate;
 
 varying vec2 vertex_world;
 varying vec2 parent_part_vertex_space;
@@ -28,10 +29,12 @@ void fragment() {
 		COLOR = vec4(0.0, 1.0, 0.0, COLOR.a);
 	}*/
 	if (parent_part_color.a == 0.0) {
-		COLOR = vec4(part_color.xyz, COLOR.a);
+		vec4 base_color = vec4(part_color.xyz, COLOR.a);
+		COLOR = vec4(mix(base_color, modulate, modulate.a).xyz, COLOR.a);
 	}
 	else {
-		COLOR = vec4(mix(parent_part_color.xyz, part_color.xyz, norm).xyz, COLOR.a);
+		vec4 base_color = vec4(mix(parent_part_color.xyz, part_color.xyz, norm).xyz, COLOR.a);
+		COLOR = vec4(mix(base_color, modulate, modulate.a).xyz, COLOR.a);
 	}
 	//COLOR = vec4(parent_part_color.xyz, COLOR.a);
 }

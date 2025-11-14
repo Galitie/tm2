@@ -5,7 +5,6 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Cards that are dependent on other cards? Unlocked? ex, slime cards appear when you add a slime trail
 	Add dance animation (hook up in dance state) (Raam)
 	Zombie Effect (zombify function on monster)(Raam)
 	Slimes need floor hitbox (Raam)

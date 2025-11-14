@@ -22,3 +22,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_14mfg")]([])
+remove_cards = Array[ExtResource("2_14mfg")]([])

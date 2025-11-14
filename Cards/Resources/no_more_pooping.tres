@@ -13,7 +13,7 @@
 [resource]
 script = ExtResource("3_rhubh")
 card_name = "CONSTIPATED"
-description = "Monster is CONSTIPATED, will no longer POOP"
+description = "Monster is CONSTIPATED, will no longer optionally POOP"
 Type = "passive"
 state_id = ""
 unique = true

@@ -39,18 +39,24 @@ class Gamepad:
 ]
 
 func _ready() -> void:
-	var device_ids: Array = Input.get_connected_joypads()
-	for id in device_ids:
-		if id < gamepads.size():
-			gamepads[id].device_id = id
-			gamepads[id].connected = true
+	set_joypads()
 
 # important that this syncs up with the game
 func _physics_process(_delta: float) -> void:
 	for gamepad in gamepads:
 		if gamepad.connected:
 			UpdateState(gamepad.device_id)
+			
+func set_joypads() -> void:
+	var device_ids: Array = Input.get_connected_joypads()
+	for id in device_ids:
+		if id < gamepads.size():
+			gamepads[id].device_id = id
+			gamepads[id].connected = true
 
+func check_joypads_status() -> void:
+	await get_tree().create_timer(1, true, true).timeout
+	set_joypads()
 
 func UpdateState(device_id: int) -> void:
 	var gamepad: Gamepad = gamepads[device_id]

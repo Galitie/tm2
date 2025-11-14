@@ -7,7 +7,6 @@ Guiding lights:
 Features to make it playtest ready:
 	Cards that are dependent on other cards? Unlocked? ex, slime cards appear when you add a slime trail
 	Add dance animation (hook up in dance state) (Raam)
-	Thorns, explode on death shouldn't happen on sudden death??? Not sure, kept these in for now
 	Zombie Effect (zombify function on monster)(Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)
@@ -15,21 +14,18 @@ Features to make it playtest ready:
 	Fix color customization / randomization functionality (Raam)
 	Upgrade screen ui update? Show HP and stats in a col to the left of mon
 	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
-	Charging looks like humping, leg thumb instead? (Raam)
+	Charging looks like humping, leg thump instead? (Raam)
 	Block is unclear (Raam)
-	Menu, hard to know if something is selected (Raam)
-	Needs music and sound effects (Raam)
 	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 	Make controller joystick work (eventually?)
-	Place logic - 1st, 2nd, 3rd etc. based off of total player points
 	Show preview of accessory or body part (Raam)
 	Sound - Background, effects etc.
 	Menus - sound, etc.
 
 	Bonuses:
 		Variable player amount?
-		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Bots
+		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Backgrounds
 		Save, play games to get achievements to unlock accessories
 		Achievements, like get 0 points, total kills > 100 etc.

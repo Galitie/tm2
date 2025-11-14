@@ -10,7 +10,7 @@ var disabled : bool = false
 var waiting_for_ready_up : bool = false
 @onready var done_text = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Title
 @onready var done_description = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Description
-
+var monster_pos : Vector2
 
 signal finished_customizing(player)
 signal not_finished_customizing(player)
@@ -65,7 +65,6 @@ func create_stylebox():
 	new_stylebox_normal.border_width_left = 5
 	new_stylebox_normal.border_width_right = 5
 	new_stylebox_normal.border_color = Color.SKY_BLUE
-	
 	
 
 func _on_button_pressed(button_index):

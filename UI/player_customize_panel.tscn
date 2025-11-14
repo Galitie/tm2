@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://ddofft047bvq4" path="res://UI/player_customize_panel.gd" id="1_j53iu"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="2_j53iu"]
 
-[node name="PlayerCustomizePanel" type="MarginContainer" groups=["PlayerCustomizePanel"]]
+[node name="PlayerCustomizePanel" type="MarginContainer"]
+custom_minimum_size = Vector2(275, 0)
 offset_left = -1.0
 offset_right = 123.0
 offset_bottom = 429.0
-size_flags_horizontal = 3
 script = ExtResource("1_j53iu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -122,6 +122,12 @@ autowrap_mode = 3
 [node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Dude Window"]
+layout_mode = 2
+
+[node name="MonsterPos" type="Control" parent="VBoxContainer/Dude Window/CenterContainer"]
+layout_mode = 2
 
 [node name="Done" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)

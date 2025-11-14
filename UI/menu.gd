@@ -1,0 +1,156 @@
+extends Control
+
+@onready var human_button_array: Array[Node] = [$"MarginContainer/HumanMenu/VBoxContainer/1", $"MarginContainer/HumanMenu/VBoxContainer/2", $"MarginContainer/HumanMenu/VBoxContainer/3", $"MarginContainer/HumanMenu/VBoxContainer/4" ]
+var current_user_position_in_human_button_array : int = 0
+
+var bot_button_array: Array[Node]
+var current_user_position_in_bot_button_array : int = 0
+
+var new_stylebox_normal = StyleBoxFlat.new()
+var input_paused : bool = false
+var main_scene = preload("res://test_scene.tscn")
+
+var human_players_selected : bool = false
+var bot_players_selected : bool = false
+
+func _ready():
+	current_user_position_in_human_button_array = 0
+	create_stylebox()
+
+
+func _physics_process(_delta):
+	if input_paused:
+		return
+	
+	if !human_players_selected:
+		var button = human_button_array[current_user_position_in_human_button_array]
+
+		if current_user_position_in_human_button_array == 0:
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
+		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
+		
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			current_user_position_in_human_button_array += dpad_vertical_input
+			if current_user_position_in_human_button_array <= -1:
+				current_user_position_in_human_button_array = human_button_array.size() - 1
+			if current_user_position_in_human_button_array >= human_button_array.size():
+				current_user_position_in_human_button_array = 0
+
+			button = human_button_array[current_user_position_in_human_button_array]
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+			for other_button in human_button_array:
+				if other_button != button:
+					other_button.remove_theme_stylebox_override("panel")
+			
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			button = human_button_array[current_user_position_in_human_button_array]
+			_on_button_pressed(current_user_position_in_human_button_array)
+	else:
+		var button = bot_button_array[current_user_position_in_bot_button_array]
+
+		if current_user_position_in_bot_button_array == 0:
+
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
+		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
+		
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			current_user_position_in_bot_button_array += dpad_vertical_input
+			if current_user_position_in_bot_button_array <= -1:
+				current_user_position_in_bot_button_array = bot_button_array.size() - 1
+			if current_user_position_in_bot_button_array >= bot_button_array.size():
+				current_user_position_in_bot_button_array = 0
+
+			button = bot_button_array[current_user_position_in_bot_button_array]
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+			for other_button in bot_button_array:
+				if other_button != button:
+					other_button.remove_theme_stylebox_override("panel")
+			
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			button = bot_button_array[current_user_position_in_bot_button_array]
+			_on_button_pressed(current_user_position_in_bot_button_array)
+
+
+func create_stylebox():
+	new_stylebox_normal.border_width_top = 5
+	new_stylebox_normal.border_width_bottom = 5
+	new_stylebox_normal.border_width_left = 5
+	new_stylebox_normal.border_width_right = 5
+	new_stylebox_normal.border_color = Color.SKY_BLUE
+
+
+func _on_button_pressed(button_index):
+	input_paused = true
+	new_stylebox_normal.border_color = Color.GREEN
+	new_stylebox_normal.bg_color = Color.GREEN
+	await get_tree().create_timer(0.50).timeout
+	
+	if !human_players_selected:
+		match button_index:
+			0:
+				Globals.player_states[0] = Player.PlayerState.HUMAN
+			1:
+				for player in 2:
+					Globals.player_states[player] = Player.PlayerState.HUMAN
+			2:
+				for player in 3:
+					Globals.player_states[player] = Player.PlayerState.HUMAN
+			3:
+				for player in 4:
+					Globals.player_states[player] = Player.PlayerState.HUMAN
+		$MarginContainer/HumanMenu.hide()
+		$MarginContainer/BotsMenu.show()
+		build_bot_buttons(button_index + 1)
+		human_players_selected = true
+	else:
+		bot_players_selected = true
+		match bot_button_array[button_index].get_child(0).text:
+			"No Bots":
+				get_tree().change_scene_to_packed(main_scene)
+				return
+			"1":
+				Globals.player_states.pop_back()
+				Globals.player_states.append(Player.PlayerState.BOT)
+			"2":				
+				Globals.player_states.pop_back()
+				Globals.player_states.pop_back()
+				Globals.player_states.append(Player.PlayerState.BOT)
+				Globals.player_states.append(Player.PlayerState.BOT)
+			"3":
+				Globals.player_states.pop_back()
+				Globals.player_states.pop_back()
+				Globals.player_states.pop_back()
+				Globals.player_states.append(Player.PlayerState.BOT)
+				Globals.player_states.append(Player.PlayerState.BOT)
+				Globals.player_states.append(Player.PlayerState.BOT)
+
+	input_paused = false	
+	if human_players_selected and bot_players_selected:
+		get_tree().change_scene_to_packed(main_scene)
+		return
+
+
+func build_bot_buttons(human_player_amount : int):
+	match human_player_amount:
+		4:
+			get_tree().change_scene_to_packed(main_scene)
+			return
+		3:
+			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()
+		2:
+			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
+		1:
+			$"MarginContainer/BotsMenu/VBoxContainer/0".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
+	var nodes = $MarginContainer/BotsMenu/VBoxContainer.get_children()
+	for node in nodes:
+		if node == nodes[0]:
+			pass
+		else:
+			if node.visible:
+				bot_button_array.append(node)

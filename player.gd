@@ -1,10 +1,16 @@
 extends Node
 class_name Player
 
-@export var monster : Monster
+var monster : Monster
 var upgrade_panel : PlayerUpgradePanel
 var customize_panel : PlayerCustomizePanel
 var controller_port: int = -1
+enum PlayerState {NONE, HUMAN, BOT}
+var player_state = PlayerState.NONE
+
+var customize_pos : Vector2
+var upgrade_pos : Vector2
+var fight_pos : Vector2
 
 var special_name: String = ""
 var special_used : bool = false

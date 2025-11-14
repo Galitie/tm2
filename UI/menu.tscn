@@ -1,0 +1,366 @@
+[gd_scene load_steps=3 format=3 uid="uid://405m25td441q"]
+
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_0h2wq"]
+[ext_resource type="Script" uid="uid://v1v7q12g5sje" path="res://UI/menu.gd" id="1_wfiwe"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wfiwe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HumanMenu" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Amount of Human Players"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="1" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/1"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+theme_override_font_sizes/font_size = 22
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="2" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/2"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+theme_override_font_sizes/font_size = 22
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="3" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/3"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+theme_override_font_sizes/font_size = 22
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="4" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/4"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+theme_override_font_sizes/font_size = 22
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BotsMenu" type="CenterContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="Label" parent="MarginContainer/BotsMenu/VBoxContainer/UpgradeTitle"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Amount of Bots"
+horizontal_alignment = 1
+vertical_alignment = 3
+autowrap_mode = 3
+
+[node name="0" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+text = "No Bots"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="1" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+text = "1"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="2" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/2"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+text = "2"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="3" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+text = "3"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="4" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/4"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+text = "4"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/4/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/4/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1

@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=11 format=3 uid="uid://cnviuf3qmq26f"]
 
-[ext_resource type="PackedScene" uid="uid://d3fkc0o45x3ja" path="res://monster.tscn" id="1_7a21h"]
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://sudden_death.gdshader" id="1_8pr8v"]
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://main.gd" id="1_fnpeg"]
 [ext_resource type="Texture2D" uid="uid://ciat4c1ffyvc" path="res://bg_grass.png" id="2_2nij2"]
-[ext_resource type="Script" uid="uid://bw5vr4ucfdgof" path="res://player.gd" id="2_coq8p"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="3_buypi"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_sasra"]
 [ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="6_vr1i5"]
@@ -56,89 +54,7 @@ rotation = -1.57155
 scale = Vector2(0.560061, 1)
 shape = SubResource("RectangleShape2D_vp4v2")
 
-[node name="Player1" type="Node" parent="." node_paths=PackedStringArray("monster") groups=["Player"]]
-script = ExtResource("2_coq8p")
-monster = NodePath("Monster")
-
-[node name="Monster" parent="Player1" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
-position = Vector2(262, 192)
-player = NodePath("..")
-player_color = Color(1, 0, 0, 1)
-
-[node name="CustomizePos" type="Node2D" parent="Player1"]
-position = Vector2(149, 400)
-metadata/_edit_lock_ = true
-
-[node name="UpgradePos" type="Node2D" parent="Player1"]
-position = Vector2(149, 575)
-metadata/_edit_lock_ = true
-
-[node name="FightPos" type="Node2D" parent="Player1"]
-position = Vector2(252, 200)
-metadata/_edit_lock_ = true
-
-[node name="Player2" type="Node" parent="." node_paths=PackedStringArray("monster") groups=["Player"]]
-script = ExtResource("2_coq8p")
-monster = NodePath("Monster")
-
-[node name="Monster" parent="Player2" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
-position = Vector2(878, 185)
-player = NodePath("..")
-player_color = Color(0, 0, 1, 1)
-
-[node name="CustomizePos" type="Node2D" parent="Player2"]
-position = Vector2(436, 400)
-metadata/_edit_lock_ = true
-
-[node name="UpgradePos" type="Node2D" parent="Player2"]
-position = Vector2(436, 575)
-metadata/_edit_lock_ = true
-
-[node name="FightPos" type="Node2D" parent="Player2"]
-position = Vector2(870, 171)
-metadata/_edit_lock_ = true
-
-[node name="Player3" type="Node" parent="." node_paths=PackedStringArray("monster") groups=["Player"]]
-script = ExtResource("2_coq8p")
-monster = NodePath("Monster")
-
-[node name="Monster" parent="Player3" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
-position = Vector2(251, 439)
-player = NodePath("..")
-player_color = Color(1, 1, 0, 1)
-
-[node name="UpgradePos" type="Node2D" parent="Player3"]
-position = Vector2(720, 575)
-metadata/_edit_lock_ = true
-
-[node name="CustomizePos" type="Node2D" parent="Player3"]
-position = Vector2(720, 400)
-metadata/_edit_lock_ = true
-
-[node name="FightPos" type="Node2D" parent="Player3"]
-position = Vector2(240, 427)
-metadata/_edit_lock_ = true
-
-[node name="Player4" type="Node" parent="." node_paths=PackedStringArray("monster") groups=["Player"]]
-script = ExtResource("2_coq8p")
-monster = NodePath("Monster")
-
-[node name="Monster" parent="Player4" node_paths=PackedStringArray("player") instance=ExtResource("1_7a21h")]
-position = Vector2(864, 459)
-player = NodePath("..")
-player_color = Color(0, 1, 0, 1)
-
-[node name="UpgradePos" type="Node2D" parent="Player4"]
-position = Vector2(1000, 575)
-metadata/_edit_lock_ = true
-
-[node name="CustomizePos" type="Node2D" parent="Player4"]
-position = Vector2(1000, 400)
-metadata/_edit_lock_ = true
-
-[node name="FightPos" type="Node2D" parent="Player4"]
-position = Vector2(860, 455)
-metadata/_edit_lock_ = true
+[node name="Players" type="Node" parent="."]
 
 [node name="UpgradePanel" parent="." instance=ExtResource("3_sasra")]
 visible = false

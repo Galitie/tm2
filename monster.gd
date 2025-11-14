@@ -17,7 +17,7 @@ enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME}
 var mon_name : String
 @onready var name_label = $Name
 
-@export var player : Player
+var player : Player
 
 @onready var root = $root
 @onready var state_machine = $StateMachine

@@ -458,8 +458,15 @@ func apply_card_resource_effects(card_resource : Resource, player):
 	if card_resource.remove_specific_states.size():
 		for state_index in card_resource.remove_specific_states:
 			player.monster.state_machine.weights[state_index] = 0
+	if card_resource.unlocked_cards:
+		for card in card_resource.unlocked_cards:
+			player.upgrade_panel.resource_array.append(load(card.get_path()))
+	if card_resource.remove_cards:
+		for card in card_resource.remove_cards:
+			player.upgrade_panel.resource_array.erase(card)
 	if card_resource.unique:
 		player.upgrade_panel.resource_array.erase(card_resource)
+
 
 
 func apply_card_attribute(attribute, amount, player):

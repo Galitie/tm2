@@ -2,6 +2,7 @@ extends Control
 @onready var playerContainer = $MarginContainer/PlayerContainer
 var player_customize_panels
 
+
 func _ready():
 	pass
 
@@ -20,6 +21,7 @@ func set_customize_panels(players):
 	for player_index in players.size():
 		player_customize_panels[player_index].player = players[player_index]
 		players[player_index].customize_panel = player_customize_panels[player_index]
+
 
 func set_bots_to_ready(players):
 	for player in players:

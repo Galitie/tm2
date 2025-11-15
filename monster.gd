@@ -24,13 +24,12 @@ var player : Player
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
 @onready var max_hp_label = %max_hp
-@onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
-@onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player : AnimationPlayer = $root/anim_player
 @onready var animation_player_damage = $AnimationPlayer_Damage
 @onready var animation_player_heal = $AnimationPlayer_Heal
 @onready var heal_label = $Heal
-
+@onready var health_texture : Texture = load("res://UI/health.png")
+@onready var low_health_texture : Texture = load("res://UI/health_low.png")
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body_collision
 
@@ -71,6 +70,7 @@ func _ready():
 	state_machine.monster = self
 	
 	root.material.set_shader_parameter("outer_color", player_color)
+
 
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox
@@ -257,7 +257,7 @@ func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)
 	current_hp_label.text = str(current_hp)
 	hp_bar.value = current_hp
-	check_low_hp()
+	update_hp_color()
 
 
 func modify_max_hp(amount):
@@ -274,8 +274,10 @@ func hit_effect(crit: bool = false) -> void:
 	mod_monster(Color("ff0e1b"))
 	get_tree().create_tween().tween_method(mod_monster, Color("ff0e1b"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 
+
 func mod_monster(color: Color) -> void:
 	MonsterGeneration.ModulateMonster(self, color)
+
 
 func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.stream = load(uid)
@@ -308,10 +310,11 @@ func send_flying(attacker: Node) -> void:
 	Globals.game.freeze_frame(self)
 
 
-func check_low_hp():
+func update_hp_color():
 	if current_hp <= (max_hp / 3.0):
-		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)
-
+		$HPBar.texture_progress = low_health_texture
+	else:
+		$HPBar.texture_progress = health_texture
 
 func move_name_upgrade():
 	$NameUpgrade.visible = true

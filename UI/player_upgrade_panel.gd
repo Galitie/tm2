@@ -29,7 +29,7 @@ func _ready():
 
 func press_card(button, acc_idx: int = 0, input = null) -> void:
 	input_paused = true
-	if input == JOY_BUTTON_A:
+	if input == JOY_BUTTON_A and player.player_state != Player.PlayerState.BOT:
 		input_paused = true
 		%Stamp.visible = true
 		%Stamp.global_position = button.global_position + button.size * 0.5

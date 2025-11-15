@@ -13,6 +13,7 @@ var main_scene = preload("res://test_scene.tscn")
 var human_players_selected : bool = false
 var bot_players_selected : bool = false
 
+
 func _ready():
 	current_user_position_in_human_button_array = 0
 	create_stylebox()
@@ -103,30 +104,43 @@ func _on_button_pressed(button_index):
 		$MarginContainer/BotsMenu.show()
 		build_bot_buttons(button_index + 1)
 		human_players_selected = true
+		input_paused = false
 	else:
+		input_paused = true
 		bot_players_selected = true
 		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
+				print(Globals.player_states, " not bots")
 				get_tree().change_scene_to_packed(main_scene)
 				return
 			"1":
-				Globals.player_states.pop_back()
-				Globals.player_states.append(Player.PlayerState.BOT)
-			"2":				
-				Globals.player_states.pop_back()
-				Globals.player_states.pop_back()
-				Globals.player_states.append(Player.PlayerState.BOT)
-				Globals.player_states.append(Player.PlayerState.BOT)
+				var counter = 1
+				var index = 0
+				for player in Globals.player_states:
+					if player == Player.PlayerState.NONE and counter > 0:
+						Globals.player_states[index] = Player.PlayerState.BOT
+						counter -= 1
+					index += 1
+			"2":
+				var counter = 2
+				var index = 0
+				for player in Globals.player_states:
+					if player == Player.PlayerState.NONE and counter > 0:
+						Globals.player_states[index] = Player.PlayerState.BOT
+						counter -= 1
+					index += 1
 			"3":
-				Globals.player_states.pop_back()
-				Globals.player_states.pop_back()
-				Globals.player_states.pop_back()
-				Globals.player_states.append(Player.PlayerState.BOT)
-				Globals.player_states.append(Player.PlayerState.BOT)
-				Globals.player_states.append(Player.PlayerState.BOT)
-
-	input_paused = false	
+				var counter = 3
+				var index = 0
+				for player in Globals.player_states:
+					if player == Player.PlayerState.NONE and counter > 0:
+						Globals.player_states[index] = Player.PlayerState.BOT
+						counter -= 1
+					index += 1
+		input_paused = false	
+	
 	if human_players_selected and bot_players_selected:
+		print(Globals.player_states, " button text: ", bot_button_array[int(button_index)].get_child(0).text)
 		get_tree().change_scene_to_packed(main_scene)
 		return
 

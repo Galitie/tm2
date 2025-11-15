@@ -12,6 +12,7 @@ var customize_pos : Vector2
 var upgrade_pos : Vector2
 var fight_pos : Vector2
 
+var has_special : bool = false
 var special_name: String = ""
 var special_used : bool = false
 

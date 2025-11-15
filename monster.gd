@@ -223,7 +223,8 @@ func explode_on_death():
 
 #TODO: Raam explosion animation???
 func _on_temp_timer_timeout():
-	temp_area.queue_free()
+	if temp_area != null:
+		temp_area.queue_free()
 
 
 func zombify():

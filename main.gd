@@ -58,14 +58,16 @@ func listen_for_special_trigger():
 		var specials = $Specials.get_children()
 		var index = 0
 		for player in players:
-			if player.player_state == Player.PlayerState.BOT and !player.special_used and player.monster.current_hp > 0:
-				player.monster.state_machine.use_special()
-				player.special_used = true
-				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
-				specials[index].text = "Special used!"
+			if player.player_state == Player.PlayerState.BOT and !player.special_used and player.monster.current_hp > 0 and player.has_special:
+				var rand_chance = randi_range(0,100000000)
+				if rand_chance > 99900000:
+					player.monster.state_machine.use_special()
+					player.special_used = true
+					specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
+					specials[index].text = "Special used!"
 			if player.monster.current_hp <= 0:
 				specials[index].text = ""
-			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0:
+			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0 and player.has_special:
 				player.monster.state_machine.use_special()
 				player.special_used = true
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
@@ -451,14 +453,17 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "BLOCKED UP"
+				player.has_special = true
 			"specialattack":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "QUICK(ER) ATTACK"
+				player.has_special = true
 			"specialpoop":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "SQUEEZE ONE OUT"
+				player.has_special = true
 			"poop_on_hit":
 				player.poop_on_hit = true
 			"slime_trail":

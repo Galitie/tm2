@@ -70,7 +70,6 @@ func handle_bot():
 	$VBoxContainer/Custom1.hide()
 	$VBoxContainer/Custom2.hide()
 	waiting_for_ready_up = true
-	print("emitted?")
 	finished_customizing.emit(player)
 	
 	var bot_stylebox = StyleBoxFlat.new()

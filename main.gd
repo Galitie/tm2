@@ -122,16 +122,17 @@ func _ready():
 		if player != Player.PlayerState.NONE:
 			add_player_node(player_counter)
 			player_counter += 1
+	
 	players = get_tree().get_nodes_in_group("Player")
-	
-	$CustomizeMenu.set_customize_panels(players)
-	$UpgradePanel.set_upgrade_panels(players)
-	$PauseTimer.timeout.connect(_unpause)
-	
 	var counter = 0
 	for player in players:
 		player.player_state = Globals.player_states[counter]
 		counter += 1
+	$CustomizeMenu.set_customize_panels(players)
+	$UpgradePanel.set_upgrade_panels(players)
+	$PauseTimer.timeout.connect(_unpause)
+	
+
 	
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	sudden_death_label.visible = false;
@@ -597,7 +598,7 @@ func spawn_slime(monster):
 	if monster.player.larger_slimes:
 		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
 	if monster.player.longer_slimes:
-		slime.lifetime = 5
+		slime.lifetime = 6
 	add_child(slime)
 	slime.add_to_group("Slime")
 	slime.add_to_group("CleanUp")

@@ -48,10 +48,9 @@ func _physics_process(_delta):
 			_on_button_pressed(current_user_position_in_human_button_array)
 	else:
 		var button = bot_button_array[current_user_position_in_bot_button_array]
-
 		if current_user_position_in_bot_button_array == 0:
-
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+		
 		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
 		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
 		

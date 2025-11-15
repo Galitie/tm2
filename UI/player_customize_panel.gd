@@ -15,6 +15,7 @@ var monster_pos : Vector2
 signal finished_customizing(player)
 signal not_finished_customizing(player)
 
+
 func _ready():
 	current_user_position_in_button_array = 0
 	create_stylebox()
@@ -60,12 +61,26 @@ func _physics_process(_delta):
 
 
 func create_stylebox():
-	new_stylebox_normal.border_width_top = 5
-	new_stylebox_normal.border_width_bottom = 5
-	new_stylebox_normal.border_width_left = 5
-	new_stylebox_normal.border_width_right = 5
+	new_stylebox_normal.set_border_width_all(5)
 	new_stylebox_normal.border_color = Color.SKY_BLUE
+
+
+func handle_bot():
+	$VBoxContainer/Title.hide()
+	$VBoxContainer/Custom1.hide()
+	$VBoxContainer/Custom2.hide()
+	waiting_for_ready_up = true
+	finished_customizing.emit(player)
 	
+	var bot_stylebox = StyleBoxFlat.new()
+	bot_stylebox.set_border_width_all(5)
+	bot_stylebox.bg_color = Color.GREEN
+	bot_stylebox.border_color = Color.GREEN
+	$VBoxContainer/Done.add_theme_stylebox_override("panel", bot_stylebox)
+	
+	done_text.text = "Finished Customizing"
+	done_description.text = "Bots are good to go"
+
 
 func _on_button_pressed(button_index):
 	match button_index:
@@ -75,8 +90,8 @@ func _on_button_pressed(button_index):
 			player.monster.generate_random_name()
 		2:
 			waiting_for_ready_up = true
+			finished_customizing.emit(player)
 			new_stylebox_normal.border_color = Color.GREEN
 			new_stylebox_normal.bg_color = Color.GREEN
-			finished_customizing.emit(player)
 			done_text.text = "Please Wait..."
 			done_description.text = "Press 'B' to go back to customizing"

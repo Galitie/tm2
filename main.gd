@@ -135,16 +135,14 @@ func _ready():
 	for player in players:
 		player.player_state = Globals.player_states[counter]
 		counter += 1
+	
 	$CustomizeMenu.set_customize_panels(players)
 	$UpgradePanel.set_upgrade_panels(players)
 	$PauseTimer.timeout.connect(_unpause)
 	
-
-	
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	sudden_death_label.visible = false;
 	sudden_death_label.scale = Vector2(4.0, 4.0)
-	
 	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time
 	
 	for player in players:
@@ -154,6 +152,7 @@ func _ready():
 		player.customize_panel.connect("finished_customizing", _add_ready_player)
 		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
 	$CustomizeMenu.set_bots_to_ready(players)
+	
 	if debug_mode:
 		Globals.game.debug_mode = true
 		for player in players:
@@ -210,7 +209,7 @@ func _process(_delta):
 					alive_monsters += 1
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
-	if ready_players.size() == 4 and current_mode == Modes.CUSTOMIZE:
+	if ready_players.size() == players.size() and current_mode == Modes.CUSTOMIZE:
 		$CustomizeMenu.disable()
 		$CustomizeMenu.hide()
 		if start_in_fight_mode:

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_xvchy")
 card_name = "SNAKE GAME"
-description = "If MONSTER leaves a SLIME trail, SLIME trail will last longer"
+description = "SLIME trail will last longer"
 Type = "passive"
 state_id = "longer_slime"
 unique = true
@@ -22,3 +22,4 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 unlocked_cards = Array[ExtResource("2_xvchy")]([])
+remove_cards = Array[ExtResource("2_xvchy")]([])

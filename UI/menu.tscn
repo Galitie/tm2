@@ -364,3 +364,13 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
+
+[connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo" to="." method="_on_button_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo" to="." method="_on_button_pressed" binds= [0]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= ["1"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= ["2"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= ["3"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/4/CardInfo" to="." method="_on_button_pressed" binds= ["4"]]

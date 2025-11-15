@@ -24,6 +24,5 @@ func set_customize_panels(players):
 
 func set_bots_to_ready(players):
 	for player in players:
-		print(player.player_state)
 		if player.player_state == Player.PlayerState.BOT:
 			player.customize_panel.handle_bot()

@@ -14,7 +14,6 @@ func setup():
 		player_upgrade_panel.upgrade_title.text = "ADD ABILITY [x" + str(player_upgrade_panel.player.upgrade_points) + "]"
 		player_upgrade_panel.update_victory_points()
 
-
 func pause_all_inputs():
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.input_paused = true

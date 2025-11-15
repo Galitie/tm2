@@ -88,7 +88,6 @@ func Physics_Update(delta: float) -> void:
 	var can_keep_chasing = target_mon.current_hp > 0.0 and chase_time > 0.0
 
 	if (center_dist <= attack_radius or near_either_side) and can_keep_chasing:
-		print("I'm close enough!", monster.mon_name, ", ", target_mon.mon_name )
 		monster.velocity = Vector2.ZERO
 		var rand = [1, 2].pick_random()
 		if rand == 1:

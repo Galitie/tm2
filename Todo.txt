@@ -5,9 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Fix cards upgrading during fight lol
 	Add dance animation (hook up in dance state) (Raam)
-	Zombie Effect (zombify function on monster)(Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)
 	More Accessories (Raam)
@@ -23,8 +21,8 @@ Features to make it playtest ready:
 	Menus - sound, etc.
 
 	Bonuses:
-		Variable player amount?
 		Bots
+			Bots choose cards
 		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Backgrounds
 		Save, play games to get achievements to unlock accessories

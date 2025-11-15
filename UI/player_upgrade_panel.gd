@@ -66,6 +66,9 @@ func _physics_process(_delta):
 		return
 	
 	if player.upgrade_points > 0:
+		if player.player_state == player.PlayerState.BOT:
+			var button = button_array[1]
+			press_card(button, 1, JOY_BUTTON_A)
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
@@ -217,6 +220,7 @@ func update_banish_text():
 		%Banish.add_theme_color_override("font_color", Color(1,1,1,.5))
 		%Banish.text = "NO 🔥 LEFT"
 
+
 func update_place_text(player):
 	if player.place == 1:
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "st"
@@ -226,3 +230,6 @@ func update_place_text(player):
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "rd"
 	elif player.place == 4:
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
+
+func set_up_bots():
+	pass

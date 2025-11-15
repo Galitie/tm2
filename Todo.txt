@@ -5,6 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Improve chase
 	Add dance animation (hook up in dance state) (Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)

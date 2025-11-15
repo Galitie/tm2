@@ -3,7 +3,7 @@ class_name PlayerCustomizePanel
 
 @onready var title = $VBoxContainer/Title/Label
 var player : Player
-@onready var button_array: Array[Node] = [$VBoxContainer/Custom1, $VBoxContainer/Custom2, $VBoxContainer/Done]
+@onready var button_array: Array[Node] = [$VBoxContainer/Custom2, $VBoxContainer/Custom1, $VBoxContainer/Done]
 var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()
 var disabled : bool = false
@@ -70,6 +70,7 @@ func handle_bot():
 	$VBoxContainer/Custom1.hide()
 	$VBoxContainer/Custom2.hide()
 	waiting_for_ready_up = true
+	print("emitted?")
 	finished_customizing.emit(player)
 	
 	var bot_stylebox = StyleBoxFlat.new()
@@ -84,9 +85,9 @@ func handle_bot():
 
 func _on_button_pressed(button_index):
 	match button_index:
-		0:
-			MonsterGeneration.RandomizeColor(player.monster)
 		1:
+			MonsterGeneration.RandomizeColor(player.monster)
+		0:
 			player.monster.generate_random_name()
 		2:
 			waiting_for_ready_up = true

@@ -151,7 +151,7 @@ func _ready():
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
 		player.customize_panel.connect("finished_customizing", _add_ready_player)
 		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
-		
+	$CustomizeMenu.set_bots_to_ready(players)
 	if debug_mode:
 		Globals.game.debug_mode = true
 		for player in players:

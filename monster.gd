@@ -127,8 +127,7 @@ func _on_hurtbox_area_entered(area):
 		
 		if area.is_in_group("Slime") and area.owner.monster != self:
 			take_damage(null, current_state, true, attack_type.SLIME)
-		
-		
+
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
@@ -315,6 +314,7 @@ func update_hp_color():
 		$HPBar.texture_progress = low_health_texture
 	else:
 		$HPBar.texture_progress = health_texture
+
 
 func move_name_upgrade():
 	$NameUpgrade.visible = true

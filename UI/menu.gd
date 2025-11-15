@@ -105,7 +105,7 @@ func _on_button_pressed(button_index):
 		human_players_selected = true
 	else:
 		bot_players_selected = true
-		match bot_button_array[button_index].get_child(0).text:
+		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
 				get_tree().change_scene_to_packed(main_scene)
 				return
@@ -137,22 +137,18 @@ func build_bot_buttons(human_player_amount : int):
 			get_tree().change_scene_to_packed(main_scene)
 			return
 		3:
-			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
 			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()
 		2:
-			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
 			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
 		1:
 			$"MarginContainer/BotsMenu/VBoxContainer/0".hide()
-			$"MarginContainer/BotsMenu/VBoxContainer/4".hide()
 	var nodes = $MarginContainer/BotsMenu/VBoxContainer.get_children()
 	for node in nodes:
 		if node == nodes[0]:
-			pass
-		else:
-			if node.visible:
-				bot_button_array.append(node)
+			continue
+		if node.visible:
+			bot_button_array.append(node)
 
 
 func _on_card_info_pressed(extra_arg_0: String) -> void:

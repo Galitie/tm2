@@ -70,7 +70,8 @@ func _physics_process(_delta):
 			
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
 			button = bot_button_array[current_user_position_in_bot_button_array]
-			_on_button_pressed(current_user_position_in_bot_button_array)
+			if button.get_child(0).disabled == false:
+				_on_button_pressed(current_user_position_in_bot_button_array)
 
 
 func create_stylebox():
@@ -151,12 +152,15 @@ func build_bot_buttons(human_player_amount : int):
 			get_tree().change_scene_to_packed(main_scene)
 			return
 		3:
-			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
 		2:
 			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()
 		1:
-			$"MarginContainer/BotsMenu/VBoxContainer/0".hide()
+			$"MarginContainer/BotsMenu/VBoxContainer/0/CardInfo".disabled = true
+			$"MarginContainer/BotsMenu/VBoxContainer/0/CardInfo".set_block_signals(true)
+			$"MarginContainer/BotsMenu/VBoxContainer/0/CardInfo".add_theme_color_override("font_disabled_color", Color.RED)
+	
 	var nodes = $MarginContainer/BotsMenu/VBoxContainer.get_children()
 	for node in nodes:
 		if node == nodes[0]:

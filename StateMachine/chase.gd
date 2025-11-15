@@ -11,17 +11,17 @@ var avoidance_strength: float = 4.0
 var max_accel: float = 5000.0
 
 # --- Side-chase settings ---
-var side_offset: float = 48.0      # lateral offset from target center
+var side_offset: float = 72.0      # lateral offset from target center
 var side_sign: int = 1             # +1 right, -1 left (sticky but can swap)
 var lead_time: float = 0.15
 
 # --- Side selection stability & attack reach ---
-var side_stick_bias: float = 40.0      # other side must be this many px closer to flip
+var side_stick_bias: float = 24.0      # other side must be this many px closer to flip
 var side_reselect_cooldown: float = 0.25
 var side_reselect_timer: float = 0.0
 
-var attack_range_scale: float = 2      # can attack if within r * scale of target center
-var side_arrive_radius_factor: float = 0.9 # can attack if within this fraction of side_offset
+var attack_range_scale: float = 1.5        # can attack if within r * scale of target center
+var side_arrive_radius_factor: float = 0.55 # can attack if within this fraction of side_offset
 
 
 func randomize_chase():
@@ -65,7 +65,7 @@ func Physics_Update(delta: float) -> void:
 			target_r = float(target_mon.body_collision.shape.radius)
 
 	# Dynamic offsets & thresholds
-	side_offset = max(side_offset, target_r)
+	side_offset = max(side_offset, target_r * 1.25)
 	var attack_radius = target_r * attack_range_scale
 	var side_arrive_radius = max(8.0, side_offset * side_arrive_radius_factor)
 

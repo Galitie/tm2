@@ -6,6 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Improve chase
+	Ties are not techinically considered mid game for place...fine at winning screen though
 	Add dance animation (hook up in dance state) (Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)

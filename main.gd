@@ -28,6 +28,22 @@ var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
+var menu_scene = preload("res://test_scene.tscn")
+
+func _init():
+	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
+	Globals.game = self
+
+
+func _physics_process(_delta: float) -> void:
+	listen_for_special_trigger()
+	# Sort monsters by Y position every second (for performance reasons)
+	await get_tree().create_timer(1.0).timeout
+	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
+	depth_entities.sort_custom(SortByY)
+	for i: int in range(depth_entities.size()):
+		var entity = depth_entities[i]
+		entity.z_index = i
 
 
 func debug_stuff():
@@ -73,23 +89,6 @@ func listen_for_special_trigger():
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 				specials[index].text = "Special used!"
 			index += 1
-
-
-func _init():
-	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
-	Globals.game = self
-
-
-func _physics_process(_delta: float) -> void:
-	listen_for_special_trigger()
-	# Sort monsters by Y position every second (for performance reasons)
-	await get_tree().create_timer(1.0).timeout
-	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
-	depth_entities.sort_custom(SortByY)
-	for i: int in range(depth_entities.size()):
-		var entity = depth_entities[i]
-		entity.z_index = i
-
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
@@ -225,7 +224,7 @@ func _process(_delta):
 			set_upgrade_mode()
 	#TODO: Make a real game end scene, placeholder for playtesting
 	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_packed(menu_scene)
 
 
 func count_death(monster: Monster):

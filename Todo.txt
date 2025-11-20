@@ -11,8 +11,7 @@ Features to make it playtest ready:
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)
 	More Accessories (Raam)
-	Upgrade screen ui update? Show HP and stats in a col to the left of mon
-	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
+	Charge attack need to do bigger attacks? -> should these be more dramatic? (Raam)
 	Block is unclear (Raam)
 	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 	Show preview of accessory or body part (Raam)

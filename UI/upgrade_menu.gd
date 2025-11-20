@@ -13,6 +13,8 @@ func setup():
 		player_upgrade_panel.setup_rerolls()
 		player_upgrade_panel.upgrade_title.text = "ADD ABILITY [x" + str(player_upgrade_panel.player.upgrade_points) + "]"
 		player_upgrade_panel.update_victory_points()
+		if player_upgrade_panel.player.player_state == Player.PlayerState.BOT:
+			player_upgrade_panel.hide_bot_stats()
 
 func pause_all_inputs():
 	for player_upgrade_panel in player_upgrade_panels:

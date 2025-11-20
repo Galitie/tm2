@@ -195,6 +195,7 @@ func setup_rerolls():
 		reroll_button.text = "NO 🎲 LEFT"
 		reroll_button.disabled = true
 
+
 # reroll button
 func _on_button_pressed():
 	emit_signal("reroll_pressed", self) #Caught by game scene
@@ -231,5 +232,7 @@ func update_place_text(player):
 	elif player.place == 4:
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
 
-func set_up_bots():
-	pass
+
+func hide_bot_stats():
+	$VBoxContainer/HBoxContainer/Reroll.hide()
+	$VBoxContainer/HBoxContainer/HBoxContainer/Banish.hide()

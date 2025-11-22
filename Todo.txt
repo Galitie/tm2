@@ -5,7 +5,7 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	FIX SOFT LOCK: Explode on death area gets stuck on the screen
+	Final upgrade round is unclear that it's the final round <.<
 	Ties are not techinically considered mid game for place...fine at winning screen though
 	Add dance animation (hook up in dance state) (Raam)
 	Slimes need floor hitbox (Raam)

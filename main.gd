@@ -22,7 +22,7 @@ var sudden_death_speed : int = 100
 var camera_tracking: bool = false
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var current_round : int
+var current_round : int = 0
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}

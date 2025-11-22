@@ -210,6 +210,7 @@ func explode_on_death():
 	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.50
 	temp_collision.shape = temp_shape_resource
 	temp_area.add_to_group("Bomb")
+	temp_area.add_to_group("CleanUp")
 	temp_area.add_child(temp_collision)
 	temp_timer = Timer.new()
 	temp_timer.timeout.connect(_on_temp_timer_timeout)

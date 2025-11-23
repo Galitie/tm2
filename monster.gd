@@ -385,11 +385,9 @@ func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) ->
 	
 	if toggle:
 		effect_sprite.modulate = Color.TRANSPARENT
-		effect_sprite.visible = true
 		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
 	else:
-		await get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
-		effect_sprite.visible = false
+		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
 
 func _on_slime_timer_timeout():
 	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:

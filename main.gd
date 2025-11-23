@@ -425,6 +425,9 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"blocker":
 				var block_index = player.monster.state_machine.keys.find("block")
 				player.monster.state_machine.weights[block_index] += .50
+			"mirrorblock":
+				player.monster.state_machine.block_values.erase("block")
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 			"attacker":
 				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
 				player.monster.state_machine.weights[basic_attack_index] += .50
@@ -472,6 +475,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.block_longer = true
 			"zombie":
 				player.zombie = true
+			"zombie_sudden_death":
+				player.zombie_sudden_death = true
 			"larger_slimes":
 				player.larger_slimes = true
 			"longer_slime":

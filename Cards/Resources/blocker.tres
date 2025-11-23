@@ -11,6 +11,7 @@ description = "Will BLOCK more often"
 Type = "block"
 state_id = "blocker"
 unique = false
+is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_14mfg")]([ExtResource("2_af6g1")])
 attribute_1 = 1

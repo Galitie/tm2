@@ -193,7 +193,10 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
 	if current_hp <= 0:
-		if player.zombie and !player.revived:
+		if player.zombie and !player.revived and !Globals.is_sudden_death_mode:
+			zombify()
+			return
+		if player.zombie_sudden_death and !player.revived and Globals.is_sudden_death_mode:
 			zombify()
 			return
 		toggle_collisions(false)

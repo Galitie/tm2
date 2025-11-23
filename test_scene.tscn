@@ -25,6 +25,7 @@ shader_parameter/Freq = 10.0
 [node name="Game" type="Node2D"]
 script = ExtResource("1_fnpeg")
 total_rounds = 7
+debug_mode = false
 override_sudden_death_time = 60.0
 
 [node name="Background" type="Sprite2D" parent="."]

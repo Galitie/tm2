@@ -37,6 +37,7 @@ var slime_trail : bool = false
 var caltrops: bool = false
 var block_longer: bool = false
 var zombie : bool = false
+var zombie_sudden_death : bool = false
 var revived : bool = false
 
 var current_small_cards : int = 0

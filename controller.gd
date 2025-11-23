@@ -1,6 +1,8 @@
 extends Node
 const DEADZONE: float = 0.2
 
+var status_timer: Timer = Timer.new()
+
 class Gamepad:
 	var device_id: int = -1
 	var connected: bool = false
@@ -40,6 +42,11 @@ class Gamepad:
 
 func _ready() -> void:
 	set_joypads()
+	status_timer.name = "Controller Status Timer"
+	status_timer.autostart = true
+	status_timer.one_shot = false
+	status_timer.timeout.connect(set_joypads)
+	add_child(status_timer)
 
 # important that this syncs up with the game
 func _physics_process(_delta: float) -> void:
@@ -53,10 +60,6 @@ func set_joypads() -> void:
 		if id < gamepads.size():
 			gamepads[id].device_id = id
 			gamepads[id].connected = true
-
-func check_joypads_status() -> void:
-	await get_tree().create_timer(1, true, true).timeout
-	set_joypads()
 
 func UpdateState(device_id: int) -> void:
 	var gamepad: Gamepad = gamepads[device_id]

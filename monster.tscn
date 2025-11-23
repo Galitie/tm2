@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=39 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
@@ -28,6 +28,7 @@
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="25_s0vvg"]
 [ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://StateMachine/upgrade.gd" id="27_14274"]
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://StateMachine/fight_start.gd" id="28_hqfdu"]
+[ext_resource type="Texture2D" uid="uid://bn3ju1wjp60ea" path="res://block.png" id="30_hqfdu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
 resource_local_to_scene = true
@@ -200,6 +201,12 @@ shape = SubResource("CircleShape2D_lqt3o")
 [node name="body_collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5105l")
+
+[node name="effect" type="Sprite2D" parent="."]
+visible = false
+z_index = 997
+position = Vector2(0, -15)
+texture = ExtResource("30_hqfdu")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("18_cjpl6")

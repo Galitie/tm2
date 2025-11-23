@@ -35,6 +35,10 @@ var player : Player
 @onready var slime_timer = $SlimeTimer
 @onready var audio_player = $AudioStreamPlayer
 
+var block_texture = load("uid://bn3ju1wjp60ea")
+var mirror_block_texture = load("uid://ck7a7uoebctrw")
+var thorns_texture = load("uid://mbp3wn4a84i6")
+
 var hitbox_collision
 var hurtbox_collision
 var hurtbox
@@ -166,6 +170,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 1
 		mod_text = " THORN"
 		modify_hp(-damage)
+		thorn_effect()
 	elif type == attack_type.BOMB:
 		random_modifier = randi_range(0,5)
 		damage = round(10 + random_modifier)
@@ -241,6 +246,7 @@ func unzombify():
 
 
 func _on_zombie_timer_timeout():
+	play_generic_sound("uid://s01jaub4gq8s")
 	player.revived = true
 	$Heal.text = "+1 HP ZOMBIE"
 	animation_player_heal.play("heal")
@@ -292,7 +298,9 @@ func thorn_effect() -> void:
 	play_generic_sound("uid://can2y656sbycd", -5.0)
 	mod_monster(Color("6bff7d"))
 	get_tree().create_tween().tween_method(mod_monster, Color("6bff7d"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
-
+	toggle_effect_graphic(true, EffectType.THORNS)
+	await get_tree().create_timer(0.5).timeout
+	toggle_effect_graphic(false)
 
 func send_flying(attacker: Node) -> void:
 	mod_monster(Color("ff0e1b"))
@@ -359,6 +367,29 @@ func generate_random_name():
 	$NameUpgrade.text = whole_name
 	mon_name = whole_name
 
+enum EffectType { BLOCK, MIRROR_BLOCK, THORNS }
+
+func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) -> void:
+	var effect_sprite: Sprite2D = $effect
+	
+	if (toggle):
+		match type:
+			EffectType.BLOCK:
+				effect_sprite.texture = block_texture
+			EffectType.MIRROR_BLOCK:
+				effect_sprite.texture = mirror_block_texture
+			EffectType.THORNS:
+				effect_sprite.texture = thorns_texture
+	
+	effect_sprite.z_index = z_index + 1
+	
+	if toggle:
+		effect_sprite.modulate = Color.TRANSPARENT
+		effect_sprite.visible = true
+		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
+	else:
+		await get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
+		effect_sprite.visible = false
 
 func _on_slime_timer_timeout():
 	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:

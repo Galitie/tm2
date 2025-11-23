@@ -21,3 +21,5 @@ attribute_amount_2 = 5
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("1_6hnit")]([])
+remove_cards = Array[ExtResource("1_6hnit")]([])

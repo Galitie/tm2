@@ -67,8 +67,11 @@ func _physics_process(_delta):
 	
 	if player.upgrade_points > 0:
 		if player.player_state == player.PlayerState.BOT:
+			input_paused = true
 			var button = button_array[1]
+			await get_tree().create_timer(1.5).timeout
 			press_card(button, 1, JOY_BUTTON_A)
+			input_paused = false
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
@@ -171,7 +174,10 @@ func setup_cards():
 	current_user_position_in_button_array = 0
 	var temp_resources = resource_array.duplicate(true)
 	for card in upgrade_cards:
-		card.show()
+		if player.player_state == Player.PlayerState.BOT:
+			card.hide()
+		else:
+			card.show()
 		var random_resource = temp_resources.pick_random()
 		if random_resource.unique:
 			temp_resources.erase(random_resource)

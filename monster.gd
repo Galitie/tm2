@@ -128,7 +128,9 @@ func _on_hurtbox_area_entered(area):
 			take_damage(attacker, current_state, true, attack_type.BOMB)
 		
 		elif area.is_in_group("Slime") and area.owner.monster != self:
-			take_damage(area.owner, current_state, true, attack_type.SLIME)
+			if area.global_position.y > global_position.y:
+				print("slime at feet")
+				take_damage(area.owner, current_state, true, attack_type.SLIME)
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
@@ -222,7 +224,6 @@ func explode_on_death():
 	temp_timer.wait_time = .40
 	temp_timer.autostart = true
 	call_deferred("add_child", temp_area)
-	
 
 
 #TODO: Raam explosion animation???

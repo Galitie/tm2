@@ -21,10 +21,28 @@ Features to make it playtest ready:
 	Menus - sound, etc.
 
 	Bonuses:
-		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
+		Modes
+			Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Backgrounds
+			Ideas have been references to old Tyler games
 		Save, play games to get achievements to unlock accessories
-		Achievements, like get 0 points, total kills > 100 etc.
+			When should it load and save?
+			Load at main menu?
+			Save at end of each fight/upgrade round?
+			How to view achievements?
+				Main menu?
+			Achievement ideas:
+				End game with 0 points
+				total kills > 100, 1000, etc
+				Reach 100 HP
+				One shot another player
+				Speed maxxed out (idk number here, but gotta go fast)
+				All slime upgrades
+				All Poop upgrades
+				All block upgrades
+				# of poop summons (idk what number here)
+				Block x amount of attacks
+			- Per player? All players? How to count these?
 
 
 Card ideas:

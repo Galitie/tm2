@@ -325,11 +325,11 @@ func set_fight_mode():
 		$Rankings.visible = true
 	$Specials.visible = true
 	if current_round == total_rounds:
-		$RoundLabel.add_theme_color_override("font_color", Color.RED)
-		$RoundLabel.add_theme_font_size_override("font_size", 36)
-		$RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
+		$Camera2D/CanvasLayer/RoundLabel.add_theme_font_size_override("font_size", 36)
+		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
 	else:
-		$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:

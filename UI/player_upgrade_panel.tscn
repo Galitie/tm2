@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=20 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="PackedScene" uid="uid://dgbiaduauaghx" path="res://Cards/card.tscn" id="1_qh1v2"]
 [ext_resource type="Shader" uid="uid://davklb2fj1p3n" path="res://UI/burn.gdshader" id="3_vv5o0"]
+[ext_resource type="PackedScene" uid="uid://cbeuoiqc8avud" path="res://UI/post_card.tscn" id="4_5aacw"]
 [ext_resource type="AudioStream" uid="uid://o81tlwdlwbgw" path="res://sounds/stamp.ogg" id="4_22x0x"]
 [ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
+[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="5_ad54b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0
@@ -45,6 +47,96 @@ shader_parameter/borderWidth = 0.02
 shader_parameter/burnMult = 0.135
 shader_parameter/noiseTexture = SubResource("NoiseTexture2D_w0fdq")
 shader_parameter/burnColor = Color(1, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_16opa"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t47v"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qi4jj"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tirdh"]
+viewport_path = NodePath("SubViewport")
 
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
 custom_minimum_size = Vector2(275, 0)
@@ -91,20 +183,40 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "🔥 BANISH [x3]"
 
-[node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+[node name="1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+visible = false
 material = SubResource("ShaderMaterial_cuncv")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
-[node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+[node name="2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+visible = false
 material = SubResource("ShaderMaterial_5aacw")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
 
-[node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+[node name="3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("1_qh1v2")]
+visible = false
 material = SubResource("ShaderMaterial_ad54b")
 custom_minimum_size = Vector2(100, 115)
 layout_mode = 2
+
+[node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
+material = SubResource("ShaderMaterial_16opa")
+position = Vector2(135, 141)
+texture = SubResource("ViewportTexture_8t47v")
+deck_order = 2
+
+[node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
+material = SubResource("ShaderMaterial_8t47v")
+position = Vector2(135, 260)
+texture = SubResource("ViewportTexture_qi4jj")
+deck_order = 1
+
+[node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
+material = SubResource("ShaderMaterial_qi4jj")
+position = Vector2(135, 384)
+texture = SubResource("ViewportTexture_tirdh")
 
 [node name="DudeWindow" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -126,6 +238,7 @@ stream = ExtResource("4_22x0x")
 [node name="Stamp" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 4
 position = Vector2(62, 171)
 rotation = -0.436332
 texture = ExtResource("5_22x0x")

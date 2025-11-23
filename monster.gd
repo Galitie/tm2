@@ -32,7 +32,7 @@ var player : Player
 @onready var low_health_texture : Texture = load("res://UI/health_low.png")
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body_collision
-
+@onready var slime_timer = $SlimeTimer
 @onready var audio_player = $AudioStreamPlayer
 
 var hitbox_collision
@@ -51,8 +51,6 @@ var target_point : Vector2
 
 @export var player_color: Color
 var mod_color: Color = Color.TRANSPARENT
-
-signal spawn_slime(monster)
 
 #TODO: Raam, temp stuff for explode on death
 var temp_timer = Timer.new()
@@ -104,11 +102,11 @@ func _on_hurtbox_area_entered(area):
 			take_damage(attacker, current_state, true)
 			return
 	
-		if area.is_in_group("Attack"):
+		elif area.is_in_group("Attack"):
 			attacker = area.get_parent().get_parent()
 			take_damage(attacker, current_state, false, attack_type.MONSTER)
 
-		if area.is_in_group("Projectile") and area.owner.monster != self: #don't shoot self
+		elif area.is_in_group("Projectile") and area.owner.monster != self: #don't shoot self
 			attacker = area.owner.emitter
 			if player.matrix:
 				var rand = [1,2].pick_random()
@@ -122,11 +120,11 @@ func _on_hurtbox_area_entered(area):
 			else:
 				take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
-		if area.is_in_group("Bomb"):
+		elif area.is_in_group("Bomb"):
 			take_damage(attacker, current_state, true, attack_type.BOMB)
 		
-		if area.is_in_group("Slime") and area.owner.monster != self:
-			take_damage(null, current_state, true, attack_type.SLIME)
+		elif area.is_in_group("Slime") and area.owner.monster != self:
+			take_damage(area.owner, current_state, true, attack_type.SLIME)
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
@@ -214,11 +212,12 @@ func explode_on_death():
 	temp_area.add_child(temp_collision)
 	temp_timer = Timer.new()
 	temp_timer.timeout.connect(_on_temp_timer_timeout)
+	temp_area.add_child(temp_sprite)
+	temp_area.add_child(temp_timer)
 	temp_timer.wait_time = .40
 	temp_timer.autostart = true
-	temp_area.add_child(temp_timer)
-	temp_area.add_child(temp_sprite)
 	call_deferred("add_child", temp_area)
+	
 
 
 #TODO: Raam explosion animation???
@@ -230,7 +229,6 @@ func _on_temp_timer_timeout():
 func zombify():
 	state_machine.transition_state("zombie")
 	toggle_collisions(false)
-	player.revived = true
 	modify_hp(1)
 	$ZombieTimer.start()
 
@@ -242,6 +240,7 @@ func unzombify():
 
 
 func _on_zombie_timer_timeout():
+	player.revived = true
 	$Heal.text = "+1 HP ZOMBIE"
 	animation_player_heal.play("heal")
 	toggle_collisions(true)
@@ -358,3 +357,21 @@ func generate_random_name():
 	$Name.text = whole_name
 	$NameUpgrade.text = whole_name
 	mon_name = whole_name
+
+
+func _on_slime_timer_timeout():
+	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:
+		spawn_slime()
+
+
+func spawn_slime():
+	var slime = preload("uid://upayf74ibwcl").instantiate()
+	slime.monster = self
+	slime.global_position = global_position + Vector2(0,30)
+	if player.larger_slimes:
+		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
+	if player.longer_slimes:
+		slime.lifetime = 6
+	get_tree().get_root().get_node("Game").add_child(slime)
+	slime.add_to_group("Slime")
+	slime.add_to_group("CleanUp")

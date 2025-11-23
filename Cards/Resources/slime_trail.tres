@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://beo0p0kljyb5g"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=6 format=3 uid="uid://beo0p0kljyb5g"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_es4dy"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_6kmbr"]
 [ext_resource type="Resource" uid="uid://dj5fe8fy1ss3n" path="res://Cards/Resources/longer_slime.tres" id="3_lkoga"]
 [ext_resource type="Resource" uid="uid://qqdwbq831ev6" path="res://Cards/Resources/larger_slimes.tres" id="4_ckl7f"]
+[ext_resource type="Resource" uid="uid://dr6d21dxjpmtp" path="res://Cards/Resources/more_slime.tres" id="5_ckl7f"]
 
 [resource]
 script = ExtResource("2_6kmbr")
@@ -23,5 +24,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("2_6kmbr")]([ExtResource("3_lkoga"), ExtResource("4_ckl7f")])
+unlocked_cards = Array[ExtResource("2_6kmbr")]([ExtResource("3_lkoga"), ExtResource("4_ckl7f"), ExtResource("5_ckl7f")])
 remove_cards = Array[ExtResource("2_6kmbr")]([])

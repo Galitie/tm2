@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_xvchy")
 card_name = "SNAKE GAME"
-description = "SLIME trail will last longer"
+description = "SLIME trails will last longer"
 Type = "passive"
 state_id = "longer_slime"
 unique = true

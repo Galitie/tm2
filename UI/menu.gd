@@ -111,7 +111,6 @@ func _on_button_pressed(button_index):
 		bot_players_selected = true
 		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
-				print(Globals.player_states, " not bots")
 				get_tree().change_scene_to_packed(main_scene)
 				return
 			"1":
@@ -141,7 +140,6 @@ func _on_button_pressed(button_index):
 		input_paused = false	
 	
 	if human_players_selected and bot_players_selected:
-		print(Globals.player_states, " button text: ", bot_button_array[int(button_index)].get_child(0).text)
 		get_tree().change_scene_to_packed(main_scene)
 		return
 

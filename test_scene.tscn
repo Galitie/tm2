@@ -185,10 +185,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 18
 
-[node name="SlimeTimer" type="Timer" parent="."]
-wait_time = 0.75
-
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]
 [connection signal="timeout" from="SuddenDeathTimer" to="." method="_on_sudden_death_timer_timeout"]
-[connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]

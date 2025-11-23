@@ -8,7 +8,7 @@ signal reroll_pressed(upgrade_panel)
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
 var player : Player
-var resource_array: Array[Resource] = [load("uid://dbvivyf8n66v3"),load("uid://fk8ruy5a3i6t"),load("uid://ypvgbouvw3wv"),load("uid://f53own34678k"),load("uid://beo0p0kljyb5g"), load("uid://0fnohogd0jnj"), load("uid://4pdhr1tis8vw"), load("uid://cn4ovy3i6wd8s"), load("uid://bnduresmutm6t"), load("uid://cjql6et6c05ls"), load("uid://n6000538073l"), load("uid://cgypuyq157lm6"), load("uid://phcwpn7m4yun"), load("res://Cards/Resources/thorns.tres"), load("uid://x788fm7x6b4i"), load("uid://bd56nejnv5k61"), load("uid://dowb4h6fynu1t"), load("uid://d38rynb3vrmjg"), load("uid://d1mv22yolom78"), load("uid://2dwrrigu8sux"), load("uid://b1yf5pmgknoky"), load("uid://bn1d6phtvfhry"),load("uid://bkgtuu1m8soho"),load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg"), load("uid://b7mqshabtd6un"), load("uid://d4m0ycr7geqti")]
+var resource_array: Array[Resource] = [load("uid://dbvivyf8n66v3"),load("uid://fk8ruy5a3i6t"),load("uid://ypvgbouvw3wv"),load("uid://f53own34678k"),load("uid://beo0p0kljyb5g"), load("uid://0fnohogd0jnj"), load("uid://bnduresmutm6t"), load("uid://cjql6et6c05ls"), load("uid://n6000538073l"), load("uid://cgypuyq157lm6"), load("uid://phcwpn7m4yun"), load("res://Cards/Resources/thorns.tres"), load("uid://bd56nejnv5k61"), load("uid://dowb4h6fynu1t"), load("uid://d38rynb3vrmjg"), load("uid://2dwrrigu8sux"), load("uid://bn1d6phtvfhry"),load("uid://bkgtuu1m8soho"),load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg"), load("uid://b7mqshabtd6un"), load("uid://d4m0ycr7geqti")]
 @onready var button_array: Array[Node] = [reroll_button, $VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3]
 var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()
@@ -29,7 +29,7 @@ func _ready():
 
 func press_card(button, acc_idx: int = 0, input = null) -> void:
 	input_paused = true
-	if input == JOY_BUTTON_A:
+	if input == JOY_BUTTON_A and player.player_state != Player.PlayerState.BOT:
 		input_paused = true
 		%Stamp.visible = true
 		%Stamp.global_position = button.global_position + button.size * 0.5
@@ -66,6 +66,9 @@ func _physics_process(_delta):
 		return
 	
 	if player.upgrade_points > 0:
+		if player.player_state == player.PlayerState.BOT:
+			var button = button_array[1]
+			press_card(button, 1, JOY_BUTTON_A)
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
@@ -192,6 +195,7 @@ func setup_rerolls():
 		reroll_button.text = "NO 🎲 LEFT"
 		reroll_button.disabled = true
 
+
 # reroll button
 func _on_button_pressed():
 	emit_signal("reroll_pressed", self) #Caught by game scene
@@ -217,6 +221,7 @@ func update_banish_text():
 		%Banish.add_theme_color_override("font_color", Color(1,1,1,.5))
 		%Banish.text = "NO 🔥 LEFT"
 
+
 func update_place_text(player):
 	if player.place == 1:
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "st"
@@ -226,3 +231,8 @@ func update_place_text(player):
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "rd"
 	elif player.place == 4:
 		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
+
+
+func hide_bot_stats():
+	$VBoxContainer/HBoxContainer/Reroll.hide()
+	$VBoxContainer/HBoxContainer/HBoxContainer/Banish.hide()

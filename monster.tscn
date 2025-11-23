@@ -277,7 +277,6 @@ script = ExtResource("18_a7j2b")
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 4096
 z_as_relative = false
 anchors_preset = 5
@@ -428,4 +427,9 @@ stream = ExtResource("23_6py8i")
 wait_time = 2.0
 one_shot = true
 
+[node name="SlimeTimer" type="Timer" parent="."]
+wait_time = 0.75
+autostart = true
+
 [connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]
+[connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]

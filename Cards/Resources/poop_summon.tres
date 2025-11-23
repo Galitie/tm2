@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bn1d6phtvfhry"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=8 format=3 uid="uid://bn1d6phtvfhry"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_k2dmc"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_k3gwj"]
+[ext_resource type="Resource" uid="uid://d1mv22yolom78" path="res://Cards/Resources/bigger_poops.tres" id="3_7lgqm"]
+[ext_resource type="Resource" uid="uid://b1yf5pmgknoky" path="res://Cards/Resources/double_poop.tres" id="4_hpxhg"]
+[ext_resource type="Resource" uid="uid://x788fm7x6b4i" path="res://Cards/Resources/increase_poop_chance.tres" id="5_jdhl5"]
+[ext_resource type="Resource" uid="uid://4pdhr1tis8vw" path="res://Cards/Resources/poop_on_hit.tres" id="6_repba"]
+[ext_resource type="Resource" uid="uid://cn4ovy3i6wd8s" path="res://Cards/Resources/special_poop.tres" id="7_2nk6j"]
 
 [resource]
 script = ExtResource("2_k3gwj")
@@ -21,5 +26,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("2_k3gwj")]([])
+unlocked_cards = Array[ExtResource("2_k3gwj")]([ExtResource("3_7lgqm"), ExtResource("4_hpxhg"), ExtResource("5_jdhl5"), ExtResource("6_repba"), ExtResource("7_2nk6j")])
 remove_cards = Array[ExtResource("2_k3gwj")]([])

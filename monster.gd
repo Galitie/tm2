@@ -17,23 +17,22 @@ enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME}
 var mon_name : String
 @onready var name_label = $Name
 
-@export var player : Player
+var player : Player
 
 @onready var root = $root
 @onready var state_machine = $StateMachine
 @onready var hp_bar = %HPBar
 @onready var current_hp_label = %current_hp
 @onready var max_hp_label = %max_hp
-@onready var max_health_fill_style = load("uid://b1cqxdsndopa") as StyleBox
-@onready var low_health_fill_style := load("uid://dlwdv81v5y0h7") as StyleBox
 @onready var animation_player : AnimationPlayer = $root/anim_player
 @onready var animation_player_damage = $AnimationPlayer_Damage
 @onready var animation_player_heal = $AnimationPlayer_Heal
 @onready var heal_label = $Heal
-
+@onready var health_texture : Texture = load("res://UI/health.png")
+@onready var low_health_texture : Texture = load("res://UI/health_low.png")
 @onready var poop_checker = $root/PoopChecker
 @onready var body_collision = $body_collision
-
+@onready var slime_timer = $SlimeTimer
 @onready var audio_player = $AudioStreamPlayer
 
 var block_texture = load("uid://bn3ju1wjp60ea")
@@ -57,8 +56,6 @@ var target_point : Vector2
 @export var player_color: Color
 var mod_color: Color = Color.TRANSPARENT
 
-signal spawn_slime(monster)
-
 #TODO: Raam, temp stuff for explode on death
 var temp_timer = Timer.new()
 var temp_area = Area2D.new()
@@ -75,6 +72,7 @@ func _ready():
 	state_machine.monster = self
 	
 	root.material.set_shader_parameter("outer_color", player_color)
+
 
 func SetCollisionRefs() -> void:
 	hitbox = $root/hitbox
@@ -108,11 +106,11 @@ func _on_hurtbox_area_entered(area):
 			take_damage(attacker, current_state, true)
 			return
 	
-		if area.is_in_group("Attack"):
+		elif area.is_in_group("Attack"):
 			attacker = area.get_parent().get_parent()
 			take_damage(attacker, current_state, false, attack_type.MONSTER)
 
-		if area.is_in_group("Projectile") and area.owner.monster != self: #don't shoot self
+		elif area.is_in_group("Projectile") and area.owner.monster != self: #don't shoot self
 			attacker = area.owner.emitter
 			if player.matrix:
 				var rand = [1,2].pick_random()
@@ -126,13 +124,12 @@ func _on_hurtbox_area_entered(area):
 			else:
 				take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
-		if area.is_in_group("Bomb"):
+		elif area.is_in_group("Bomb"):
 			take_damage(attacker, current_state, true, attack_type.BOMB)
 		
-		if area.is_in_group("Slime") and area.owner.monster != self:
-			take_damage(null, current_state, true, attack_type.SLIME)
-		
-		
+		elif area.is_in_group("Slime") and area.owner.monster != self:
+			take_damage(area.owner, current_state, true, attack_type.SLIME)
+
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
 	var damage : int
@@ -216,25 +213,27 @@ func explode_on_death():
 	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.50
 	temp_collision.shape = temp_shape_resource
 	temp_area.add_to_group("Bomb")
+	temp_area.add_to_group("CleanUp")
 	temp_area.add_child(temp_collision)
 	temp_timer = Timer.new()
 	temp_timer.timeout.connect(_on_temp_timer_timeout)
+	temp_area.add_child(temp_sprite)
+	temp_area.add_child(temp_timer)
 	temp_timer.wait_time = .40
 	temp_timer.autostart = true
-	temp_area.add_child(temp_timer)
-	temp_area.add_child(temp_sprite)
 	call_deferred("add_child", temp_area)
+	
 
 
 #TODO: Raam explosion animation???
 func _on_temp_timer_timeout():
-	temp_area.queue_free()
+	if temp_area != null:
+		temp_area.queue_free()
 
 
 func zombify():
 	state_machine.transition_state("zombie")
 	toggle_collisions(false)
-	player.revived = true
 	modify_hp(1)
 	$ZombieTimer.start()
 
@@ -247,6 +246,7 @@ func unzombify():
 
 func _on_zombie_timer_timeout():
 	play_generic_sound("uid://s01jaub4gq8s")
+	player.revived = true
 	$Heal.text = "+1 HP ZOMBIE"
 	animation_player_heal.play("heal")
 	toggle_collisions(true)
@@ -262,7 +262,7 @@ func modify_hp(amount):
 	current_hp = clamp(current_hp + amount, 0, max_hp)
 	current_hp_label.text = str(current_hp)
 	hp_bar.value = current_hp
-	check_low_hp()
+	update_hp_color()
 
 
 func modify_max_hp(amount):
@@ -279,8 +279,10 @@ func hit_effect(crit: bool = false) -> void:
 	mod_monster(Color("ff0e1b"))
 	get_tree().create_tween().tween_method(mod_monster, Color("ff0e1b"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
 
+
 func mod_monster(color: Color) -> void:
 	MonsterGeneration.ModulateMonster(self, color)
+
 
 func play_generic_sound(uid: String, volume_db: float = 0.0) -> void:
 	audio_player.stream = load(uid)
@@ -315,9 +317,11 @@ func send_flying(attacker: Node) -> void:
 	Globals.game.freeze_frame(self)
 
 
-func check_low_hp():
+func update_hp_color():
 	if current_hp <= (max_hp / 3.0):
-		hp_bar.add_theme_stylebox_override("fill", low_health_fill_style)
+		$HPBar.texture_progress = low_health_texture
+	else:
+		$HPBar.texture_progress = health_texture
 
 
 func move_name_upgrade():
@@ -385,3 +389,20 @@ func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) ->
 	else:
 		await get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
 		effect_sprite.visible = false
+
+func _on_slime_timer_timeout():
+	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:
+		spawn_slime()
+
+
+func spawn_slime():
+	var slime = preload("uid://upayf74ibwcl").instantiate()
+	slime.monster = self
+	slime.global_position = global_position + Vector2(0,30)
+	if player.larger_slimes:
+		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
+	if player.longer_slimes:
+		slime.lifetime = 6
+	get_tree().get_root().get_node("Game").add_child(slime)
+	slime.add_to_group("Slime")
+	slime.add_to_group("CleanUp")

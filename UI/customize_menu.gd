@@ -1,14 +1,29 @@
 extends Control
-@onready var players = get_tree().get_nodes_in_group("Player")
-@onready var player_customize_panels = get_tree().get_nodes_in_group("PlayerCustomizePanel")
+@onready var playerContainer = $MarginContainer/PlayerContainer
+var player_customize_panels
 
 
 func _ready():
-	for player_index in range(players.size()):
-		player_customize_panels[player_index].player = players[player_index]
-		players[player_index].customize_panel = player_customize_panels[player_index]
+	pass
 
 
 func disable():
 	for player in player_customize_panels:
 		player.disabled = true
+
+
+func set_customize_panels(players):
+	for player in players:
+		var panel = load("res://UI/player_customize_panel.tscn").instantiate() as PlayerCustomizePanel
+		panel.add_to_group("PlayerCustomizePanel")
+		playerContainer.add_child(panel)
+	player_customize_panels = get_tree().get_nodes_in_group("PlayerCustomizePanel")
+	for player_index in players.size():
+		player_customize_panels[player_index].player = players[player_index]
+		players[player_index].customize_panel = player_customize_panels[player_index]
+
+
+func set_bots_to_ready(players):
+	for player in players:
+		if player.player_state == Player.PlayerState.BOT:
+			player.customize_panel.handle_bot()

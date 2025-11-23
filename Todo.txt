@@ -5,25 +5,25 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Final upgrade round is unclear that it's the final round <.< (Raam)
+	
+	More slime cards?
+	Ties are not techinically considered mid game for place...fine at winning screen though
+	Bullets from poops not clear when they disappear
+	Save file? Achievements? Unlocks?
+	
 	Add dance animation (hook up in dance state) (Raam)
-	Zombie Effect (zombify function on monster)(Raam)
 	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)
 	More Accessories (Raam)
-	Fix color customization / randomization functionality (Raam)
-	Upgrade screen ui update? Show HP and stats in a col to the left of mon
-	Charge attack need to do bigger attacks -> should these be more dramatic? (Raam)
-	Charging looks like humping, leg thump instead? (Raam)
+	Charge attack need to do bigger attacks? -> should these be more dramatic? (Raam)
 	Block is unclear (Raam)
 	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
-	Make controller joystick work (eventually?)
 	Show preview of accessory or body part (Raam)
 	Sound - Background, effects etc.
 	Menus - sound, etc.
 
 	Bonuses:
-		Variable player amount?
-		Bots
 		Modes - Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Backgrounds
 		Save, play games to get achievements to unlock accessories
@@ -31,6 +31,7 @@ Features to make it playtest ready:
 
 
 Card ideas:
+	Boxy looking shader was cool
 	Rainbow
 	Summons (Sabrina loves these generally) spiders, bats, ghosts
 	Drop traps, bananas
@@ -56,7 +57,6 @@ General Ideas:
 	Have multiple creatures? If so, they will need player outlines or something
 	Different Idle options? Could bop, or dance or zone out etc.
 	Do upgrade cards determine looks? Does's it tell you?
-	Maybe on sudden death, zoom in / bounds get smaller
 
 
 Builds:

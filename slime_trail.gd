@@ -1,16 +1,16 @@
 extends Node2D
-class_name SlimeTrail
+class_name Slime
 
 @onready var monster : Monster
 @onready var sprite = $CanvasGroup/Sprite2D
 @onready var lifetime = 3
+@onready var lifetime_timer = $Lifetime
 
 func _ready():
 	modulate = monster.player_color
 	$Lifetime.wait_time = lifetime
 	$Lifetime.start()
-	
-	
+
 
 func _physics_process(delta):
 	if monster.current_hp <= 0:

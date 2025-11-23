@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("3_p2ha8")
 card_name = "GOOPY"
-description = "If MONSTER leaves a SLIME trail, SLIME trails will be BIGGER"
+description = "SLIME trails will be BIGGER"
 Type = "passive"
 state_id = "larger_slimes"
 unique = true
@@ -22,3 +22,4 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 unlocked_cards = Array[ExtResource("3_p2ha8")]([])
+remove_cards = Array[ExtResource("3_p2ha8")]([])

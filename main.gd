@@ -7,9 +7,8 @@ class_name Game
 @export var override_sudden_death_time : float
 @export var disable_customizer : bool
 
-@onready var players : Array[Node] = get_tree().get_nodes_in_group("Player")
+@onready var players : Array[Node]
 @onready var monsters: Array[Monster]
-@onready var player_count : int = players.size()
 @onready var upgrade_menu : Node = $UpgradePanel
 @onready var sudden_death_label: RichTextLabel = $Camera2D/CanvasLayer/SuddenDeathLabel
 @onready var sudden_death_timer: Timer = $SuddenDeathTimer
@@ -23,12 +22,28 @@ var sudden_death_speed : int = 100
 var camera_tracking: bool = false
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var current_round : int
+var current_round : int = 0
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
+var menu_scene = preload("res://test_scene.tscn")
+
+func _init():
+	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
+	Globals.game = self
+
+
+func _physics_process(_delta: float) -> void:
+	listen_for_special_trigger()
+	# Sort monsters by Y position every second (for performance reasons)
+	await get_tree().create_timer(1.0).timeout
+	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
+	depth_entities.sort_custom(SortByY)
+	for i: int in range(depth_entities.size()):
+		var entity = depth_entities[i]
+		entity.z_index = i
 
 
 func debug_stuff():
@@ -59,31 +74,21 @@ func listen_for_special_trigger():
 		var specials = $Specials.get_children()
 		var index = 0
 		for player in players:
+			if player.player_state == Player.PlayerState.BOT and !player.special_used and player.monster.current_hp > 0 and player.has_special:
+				var rand_chance = randi_range(0,100000000)
+				if rand_chance > 99900000:
+					player.monster.state_machine.use_special()
+					player.special_used = true
+					specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
+					specials[index].text = "Special used!"
 			if player.monster.current_hp <= 0:
 				specials[index].text = ""
-			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0:
+			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0 and player.has_special:
 				player.monster.state_machine.use_special()
 				player.special_used = true
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 				specials[index].text = "Special used!"
 			index += 1
-
-
-func _init():
-	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
-	Globals.game = self
-
-
-func _physics_process(_delta: float) -> void:
-	listen_for_special_trigger()
-	# Sort monsters by Y position every second (for performance reasons)
-	await get_tree().create_timer(1.0).timeout
-	var depth_entities = get_tree().get_nodes_in_group("DepthEntity")
-	depth_entities.sort_custom(SortByY)
-	for i: int in range(depth_entities.size()):
-		var entity = depth_entities[i]
-		entity.z_index = i
-
 
 func SortByY(a, b):
 	return a.global_position.y < b.global_position.y
@@ -109,7 +114,7 @@ func freeze_frame(monster: Monster) -> void:
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
 	
-	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
+	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
 		camera_tracking = false
 		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
 		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
@@ -117,12 +122,26 @@ func freeze_frame(monster: Monster) -> void:
 
 
 func _ready():
+	# Generate player nodes off of player states
+	var player_counter = 1
+	for player in Globals.player_states:
+		if player != Player.PlayerState.NONE:
+			add_player_node(player_counter)
+			player_counter += 1
+	
+	players = get_tree().get_nodes_in_group("Player")
+	var counter = 0
+	for player in players:
+		player.player_state = Globals.player_states[counter]
+		counter += 1
+	
+	$CustomizeMenu.set_customize_panels(players)
+	$UpgradePanel.set_upgrade_panels(players)
 	$PauseTimer.timeout.connect(_unpause)
 	
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	sudden_death_label.visible = false;
 	sudden_death_label.scale = Vector2(4.0, 4.0)
-	
 	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time
 	
 	for player in players:
@@ -131,7 +150,8 @@ func _ready():
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
 		player.customize_panel.connect("finished_customizing", _add_ready_player)
 		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
-		
+	$CustomizeMenu.set_bots_to_ready(players)
+	
 	if debug_mode:
 		Globals.game.debug_mode = true
 		for player in players:
@@ -188,7 +208,7 @@ func _process(_delta):
 					alive_monsters += 1
 			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
-	if ready_players.size() == 4 and current_mode == Modes.CUSTOMIZE:
+	if ready_players.size() == players.size() and current_mode == Modes.CUSTOMIZE:
 		$CustomizeMenu.disable()
 		$CustomizeMenu.hide()
 		if start_in_fight_mode:
@@ -204,14 +224,14 @@ func _process(_delta):
 			set_upgrade_mode()
 	#TODO: Make a real game end scene, placeholder for playtesting
 	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_packed(menu_scene)
 
 
 func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
 	current_knocked_out_monsters.append(monster)
-	if current_knocked_out_monsters.size() == player_count - 1 || current_knocked_out_monsters.size() >= player_count:
+	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
 		sudden_death_timer.stop()
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
@@ -222,18 +242,18 @@ func count_death(monster: Monster):
 
 
 func set_customize_mode():
+	$UpgradePanel.pause_all_inputs()
 	$CustomizeMenu.show()
 	sudden_death_label.visible = false
 	current_mode = Modes.CUSTOMIZE
 	for player in players:
-		var monster = player.get_node("Monster")
-		monster.move_name_upgrade()
-		var customize_pos = player.get_node("CustomizePos")
-		monster.target_point = customize_pos.global_position
-		monster.state_machine.transition_state("upgradestart")
+		player.monster.move_name_upgrade()
+		player.monster.target_point = player.customize_pos
+		player.monster.state_machine.transition_state("upgradestart")
 
 
 func set_upgrade_mode():
+	$UpgradePanel.unpause_all_inputs()
 	if current_round == 0:
 		audio_player.stream = load("uid://bnfvpcj04flvs")
 		audio_player.play()
@@ -247,7 +267,6 @@ func set_upgrade_mode():
 		$Rankings.visible = false
 		$Rankings.text = "Previous mround points:\n"
 	$Specials.visible = false
-	$SlimeTimer.stop()
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
@@ -267,8 +286,7 @@ func set_upgrade_mode():
 			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		monster.move_name_upgrade()
-		var upgrade_pos = player.get_node("UpgradePos")
-		monster.target_point = upgrade_pos.global_position
+		monster.target_point = player.upgrade_pos
 		monster.state_machine.transition_state("upgradestart")
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
@@ -295,7 +313,7 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 func set_fight_mode():
 	transition_audio("uid://mysomdex1y7k", 0.5)
-	
+	$UpgradePanel.pause_all_inputs()
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()
@@ -313,10 +331,8 @@ func set_fight_mode():
 	for player in players:
 		var monster = player.get_node("Monster")
 		monster.move_name_fight()
-		var fight_pos = player.get_node("FightPos")
 		monster.state_machine.transition_state("fightstart")
-		monster.target_point = fight_pos.global_position
-	$SlimeTimer.start()
+		monster.target_point = player.fight_pos
 
 
 func _on_sudden_death_timer_timeout():
@@ -433,14 +449,17 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "BLOCKED UP"
+				player.has_special = true
 			"specialattack":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "QUICK(ER) ATTACK"
+				player.has_special = true
 			"specialpoop":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "SQUEEZE ONE OUT"
+				player.has_special = true
 			"poop_on_hit":
 				player.poop_on_hit = true
 			"slime_trail":
@@ -453,6 +472,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.larger_slimes = true
 			"longer_slime":
 				player.longer_slimes = true
+			"more_slime":
+				player.monster.slime_timer.wait_time = .50
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -557,8 +578,7 @@ func check_if_game_over():
 					player.get_child(0).hide()
 		for player in players:
 			var monster = player.get_node("Monster")
-			var customize_pos = player.get_node("CustomizePos")
-			monster.target_point = customize_pos.global_position
+			monster.target_point = player.customize_pos
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()
@@ -577,19 +597,6 @@ func spawn_poop(monster):
 		poop.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
 	add_child(poop)
 	poop.add_to_group("CleanUp")
-
-
-func spawn_slime(monster):
-	var slime = preload("uid://upayf74ibwcl").instantiate()
-	slime.monster = monster
-	slime.global_position = monster.global_position + Vector2(0,30)
-	if monster.player.larger_slimes:
-		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
-	if monster.player.longer_slimes:
-		slime.lifetime = 5
-	add_child(slime)
-	slime.add_to_group("Slime")
-	slime.add_to_group("CleanUp")
 
 
 func spawn_bomb(monster):
@@ -629,7 +636,41 @@ func reset_specials_text():
 		index += 1
 
 
-func _on_slime_timer_timeout():
-	for player in players:
-		if player.slime_trail and player.monster.current_hp > 0 and player.monster.velocity != Vector2.ZERO:
-			spawn_slime(player.monster)
+func add_player_node(player_number):
+	var player_node : Player = Player.new()
+	var monster : Monster = load("res://monster.tscn").instantiate() as Monster
+	match player_number:
+		1:
+			player_node.name = "Player1"
+			monster.player_color = Color.RED
+			player_node.customize_pos = Vector2(149,400)
+			player_node.upgrade_pos = Vector2(149, 575)
+			player_node.fight_pos = Vector2(252,200)
+		2:
+			player_node.name = "Player2"
+			monster.player_color = Color.BLUE
+			player_node.customize_pos = Vector2(436,400)
+			player_node.upgrade_pos = Vector2(436, 575)
+			player_node.fight_pos = Vector2(870,171)
+
+		3:
+			player_node.name = "Player3"
+			monster.player_color = Color.YELLOW
+			player_node.customize_pos = Vector2(720,400)
+			player_node.upgrade_pos = Vector2(720, 575)
+			player_node.fight_pos = Vector2(240,427)
+		4:
+			player_node.name = "Player4"
+			monster.player_color = Color.GREEN
+			player_node.customize_pos = Vector2(1000,400)
+			player_node.upgrade_pos = Vector2(1000, 575)
+			player_node.fight_pos = Vector2(860,455)
+	
+	monster.add_to_group("Monster")
+	player_node.add_to_group("Player")
+	player_node.add_child(monster)
+	var players_node = get_tree().get_root().get_node("Game/Players")
+	players_node.add_child(player_node)
+	player_node.monster = monster
+	monster.player = player_node
+	

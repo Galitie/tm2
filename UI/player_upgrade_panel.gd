@@ -197,7 +197,7 @@ func setup_cards():
 
 
 func update_victory_points():
-	$VBoxContainer/DudeWindow/VBoxContainer/Victory.text = "👑 " + str(player.victory_points)
+	$VBoxContainer/VBoxContainer/Victory.text = "👑 " + str(player.victory_points)
 
 
 func setup_rerolls():
@@ -241,13 +241,13 @@ func update_banish_text():
 
 func update_place_text(player):
 	if player.place == 1:
-		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "st"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "st"
 	elif player.place == 2:
-		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "nd"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "nd"
 	elif player.place == 3:
-		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "rd"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "rd"
 	elif player.place == 4:
-		$VBoxContainer/DudeWindow/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
 
 
 func hide_bot_stats():

@@ -141,6 +141,7 @@ text = "WINNER! (Press START to play again)
 horizontal_alignment = 1
 
 [node name="RoundLabel" type="Label" parent="."]
+z_index = 4096
 offset_right = 40.0
 offset_bottom = 23.0
 

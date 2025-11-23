@@ -6,7 +6,6 @@ var done_blocking: bool
 var block_cycles: int
 var block_threshold: int
 
-
 func Enter():
 	done_blocking = false
 	block_cycles = 0
@@ -16,6 +15,8 @@ func Enter():
 		block_threshold = 2.5
 	monster.animation_player.play("block")
 	monster.velocity = Vector2.ZERO
+	
+	monster.toggle_effect_graphic(true, Monster.EffectType.BLOCK)
 
 
 func animation_finished(anim_name: String):
@@ -30,6 +31,7 @@ func animation_finished(anim_name: String):
 		if block_cycles >= block_threshold:
 			monster.animation_player.play("block", -1.0, -1.0, true)
 			done_blocking = true
+			monster.toggle_effect_graphic(false)
 			#monster.hurtbox_collision.disabled = false
 		else:
 			monster.animation_player.play("block_idle")

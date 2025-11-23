@@ -21,7 +21,7 @@ void fragment() {
 		dist = influence;
 	}
 	float norm = dist / influence;
-	
+
 	/*if (dist < 40.0) {
 		COLOR = vec4(1.0, 0.0, 0.0, COLOR.a);
 	}

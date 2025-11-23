@@ -17,9 +17,7 @@ func Enter():
 	if !Globals.is_sudden_death_mode:
 		monster.animation_player.play("faint")
 		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("alpha", value), 1.0, 0.5, 1.0)
-		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("outer_color", value), monster.player_color, Color(0.0, 0.0, 0.0, 0.0), 1.0)
-		
-	
+		monster.root.material.set_shader_parameter("outer_color", Color.TRANSPARENT)
 
 func Update(delta:float):
 	if monster.sent_flying:

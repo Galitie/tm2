@@ -245,7 +245,7 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	if debug_mode:
 		$Rankings.visible = false
-		$Rankings.text = "Previous round points:\n"
+		$Rankings.text = "Previous mround points:\n"
 	$Specials.visible = false
 	$SlimeTimer.stop()
 	clean_up_screen()

@@ -15,6 +15,8 @@ func Enter():
 		block_threshold = 1.25
 	monster.animation_player.play("block")
 	monster.velocity = Vector2.ZERO
+	
+	monster.toggle_effect_graphic(true, Monster.EffectType.MIRROR_BLOCK)
 
 
 func animation_finished(anim_name: String):
@@ -28,5 +30,6 @@ func animation_finished(anim_name: String):
 		if block_cycles >= block_threshold:
 			monster.animation_player.play("block", -1.0, -1.0, true)
 			done_blocking = true
+			monster.toggle_effect_graphic(false)
 		else:
 			monster.animation_player.play("block_idle")

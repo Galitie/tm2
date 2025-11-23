@@ -121,6 +121,13 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
+[node name="RoundLabel" type="Label" parent="Camera2D/CanvasLayer"]
+z_index = 4096
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 28.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("10_vr1i5")
@@ -141,11 +148,8 @@ text = "WINNER! (Press START to play again)
 "
 horizontal_alignment = 1
 
-[node name="RoundLabel" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Rankings" type="Label" parent="."]
+z_index = 4096
 offset_top = 34.0
 offset_right = 40.0
 offset_bottom = 57.0

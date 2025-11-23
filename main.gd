@@ -265,7 +265,7 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	if debug_mode:
 		$Rankings.visible = false
-		$Rankings.text = "Previous mround points:\n"
+		$Rankings.text = "Previous round points:\n"
 	$Specials.visible = false
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
@@ -325,11 +325,11 @@ func set_fight_mode():
 		$Rankings.visible = true
 	$Specials.visible = true
 	if current_round == total_rounds:
-		$RoundLabel.add_theme_color_override("font_color", Color.RED)
-		$RoundLabel.add_theme_font_size_override("font_size", 36)
-		$RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
+		$Camera2D/CanvasLayer/RoundLabel.add_theme_font_size_override("font_size", 36)
+		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
 	else:
-		$RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:

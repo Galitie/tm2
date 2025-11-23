@@ -37,6 +37,13 @@ varying flat vec2 pivot;
 varying flat vec2 region_rate;
 varying flat mat3 inv_rot_mat;
 
+uniform vec2 position;
+uniform float radius;
+uniform float borderWidth = 0.02;
+uniform float burnMult = 0.135;
+uniform sampler2D noiseTexture;
+uniform vec4 burnColor : source_color;
+
 vec2 rotate(vec2 uv, vec2 pivot_r, float angle)
 {
 	mat2 rotation_mat = mat2(vec2(cos(angle), -sin(angle)), vec2(sin(angle), cos(angle)));
@@ -209,4 +216,8 @@ void fragment()
     vec4 res = mix(shadow, main_texture, main_texture.a);
     vec4 debug_layer = vec4(1.0, 0.0, 0.0, 0.3);
     COLOR = mix(debug ? debug_layer : res, res, res.a);
+	
+	float dist = length(position - UV) + (texture(noiseTexture, UV).b) * burnMult;
+	COLOR.rgb = mix(COLOR.rgb, burnColor.rgb, float(dist<radius+borderWidth));
+	COLOR.a *= 1.0-(float(dist<radius));
 }

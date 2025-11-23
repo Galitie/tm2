@@ -32,7 +32,7 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 	if input == JOY_BUTTON_A and player.player_state != Player.PlayerState.BOT:
 		input_paused = true
 		%Stamp.visible = true
-		%Stamp.global_position = button.global_position + button.size * 0.5
+		%Stamp.global_position = button.global_position
 		%Stamp.scale = Vector2(2.0, 2.0)
 		await get_tree().create_tween().tween_property(%Stamp, "scale", Vector2(1.0, 1.0), 0.1).finished
 		get_tree().create_tween().tween_property(%Stamp, "visible", false, 1.0)
@@ -49,7 +49,6 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 			await get_tree().create_timer(0.5).timeout
 	input_paused = false
 	button._on_button_pressed(acc_idx, input, button)
-
 
 
 func burn_card(button):
@@ -75,6 +74,7 @@ func _physics_process(_delta):
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
+			
 		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
 		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
 		
@@ -86,19 +86,25 @@ func _physics_process(_delta):
 				current_user_position_in_button_array = 0
 			# Really shitty way to see what index player is on
 			var button = button_array[current_user_position_in_button_array]
+			
 			if button == reroll_button:
 				reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			else:
-				button.add_theme_stylebox_override("panel", new_stylebox_normal)
-				reroll_button.remove_theme_stylebox_override("normal")
-				reroll_button.remove_theme_stylebox_override("disabled")
+				button.select()
+				
 			for other_button in button_array:
-				if other_button != reroll_button:
-					other_button.card_info_panel.show()
-					other_button.accessory_panel.hide()
 				if other_button != button:
-					other_button.remove_theme_stylebox_override("panel")
+					if other_button == reroll_button:
+						other_button.remove_theme_stylebox_override("panel")
+						reroll_button.remove_theme_stylebox_override("normal")
+					else:
+						if other_button.selected:
+							other_button.deselect()
+							other_button.hide_accessories()
+		
 			in_accessory_menu = false
+			if button != reroll_button:
+				button.hide_accessories()
 		
 		# To banish cards
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !in_accessory_menu:
@@ -120,48 +126,53 @@ func _physics_process(_delta):
 						in_accessory_menu = false
 						
 						press_card(button, current_user_position_in_accessory_array, input)
-						button.card_info_panel.show()
-						button.accessory_panel.hide()
+						button.hide_accessories()
 					else:
 						#Not yet in the acc menu, but will enter it now
-						button.card_info_panel.hide()
-						button.accessory_panel.show()
+						#button.card_info_panel.hide()
+						#button.accessory_panel.show()
+						button.show_accessories()
 						current_user_position_in_accessory_array = 0
-						var accessory_button = button.accessories[current_user_position_in_accessory_array]
-						accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
+						var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
+						button.select_accessory(accessory_button)
+						#accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
 						in_accessory_menu = true
-						for other_button in button.accessories:
+						for other_button in button.valid_accessories:
 							if other_button != accessory_button:
-								other_button.remove_theme_stylebox_override("panel")
+								button.deselect_accessory(other_button)
+								#other_button.remove_theme_stylebox_override("panel")
 				else:
 					press_card(button, 0, input)
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
-			button.card_info_panel.show()
-			button.accessory_panel.hide()
+			#button.card_info_panel.show()
+			#button.accessory_panel.hide()
+			button.hide_accessories()
 			in_accessory_menu = false
 		
 		# For navigating the accessory menu
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
 			if button.accessory_panel.visible:
 				current_user_position_in_accessory_array += dpad_horizontal_input
-				if current_user_position_in_accessory_array <= -1:
-					current_user_position_in_accessory_array = button.accessories.size() - 1
-				if current_user_position_in_accessory_array >= button.accessories.size():
+				if current_user_position_in_accessory_array < 0:
+					current_user_position_in_accessory_array = button.valid_accessories.size() - 1
+				if current_user_position_in_accessory_array > button.valid_accessories.size() - 1:
 					current_user_position_in_accessory_array = 0
-				var accessory_button = button.accessories[current_user_position_in_accessory_array]
-				accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
-				for other_button in button.accessories:
+				var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
+				button.select_accessory(accessory_button)
+				#accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
+				for other_button in button.valid_accessories:
 					if other_button != accessory_button:
-						other_button.remove_theme_stylebox_override("panel")
+						button.deselect_accessory(other_button)
+						#other_button.remove_theme_stylebox_override("panel")
 	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:
 			reroll_button.remove_theme_stylebox_override("normal")
 			reroll_button.remove_theme_stylebox_override("disabled")
 		else:
-			button.remove_theme_stylebox_override("panel")
+			button.deselect()
 
 
 func disable_cards():

@@ -272,16 +272,26 @@ func set_upgrade_mode():
 	clear_knocked_out_monsters()
 	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
-	var rerolls_amount_counter = 0
-	var place_counter = 1
+
+	var current_place = 0
+	var prev_points = -1
+	var rerolls = 0
+
 	for player in players:
-		player.special_used = false
-		player.monster.unzombify()
+		if player.victory_points != prev_points:
+			current_place += 1
+			rerolls += 1
+			prev_points = player.victory_points
 		if current_round == 0:
 			player.place = 1
+			player.rerolls = 3
 		else:
-			player.place = place_counter
+			player.place = current_place
+			player.rerolls = rerolls + player.bonus_rerolls
 		player.upgrade_panel.update_place_text(player)
+		
+		player.special_used = false
+		player.monster.unzombify()
 		if debug_mode:
 			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
@@ -294,12 +304,6 @@ func set_upgrade_mode():
 			player.upgrade_points = randi_range(1,5)
 		else:
 			player.upgrade_points = 3
-		if current_round == 0:
-			player.rerolls = 3
-		else:
-			player.rerolls = rerolls_amount_counter + player.bonus_rerolls
-		rerolls_amount_counter += 1
-		place_counter += 1
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
 	check_if_game_over()

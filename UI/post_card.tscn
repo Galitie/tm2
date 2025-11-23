@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="1_5gyjd"]
 [ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://post_card.gd" id="2_5gyjd"]
-[ext_resource type="Texture2D" uid="uid://oy15ibruw30k" path="res://art/postage_common.png" id="3_4rr1v"]
+[ext_resource type="Texture2D" uid="uid://tsfcfyle4b6g" path="res://UI/postage_common.png" id="3_ojvqg"]
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="4_ojvqg"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="5_r0bo0"]
 [ext_resource type="Texture2D" uid="uid://byi6oqbecy5pc" path="res://parts/fat_mallard.png" id="6_4rr1v"]
@@ -59,7 +59,7 @@ size = Vector2i(285, 141)
 render_target_update_mode = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-texture = ExtResource("3_4rr1v")
+texture = ExtResource("3_ojvqg")
 centered = false
 
 [node name="Header" type="RichTextLabel" parent="SubViewport/Sprite2D"]

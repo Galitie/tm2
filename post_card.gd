@@ -16,7 +16,7 @@ var valid_accessories: Array = []
 @onready var description = $SubViewport/Sprite2D/Description
 @onready var stats = $SubViewport/Sprite2D/Stats
 
-@onready var common_texture = load("uid://oy15ibruw30k")
+@onready var common_texture = load("uid://tsfcfyle4b6g")
 @onready var unique_texture = load("uid://noyaw0jmuiam")
 @onready var special_texture = load("uid://rd37trgsse7k")
 
@@ -110,12 +110,11 @@ func choose_card_resource(card_resource):
 	chosen_resource = card_resource
 	header.text = chosen_resource.card_name
 	
-	var color_string: String = ""
 	var source_sprite: Sprite2D = $SubViewport/Sprite2D
 	if card_resource.unique:
 		source_sprite.texture = unique_texture
 		change_text_style(CardStyle.UNIQUE)
-	elif !card_resource.state_id.is_empty():
+	elif card_resource.is_special:
 		source_sprite.texture = special_texture
 		change_text_style(CardStyle.SPECIAL)
 	else:

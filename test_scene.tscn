@@ -145,6 +145,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Rankings" type="Label" parent="."]
+z_index = 4096
 offset_top = 34.0
 offset_right = 40.0
 offset_bottom = 57.0

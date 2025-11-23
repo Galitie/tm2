@@ -265,7 +265,7 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	if debug_mode:
 		$Rankings.visible = false
-		$Rankings.text = "Previous mround points:\n"
+		$Rankings.text = "Previous round points:\n"
 	$Specials.visible = false
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)

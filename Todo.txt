@@ -12,11 +12,9 @@ Features to make it playtest ready:
 	Save file? Achievements? Unlocks?
 	
 	Add dance animation (hook up in dance state) (Raam)
-	Slimes need floor hitbox (Raam)
 	Replace temp explode on death animation (monster) (Raam)
 	More Accessories (Raam)
 	Charge attack need to do bigger attacks? -> should these be more dramatic? (Raam)
-	Block is unclear (Raam)
 	Should poops just wander instead of follow? Confusing when they shoot through your guy (Galit)
 	Show preview of accessory or body part (Raam)
 	Sound - Background, effects etc.

@@ -6,6 +6,7 @@ class_name CardResourceScript
 @export_enum("basic_attack", "charge_attack", "special", "block", "passive", "immediate", "poop", "chase") var Type : String
 @export var state_id : String
 @export var unique : bool
+@export var is_special : bool
 @export var remove_specific_states : Array[int]
 @export var parts_and_acc: Array[MonsterPart]
 @export_group("Attributes")

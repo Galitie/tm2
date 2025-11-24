@@ -106,9 +106,14 @@ func _on_hurtbox_area_entered(area):
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
-			if (area.is_in_group("Projectile") or area.is_in_group("Slime")) and area.owner.monster == self:
+			if area.is_in_group("Attack"):
+				take_damage(attacker, current_state, true)
+			# Slime or projectile belongs to the monster, ignore it
+			elif (area.is_in_group("Projectile") or area.is_in_group("Slime")) and area.owner.monster == self:
 				return
-			take_damage(attacker, current_state, true)
+			# if it doesn't, do block stuff
+			elif area.is_in_group("Bomb") or area.is_in_group("Slime") or area.is_in_group("Bomb"):
+				take_damage(null, current_state, true)
 			return
 	
 		elif area.is_in_group("Attack"):
@@ -149,12 +154,12 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			"bite":
 				if attacker.player.bite_full_heal:
 					attacker.modify_hp(max_hp)
-					attacker.heal_label.text = "BITE HEAL ALL HP"
+					attacker.heal_label.text = "HEAL ALL"
 					attacker.animation_player_heal.play("heal")
 				else:
 					if attacker.current_hp < roundi(attacker.max_hp / 2):
 						attacker.modify_hp(null, roundi(attacker.max_hp / 2))
-						attacker.heal_label.text = "BITE HEAL HALF HP"
+						attacker.heal_label.text = "HEAL HALF"
 						attacker.animation_player_heal.play("heal")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()

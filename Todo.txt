@@ -5,9 +5,8 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Fix chase when different sizes
-	Don't let players use special during zombie time
-	Sudden death bug: Two left, one killed the other on exact frame of sudden death, stayed zoomed in though in upgrade mode
+	Block sound triggers when non-attacks enter hurtbox
+	For chase, what if I use the hitbox instead? Chase until hitbox area touches hurtbox of target
 	
 	Final upgrade round is unclear that it's the final round <.< (Raam)
 	

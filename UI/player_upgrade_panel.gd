@@ -48,6 +48,8 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 		else:
 			await get_tree().create_timer(0.5).timeout
 	input_paused = false
+	if button.showing_accessories:
+		button.hide_accessories(true)
 	button._on_button_pressed(acc_idx, input, button)
 
 
@@ -100,11 +102,10 @@ func _physics_process(_delta):
 					else:
 						if other_button.selected:
 							other_button.deselect()
+						if other_button.showing_accessories:
 							other_button.hide_accessories()
 		
 			in_accessory_menu = false
-			if button != reroll_button:
-				button.hide_accessories()
 		
 		# To banish cards
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !in_accessory_menu:
@@ -126,28 +127,20 @@ func _physics_process(_delta):
 						in_accessory_menu = false
 						
 						press_card(button, current_user_position_in_accessory_array, input)
-						button.hide_accessories()
 					else:
-						#Not yet in the acc menu, but will enter it now
-						#button.card_info_panel.hide()
-						#button.accessory_panel.show()
 						button.show_accessories()
 						current_user_position_in_accessory_array = 0
 						var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
 						button.select_accessory(accessory_button)
-						#accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
 						in_accessory_menu = true
 						for other_button in button.valid_accessories:
 							if other_button != accessory_button:
 								button.deselect_accessory(other_button)
-								#other_button.remove_theme_stylebox_override("panel")
 				else:
 					press_card(button, 0, input)
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
-			#button.card_info_panel.show()
-			#button.accessory_panel.hide()
 			button.hide_accessories()
 			in_accessory_menu = false
 		
@@ -161,11 +154,9 @@ func _physics_process(_delta):
 					current_user_position_in_accessory_array = 0
 				var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
 				button.select_accessory(accessory_button)
-				#accessory_button.add_theme_stylebox_override("panel", new_stylebox_normal)
 				for other_button in button.valid_accessories:
 					if other_button != accessory_button:
 						button.deselect_accessory(other_button)
-						#other_button.remove_theme_stylebox_override("panel")
 	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:

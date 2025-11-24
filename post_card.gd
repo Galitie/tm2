@@ -12,15 +12,22 @@ var valid_accessories: Array = []
 @onready var accessory_header = $SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/TitleDescription/Header
 #@onready var x_texture = load("res://none_icon.png")
 
+enum CardType { COMMON, UNIQUE, SPECIAL }
+var type: CardType = CardType.COMMON
+
 @onready var header = $SubViewport/Sprite2D/Header
 @onready var description = $SubViewport/Sprite2D/Description
 @onready var stats = $SubViewport/Sprite2D/Stats
 
 @onready var common_texture = load("uid://tsfcfyle4b6g")
+@onready var common_backside = load("uid://dfcg1ysqsucr6")
 @onready var unique_texture = load("uid://noyaw0jmuiam")
+@onready var unique_backside = load("uid://nivlcmg3kc7o")
 @onready var special_texture = load("uid://rd37trgsse7k")
+@onready var special_backside = load("uid://dj3p7vy3iup0y")
 
 var selected: bool = false
+var showing_accessories: bool = false
 
 func _ready() -> void:
 	material.set_shader_parameter("inset", 0.4)
@@ -74,11 +81,10 @@ func append_attribute(label, amount) -> void:
 		else:
 			stats.text += "{att}{amt} ".format({"att": label, "amt": amount})
 
-enum CardStyle { COMMON, UNIQUE, SPECIAL }
 
-func change_text_style(style: CardStyle) -> void:
-	match style:
-		CardStyle.COMMON:
+func change_text_style() -> void:
+	match type:
+		CardType.COMMON:
 			header.add_theme_color_override("default_color", Color("082d49"))
 			header.add_theme_color_override("font_outline_color", Color("bdd4d1"))
 			description.add_theme_color_override("default_color", Color("082d49"))
@@ -87,7 +93,7 @@ func change_text_style(style: CardStyle) -> void:
 			stats.add_theme_color_override("font_outline_color", Color("bdd4d1"))
 			accessory_header.add_theme_color_override("default_color", Color("082d49"))
 			accessory_header.add_theme_color_override("font_outline_color", Color("bdd4d1"))
-		CardStyle.UNIQUE:
+		CardType.UNIQUE:
 			header.add_theme_color_override("default_color", Color("3c130a"))
 			header.add_theme_color_override("font_outline_color", Color("ecd8bf"))
 			description.add_theme_color_override("default_color", Color("3c130a"))
@@ -96,7 +102,7 @@ func change_text_style(style: CardStyle) -> void:
 			stats.add_theme_color_override("font_outline_color", Color("ecd8bf"))
 			accessory_header.add_theme_color_override("default_color", Color("3c130a"))
 			accessory_header.add_theme_color_override("font_outline_color", Color("ecd8bf"))
-		CardStyle.SPECIAL:
+		CardType.SPECIAL:
 			header.add_theme_color_override("default_color", Color("27502f"))
 			header.add_theme_color_override("font_outline_color", Color("c7dcba"))
 			description.add_theme_color_override("default_color", Color("27502f"))
@@ -111,15 +117,18 @@ func choose_card_resource(card_resource):
 	header.text = chosen_resource.card_name
 	
 	var source_sprite: Sprite2D = $SubViewport/Sprite2D
-	if card_resource.unique:
-		source_sprite.texture = unique_texture
-		change_text_style(CardStyle.UNIQUE)
-	elif card_resource.is_special:
+	if card_resource.is_special:
+		type = CardType.SPECIAL
 		source_sprite.texture = special_texture
-		change_text_style(CardStyle.SPECIAL)
+		change_text_style()
+	elif card_resource.unique:
+		type = CardType.UNIQUE
+		source_sprite.texture = unique_texture
+		change_text_style()
 	else:
+		type = CardType.COMMON
 		source_sprite.texture = common_texture
-		change_text_style(CardStyle.COMMON)
+		change_text_style()
 	
 	var description_words: PackedStringArray = chosen_resource.description.split(' ')
 	for i in range(description_words.size()):
@@ -157,12 +166,41 @@ func hide_text(toggle: bool) -> void:
 	stats.visible = !toggle
 	
 func show_accessories() -> void:
+	showing_accessories = true
+	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished
+	material.set_shader_parameter("y_rot", -90.0)
 	hide_text(true)
+	match type:
+		CardType.COMMON:
+			$SubViewport/Sprite2D.texture = common_backside
+		CardType.UNIQUE:
+			$SubViewport/Sprite2D.texture = unique_backside
+		CardType.SPECIAL:
+			$SubViewport/Sprite2D.texture = special_backside
 	accessory_panel.visible = true
+	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
 	
-func hide_accessories() -> void:
+func hide_accessories(instant: bool = false) -> void:
+	if instant:
+		showing_accessories = false
+		accessory_panel.visible = false
+		hide_text(false)
+		material.set_shader_parameter("y_rot", 0.0)
+		return
+	
+	showing_accessories = false
+	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished
+	match type:
+		CardType.COMMON:
+			$SubViewport/Sprite2D.texture = common_texture
+		CardType.UNIQUE:
+			$SubViewport/Sprite2D.texture = unique_texture
+		CardType.SPECIAL:
+			$SubViewport/Sprite2D.texture = special_texture
+	material.set_shader_parameter("y_rot", -90.0)
 	accessory_panel.visible = false
 	hide_text(false)
+	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
 	
 func disabled() -> bool:
 	return false

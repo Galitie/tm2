@@ -147,15 +147,13 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bite":
-				var heal_amount = roundi(max_hp / 2)
-				if player.bite_full_heal:
-					heal_amount = max_hp
+				if attacker.player.bite_full_heal:
 					attacker.modify_hp(max_hp)
 					attacker.heal_label.text = "BITE HEAL HP"
 					attacker.animation_player_heal.play("heal")
 				else:
-					if current_hp < heal_amount:
-						attacker.modify_hp(null, heal_amount)
+					if attacker.current_hp < roundi(attacker.max_hp / 2):
+						attacker.modify_hp(null, roundi(attacker.max_hp / 2))
 						attacker.heal_label.text = "BITE HEAL HP"
 						attacker.animation_player_heal.play("heal")
 		if thorns:
@@ -184,8 +182,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 				play_generic_sound("uid://cf8aw1xy3pg34")
 				mod_monster(Color("3467ff"))
 				get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
-				attacker.heal_label.text = "DODGED"
-				attacker.animation_player_heal.play("heal")
+				heal_label.text = "DODGED"
+				animation_player_heal.play("heal")
 				return
 		random_modifier = randi_range(1,5)
 		damage = random_modifier

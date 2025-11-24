@@ -7,9 +7,10 @@ Guiding lights:
 Features to make it playtest ready:
 	Fix chase when different sizes
 	Don't let players use special during zombie time
+	Sudden death bug: Two left, one killed the other on exact frame of sudden death, stayed zoomed in though in upgrade mode
+	
 	Final upgrade round is unclear that it's the final round <.< (Raam)
 	
-	Ties are not techinically considered mid game for place...fine at winning screen though
 	Bullets from poops not clear when they disappear (Raam?)
 	Save file? Achievements? Unlocks?
 	

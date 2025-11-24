@@ -30,6 +30,7 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 var ready_players : Array[Node] = []
 var menu_scene = preload("res://test_scene.tscn")
 
+
 func _init():
 	Controller.process_mode = Node.PROCESS_MODE_ALWAYS
 	Globals.game = self
@@ -108,17 +109,10 @@ func freeze_frame(monster: Monster) -> void:
 	Globals.game.camera.global_position = monster.global_position
 	Globals.game.camera.zoom = Vector2(2.0, 2.0)
 	Globals.game.pause_game(1.25)
-	
 	camera_tracking = false
 	await get_tree().create_tween().tween_property(camera, "zoom", Vector2(0.8, 0.8), 0.1).finished
 	await get_tree().create_timer(0.5).timeout
 	camera_tracking = true
-	
-	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
-		camera_tracking = false
-		get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
-		get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
-		get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
 
 
 func _ready():
@@ -239,6 +233,7 @@ func count_death(monster: Monster):
 				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
+		
 
 
 func set_customize_mode():
@@ -356,6 +351,11 @@ func _on_sudden_death_timer_timeout():
 
 
 func _on_round_over_delay_timer_timeout():
+	camera_tracking = false
+	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
+	get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.0, 1.0), 1.0).set_trans(Tween.TRANS_EXPO)
+	get_tree().create_tween().tween_property(camera, "global_position", Vector2(575.0, 325.0), 1.0).set_trans(Tween.TRANS_EXPO)
+	
 	for player in players:
 		if player.monster.current_hp > 0 and player.monster not in current_knocked_out_monsters:
 			current_knocked_out_monsters.append(player.monster)

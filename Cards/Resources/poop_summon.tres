@@ -15,6 +15,7 @@ description = "Turn POOPS into SUMMONS that fight for you and shoot PROJECTILES"
 Type = "poop"
 state_id = "poop_summon"
 unique = true
+is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_k2dmc")]([])
 attribute_1 = 0

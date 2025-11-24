@@ -11,6 +11,7 @@ description = "1.25x DMG dealt and 2x DMG recieved"
 Type = "immediate"
 state_id = "dbl_dmg"
 unique = true
+is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_pyie5")]([ExtResource("2_2hs6l")])
 attribute_1 = 0

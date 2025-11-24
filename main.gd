@@ -75,20 +75,21 @@ func listen_for_special_trigger():
 		var specials = $Specials.get_children()
 		var index = 0
 		for player in players:
-			if player.player_state == Player.PlayerState.BOT and !player.special_used and player.monster.current_hp > 0 and player.has_special:
+			var requirements_met = !player.special_used and player.monster.current_hp > 0 and player.has_special and player.monster.state_machine.current_state.name != "zombie"
+			if player.player_state == Player.PlayerState.BOT and requirements_met:
 				var rand_chance = randi_range(0,100000000)
 				if rand_chance > 99900000:
 					player.monster.state_machine.use_special()
 					player.special_used = true
 					specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 					specials[index].text = "Special used!"
-			if player.monster.current_hp <= 0:
-				specials[index].text = ""
-			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and !player.special_used and player.monster.current_hp > 0 and player.has_special:
+			elif Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and requirements_met:
 				player.monster.state_machine.use_special()
 				player.special_used = true
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 				specials[index].text = "Special used!"
+			elif player.monster.current_hp <= 0:
+				specials[index].text = ""
 			index += 1
 
 func SortByY(a, b):

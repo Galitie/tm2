@@ -11,6 +11,7 @@ description = "Chance to bite enemy and HEAL self to MAX HP"
 Type = "basic_attack"
 state_id = "bitelifesteal"
 unique = true
+is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_bl12o")]([ExtResource("2_0blak")])
 attribute_1 = 0

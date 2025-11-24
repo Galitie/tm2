@@ -13,6 +13,7 @@ description = "Leave a SLIME trail that DMGS monsters that enter it"
 Type = "passive"
 state_id = "slime_trail"
 unique = true
+is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_es4dy")]([])
 attribute_1 = 0

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://b1yf5pmgknoky"]
 
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_7bdyh"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_88tgj"]
 
 [resource]
@@ -9,7 +10,9 @@ description = "When POOPING 50% chance to make an additional POOP"
 Type = "passive"
 state_id = "more_poops"
 unique = true
+is_special = false
 remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_7bdyh")]([])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0
@@ -19,3 +22,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_88tgj")]([])
+remove_cards = Array[ExtResource("2_88tgj")]([])

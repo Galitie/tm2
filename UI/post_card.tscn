@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbeuoiqc8avud"]
 
-[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="1_5gyjd"]
+[ext_resource type="Shader" path="res://UI/hover.gdshader" id="1_5gyjd"]
 [ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://post_card.gd" id="2_5gyjd"]
 [ext_resource type="Texture2D" uid="uid://tsfcfyle4b6g" path="res://UI/postage_common.png" id="3_ojvqg"]
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="4_ojvqg"]

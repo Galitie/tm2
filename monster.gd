@@ -149,12 +149,12 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			"bite":
 				if attacker.player.bite_full_heal:
 					attacker.modify_hp(max_hp)
-					attacker.heal_label.text = "BITE HEAL HP"
+					attacker.heal_label.text = "BITE HEAL ALL HP"
 					attacker.animation_player_heal.play("heal")
 				else:
 					if attacker.current_hp < roundi(attacker.max_hp / 2):
 						attacker.modify_hp(null, roundi(attacker.max_hp / 2))
-						attacker.heal_label.text = "BITE HEAL HP"
+						attacker.heal_label.text = "BITE HEAL HALF HP"
 						attacker.animation_player_heal.play("heal")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()

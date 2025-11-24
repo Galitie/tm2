@@ -156,10 +156,18 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
-			"bitelifesteal":
-				attacker.modify_hp(max_hp)
-				attacker.heal_label.text = "HEAL MAX HP"
-				attacker.animation_player_heal.play("heal")
+			"bite":
+				var heal_amount = roundi(max_hp / 2)
+				if player.bite_full_heal:
+					heal_amount = max_hp
+					attacker.modify_hp(max_hp)
+					attacker.heal_label.text = "BITE HEAL HP"
+					attacker.animation_player_heal.play("heal")
+				else:
+					if current_hp < heal_amount:
+						attacker.modify_hp(null, heal_amount)
+						attacker.heal_label.text = "BITE HEAL HP"
+						attacker.animation_player_heal.play("heal")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
@@ -244,7 +252,7 @@ func _on_temp_timer_timeout():
 func zombify():
 	state_machine.transition_state("zombie")
 	toggle_collisions(false)
-	modify_hp(1)
+	modify_hp(null, 1)
 	$ZombieTimer.start()
 
 
@@ -268,8 +276,11 @@ func _on_zombie_timer_timeout():
 		state_machine.transition_state("upgradestart")
 
 
-func modify_hp(amount):
-	current_hp = clamp(current_hp + amount, 0, max_hp)
+func modify_hp(amount, set_hp_amount = null):
+	if set_hp_amount != null:
+		current_hp = clamp(set_hp_amount, 0, max_hp)
+	else:
+		current_hp = clamp(current_hp + amount, 0, max_hp)
 	current_hp_label.text = str(current_hp)
 	hp_bar.value = current_hp
 	update_hp_color()

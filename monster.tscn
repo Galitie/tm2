@@ -259,7 +259,7 @@ script = ExtResource("27_14274")
 [node name="FightStart" type="Node" parent="StateMachine"]
 script = ExtResource("28_hqfdu")
 
-[node name="BiteLifeSteal" type="Node" parent="StateMachine"]
+[node name="Bite" type="Node" parent="StateMachine"]
 script = ExtResource("25_ce3e3")
 
 [node name="MirrorBlock" type="Node" parent="StateMachine"]

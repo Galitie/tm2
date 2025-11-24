@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbeuoiqc8avud"]
 
 [ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="1_5gyjd"]
-[ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://post_card.gd" id="2_5gyjd"]
+[ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://UI/post_card.gd" id="2_ojvqg"]
 [ext_resource type="Texture2D" uid="uid://tsfcfyle4b6g" path="res://UI/postage_common.png" id="3_ojvqg"]
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="4_ojvqg"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="5_r0bo0"]
@@ -49,7 +49,7 @@ viewport_path = NodePath("SubViewport")
 [node name="PostCard" type="Sprite2D"]
 material = SubResource("ShaderMaterial_kjul2")
 texture = SubResource("ViewportTexture_ywdab")
-script = ExtResource("2_5gyjd")
+script = ExtResource("2_ojvqg")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true

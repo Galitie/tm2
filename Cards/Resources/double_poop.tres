@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_88tgj")
 card_name = "THE RUNS"
-description = "When POOPING 50% chance to make an additional POOP"
+description = "When POOPING chance to make an additional POOP"
 Type = "passive"
 state_id = "more_poops"
 unique = true

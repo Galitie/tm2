@@ -186,7 +186,6 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Acc1" type="ColorRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories"]
-modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0.301961, 0.301961, 0.301961, 0)

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_h78ii")
 card_name = "THE CHOSEN ONE"
-description = "Sometimes negates instances of DMG from PROJECTILES"
+description = "Often DODGES PROJECTILES from POOP SUMMONS"
 Type = "passive"
 state_id = "matrix"
 unique = true

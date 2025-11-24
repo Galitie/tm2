@@ -117,17 +117,7 @@ func _on_hurtbox_area_entered(area):
 
 		elif area.is_in_group("Projectile") and area.owner.monster != self: #don't shoot self
 			attacker = area.owner.emitter
-			if player.matrix:
-				var rand = [1,2].pick_random()
-				if rand == 1:
-					take_damage(null, current_state, true, attack_type.PROJECTILE)
-				else:
-					play_generic_sound("uid://cf8aw1xy3pg34")
-					mod_monster(Color("3467ff"))
-					get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
-					return
-			else:
-				take_damage(null, current_state, true, attack_type.PROJECTILE)
+			take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		elif area.is_in_group("Bomb"):
 			take_damage(attacker, current_state, true, attack_type.BOMB)
@@ -188,6 +178,15 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
+		if player.matrix:
+			var rand = [1,2,3].pick_random()
+			if rand == 1 or rand == 2:
+				play_generic_sound("uid://cf8aw1xy3pg34")
+				mod_monster(Color("3467ff"))
+				get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+				attacker.heal_label.text = "DODGED"
+				attacker.animation_player_heal.play("heal")
+				return
 		random_modifier = randi_range(1,5)
 		damage = random_modifier
 		modify_hp(-damage)

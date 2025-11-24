@@ -8,7 +8,7 @@ var current_user_position_in_bot_button_array : int = 0
 
 var new_stylebox_normal = StyleBoxFlat.new()
 var input_paused : bool = false
-var main_scene = preload("res://test_scene.tscn")
+var main_scene = preload("res://main.tscn")
 
 var human_players_selected : bool = false
 var bot_players_selected : bool = false
@@ -86,7 +86,7 @@ func _on_button_pressed(button_index):
 	input_paused = true
 	new_stylebox_normal.border_color = Color.GREEN
 	new_stylebox_normal.bg_color = Color.GREEN
-	await get_tree().create_timer(0.50).timeout
+	await get_tree().create_timer(0.25).timeout
 	
 	if !human_players_selected:
 		match button_index:

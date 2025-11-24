@@ -28,7 +28,7 @@ var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
-var menu_scene = preload("res://test_scene.tscn")
+var menu_scene = preload("res://UI/menu.tscn")
 
 
 func _init():

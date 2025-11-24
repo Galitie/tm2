@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cbeuoiqc8avud" path="res://UI/post_card.tscn" id="4_5aacw"]
 [ext_resource type="AudioStream" uid="uid://o81tlwdlwbgw" path="res://sounds/stamp.ogg" id="4_22x0x"]
 [ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
-[ext_resource type="Shader" path="res://UI/hover.gdshader" id="5_ad54b"]
+[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="5_ad54b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0
 content_margin_right = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_16opa"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_22x0x"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -40,7 +40,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t47v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuncv"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -70,7 +70,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qi4jj"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aacw"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -148,19 +148,19 @@ theme_override_font_sizes/font_size = 16
 text = "🔥 BANISH [x3]"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_16opa")
+material = SubResource("ShaderMaterial_22x0x")
 position = Vector2(135, 141)
 texture = SubResource("ViewportTexture_8t47v")
 deck_order = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_8t47v")
+material = SubResource("ShaderMaterial_cuncv")
 position = Vector2(135, 262)
 texture = SubResource("ViewportTexture_qi4jj")
 deck_order = 1
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_qi4jj")
+material = SubResource("ShaderMaterial_5aacw")
 position = Vector2(135, 384)
 texture = SubResource("ViewportTexture_tirdh")
 

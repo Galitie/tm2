@@ -251,6 +251,9 @@ func set_customize_mode():
 
 func set_upgrade_mode():
 	clean_up_screen()
+	if current_round == total_rounds - 1:
+		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
+		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL UPGRADE ROUND"
 	sudden_death_timer.stop()
 	Globals.is_sudden_death_mode = false
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)

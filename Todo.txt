@@ -5,7 +5,6 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Block sound triggers when non-attacks enter hurtbox
 	For chase, what if I use the hitbox instead? Chase until hitbox area touches hurtbox of target
 	
 	Final upgrade round is unclear that it's the final round <.< (Raam)

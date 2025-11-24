@@ -71,4 +71,5 @@ func _animation_finished(anim_name: String) -> void:
 
 func use_special():
 	if special_values != [] and monster.current_hp > 0:
+		monster.toggle_effect_graphic(false)
 		choose_new_state("special")

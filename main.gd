@@ -201,8 +201,9 @@ func _process(_delta):
 				if monster.current_hp > 0:
 					monster_avg_position += monster.global_position
 					alive_monsters += 1
-			camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
-			camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
+			if alive_monsters:
+				camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
+				camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 	if ready_players.size() == players.size() and current_mode == Modes.CUSTOMIZE:
 		$CustomizeMenu.disable()
 		$CustomizeMenu.hide()

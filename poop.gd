@@ -16,6 +16,12 @@ var damage_dealt_mult: float = 1.0
 @onready var projectile = load("res://projectile.tscn")
 
 func _ready():
+	# NOTE: Calculated only on spawn
+	var size_diff: float = Globals.get_window_size_diff()
+	var original_line_thickness: float = $CanvasGroup.material.get_shader_parameter("line_thickness")
+	var new_thickness: float = size_diff * original_line_thickness
+	$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
+	
 	if is_a_summon:
 		sprite.play("gun")
 		$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)

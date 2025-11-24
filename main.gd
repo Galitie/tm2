@@ -271,9 +271,9 @@ func set_upgrade_mode():
 		sudden_death_speed_set = false
 		for player in players:
 			player.monster.move_speed -= sudden_death_speed
-	if debug_mode:
-		$Rankings.visible = false
-		$Rankings.text = "Previous round points:\n"
+	#if debug_mode:
+	$Rankings.visible = false
+	$Rankings.text = "Previous round points:\n"
 	$Specials.visible = false
 	clear_knocked_out_monsters()
 	var current_place = 0
@@ -293,8 +293,8 @@ func set_upgrade_mode():
 			player.rerolls = rerolls + player.bonus_rerolls
 		player.upgrade_panel.update_place_text(player)
 		player.special_used = false
-		if debug_mode:
-			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		#if debug_mode:
+		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
@@ -318,8 +318,8 @@ func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()
-	if debug_mode:
-		$Rankings.visible = true
+	#if debug_mode:
+	$Rankings.visible = true
 	$Specials.visible = true
 	if current_round == total_rounds:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
@@ -566,11 +566,11 @@ func check_if_game_over() -> bool:
 		$UpgradePanel.hide()
 		print("game over")
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
-		if debug_mode:
-			$Rankings.visible = true
-			$Rankings.text = "Rankings:\n"
-			for player in players:
-				$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		#if debug_mode:
+		$Rankings.visible = true
+		$Rankings.text = "Rankings:\n"
+		for player in players:
+			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:

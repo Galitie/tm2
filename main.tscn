@@ -153,6 +153,7 @@ z_index = 4096
 offset_top = 34.0
 offset_right = 40.0
 offset_bottom = 57.0
+theme_override_font_sizes/font_size = 8
 
 [node name="Specials" type="HBoxContainer" parent="."]
 offset_left = 3.0

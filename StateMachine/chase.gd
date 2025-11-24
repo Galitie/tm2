@@ -9,15 +9,18 @@ var move_speed_adjust: int = 15
 var max_accel: float = 5000.0
 
 # --- Side position (chosen per chase) ---
-const SIDE_OFFSET: float = 72.0
-const ARRIVE_RADIUS: float = 90.0
+const BASE_SIDE_OFFSET: float = 72.0
+const BASE_ARRIVE_RADIUS: float = 90.0
 
-var side_sign: int = 1   # +1 = right, -1 = left (chosen based on which side is closer)
+var side_offset: float = BASE_SIDE_OFFSET
+var arrive_radius: float = BASE_ARRIVE_RADIUS
+
+var side_sign: int = 1   # +1 = right, -1 = left
 
 # --- Simple avoidance between monsters ---
 var avoidance_radius: float = 96.0
-var avoidance_strength: float = 8.0
-var avoidance_weight: float = 3.0  # scale this up for even stronger avoidance
+var avoidance_strength: float = 10.0
+var avoidance_weight: float = 5.0
 
 var chase_time : float
 
@@ -48,12 +51,12 @@ func Physics_Update(delta: float) -> void:
 	var can_keep_chasing = target_mon.current_hp > 0.0 and chase_time > 0.0
 
 	var side_dir = Vector2(side_sign, 0.0)
-	var side_goal = target_mon.global_position + side_dir * SIDE_OFFSET
+	var side_goal = target_mon.global_position + side_dir * side_offset
 	var to_side = side_goal - monster.global_position
 	var dist_to_side = to_side.length()
 
-	# ---- Attack if close enough to side point ----
-	if dist_to_side <= ARRIVE_RADIUS and can_keep_chasing:
+	if dist_to_side <= arrive_radius and can_keep_chasing:
+		print(monster.mon_name, " is close enough to ", target_mon.mon_name, " side offset ", side_offset)
 		monster.velocity = Vector2.ZERO
 		var rand = [1, 2].pick_random()
 		if rand == 1:
@@ -62,13 +65,12 @@ func Physics_Update(delta: float) -> void:
 			ChooseNewState.emit("charge_attack")
 		return
 
-	# ---- Steering toward the side goal with stronger avoidance ----
+	# ---- Steering toward the side goal with avoidance ----
 	if dist_to_side > 1.0 and can_keep_chasing:
 		var desired_dir = to_side.normalized()
 
 		var avoidance = get_avoidance_vector()
 		if avoidance.length() > 0.001:
-			# Stronger influence from avoidance
 			desired_dir = (desired_dir + avoidance * avoidance_weight).normalized()
 
 		var desired_velocity = desired_dir * monster.move_speed
@@ -89,17 +91,30 @@ func select_target() -> void:
 	if targetable_monsters.size() > 0:
 		target_mon = targetable_monsters.pick_random()
 
-		# Choose the side of the target that is currently closest to this monster
-		var right_goal = target_mon.global_position + Vector2(1, 0) * SIDE_OFFSET
-		var left_goal  = target_mon.global_position + Vector2(-1, 0) * SIDE_OFFSET
+		# --- Scaling setup for initial target selection ---
+		var target_scale = 1.0
+		var self_scale = 1.0
+
+		if target_mon.has_node("root"):
+			target_scale = target_mon.root.scale.x
+		if monster.has_node("root"):
+			self_scale = monster.root.scale.x
+
+		var size_factor = max(target_scale, self_scale)
+		side_offset = BASE_SIDE_OFFSET * size_factor
+		arrive_radius = BASE_ARRIVE_RADIUS * size_factor
+
+		# Choose the closer side
+		var right_goal = target_mon.global_position + Vector2(1, 0) * side_offset
+		var left_goal  = target_mon.global_position + Vector2(-1, 0) * side_offset
 
 		var dist_right = (right_goal - monster.global_position).length()
 		var dist_left  = (left_goal  - monster.global_position).length()
 
 		if dist_right <= dist_left:
-			side_sign = 1   # go to right side
+			side_sign = 1
 		else:
-			side_sign = -1  # go to left side
+			side_sign = -1
 	else:
 		target_mon = null
 		ChooseNewState.emit()
@@ -145,6 +160,5 @@ func get_neighbor_monsters() -> Array[CharacterBody2D]:
 	return neighbors
 
 
-# Don't remove these
 func animation_finished(anim_name: String) -> void:
 	pass

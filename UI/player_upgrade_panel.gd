@@ -68,7 +68,7 @@ func _physics_process(_delta):
 		if player.player_state == player.PlayerState.BOT:
 			input_paused = true
 			var button = button_array[1]
-			await get_tree().create_timer(1.5).timeout
+			await get_tree().create_timer(2).timeout
 			press_card(button, 1, JOY_BUTTON_A)
 			input_paused = false
 		if current_user_position_in_button_array == 0:

@@ -129,7 +129,6 @@ func _on_hurtbox_area_entered(area):
 		
 		elif area.is_in_group("Slime") and area.owner.monster != self:
 			if area.global_position.y > global_position.y:
-				print("slime at feet")
 				take_damage(area.owner, current_state, true, attack_type.SLIME)
 
 
@@ -201,10 +200,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			return
 		toggle_collisions(false)
 		Globals.game.count_death(self)
+		if Globals.is_sudden_death_mode:
+			send_flying(attacker)
 		if player.death_explode:
 			explode_on_death()
-		elif Globals.is_sudden_death_mode:
-			send_flying(attacker)
+
 
 
 

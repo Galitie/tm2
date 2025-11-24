@@ -46,8 +46,8 @@ shader_parameter/outer_color = Color(0, 0, 0, 0)
 radius = 15.52
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
-radius = 55.0
-height = 160.0
+radius = 51.0
+height = 152.0
 
 [sub_resource type="Animation" id="Animation_itwwk"]
 length = 0.001

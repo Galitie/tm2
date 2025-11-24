@@ -249,6 +249,17 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
+	clean_up_screen()
+	sudden_death_timer.stop()
+	Globals.is_sudden_death_mode = false
+	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
+	for player in players:
+		player.monster.unzombify()
+		player.monster.target_point = player.upgrade_pos
+		player.monster.state_machine.transition_state("upgradestart")
+		player.monster.move_name_upgrade()
+	if check_if_game_over():
+		return
 	$UpgradePanel.unpause_all_inputs()
 	if current_round == 0:
 		audio_player.stream = load("uid://bnfvpcj04flvs")
@@ -263,12 +274,7 @@ func set_upgrade_mode():
 		$Rankings.visible = false
 		$Rankings.text = "Previous round points:\n"
 	$Specials.visible = false
-	clean_up_screen()
-	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
-	sudden_death_timer.stop()
-	Globals.is_sudden_death_mode = false
-
 	var current_place = 0
 	var prev_points = -1
 	var rerolls = 0
@@ -285,15 +291,10 @@ func set_upgrade_mode():
 			player.place = current_place
 			player.rerolls = rerolls + player.bonus_rerolls
 		player.upgrade_panel.update_place_text(player)
-		
 		player.special_used = false
-		player.monster.unzombify()
 		if debug_mode:
 			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
-		monster.move_name_upgrade()
-		monster.target_point = player.upgrade_pos
-		monster.state_machine.transition_state("upgradestart")
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
 		if player.randomize_upgrade_points:
@@ -302,7 +303,6 @@ func set_upgrade_mode():
 			player.upgrade_points = 3
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
-	check_if_game_over()
 
 func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 	await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, length).finished
@@ -557,7 +557,7 @@ func reroll_pressed(upgrade_panel):
 		upgrade_panel.reroll_button.disabled = true
 
 #TODO: Make a real game over scene, placeholder for playtesting
-func check_if_game_over():
+func check_if_game_over() -> bool:
 	if current_round >= total_rounds:
 		current_mode = Modes.GAME_END
 		$UpgradePanel.hide()
@@ -589,6 +589,8 @@ func check_if_game_over():
 		for player in players:
 			var monster = player.get_node("Monster")
 			monster.target_point = player.customize_pos
+		return true
+	return false
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()

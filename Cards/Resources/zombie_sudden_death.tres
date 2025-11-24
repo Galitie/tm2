@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_vj5cs")
-card_name = "UNKILLABLE"
-description = "ZOMBIE can now activate during SUDDEN DEATH"
+card_name = "SUDDEN UNDEATH"
+description = "ZOMBIE can now activate during SUDDEN DEATH if not already activated during round"
 Type = "passive"
 state_id = "zombie_sudden_death"
 unique = true

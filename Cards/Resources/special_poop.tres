@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_c826k")
 card_name = "OH SHIT"
-description = "Once per round, if triggered, immediately POOP. Replaces any current special attacks."
+description = "Once per round, if triggered, immediately POOP. Replaces any current specials that use the Y button"
 Type = "special"
 state_id = "specialpoop"
 unique = true

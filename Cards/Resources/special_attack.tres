@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_pi5m0")
 card_name = "BLAM!"
-description = "Once per round, if triggered, immediately ATTACK. Replaces any current special attacks."
+description = "Once per round, if triggered, immediately ATTACK. Replaces any current specials that use the Y button"
 Type = "special"
 state_id = "specialattack"
 unique = true

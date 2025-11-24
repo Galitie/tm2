@@ -75,7 +75,7 @@ func listen_for_special_trigger():
 		var specials = $Specials.get_children()
 		var index = 0
 		for player in players:
-			var requirements_met = !player.special_used and player.monster.current_hp > 0 and player.has_special and player.monster.state_machine.current_state.name != "zombie"
+			var requirements_met = !player.special_used and player.monster.current_hp > 0 and player.has_special and player.monster.state_machine.current_state.name != "Zombie"
 			if player.player_state == Player.PlayerState.BOT and requirements_met:
 				var rand_chance = randi_range(0,100000000)
 				if rand_chance > 99900000:

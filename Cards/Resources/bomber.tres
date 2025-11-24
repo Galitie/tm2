@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_rdoa5")
 card_name = "BOMBER"
-description = "Chance of POOPING BOMBS. BOMBS DMG everyone including SELF."
+description = "Chance of POOPING BOMBS - BOMBS DMG everyone including SELF"
 Type = "poop"
 state_id = "bombing"
 unique = true

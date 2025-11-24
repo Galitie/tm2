@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_6hnit")
 card_name = "SPEED BOOST"
-description = "Gotta go fast"
+description = "Gotta go fast - increase MOVE SPEED"
 Type = "immediate"
 state_id = ""
 unique = false

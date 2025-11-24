@@ -49,6 +49,7 @@ func _on_explosion_countdown_timeout():
 	$AudioStreamPlayer.play()
 
 func _on_explosion_time_timeout():
+	$Area2D/ExplosionHitBox.disabled = true
 	remove_from_group("DepthEntity")
 	z_index = 50
 	exploding = false

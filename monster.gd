@@ -67,11 +67,16 @@ func _ready():
 	max_hp_label.text = str(max_hp)
 	hp_bar.max_value = max_hp
 	hp_bar.value = max_hp
-	#$MonsterContainer/Parts.material.set_shader_parameter("hue_shift", hue_shift)
 	generate_random_name()
 	state_machine.monster = self
 	
 	root.material.set_shader_parameter("outer_color", player_color)
+	
+	# NOTE: Only calculated once for now
+	var size_diff: float = Globals.get_window_size_diff()
+	var original_line_thickness: float = root.material.get_shader_parameter("line_thickness")
+	var new_thickness: float = size_diff * original_line_thickness
+	root.material.set_shader_parameter("line_thickness", new_thickness)
 
 
 func SetCollisionRefs() -> void:

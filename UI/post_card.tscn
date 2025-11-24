@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbeuoiqc8avud"]
 
-[ext_resource type="Shader" path="res://UI/hover.gdshader" id="1_5gyjd"]
-[ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://post_card.gd" id="2_5gyjd"]
+[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="1_5gyjd"]
+[ext_resource type="Script" uid="uid://n856k2fdj1hv" path="res://UI/post_card.gd" id="2_ojvqg"]
 [ext_resource type="Texture2D" uid="uid://tsfcfyle4b6g" path="res://UI/postage_common.png" id="3_ojvqg"]
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="4_ojvqg"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="5_r0bo0"]
@@ -49,7 +49,7 @@ viewport_path = NodePath("SubViewport")
 [node name="PostCard" type="Sprite2D"]
 material = SubResource("ShaderMaterial_kjul2")
 texture = SubResource("ViewportTexture_ywdab")
-script = ExtResource("2_5gyjd")
+script = ExtResource("2_ojvqg")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -186,6 +186,7 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Acc1" type="ColorRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories"]
+modulate = Color(0, 1, 0, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 color = Color(0.301961, 0.301961, 0.301961, 0)

@@ -128,6 +128,14 @@ offset_top = 5.0
 offset_right = 45.0
 offset_bottom = 28.0
 
+[node name="Rankings" type="Label" parent="Camera2D/CanvasLayer"]
+z_index = 4096
+offset_left = 5.0
+offset_top = 34.0
+offset_right = 45.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 10
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_vivmo")
@@ -147,13 +155,6 @@ theme_override_font_sizes/font_size = 50
 text = "WINNER! (Press START to play again)
 "
 horizontal_alignment = 1
-
-[node name="Rankings" type="Label" parent="."]
-z_index = 4096
-offset_top = 34.0
-offset_right = 40.0
-offset_bottom = 57.0
-theme_override_font_sizes/font_size = 10
 
 [node name="Specials" type="HBoxContainer" parent="."]
 offset_left = 3.0

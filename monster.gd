@@ -35,6 +35,7 @@ var player : Player
 @onready var body_collision = $body_collision
 @onready var slime_timer = $SlimeTimer
 @onready var audio_player = $AudioStreamPlayer
+@onready var aura = $aura
 
 var block_texture = load("uid://bn3ju1wjp60ea")
 var mirror_block_texture = load("uid://ck7a7uoebctrw")
@@ -423,6 +424,9 @@ func _on_slime_timer_timeout():
 	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:
 		spawn_slime()
 
+func set_thorns() -> void:
+	thorns = true
+	aura.visible = true
 
 func spawn_slime():
 	var slime = preload("uid://upayf74ibwcl").instantiate()

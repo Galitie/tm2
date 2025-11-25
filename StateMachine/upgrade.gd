@@ -18,6 +18,8 @@ func Enter():
 	monster.global_position.x = clampf(monster.global_position.x, -100.0, viewport_size.x + 100.0)
 	monster.global_position.y = clampf(monster.global_position.y, -100.0, viewport_size.y + 100.0)
 	monster.toggle_effect_graphic(false)
+	if monster.thorns:
+		monster.aura.visible = true
 	
 	if monster.current_hp <= 0:
 		monster.animation_player.play("get_up")

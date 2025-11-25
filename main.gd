@@ -22,6 +22,8 @@ var sudden_death_speed : int = 100
 var camera_tracking: bool = false
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
+@onready var rankings = $Camera2D/CanvasLayer/Rankings
+
 var current_round : int = 0
 var current_mode : Modes
 var current_knocked_out_monsters : Array[Monster] = []
@@ -275,8 +277,8 @@ func set_upgrade_mode():
 		for player in players:
 			player.monster.move_speed -= sudden_death_speed
 	#if debug_mode:
-	$Rankings.visible = false
-	$Rankings.text = "Previous round points:\n"
+	rankings.visible = false
+	rankings.text = "Previous round points:\n"
 	$Specials.visible = false
 	clear_knocked_out_monsters()
 	var current_place = 0
@@ -297,7 +299,7 @@ func set_upgrade_mode():
 		player.upgrade_panel.update_place_text(player)
 		player.special_used = false
 		#if debug_mode:
-		$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.get_node("Monster")
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
@@ -322,8 +324,8 @@ func set_fight_mode():
 	current_round += 1
 	reset_specials_text()
 	#if debug_mode:
-	$Rankings.visible = true
-	$Specials.visible = true
+	rankings.visible = true
+	rankings.visible = true
 	if current_round == total_rounds:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_font_size_override("font_size", 36)
@@ -441,7 +443,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				var other_index = player.monster.state_machine.keys.find("poop")
 				player.monster.state_machine.weights[other_index] += .50
 			"thorns":
-				player.monster.thorns = true
+				#player.monster.thorns = true
+				player.monster.set_thorns()
 			"death_explode":
 				player.death_explode = true
 			"larger":
@@ -571,10 +574,10 @@ func check_if_game_over() -> bool:
 		print("game over")
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 		#if debug_mode:
-		$Rankings.visible = true
-		$Rankings.text = "Rankings:\n"
+		rankings.visible = true
+		rankings.text = "Rankings:\n"
 		for player in players:
-			$Rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+			rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var highest_score = players[0].victory_points
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
@@ -621,7 +624,6 @@ func spawn_poop(monster):
 func spawn_bomb(monster):
 	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
-	#bomb.z_index = monster.z_index
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position
 	if monster.player.larger_poops:

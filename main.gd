@@ -489,8 +489,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.longer_slimes = true
 			"more_slime":
 				player.monster.slime_timer.wait_time = .50
-			"bite_full_heal":
-				player.bite_full_heal = true
+			"bite_heal_more":
+				player.bite_heal_more = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

@@ -155,14 +155,16 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		var is_blocking = current_state == "block" or current_state=="mirrorblock"		
 		match attack.to_lower():
 			"bite":
-				if attacker.player.bite_full_heal and !is_blocking:
-					attacker.modify_hp(max_hp)
-					attacker.heal_label.text = "HEAL ALL"
+				if attacker.player.bite_heal_more and !is_blocking:
+					var heal_amount = roundi(max_hp * .10)
+					attacker.modify_hp(heal_amount)
+					attacker.heal_label.text = "HEAL++"
 					attacker.animation_player_heal.play("heal")
 				else:
-					if attacker.current_hp < roundi(attacker.max_hp / 2) and !is_blocking:
-						attacker.modify_hp(null, roundi(attacker.max_hp / 2))
-						attacker.heal_label.text = "HEAL HALF"
+					if !is_blocking:
+						var heal_amount = roundi(max_hp * .5)
+						attacker.modify_hp(heal_amount)
+						attacker.heal_label.text = "HEAL"
 						attacker.animation_player_heal.play("heal")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()

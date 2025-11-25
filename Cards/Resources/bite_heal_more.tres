@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bkwdvbvoxyvew"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_3ed7a"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_njg50"]
+
+[resource]
+script = ExtResource("2_njg50")
+card_name = "SLURP SLURP SLURP"
+description = "Chance to bite enemy and heal even MORE HP"
+Type = "basic_attack"
+state_id = "bite_heal_more"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_3ed7a")]([])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_njg50")]([])
+remove_cards = Array[ExtResource("2_njg50")]([])

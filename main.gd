@@ -431,8 +431,9 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				var block_index = player.monster.state_machine.keys.find("block")
 				player.monster.state_machine.weights[block_index] += .50
 			"mirrorblock":
-				player.monster.state_machine.block_values.erase("block")
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+			"mirrorblock_all":
+				player.monster.state_machine.block_values.erase("block")
 			"attacker":
 				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
 				player.monster.state_machine.weights[basic_attack_index] += .50

@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://dyvymb65crfuv"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://dyvymb65crfuv"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_2cjdi"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_q4vpd"]
+[ext_resource type="Resource" uid="uid://cjyy73ki5m4k6" path="res://Cards/Resources/mirror_block_all.tres" id="3_o280t"]
 
 [resource]
 script = ExtResource("2_q4vpd")
 card_name = "MIRROR BLOCK"
-description = "Reflect DMG on successful BLOCK"
+description = "Sometime reflect DMG on successful BLOCK"
 Type = "block"
 state_id = "mirrorblock"
 unique = true
@@ -22,5 +23,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("2_q4vpd")]([])
+unlocked_cards = Array[ExtResource("2_q4vpd")]([ExtResource("3_o280t")])
 remove_cards = Array[ExtResource("2_q4vpd")]([])

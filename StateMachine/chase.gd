@@ -53,7 +53,6 @@ func Physics_Update(delta: float) -> void:
 	
 	
 	if overlapping_hitbox and can_keep_chasing:
-		print("!!!!! ", monster.mon_name, " is close enough to ", target_mon.mon_name)
 		monster.velocity = Vector2.ZERO
 		var rand = [1, 2].pick_random()
 		if rand == 1:

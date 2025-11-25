@@ -65,14 +65,16 @@ func burn_card(button):
 func _physics_process(_delta):
 	if input_paused:
 		return
-	
-	if player.upgrade_points > 0:
+	# make sure bunnies are back in their spot
+	if player.upgrade_points > 0 and player.monster.global_position == player.monster.target_point:
+		#handle bots
 		if player.player_state == player.PlayerState.BOT:
 			input_paused = true
 			var button = button_array[1]
-			await get_tree().create_timer(2).timeout
+			await get_tree().create_timer(1).timeout
 			press_card(button, 1, JOY_BUTTON_A)
 			input_paused = false
+		
 		if current_user_position_in_button_array == 0:
 			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
 			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)

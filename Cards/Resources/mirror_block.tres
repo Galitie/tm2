@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_q4vpd")
 card_name = "MIRROR BLOCK"
-description = "Sometime reflect DMG on successful BLOCK"
+description = "Sometimes reflect DMG on successful BLOCK"
 Type = "block"
 state_id = "mirrorblock"
 unique = true

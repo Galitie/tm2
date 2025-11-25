@@ -409,8 +409,11 @@ func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) ->
 	effect_sprite.z_index = z_index + 1
 	
 	if toggle:
-		effect_sprite.modulate = Color.TRANSPARENT
-		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
+		if type == EffectType.THORNS && Globals.is_sudden_death_mode:
+			effect_sprite.modulate = Color.WHITE
+		else:
+			effect_sprite.modulate = Color.TRANSPARENT
+			get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
 	else:
 		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
 

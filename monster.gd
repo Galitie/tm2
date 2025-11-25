@@ -13,6 +13,7 @@ var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
 var thorns : bool = false
 enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME}
+var current_state : String
 
 var mon_name : String
 @onready var name_label = $Name
@@ -103,7 +104,7 @@ func _physics_process(_delta):
 func _on_hurtbox_area_entered(area):
 	var attacker: Node
 	if area != hitbox:
-		var current_state = state_machine.current_state.name.to_lower()
+		current_state = state_machine.current_state.name.to_lower()
 
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
@@ -151,14 +152,15 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
+		var is_blocking = current_state == "block" or current_state=="mirrorblock"		
 		match attack.to_lower():
 			"bite":
-				if attacker.player.bite_full_heal:
+				if attacker.player.bite_full_heal and !is_blocking:
 					attacker.modify_hp(max_hp)
 					attacker.heal_label.text = "HEAL ALL"
 					attacker.animation_player_heal.play("heal")
 				else:
-					if attacker.current_hp < roundi(attacker.max_hp / 2):
+					if attacker.current_hp < roundi(attacker.max_hp / 2) and !is_blocking:
 						attacker.modify_hp(null, roundi(attacker.max_hp / 2))
 						attacker.heal_label.text = "HEAL HALF"
 						attacker.animation_player_heal.play("heal")
@@ -183,8 +185,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
 		if player.matrix:
-			var rand = [1,2,3].pick_random()
-			if rand == 1 or rand == 2:
+			var rand = [1,2].pick_random()
+			if rand == 1:
 				play_generic_sound("uid://cf8aw1xy3pg34")
 				mod_monster(Color("3467ff"))
 				get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)

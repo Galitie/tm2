@@ -43,6 +43,7 @@ var hitbox_collision
 var hurtbox_collision
 var hurtbox
 var hitbox 
+@onready var proximity_chase_area
 var attacked : bool = false
 
 var sent_flying: bool = false

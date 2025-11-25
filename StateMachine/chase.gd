@@ -9,20 +9,15 @@ var move_speed_adjust: int = 15
 var max_accel: float = 5000.0
 
 # --- Side position (chosen per chase) ---
-const BASE_SIDE_OFFSET: float = 72.0
-const BASE_ARRIVE_RADIUS: float = 90.0
-
-var side_offset: float = BASE_SIDE_OFFSET
-var arrive_radius: float = BASE_ARRIVE_RADIUS
-
+const SIDE_OFFSET: float = 72.0
 var side_sign: int = 1   # +1 = right, -1 = left
 
 # --- Simple avoidance between monsters ---
 var avoidance_radius: float = 96.0
 var avoidance_strength: float = 10.0
 var avoidance_weight: float = 5.0
-
 var chase_time : float
+var overlapping_hitbox : bool = false
 
 
 func randomize_chase() -> void:
@@ -39,6 +34,7 @@ func Enter() -> void:
 
 func Exit() -> void:
 	monster.move_speed -= move_speed_adjust
+	overlapping_hitbox = false
 
 
 func Physics_Update(delta: float) -> void:
@@ -51,18 +47,20 @@ func Physics_Update(delta: float) -> void:
 	var can_keep_chasing = target_mon.current_hp > 0.0 and chase_time > 0.0
 
 	var side_dir = Vector2(side_sign, 0.0)
-	var side_goal = target_mon.global_position + side_dir * side_offset
+	var side_goal = target_mon.global_position + side_dir * SIDE_OFFSET
 	var to_side = side_goal - monster.global_position
 	var dist_to_side = to_side.length()
-
-	if dist_to_side <= arrive_radius and can_keep_chasing:
-		print(monster.mon_name, " is close enough to ", target_mon.mon_name, " side offset ", side_offset)
+	
+	
+	if overlapping_hitbox and can_keep_chasing:
+		print("!!!!! ", monster.mon_name, " is close enough to ", target_mon.mon_name)
 		monster.velocity = Vector2.ZERO
 		var rand = [1, 2].pick_random()
 		if rand == 1:
 			ChooseNewState.emit("basic_attack")
 		else:
 			ChooseNewState.emit("charge_attack")
+		overlapping_hitbox = false
 		return
 
 	# ---- Steering toward the side goal with avoidance ----
@@ -91,22 +89,9 @@ func select_target() -> void:
 	if targetable_monsters.size() > 0:
 		target_mon = targetable_monsters.pick_random()
 
-		# --- Scaling setup for initial target selection ---
-		var target_scale = 1.0
-		var self_scale = 1.0
-
-		if target_mon.has_node("root"):
-			target_scale = target_mon.root.scale.x
-		if monster.has_node("root"):
-			self_scale = monster.root.scale.x
-
-		var size_factor = max(target_scale, self_scale)
-		side_offset = BASE_SIDE_OFFSET * size_factor
-		arrive_radius = BASE_ARRIVE_RADIUS * size_factor
-
 		# Choose the closer side
-		var right_goal = target_mon.global_position + Vector2(1, 0) * side_offset
-		var left_goal  = target_mon.global_position + Vector2(-1, 0) * side_offset
+		var right_goal = target_mon.global_position + Vector2(1, 0) * SIDE_OFFSET
+		var left_goal  = target_mon.global_position + Vector2(-1, 0) * SIDE_OFFSET
 
 		var dist_right = (right_goal - monster.global_position).length()
 		var dist_left  = (left_goal  - monster.global_position).length()
@@ -162,3 +147,15 @@ func get_neighbor_monsters() -> Array[CharacterBody2D]:
 
 func animation_finished(anim_name: String) -> void:
 	pass
+
+
+func _on_proximity_chase_area_entered(area: Area2D) -> void:
+	if area.is_in_group("HurtBox") and target_mon != null:
+		if area == target_mon.hurtbox:
+			overlapping_hitbox = true
+
+
+func _on_proximity_chase_area_exited(area: Area2D) -> void:
+	if area.is_in_group("HurtBox") and target_mon != null:
+		if area == target_mon.hurtbox:
+			overlapping_hitbox = false

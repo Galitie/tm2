@@ -6,6 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	For chase, what if I use the hitbox instead? Chase until hitbox area touches hurtbox of target
+	Maybe break up the matrix/projectile dodge card into 50% chance, 75% chance
 	
 	Final upgrade round is unclear that it's the final round <.< (Raam)
 	Bullets from poops not clear when they disappear (Raam?)

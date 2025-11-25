@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=39 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://outline.gdshader" id="2_5105l"]
@@ -45,9 +45,12 @@ shader_parameter/outer_color = Color(0, 0, 0, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_lqt3o"]
 radius = 15.52
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14274"]
+size = Vector2(35, 82)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 51.0
-height = 152.0
+height = 144.0
 
 [sub_resource type="Animation" id="Animation_itwwk"]
 length = 0.001
@@ -197,6 +200,13 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="root/PoopChecker"]
 shape = SubResource("CircleShape2D_lqt3o")
+
+[node name="proximity_chase" type="Area2D" parent="root"]
+collision_layer = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="root/proximity_chase"]
+position = Vector2(121.5, -8)
+shape = SubResource("RectangleShape2D_14274")
 
 [node name="body_collision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -427,5 +437,7 @@ one_shot = true
 wait_time = 0.75
 autostart = true
 
+[connection signal="area_entered" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_entered"]
+[connection signal="area_exited" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_exited"]
 [connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]
 [connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]

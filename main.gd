@@ -272,41 +272,53 @@ func set_upgrade_mode():
 		audio_player.play()
 	current_mode = Modes.UPGRADE
 	sudden_death_label.visible = false
+	
 	if sudden_death_speed_set:
 		sudden_death_speed_set = false
 		for player in players:
 			player.monster.move_speed -= sudden_death_speed
-	#if debug_mode:
+	
 	rankings.visible = false
 	rankings.text = "Previous round points:\n"
 	$Specials.visible = false
 	clear_knocked_out_monsters()
+	
 	var current_place = 0
 	var prev_points = -1
 	var rerolls = 0
 
 	for player in players:
-		if player.victory_points != prev_points:
-			current_place += 1
-			rerolls += 1
-			prev_points = player.victory_points
 		if current_round == 0:
 			player.place = 1
 			player.rerolls = 3
+		elif player.victory_points != prev_points:
+			current_place += 1
+			rerolls += 1
+			prev_points = player.victory_points
 		else:
 			player.place = current_place
 			player.rerolls = rerolls + player.bonus_rerolls
 		player.upgrade_panel.update_place_text(player)
+		
 		player.special_used = false
-		#if debug_mode:
 		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		
 		var monster = player.get_node("Monster")
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
+		
 		if player.randomize_upgrade_points:
-			player.upgrade_points = randi_range(1,5)
+			player.upgrade_points = randi_range(1,6)
 		else:
-			player.upgrade_points = 3
+			if player.place == 1:
+				player.upgrade_points = 2
+			if player.place == 2:
+				player.upgrade_points = 3
+			if player.place == 3:
+				player.upgrade_points = 4
+			if player.place == 4:
+				player.upgrade_points = 5
+			
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
 
@@ -324,6 +336,7 @@ func set_fight_mode():
 	current_round += 1
 	reset_specials_text()
 	#if debug_mode:
+	$Specials.visible = true
 	rankings.visible = true
 	rankings.visible = true
 	if current_round == total_rounds:
@@ -367,10 +380,17 @@ func _on_round_over_delay_timer_timeout():
 		if player.monster.current_hp > 0 and player.monster not in current_knocked_out_monsters:
 			current_knocked_out_monsters.append(player.monster)
 			break
+	
 	var victory_points_gained = 0
 	for monster in current_knocked_out_monsters:
 		monster.player.victory_points += victory_points_gained
-		victory_points_gained += 1
+		if victory_points_gained == 0:
+			victory_points_gained = 1
+		if victory_points_gained == 1:
+			victory_points_gained = 3
+		if victory_points_gained == 3:
+			victory_points_gained = 5
+	
 	set_upgrade_mode()
 	print("Current Round: ", current_round)
 	for player in players:
@@ -617,6 +637,9 @@ func spawn_poop(monster):
 		poop.is_a_summon = true
 	if monster.player.larger_poops:
 		poop.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
+		poop.poop_shoot_interval = randf_range(3,10)	
+	else:
+		poop.poop_shoot_interval = randf_range(5,15)
 	add_child(poop)
 	poop.add_to_group("CleanUp")
 

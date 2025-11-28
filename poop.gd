@@ -28,10 +28,9 @@ func _ready():
 	
 	if not is_a_summon:
 		collision.disabled = true
-		$Lifetime.wait_time = 5
+		$Lifetime.wait_time = 3
 		$Lifetime.start()
 	velocity = Vector2.ZERO
-	poop_shoot_interval = randf_range(5,15)
 	$AnimationPlayer.play("idle")
 
 func _physics_process(delta):

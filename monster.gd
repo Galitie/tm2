@@ -17,6 +17,7 @@ var current_state : String
 
 var mon_name : String
 @onready var name_label = $Name
+@onready var upgrade_label = $NameUpgrade
 
 var player : Player
 
@@ -391,9 +392,10 @@ func generate_random_name():
 	if randi() % 4 == 0:
 		name_parts.append(end_name_suffixes[randi() % end_name_suffixes.size()])
 	var whole_name: String =  " ".join(name_parts)
-	$Name.text = whole_name
-	$NameUpgrade.text = whole_name
+	name_label.text = whole_name
+	upgrade_label.text = whole_name
 	mon_name = whole_name
+	return whole_name
 
 enum EffectType { BLOCK, MIRROR_BLOCK, THORNS }
 

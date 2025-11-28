@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_sqi73")
 card_name = "POOPER"
-description = "Will POOP all POOPS more often"
+description = "Will POOP more often"
 Type = "poop"
 state_id = "pooper"
 unique = false

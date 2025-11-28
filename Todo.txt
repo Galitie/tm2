@@ -5,7 +5,21 @@ Guiding lights:
 
 
 Features to make it playtest ready:
+	Test name back feature
+	Test poops shooting more often
+	Test points 5,3,1,0 spread
+	Test upgrade points change
+	
+	Players don't like being one shotted - balance HP and DMG (Needs testing above first)
+	Keep last couple of colors so players can go back
+	Bug with sudden death and zombie? Two players alive at sudden death
+
+	A card that allows attacks to pierce block?
+	A card that makes attacks uninterruptable?
 	Maybe break up the matrix/projectile dodge card into 50% chance, 75% chance?
+	
+	If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner
+	Controller rumble opportunities
 	
 	Final upgrade round is unclear that it's the final round <.< (Raam)
 	Bullets from poops not clear when they disappear (Raam?)

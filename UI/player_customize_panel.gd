@@ -1,16 +1,21 @@
 extends MarginContainer
 class_name PlayerCustomizePanel
 
-@onready var title = $VBoxContainer/Title/Label
 var player : Player
+var monster_pos : Vector2
+var mon_names : Array[String] = []
+
 @onready var button_array: Array[Node] = [$VBoxContainer/Custom2, $VBoxContainer/Custom1, $VBoxContainer/Done]
 var current_user_position_in_button_array : int = 0
+
 var new_stylebox_normal = StyleBoxFlat.new()
 var disabled : bool = false
 var waiting_for_ready_up : bool = false
+
+@onready var title = $VBoxContainer/Title/Label
 @onready var done_text = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Title
 @onready var done_description = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Description
-var monster_pos : Vector2
+
 
 signal finished_customizing(player)
 signal not_finished_customizing(player)
@@ -58,6 +63,16 @@ func _physics_process(_delta):
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			button = button_array[current_user_position_in_button_array]
 			_on_button_pressed(current_user_position_in_button_array)
+		
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B):
+			if current_user_position_in_button_array == 0: #if current highlighted button is name
+				if mon_names.size() >= 2:
+					var previous_element = mon_names.size() - 2
+					var previous_name = mon_names[previous_element]
+					player.monster.name_label.text = previous_name
+					player.monster.upgrade_label.text = previous_name
+					player.monster.mon_name = previous_name
+					mon_names.pop_back()
 
 
 func create_stylebox():
@@ -87,7 +102,13 @@ func _on_button_pressed(button_index):
 		1:
 			MonsterGeneration.RandomizeColor(player.monster)
 		0:
-			player.monster.generate_random_name()
+			var mon_name = player.monster.generate_random_name()
+			if mon_names.size() < 5:
+				mon_names.append(mon_name)
+			else:
+				mon_names.pop_front()
+				mon_names.append(mon_name)
+				
 		2:
 			waiting_for_ready_up = true
 			finished_customizing.emit(player)

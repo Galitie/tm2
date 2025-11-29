@@ -5,8 +5,6 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Test name back feature
-	Test color back feature
 	Test poops shooting more often
 	Test points 5,3,1,0 spread
 	Test upgrade points change

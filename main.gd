@@ -459,6 +459,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"attacker":
 				var basic_attack_index = player.monster.state_machine.keys.find("basic_attack")
 				player.monster.state_machine.weights[basic_attack_index] += .50
+			"shield_breaker":
+				player.shield_breaker = true
 			"pooper":
 				var other_index = player.monster.state_machine.keys.find("poop")
 				player.monster.state_machine.weights[other_index] += .50

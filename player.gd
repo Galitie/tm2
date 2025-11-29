@@ -40,6 +40,7 @@ var zombie : bool = false
 var zombie_sudden_death : bool = false
 var revived : bool = false
 var bite_heal_more : bool = false
+var shield_breaker : bool = false
 
 var current_small_cards : int = 0
 var current_big_cards : int = 0

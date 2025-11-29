@@ -11,7 +11,6 @@ Features to make it playtest ready:
 
 	A card that allows attacks to pierce block?
 	A card that makes attacks uninterruptable?
-	Maybe break up the matrix/projectile dodge card into 50% chance, 75% chance?
 	
 	If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner
 	Controller rumble opportunities

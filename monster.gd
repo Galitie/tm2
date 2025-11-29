@@ -142,32 +142,35 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var crit_text : String
 	var mod_text : String
 	var random_modifier : int
+	var is_blocking = false
 	if current_state.contains("block"):
-		match current_state.to_lower():
-			"mirrorblock":
-				if attacker is Monster:
-					var attacker_state = attacker.state_machine.current_state.name.to_lower()
-					attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
-		play_generic_sound("uid://cf8aw1xy3pg34")
-		mod_monster(Color("3467ff"))
-		get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
-		return
+		is_blocking = true
+		if attacker is Monster:
+			if attacker.player.shield_breaker:
+				var broke_shield = [0,0,1].pick_random()
+				if broke_shield:
+					print("Broke shield!")
+					#TODO: Broken shield effect? Maybe needs to live in type==attack_type.MONSTER below
+					pass
+			else:
+				match current_state.to_lower():
+					"mirrorblock":
+						var attacker_state = attacker.state_machine.current_state.name.to_lower()
+						attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
+				block_feedback()
+				return
+		else: #Not damage from a monster, block it
+			block_feedback()
+			return
 	if type == attack_type.MONSTER:
 		var attack : String = attacker.state_machine.current_state.name
-		var is_blocking = current_state == "block" or current_state=="mirrorblock"		
 		match attack.to_lower():
 			"bite":
-				if attacker.player.bite_heal_more and !is_blocking:
-					var heal_amount = roundi(attacker.max_hp * .20)
-					attacker.modify_hp(heal_amount)
-					attacker.heal_label.text = "+"+ str(heal_amount) + " HP HEAL"
-					attacker.animation_player_heal.play("heal")
-				else:
-					if !is_blocking:
-						var heal_amount = roundi(attacker.max_hp * .10)
-						attacker.modify_hp(heal_amount)
-						attacker.heal_label.text = "+"+ str(heal_amount) + " HP HEAL"
-						attacker.animation_player_heal.play("heal")
+				if !is_blocking:
+					if attacker.player.bite_heal_more:
+						heal_effect(attacker, .20, "HP HEAL")
+					else:
+						heal_effect(attacker, .10, "HP HEAL")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
@@ -189,18 +192,14 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
 		if player.super_matrix:
-			play_generic_sound("uid://cf8aw1xy3pg34")
-			mod_monster(Color("3467ff"))
-			get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+			block_feedback()
 			heal_label.text = "DODGED"
 			animation_player_heal.play("heal")
 			return
 		if player.matrix:
 			var rand = [1,2,3].pick_random()
 			if rand == 1:
-				play_generic_sound("uid://cf8aw1xy3pg34")
-				mod_monster(Color("3467ff"))
-				get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+				block_feedback()
 				heal_label.text = "DODGED"
 				animation_player_heal.play("heal")
 				return
@@ -233,8 +232,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			send_flying(attacker)
 		if player.death_explode:
 			explode_on_death()
-
-
 
 
 #TODO: Raam explosion animation???
@@ -338,6 +335,20 @@ func thorn_effect() -> void:
 	await get_tree().create_timer(0.5).timeout
 	toggle_effect_graphic(false)
 
+
+func block_feedback() -> void:
+	play_generic_sound("uid://cf8aw1xy3pg34")
+	mod_monster(Color("3467ff"))
+	get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+
+
+func heal_effect(attacker:Monster, amount: float, label_text: String):
+	var heal_amount = roundi(attacker.max_hp * amount)
+	attacker.modify_hp(heal_amount)
+	attacker.heal_label.text = "+"+ str(heal_amount) + " " + label_text
+	attacker.animation_player_heal.play("heal")
+
+
 func send_flying(attacker: Node) -> void:
 	mod_monster(Color("ff0e1b"))
 	sent_flying = true
@@ -405,6 +416,7 @@ func generate_random_name():
 	return whole_name
 
 enum EffectType { BLOCK, MIRROR_BLOCK, THORNS }
+
 
 func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) -> void:
 	var effect_sprite: Sprite2D = $effect

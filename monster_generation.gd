@@ -46,13 +46,26 @@ func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 func GetMonsterPartsGroupName(monster: Monster) -> String:
 	return "monster%f_parts" % monster.player.controller_port
 
-func RandomizeColor(monster: Monster) -> void:
+func RandomizeColor(monster: Monster, set_colors: Array[Color] = []) -> Array[Color]:
+	var colors : Array[Color] = []
+	if set_colors != []:
+		var counter = 0
+		for part: MonsterPartNode in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
+			if part.sprite.material != null:
+				part.sprite.material.set_shader_parameter("part_color", set_colors[counter])
+				counter += 1
+				if part.parent_part != null && part.parent_part.sprite.material != null:
+					part.sprite.material.set_shader_parameter("parent_part_color", part.parent_part.sprite.material.get_shader_parameter("part_color"))
+		return set_colors
 	for part: MonsterPartNode in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
 		if part.sprite.material != null:
-			part.sprite.material.set_shader_parameter("part_color", Color(randf(), randf(), randf()))
+			var random_color = Color(randf(), randf(), randf())
+			part.sprite.material.set_shader_parameter("part_color", random_color)
+			colors.append(random_color)
 			if part.parent_part != null && part.parent_part.sprite.material != null:
 				part.sprite.material.set_shader_parameter("parent_part_color", part.parent_part.sprite.material.get_shader_parameter("part_color"))
-
+	return colors
+	
 func ModulateMonster(monster: Monster, color: Color) -> void:
 	for part: MonsterPartNode in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
 		if part.sprite.material != null:

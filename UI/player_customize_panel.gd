@@ -4,6 +4,7 @@ class_name PlayerCustomizePanel
 var player : Player
 var monster_pos : Vector2
 var mon_names : Array[String] = []
+var mon_colors : Array[Array] = []
 
 @onready var button_array: Array[Node] = [$VBoxContainer/Custom2, $VBoxContainer/Custom1, $VBoxContainer/Done]
 var current_user_position_in_button_array : int = 0
@@ -74,6 +75,14 @@ func _physics_process(_delta):
 					player.monster.mon_name = previous_name
 					mon_names.pop_back()
 
+		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B):
+			if current_user_position_in_button_array == 1: #if current highlighted button is color
+				if mon_colors.size() >= 2:
+					var previous_element = mon_colors.size() - 2
+					var previous_color = mon_colors[previous_element]
+					MonsterGeneration.RandomizeColor(player.monster, previous_color)
+					mon_colors.pop_back()
+
 
 func create_stylebox():
 	new_stylebox_normal.set_border_width_all(5)
@@ -100,7 +109,13 @@ func handle_bot():
 func _on_button_pressed(button_index):
 	match button_index:
 		1:
-			MonsterGeneration.RandomizeColor(player.monster)
+			var random_color = MonsterGeneration.RandomizeColor(player.monster)
+			if mon_colors.size() < 5:
+				mon_colors.append(random_color)
+			else:
+				mon_colors.pop_front()
+				mon_colors.append(random_color)
+			
 		0:
 			var mon_name = player.monster.generate_random_name()
 			if mon_names.size() < 5:

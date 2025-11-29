@@ -6,12 +6,12 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Test name back feature
+	Test color back feature
 	Test poops shooting more often
 	Test points 5,3,1,0 spread
 	Test upgrade points change
 	
 	Players don't like being one shotted - balance HP and DMG (Needs testing above first)
-	Keep last couple of colors so players can go back
 	Bug with sudden death and zombie? Two players alive at sudden death
 
 	A card that allows attacks to pierce block?

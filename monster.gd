@@ -111,7 +111,7 @@ func _on_hurtbox_area_entered(area):
 		if current_state.contains("block"):
 			attacker = area.get_parent().get_parent()
 			if area.is_in_group("Attack"):
-				take_damage(attacker, current_state, true)
+				take_damage(attacker, current_state, true, attack_type.MONSTER)
 			# Slime or projectile belongs to the monster, ignore it
 			elif (area.is_in_group("Projectile") or area.is_in_group("Slime")) and area.owner.monster == self:
 				return
@@ -148,6 +148,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		is_blocking = true
 		if attacker is Monster:
 			if attacker.player.shield_breaker:
+				print("attacker has shield breaker")
 				var broke_shield = [0,0,1].pick_random()
 				if broke_shield:
 					shield_broken = true
@@ -171,8 +172,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			return
 	if type == attack_type.MONSTER:
 		if shield_broken:
+			print("got into the type MONSTER")
 			#TODO:Add shield broken effect here?
-			pass
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bite":
@@ -190,6 +191,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult * damage_received_mult) + random_modifier 
 		if damage == 0:
 			damage = 1
+		print("damage: ", damage)
 		modify_hp(-(damage))
 	elif type == attack_type.THORN:
 		damage = 1
@@ -197,7 +199,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 		thorn_effect()
 	elif type == attack_type.BOMB:
-		random_modifier = randi_range(-3,5)
+		random_modifier = randi_range(-3,0)
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:

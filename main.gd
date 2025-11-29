@@ -149,14 +149,6 @@ func _ready():
 		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
 	$CustomizeMenu.set_bots_to_ready(players)
 	
-	if debug_mode:
-		Globals.game.debug_mode = true
-		for player in players:
-			player.monster.debug_mode = true
-			if player.monster.pre_loaded_cards.size():
-				for pre_loaded_card in player.monster.pre_loaded_cards:
-					apply_card_resource_effects(pre_loaded_card, player)
-	
 	for player_index in players.size():
 		var player = players[player_index]
 		player.controller_port = player_index
@@ -175,12 +167,20 @@ func _ready():
 		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
 		player_upgrade_panel.update_banish_text()
 	
+	if debug_mode:
+		Globals.game.debug_mode = true
+		for player in players:
+			player.monster.debug_mode = true
+			if player.monster.pre_loaded_cards.size():
+				for pre_loaded_card in player.monster.pre_loaded_cards:
+					apply_card_resource_effects(pre_loaded_card, player)
+	
 	if disable_customizer:
 		$CustomizeMenu.hide()
 		$CustomizeMenu.disable()
 	else:
 		set_customize_mode()
-		
+	
 	if start_in_fight_mode:
 		set_fight_mode()
 	elif !start_in_fight_mode and disable_customizer:

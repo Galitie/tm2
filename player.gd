@@ -32,6 +32,7 @@ var larger_slimes : bool = false
 var longer_slimes : bool = false
 var death_explode : bool = false
 var matrix : bool = false
+var super_matrix : bool = false
 var poop_on_hit: bool = false
 var slime_trail : bool = false
 var caltrops: bool = false

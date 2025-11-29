@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("2_6xcsp")
 card_name = "GROND"
-description = "Will sometimes ATTACK and BREAK THROUGH a SHIELD"
+description = "When ATTACKING will sometimes BREAK THROUGH a SHIELD"
 Type = "passive"
 state_id = "shield_breaker"
-unique = false
+unique = true
 is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_mfx20")]([])

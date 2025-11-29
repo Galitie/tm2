@@ -142,16 +142,23 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var crit_text : String
 	var mod_text : String
 	var random_modifier : int
-	var is_blocking = false
+	var is_blocking : bool = false
+	var shield_broken : bool = false
 	if current_state.contains("block"):
 		is_blocking = true
 		if attacker is Monster:
 			if attacker.player.shield_breaker:
 				var broke_shield = [0,0,1].pick_random()
 				if broke_shield:
-					print("Broke shield!")
-					#TODO: Broken shield effect? Maybe needs to live in type==attack_type.MONSTER below
-					pass
+					shield_broken = true
+					print("Broke shield!") #Add effect in 'if type == attack_type.MONSTER:'?
+				else:
+					match current_state.to_lower():
+						"mirrorblock":
+							var attacker_state = attacker.state_machine.current_state.name.to_lower()
+							attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
+					block_feedback()
+					return
 			else:
 				match current_state.to_lower():
 					"mirrorblock":
@@ -163,10 +170,13 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			block_feedback()
 			return
 	if type == attack_type.MONSTER:
+		if shield_broken:
+			#TODO:Add shield broken effect here?
+			pass
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bite":
-				if !is_blocking:
+				if !is_blocking or shield_broken:
 					if attacker.player.bite_heal_more:
 						heal_effect(attacker, .20, "HP HEAL")
 					else:

@@ -6,10 +6,9 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Test balance of all the new changes
+	Test shield breaker and add effect animation (Raam?)
 
 	Bug with sudden death and zombie? Two players alive at sudden death
-
-	A card that allows attacks to pierce block?
 	A card that makes attacks uninterruptable?
 	
 	If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner

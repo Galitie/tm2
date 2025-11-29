@@ -5,10 +5,8 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Test poops shooting more often
 	Test points 5,3,1,0 spread
 	Test upgrade points change
-	Fix adding cards to monsters feature for testing
 	
 	Players don't like being one shotted - balance HP and DMG (Needs testing above first)
 	Bug with sudden death and zombie? Two players alive at sudden death

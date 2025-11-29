@@ -7,16 +7,16 @@
 [resource]
 script = ExtResource("3_pkltb")
 card_name = "GLASS CANNON"
-description = "Deal 1.25x DMG but take 2x DMG"
+description = "Deal 1.5x DMG but take 2x DMG"
 Type = "immediate"
 state_id = "dbl_dmg"
 unique = true
 is_special = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_a1xy7")]([ExtResource("2_ing2r")])
-attribute_1 = 0
-attribute_label_1 = ""
-attribute_amount_1 = 0
+attribute_1 = 1
+attribute_label_1 = "HP"
+attribute_amount_1 = 5
 attribute_2 = 0
 attribute_label_2 = ""
 attribute_amount_2 = 0

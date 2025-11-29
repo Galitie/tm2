@@ -288,13 +288,13 @@ func set_upgrade_mode():
 	var rerolls = 0
 
 	for player in players:
-		if current_round == 0:
-			player.place = 1
-			player.rerolls = 3
-		elif player.victory_points != prev_points:
+		if player.victory_points != prev_points:
 			current_place += 1
 			rerolls += 1
 			prev_points = player.victory_points
+		if current_round == 0:
+			player.place = 1
+			player.rerolls = 3
 		else:
 			player.place = current_place
 			player.rerolls = rerolls + player.bonus_rerolls
@@ -386,9 +386,9 @@ func _on_round_over_delay_timer_timeout():
 		monster.player.victory_points += victory_points_gained
 		if victory_points_gained == 0:
 			victory_points_gained = 1
-		if victory_points_gained == 1:
+		elif victory_points_gained == 1:
 			victory_points_gained = 3
-		if victory_points_gained == 3:
+		elif victory_points_gained == 3:
 			victory_points_gained = 5
 	
 	set_upgrade_mode()
@@ -442,8 +442,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"more_poops":
 				player.more_poops = true
 			"dbl_dmg":
-				player.monster.damage_dealt_mult *= 1.25
-				player.monster.damage_received_mult *= 2.0
+				player.monster.damage_dealt_mult += 1.50
+				player.monster.damage_received_mult = 2.0
 			"larger_poops":
 				player.larger_poops = true
 			"chaser":

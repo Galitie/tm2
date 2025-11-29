@@ -5,10 +5,8 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Test points 5,3,1,0 spread
-	Test upgrade points change
-	
-	Players don't like being one shotted - balance HP and DMG (Needs testing above first)
+	Test balance of all the new changes
+
 	Bug with sudden death and zombie? Two players alive at sudden death
 
 	A card that allows attacks to pierce block?

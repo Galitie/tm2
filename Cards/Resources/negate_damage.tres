@@ -1,18 +1,20 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://n6000538073l"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://n6000538073l"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="1_u8ihq"]
+[ext_resource type="Resource" uid="uid://bbl3gfk2tdsed" path="res://parts/sick_shades.tres" id="2_bdkyc"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://Cards/card_info.gd" id="2_h78ii"]
+[ext_resource type="Resource" uid="uid://c757uiq6xptok" path="res://Cards/Resources/often_negate_damage.tres" id="3_h78ii"]
 
 [resource]
 script = ExtResource("2_h78ii")
 card_name = "THE CHOSEN ONE"
-description = "Often DODGES PROJECTILES from POOP SUMMONS"
+description = "Sometimes DODGES PROJECTILES from POOP SUMMONS"
 Type = "passive"
 state_id = "matrix"
 unique = true
 is_special = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_u8ihq")]([])
+parts_and_acc = Array[ExtResource("1_u8ihq")]([ExtResource("2_bdkyc")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0
@@ -22,5 +24,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("2_h78ii")]([])
+unlocked_cards = Array[ExtResource("2_h78ii")]([ExtResource("3_h78ii")])
 remove_cards = Array[ExtResource("2_h78ii")]([])

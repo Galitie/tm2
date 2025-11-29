@@ -481,6 +481,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 					player.upgrade_panel.remove_from_card_pool(card_resource)
 			"matrix":
 				player.matrix = true
+			"super_matrix":
+				player.super_matrix = true
 			"specialblock":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)

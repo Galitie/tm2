@@ -188,8 +188,15 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
+		if player.super_matrix:
+			play_generic_sound("uid://cf8aw1xy3pg34")
+			mod_monster(Color("3467ff"))
+			get_tree().create_tween().tween_method(mod_monster, Color("3467ff"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+			heal_label.text = "DODGED"
+			animation_player_heal.play("heal")
+			return
 		if player.matrix:
-			var rand = [1,2].pick_random()
+			var rand = [1,2,3].pick_random()
 			if rand == 1:
 				play_generic_sound("uid://cf8aw1xy3pg34")
 				mod_monster(Color("3467ff"))

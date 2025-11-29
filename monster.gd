@@ -8,7 +8,7 @@ var intelligence : int = 1
 var move_speed : int = 50
 var attack_speed : int = 1
 var crit_chance: int = 1
-var crit_multiplier: float = 1.5
+var crit_multiplier: float = 1.75
 var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
 var thorns : bool = false
@@ -173,7 +173,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
 		critted = roll_crit()
 		crit_text = " CRIT" if critted && !ignore_crit else ""
-		random_modifier = randi_range(0,3)
+		random_modifier = randi_range(0,1)
 		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult * damage_received_mult) + random_modifier 
 		if damage == 0:
 			damage = 1
@@ -184,7 +184,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 		thorn_effect()
 	elif type == attack_type.BOMB:
-		random_modifier = randi_range(0,5)
+		random_modifier = randi_range(-3,5)
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
@@ -238,7 +238,7 @@ func explode_on_death():
 	var temp_sprite = Sprite2D.new()
 	temp_sprite.texture = load("uid://cgrc4jxdyeooy")
 	temp_sprite.scale = Vector2(3,3)
-	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.50
+	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1
 	temp_collision.shape = temp_shape_resource
 	temp_area.add_to_group("Bomb")
 	temp_area.add_to_group("CleanUp")

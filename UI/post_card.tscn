@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="4_ojvqg"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="5_r0bo0"]
 [ext_resource type="Texture2D" uid="uid://byi6oqbecy5pc" path="res://parts/fat_mallard.png" id="6_4rr1v"]
-[ext_resource type="Texture2D" uid="uid://djnv6gcu6l0li" path="res://UI/none_icon.png" id="7_ojvqg"]
+[ext_resource type="Texture2D" uid="uid://djnv6gcu6l0li" path="res://none_icon.png" id="7_ojvqg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5gyjd"]
 noise_type = 3

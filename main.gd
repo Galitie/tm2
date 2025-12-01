@@ -237,7 +237,6 @@ func count_death(monster: Monster):
 				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
-		
 
 
 func set_customize_mode():
@@ -318,9 +317,12 @@ func set_upgrade_mode():
 				player.upgrade_points = 4
 			if player.place == 4:
 				player.upgrade_points = 5
+			if current_round == 0:
+				player.upgrade_points = 3
 			
 	upgrade_menu.setup()
 	upgrade_menu.visible = true
+
 
 func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 	await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, length).finished

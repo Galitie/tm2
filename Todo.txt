@@ -5,14 +5,15 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Test balance of all the new changes
 	Test shield breaker and add effect animation (Raam?)
 
+	Test balance of all the new changes
+	- bug with rerolls, starting with 2 on the first round
 	Bug with sudden death and zombie? Two players alive at sudden death
-	A card that makes attacks uninterruptable?
-	
 	If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner
 	Controller rumble opportunities
+	
+	A card that makes attacks uninterruptable?
 	
 	Final upgrade round is unclear that it's the final round <.< (Raam)
 	Bullets from poops not clear when they disappear (Raam?)

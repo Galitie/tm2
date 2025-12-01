@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bsvu0x8037yil"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_mfx20"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_6xcsp"]
+
+[resource]
+script = ExtResource("2_6xcsp")
+card_name = "GROND"
+description = "When ATTACKING will sometimes BREAK THROUGH a SHIELD"
+Type = "passive"
+state_id = "shield_breaker"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_mfx20")]([])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_6xcsp")]([])
+remove_cards = Array[ExtResource("2_6xcsp")]([])

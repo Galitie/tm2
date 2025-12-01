@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgti6mrpdekpx"]
 
-[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_annpc"]
-[ext_resource type="Script" uid="uid://bpta51rbj3ncc" path="res://UI/customize_menu.gd" id="2_annpc"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://ui/Theme.tres" id="1_annpc"]
+[ext_resource type="Script" uid="uid://bpta51rbj3ncc" path="res://ui/customize_menu.gd" id="2_annpc"]
 
 [node name="CustomizeMenu" type="Control"]
 layout_mode = 3

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://qqdwbq831ev6"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_ltuqc"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_p2ha8"]
+
+[resource]
+script = ExtResource("3_p2ha8")
+card_name = "GOOPY"
+description = "SLIME trails will be BIGGER"
+Type = "passive"
+state_id = "larger_slimes"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_ltuqc")]([])
+attribute_1 = 2
+attribute_label_1 = "SPD"
+attribute_amount_1 = 5
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("3_p2ha8")]([])
+remove_cards = Array[ExtResource("3_p2ha8")]([])

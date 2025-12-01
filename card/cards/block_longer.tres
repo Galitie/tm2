@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://ypvgbouvw3wv"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_neo1f"]
+[ext_resource type="Resource" uid="uid://cnbvwuuu8otcb" path="res://parts/turtle_shell.tres" id="2_j1ana"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_kocdb"]
+
+[resource]
+script = ExtResource("3_kocdb")
+card_name = "STONE WALL"
+description = "Will BLOCK for longer duration"
+Type = "block"
+state_id = "block_longer"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_neo1f")]([ExtResource("2_j1ana")])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("3_kocdb")]([])
+remove_cards = Array[ExtResource("3_kocdb")]([])

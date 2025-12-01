@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://upayf74ibwcl"]
+
+[ext_resource type="Script" uid="uid://b1lq7tm3h5jro" path="res://projectiles/slime_trail.gd" id="1_ppcr1"]
+[ext_resource type="Texture2D" uid="uid://cr5d5n3e20kav" path="res://projectiles/slime_trail.png" id="3_ppcr1"]
+[ext_resource type="AudioStream" uid="uid://b72fw0suma1hh" path="res://sounds/gun.ogg" id="6_alucd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xsvd0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ppcr1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppcr1"]
+size = Vector2(38, 38)
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1_ppcr1")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+position = Vector2(0, 14)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CanvasGroup"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_xsvd0")
+offset = Vector2(0, -19)
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_alucd")
+volume_db = -20.0
+
+[node name="Area" type="Area2D" parent="." groups=["Slime"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_ppcr1")
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

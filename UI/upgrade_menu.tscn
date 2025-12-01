@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://caig5oumsc857"]
 
-[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_sx8i1"]
-[ext_resource type="Script" uid="uid://b72ksksy2twh2" path="res://UI/upgrade_menu.gd" id="2_tug6p"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://ui/Theme.tres" id="1_sx8i1"]
+[ext_resource type="Script" uid="uid://b72ksksy2twh2" path="res://ui/upgrade_menu.gd" id="2_tug6p"]
 
 [node name="UpgradeMenu" type="Control"]
 layout_mode = 3

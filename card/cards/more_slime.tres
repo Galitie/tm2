@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://dr6d21dxjpmtp"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_kvgmt"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_84c8q"]
+
+[resource]
+script = ExtResource("2_84c8q")
+card_name = "SUPER SLIMEY"
+description = "SLIME trails will spawn more often"
+Type = "passive"
+state_id = "more_slime"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_kvgmt")]([])
+attribute_1 = 1
+attribute_label_1 = "HP"
+attribute_amount_1 = 3
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_84c8q")]([])
+remove_cards = Array[ExtResource("2_84c8q")]([])

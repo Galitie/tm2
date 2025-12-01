@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://c7kbcfhprqc84"]
 
-[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster_connection.gd" id="1_1nahy"]
-[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster_part.gd" id="2_f4ju3"]
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_1nahy"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_f4ju3"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="3_f4ju3"]
 
 [resource]

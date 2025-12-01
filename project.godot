@@ -18,11 +18,15 @@ config/name="TM2"
 run/main_scene="uid://405m25td441q"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[audio]
+
+buses/default_bus_layout="res://sounds/default_bus_layout.tres"
+
 [autoload]
 
-Globals="*res://globals.gd"
-Controller="*res://controller.gd"
-MonsterGeneration="*res://monster_generation.gd"
+Globals="*res://core/globals.gd"
+Controller="*res://core/controller.gd"
+MonsterGeneration="*res://monster/monster_generation.gd"
 
 [display]
 

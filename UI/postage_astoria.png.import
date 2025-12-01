@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dj3p7vy3iup0y"
-path="res://.godot/imported/postage_astoria.png-f03e2f5999f14fe139dbd5d1bd5226f3.ctex"
+path="res://.godot/imported/postage_astoria.png-ded5039c9d7bf187b63935878e05436e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/postage_astoria.png"
-dest_files=["res://.godot/imported/postage_astoria.png-f03e2f5999f14fe139dbd5d1bd5226f3.ctex"]
+source_file="res://ui/postage_astoria.png"
+dest_files=["res://.godot/imported/postage_astoria.png-ded5039c9d7bf187b63935878e05436e.ctex"]
 
 [params]
 

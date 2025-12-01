@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfcg1ysqsucr6"
-path="res://.godot/imported/postage_ellery.png-208fb8783ef73f4c85e72e9de54db4f9.ctex"
+path="res://.godot/imported/postage_ellery.png-b716687a4597c6773913c464b5a258d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/postage_ellery.png"
-dest_files=["res://.godot/imported/postage_ellery.png-208fb8783ef73f4c85e72e9de54db4f9.ctex"]
+source_file="res://ui/postage_ellery.png"
+dest_files=["res://.godot/imported/postage_ellery.png-b716687a4597c6773913c464b5a258d2.ctex"]
 
 [params]
 

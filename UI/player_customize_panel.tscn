@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://laiyva0qmjkd"]
 
-[ext_resource type="Script" uid="uid://ddofft047bvq4" path="res://UI/player_customize_panel.gd" id="1_j53iu"]
-[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="2_j53iu"]
+[ext_resource type="Script" uid="uid://ddofft047bvq4" path="res://ui/player_customize_panel.gd" id="1_j53iu"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://ui/Theme.tres" id="2_j53iu"]
 
 [node name="PlayerCustomizePanel" type="MarginContainer"]
 custom_minimum_size = Vector2(275, 0)

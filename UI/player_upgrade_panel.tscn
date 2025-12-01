@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=3 uid="uid://ba3142spsuljy"]
 
-[ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://ui/player_upgrade_panel.gd" id="1_kvryu"]
-[ext_resource type="PackedScene" uid="uid://cbeuoiqc8avud" path="res://ui/post_card.tscn" id="4_5aacw"]
+[ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
+[ext_resource type="PackedScene" uid="uid://cbeuoiqc8avud" path="res://UI/post_card.tscn" id="4_5aacw"]
 [ext_resource type="AudioStream" uid="uid://o81tlwdlwbgw" path="res://sounds/stamp.ogg" id="4_22x0x"]
-[ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://ui/stamp.png" id="5_22x0x"]
-[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://ui/hover.gdshader" id="5_ad54b"]
+[ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
+[ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="5_ad54b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0

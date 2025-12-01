@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://ciat4c1ffyvc" path="res://stages/bg_grass.png" id="2_kek77"]
-[ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://ui/upgrade_menu.tscn" id="3_4c57u"]
-[ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://ui/customize_menu.tscn" id="4_efxa6"]
+[ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="4_efxa6"]
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://effects/sudden_death.gdshader" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="6_ycdy4"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="7_w48qg"]

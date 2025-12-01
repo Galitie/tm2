@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://noyaw0jmuiam"
-path="res://.godot/imported/postage_unique.png-ae3220eb682b6c348daad6a79221c42f.ctex"
+path="res://.godot/imported/postage_unique.png-cb0e85c6ce0cd92e15015cab8a3e769f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/postage_unique.png"
-dest_files=["res://.godot/imported/postage_unique.png-ae3220eb682b6c348daad6a79221c42f.ctex"]
+source_file="res://UI/postage_unique.png"
+dest_files=["res://.godot/imported/postage_unique.png-cb0e85c6ce0cd92e15015cab8a3e769f.ctex"]
 
 [params]
 

@@ -9,7 +9,6 @@ Features to make it playtest ready:
 
 	Test balance of all the new changes
 	Bug with sudden death and zombie? Two players alive at sudden death
-	Controller rumble opportunities
 	
 	A card that makes attacks uninterruptable?
 	

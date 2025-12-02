@@ -74,7 +74,7 @@ one_shot = true
 one_shot = true
 
 [node name="SuddenDeathTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 60.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

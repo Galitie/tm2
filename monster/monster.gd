@@ -375,6 +375,8 @@ func send_flying(attacker: Node) -> void:
 		attacker_position = global_position
 	knockback = (global_position - attacker_position).normalized().x
 	Globals.game.freeze_frame(self)
+	await get_tree().create_timer(1.25).timeout
+	Controller.Vibrate(player.controller_port, 1, 1, .75)
 
 
 func update_hp_color():

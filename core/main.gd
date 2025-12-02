@@ -231,6 +231,8 @@ func _process(_delta):
 func count_death(monster: Monster):
 	monster.remove_from_group("DepthEntity")
 	monster.z_index = -1
+	if current_knocked_out_monsters.has(monster):
+		return
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
 		sudden_death_timer.stop()

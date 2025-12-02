@@ -253,13 +253,13 @@ func update_banish_text():
 
 func update_place_text(player):
 	if player.place == 1:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "st"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "1st"
 	elif player.place == 2:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "nd"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "2nd"
 	elif player.place == 3:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "rd"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "3rd"
 	elif player.place == 4:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + str(player.place) + "th"
+		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "4th"
 
 
 func hide_bot_stats():

@@ -181,7 +181,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		match attack.to_lower():
 			"bite":
 				if !is_blocking or shield_broken:
-					if attacker.player.bite_heal_more:
+					if attacker.player.bite_heal_more and attacker.current_hp < attacker.max_hp:
 						heal_effect(attacker, .20, "HP HEAL")
 					else:
 						heal_effect(attacker, .10, "HP HEAL")
@@ -293,7 +293,7 @@ func _on_zombie_timer_timeout():
 	$Heal.text = "+1 HP ZOMBIE"
 	animation_player_heal.play("heal")
 	toggle_collisions(true)
-	if Globals.game.current_mode != Globals.game.Modes.UPGRADE:
+	if Globals.game.current_mode != Globals.game.Modes.UPGRADE or Globals.game.Modes.GAME_END:
 		state_machine.transition_state("getupandgo")
 		mod_color = Color(0.0, 0.39, 0.0, 0.7)
 		mod_monster(mod_color)
@@ -375,6 +375,8 @@ func send_flying(attacker: Node) -> void:
 		attacker_position = global_position
 	knockback = (global_position - attacker_position).normalized().x
 	Globals.game.freeze_frame(self)
+	await get_tree().create_timer(1.25).timeout
+	Controller.Vibrate(player.controller_port, 1, 1, .75)
 
 
 func update_hp_color():

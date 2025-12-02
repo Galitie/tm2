@@ -104,8 +104,5 @@ func IsButtonPressed(device_id: int, button: int) -> int:
 func GetLeftStick(device_id: int) -> Vector2:
 	return gamepads[device_id].left_stick
 	
-#func GetRightStick(device_id: int) -> Vector2:
-	#return gamepads[device_id].right_stick
-#
-#func GetRightTrigger(device_id: int) -> float:
-	#return gamepads[device_id].right_trigger
+func Vibrate(device_id: int, weak_level: int, strong_level : int, duration : float = 0):
+	Input.start_joy_vibration(device_id, weak_level, strong_level, duration)

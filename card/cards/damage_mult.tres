@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("3_pkltb")
 card_name = "GLASS CANNON"
-description = "Deal 1.5x DMG but take 2x DMG"
+description = "Deal 1.5x DMG with ATTACKS but take 1.75x DMG"
 Type = "immediate"
 state_id = "dbl_dmg"
 unique = true

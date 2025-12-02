@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("3_kcama")
 card_name = "AGGRESSOR"
-description = "Will CHASE after others more often"
+description = "Will CHASE after and ATTACK others more often"
 Type = "chase"
 state_id = "chaser"
 unique = true

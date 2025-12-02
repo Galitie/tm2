@@ -446,7 +446,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.more_poops = true
 			"dbl_dmg":
 				player.monster.damage_dealt_mult = 1.50
-				player.monster.damage_received_mult = 2.0
+				player.monster.damage_received_mult = 1.75
 			"larger_poops":
 				player.larger_poops = true
 			"chaser":
@@ -606,6 +606,7 @@ func handle_game_over():
 	upgrade_menu.pause_all_inputs()
 	current_mode = Modes.GAME_END
 	upgrade_menu.visible = false
+	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	rankings.visible = true
 	rankings.text = "Rankings:\n"

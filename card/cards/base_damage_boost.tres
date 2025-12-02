@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_lrdyw")
 card_name = "DAMAGE BOOST"
-description = "Increase BASE DMG"
+description = "Increase BASE DMG for ATTACKS"
 Type = "immediate"
 state_id = ""
 unique = false

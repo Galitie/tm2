@@ -10,6 +10,9 @@ func _ready():
 	modulate = monster.player_color
 	$Lifetime.wait_time = lifetime
 	$Lifetime.start()
+	
+	if monster.root.scale.x < 0.0:
+		scale.x = -scale.x
 
 
 func _physics_process(delta):

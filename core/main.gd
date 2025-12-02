@@ -9,7 +9,7 @@ class_name Game
 
 @onready var players : Array[Node]
 @onready var monsters: Array[Monster]
-@onready var upgrade_menu : Node = $UpgradePanel
+@onready var upgrade_menu : Node = $Camera2D/CanvasLayer/UpgradePanel
 @onready var sudden_death_label: RichTextLabel = $Camera2D/CanvasLayer/SuddenDeathLabel
 @onready var sudden_death_timer: Timer = $SuddenDeathTimer
 
@@ -63,18 +63,18 @@ func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
-		$CustomizeMenu.disable()
-		$CustomizeMenu.hide()
+		$Camera2D/CanvasLayer/CustomizeMenu.disable()
+		$Camera2D/CanvasLayer/CustomizeMenu.hide()
 		if start_in_fight_mode:
 			set_fight_mode()
 		else:
 			transition_audio("uid://bnfvpcj04flvs", 0.0)
 			set_upgrade_mode()
 
-
+ 
 func listen_for_special_trigger():
 	if current_mode == Modes.FIGHT:
-		var specials = $Specials.get_children()
+		var specials = $Camera2D/CanvasLayer/Specials.get_children()
 		var index = 0
 		for player in players:
 			var requirements_met = !player.special_used and player.monster.current_hp > 0 and player.has_special and player.monster.state_machine.current_state.name != "Zombie"
@@ -132,8 +132,8 @@ func _ready():
 		player.player_state = Globals.player_states[counter]
 		counter += 1
 	
-	$CustomizeMenu.set_customize_panels(players)
-	$UpgradePanel.set_upgrade_panels(players)
+	$Camera2D/CanvasLayer/CustomizeMenu.set_customize_panels(players)
+	$Camera2D/CanvasLayer/UpgradePanel.set_upgrade_panels(players)
 	$PauseTimer.timeout.connect(_unpause)
 	
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
@@ -147,7 +147,7 @@ func _ready():
 		player.monster.state_machine.find_child("Bombing").connect("spawn_bomb", spawn_bomb)
 		player.customize_panel.connect("finished_customizing", _add_ready_player)
 		player.customize_panel.connect("not_finished_customizing", _remove_ready_player)
-	$CustomizeMenu.set_bots_to_ready(players)
+	$Camera2D/CanvasLayer/CustomizeMenu.set_bots_to_ready(players)
 	
 	for player_index in players.size():
 		var player = players[player_index]
@@ -176,8 +176,8 @@ func _ready():
 					apply_card_resource_effects(pre_loaded_card, player)
 	
 	if disable_customizer:
-		$CustomizeMenu.hide()
-		$CustomizeMenu.disable()
+		$Camera2D/CanvasLayer/CustomizeMenu.hide()
+		$Camera2D/CanvasLayer/CustomizeMenu.disable()
 	else:
 		set_customize_mode()
 	
@@ -207,15 +207,15 @@ func _process(_delta):
 				camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 				camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 	if ready_players.size() == players.size() and current_mode == Modes.CUSTOMIZE:
-		$CustomizeMenu.disable()
-		$CustomizeMenu.hide()
+		$Camera2D/CanvasLayer/CustomizeMenu.disable()
+		$Camera2D/CanvasLayer/CustomizeMenu.hide()
 		if start_in_fight_mode:
 			set_fight_mode()
 		else:
 			set_upgrade_mode()
 	if ready_players.size() == 1 and current_mode == Modes.CUSTOMIZE and debug_mode:
-		$CustomizeMenu.disable()
-		$CustomizeMenu.hide()
+		$Camera2D/CanvasLayer/CustomizeMenu.disable()
+		$Camera2D/CanvasLayer/CustomizeMenu.hide()
 		if start_in_fight_mode:
 			set_fight_mode()
 		else:
@@ -240,8 +240,8 @@ func count_death(monster: Monster):
 
 
 func set_customize_mode():
-	$UpgradePanel.pause_all_inputs()
-	$CustomizeMenu.show()
+	$Camera2D/CanvasLayer/UpgradePanel.pause_all_inputs()
+	$Camera2D/CanvasLayer/CustomizeMenu.show()
 	sudden_death_label.visible = false
 	current_mode = Modes.CUSTOMIZE
 	for player in players:
@@ -265,7 +265,7 @@ func set_upgrade_mode():
 		player.monster.move_name_upgrade()
 	if check_if_game_over():
 		return
-	$UpgradePanel.unpause_all_inputs()
+	$Camera2D/CanvasLayer/UpgradePanel.unpause_all_inputs()
 	if current_round == 0:
 		audio_player.stream = load("uid://bnfvpcj04flvs")
 		audio_player.play()
@@ -279,7 +279,7 @@ func set_upgrade_mode():
 	
 	rankings.visible = false
 	rankings.text = "Previous round points:\n"
-	$Specials.visible = false
+	$Camera2D/CanvasLayer/Specials.visible = false
 	clear_knocked_out_monsters()
 	
 	var current_place = 0
@@ -333,12 +333,12 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 func set_fight_mode():
 	transition_audio("uid://mysomdex1y7k", 0.5)
-	$UpgradePanel.pause_all_inputs()
+	$Camera2D/CanvasLayer/UpgradePanel.pause_all_inputs()
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()
 	#if debug_mode:
-	$Specials.visible = true
+	$Camera2D/CanvasLayer/Specials.visible = true
 	rankings.visible = true
 	rankings.visible = true
 	if current_round == total_rounds:
@@ -348,7 +348,7 @@ func set_fight_mode():
 	else:
 		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
-	get_node("UpgradePanel").visible = false
+	$Camera2D/CanvasLayer/UpgradePanel.visible = false
 	for player in players:
 		var monster = player.get_node("Monster")
 		monster.move_name_fight()
@@ -596,7 +596,7 @@ func reroll_pressed(upgrade_panel):
 func check_if_game_over() -> bool:
 	if current_round >= total_rounds:
 		current_mode = Modes.GAME_END
-		$UpgradePanel.hide()
+		$Camera2D/CanvasLayer/UpgradePanel.hide()
 		print("game over")
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 		#if debug_mode:
@@ -608,15 +608,15 @@ func check_if_game_over() -> bool:
 		var winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
 			print("Winner:", winners[0].name)
-			$WinnersLabel.text = "WINNER! (Press START to play again)"
-			$WinnersLabel.show()
+			$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
+			$Camera2D/CanvasLayer/WinnersLabel.show()
 			for player in players:
 				if player not in winners:
 					player.get_child(0).hide()
 		else:
 			print("It's a tie between:")
-			$WinnersLabel.text = "WINNERS! (Press START to play again)"
-			$WinnersLabel.show()
+			$Camera2D/CanvasLayer/WinnersLabel.text = "WINNERS! (Press START to play again)"
+			$Camera2D/CanvasLayer/WinnersLabel.show()
 			for winner in winners:
 				print("- ", winner.name)
 			for player in players:
@@ -676,7 +676,7 @@ func _remove_ready_player(player):
 
 
 func reset_specials_text():
-	var specials = $Specials.get_children()
+	var specials = $Camera2D/CanvasLayer/Specials.get_children()
 	var index = 0
 	for player in players:
 		specials[index].text = ""

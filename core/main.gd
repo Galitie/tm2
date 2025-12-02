@@ -30,7 +30,9 @@ var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
+var winners = []
 var menu_scene = preload("uid://405m25td441q")
+
 
 
 func _init():
@@ -53,13 +55,14 @@ func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.FIGHT:
 		var targetable_monsters: Array[CharacterBody2D] = []
 		var monster_collection : Array[Node] = get_tree().get_nodes_in_group("Monster")
+		var unkillable_states = ["knockedout", "hurt", "zombie", "getupandgo", "upgradestart", "fightstart"]
 		for monster in monster_collection:
-			var state_machine = monster.get_node("StateMachine")
-			if monster.current_hp > 0:
+			if monster.current_hp > 0 and !unkillable_states.has(monster.state_machine.current_state.name.to_lower()):
 				targetable_monsters.append(monster)
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
-			target_monster.take_damage(null, "", false, 0, 999)
+			if target_monster.current_hp > 0 and !unkillable_states.has(target_monster.state_machine.current_state.name):
+				target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
@@ -234,7 +237,6 @@ func count_death(monster: Monster):
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
 				winner.state_machine.transition_state("dance")
-				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
@@ -252,6 +254,7 @@ func set_customize_mode():
 
 func set_upgrade_mode():
 	clean_up_screen()
+	clear_knocked_out_monsters()
 	if current_round == total_rounds - 1:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
 		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL UPGRADE ROUND"
@@ -260,23 +263,22 @@ func set_upgrade_mode():
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	for player in players:
 		player.monster.unzombify()
-		player.monster.target_point = player.upgrade_pos
 		player.monster.state_machine.transition_state("upgradestart")
 		player.monster.move_name_upgrade()
-	if check_if_game_over():
+	if sudden_death_speed_set:
+		sudden_death_speed_set = false
+		for player in players:
+			player.monster.move_speed -= sudden_death_speed
+	sudden_death_label.visible = false
+	var game_over = check_if_game_over()
+	if game_over:
 		return
+	print("checked game over and continued")
 	$Camera2D/CanvasLayer/UpgradePanel.unpause_all_inputs()
 	if current_round == 0:
 		audio_player.stream = load("uid://bnfvpcj04flvs")
 		audio_player.play()
 	current_mode = Modes.UPGRADE
-	sudden_death_label.visible = false
-	
-	if sudden_death_speed_set:
-		sudden_death_speed_set = false
-		for player in players:
-			player.monster.move_speed -= sudden_death_speed
-	
 	rankings.visible = false
 	rankings.text = "Previous round points:\n"
 	$Camera2D/CanvasLayer/Specials.visible = false
@@ -287,6 +289,7 @@ func set_upgrade_mode():
 	var rerolls = 0
 
 	for player in players:
+		player.monster.target_point = player.upgrade_pos
 		if player.victory_points != prev_points:
 			current_place += 1
 			rerolls += 1
@@ -302,7 +305,7 @@ func set_upgrade_mode():
 		player.special_used = false
 		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		
-		var monster = player.get_node("Monster")
+		var monster = player.monster
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
 		
@@ -332,14 +335,14 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 
 func set_fight_mode():
-	transition_audio("uid://mysomdex1y7k", 0.5)
-	$Camera2D/CanvasLayer/UpgradePanel.pause_all_inputs()
 	current_mode = Modes.FIGHT
+	$Camera2D/CanvasLayer/UpgradePanel.pause_all_inputs()
+	$Camera2D/CanvasLayer/UpgradePanel.visible = false
+	transition_audio("uid://mysomdex1y7k", 0.5)
+	transition_audio("uid://mysomdex1y7k", 0.5)
 	current_round += 1
 	reset_specials_text()
-	#if debug_mode:
 	$Camera2D/CanvasLayer/Specials.visible = true
-	rankings.visible = true
 	rankings.visible = true
 	if current_round == total_rounds:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
@@ -348,12 +351,13 @@ func set_fight_mode():
 	else:
 		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
-	$Camera2D/CanvasLayer/UpgradePanel.visible = false
+	
+
 	for player in players:
-		var monster = player.get_node("Monster")
+		var monster = player.monster
 		monster.move_name_fight()
-		monster.state_machine.transition_state("fightstart")
 		monster.target_point = player.fight_pos
+		monster.state_machine.transition_state("fightstart")
 
 
 func _on_sudden_death_timer_timeout():
@@ -392,7 +396,7 @@ func _on_round_over_delay_timer_timeout():
 			victory_points_gained = 3
 		elif victory_points_gained == 3:
 			victory_points_gained = 5
-	
+	print("on round over timer triggered and going into upgrade mode")
 	set_upgrade_mode()
 	print("Current Round: ", current_round)
 	for player in players:
@@ -535,12 +539,11 @@ func apply_card_resource_effects(card_resource : Resource, player):
 		player.upgrade_panel.resource_array.erase(card_resource)
 
 
-
 func apply_card_attribute(attribute, amount, player):
 	match attribute:
 		CardResourceScript.Attributes.HP:
 			player.monster.modify_max_hp(amount)
-			player.monster.modify_hp(player.monster.max_hp)
+			player.monster.modify_hp(null, player.monster.max_hp)
 		CardResourceScript.Attributes.MOVE_SPEED:
 			player.monster.move_speed += amount
 		CardResourceScript.Attributes.BASE_DAMAGE:
@@ -592,41 +595,41 @@ func reroll_pressed(upgrade_panel):
 		upgrade_panel.reroll_button.text = "NO 🎲 LEFT"
 		upgrade_panel.reroll_button.disabled = true
 
-#TODO: Make a real game over scene, placeholder for playtesting
+
 func check_if_game_over() -> bool:
 	if current_round >= total_rounds:
+		print("Game over - check for ties")
+		$Camera2D/CanvasLayer/UpgradePanel.pause_all_inputs()
 		current_mode = Modes.GAME_END
 		$Camera2D/CanvasLayer/UpgradePanel.hide()
-		print("game over")
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
-		#if debug_mode:
 		rankings.visible = true
 		rankings.text = "Rankings:\n"
 		for player in players:
 			rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var highest_score = players[0].victory_points
-		var winners = players.filter(func(p): return p.victory_points == highest_score)
+		winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
 			print("Winner:", winners[0].name)
 			$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
 			$Camera2D/CanvasLayer/WinnersLabel.show()
 			for player in players:
+				player.monster.target_point = player.customize_pos
 				if player not in winners:
 					player.get_child(0).hide()
+			return true
 		else:
+			# There is a tie, time for more sudden death!
+			$SuddenDeathTimer.wait_time = 1
+			set_fight_mode()
 			print("It's a tie between:")
-			$Camera2D/CanvasLayer/WinnersLabel.text = "WINNERS! (Press START to play again)"
-			$Camera2D/CanvasLayer/WinnersLabel.show()
-			for winner in winners:
-				print("- ", winner.name)
 			for player in players:
 				if player not in winners:
-					player.get_child(0).hide()
-		for player in players:
-			var monster = player.get_node("Monster")
-			monster.target_point = player.customize_pos
-		return true
+					player.zombie = false
+					player.zombie_sudden_death = false
+					player.monster.take_damage(null, "", false, 0, 999)
 	return false
+
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()

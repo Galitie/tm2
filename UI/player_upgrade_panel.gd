@@ -66,7 +66,7 @@ func _physics_process(_delta):
 	if input_paused:
 		return
 	# make sure bunnies are back in their spot
-	if player.upgrade_points > 0 and player.monster.global_position == player.monster.target_point:
+	if player.upgrade_points > 0 and player.monster.global_position == player.monster.target_point and Globals.game.current_mode == Globals.game.Modes.UPGRADE:
 		#handle bots
 		if player.player_state == player.PlayerState.BOT:
 			input_paused = true

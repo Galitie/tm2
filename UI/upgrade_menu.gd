@@ -16,6 +16,7 @@ func setup():
 		if player_upgrade_panel.player.player_state == Player.PlayerState.BOT:
 			player_upgrade_panel.hide_bot_stats()
 
+
 func pause_all_inputs():
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.input_paused = true

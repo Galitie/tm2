@@ -15,17 +15,9 @@ func Enter() -> void:
 	monster.name_label.show()
 
 	if monster.target_point != null:
-		var root: Node2D = monster.get_node("root")
-		var s: Vector2 = root.scale
-		if monster.target_point.x < monster.global_position.x:
-			s.x = -abs(s.x)
-		else:
-			s.x = abs(s.x)  
-		root.scale = s
 		moving_in = true
 		monster.animation_player.play("walk", -1.0, 2.0)
-	else:
-		_emit_next_behavior()
+
 
 func Physics_Update(delta: float) -> void:
 	if moving_in:
@@ -41,8 +33,6 @@ func Physics_Update(delta: float) -> void:
 
 		if monster.global_position.is_equal_approx(monster.target_point):
 			moving_in = false
-			s.x = abs(s.x)   # face right, keep size
-			root.scale = s
 			monster.global_position = monster.target_point
 			monster.animation_player.play("idle")
 			_emit_next_behavior()

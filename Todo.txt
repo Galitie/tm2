@@ -8,9 +8,8 @@ Features to make it playtest ready:
 	Test shield breaker and add effect animation (Raam?)
 
 	Test balance of all the new changes
-	- bug with rerolls, starting with 2 on the first round
 	Bug with sudden death and zombie? Two players alive at sudden death
-	If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner
+	>If there is a tie at the end of the game, a last SUDDEN DEATH to determine winner
 	Controller rumble opportunities
 	
 	A card that makes attacks uninterruptable?

@@ -23,7 +23,6 @@ func Enter():
 	
 	if monster.current_hp <= 0:
 		monster.animation_player.play("get_up")
-		
 		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("alpha", value), 0.5, 1.0, 0.25)
 		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("outer_color", value), Color(0.0, 0.0, 0.0, 0.0), monster.player_color, 0.25)
 	else:
@@ -32,7 +31,7 @@ func Enter():
 		monster.animation_player.play("walk", -1.0, 2.0)
 	monster.toggle_collisions(false)
 	monster.velocity = Vector2()
-	monster.modify_hp(monster.max_hp)
+	monster.modify_hp(null, monster.max_hp)
 	monster.z_index = 1
 	
 

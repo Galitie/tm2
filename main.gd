@@ -31,6 +31,7 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 var menu_scene = preload("res://UI/menu.tscn")
+var winners = []
 
 
 func _init():
@@ -53,12 +54,13 @@ func debug_stuff():
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.FIGHT:
 		var targetable_monsters: Array[CharacterBody2D] = []
 		var monster_collection : Array[Node] = get_tree().get_nodes_in_group("Monster")
+		var unkillable_states = ["knockedout", "hurt", "zombie", "getupandgo", "upgradestart", "fightstart"]
 		for monster in monster_collection:
-			if monster.current_hp > 0 and monster.state_machine.current_state.name != "knockedout":
+			if monster.current_hp > 0 and !unkillable_states.has(monster.state_machine.current_state.name):
 				targetable_monsters.append(monster)
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
-			if target_monster.current_hp > 0 and target_monster.state_machine.current_state.name != "knockedout":
+			if target_monster.current_hp > 0 and !unkillable_states.has(target_monster.state_machine.current_state.name):
 				target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
@@ -234,7 +236,6 @@ func count_death(monster: Monster):
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
 				winner.state_machine.transition_state("dance")
-				print("Monster is dancing")
 		$RoundOverDelayTimer.start()
 		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
@@ -261,7 +262,6 @@ func set_upgrade_mode():
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	for player in players:
 		player.monster.unzombify()
-		player.monster.target_point = player.upgrade_pos
 		player.monster.state_machine.transition_state("upgradestart")
 		player.monster.move_name_upgrade()
 	if sudden_death_speed_set:
@@ -285,6 +285,7 @@ func set_upgrade_mode():
 	var rerolls = 0
 
 	for player in players:
+		player.monster.target_point = player.upgrade_pos
 		if player.victory_points != prev_points:
 			current_place += 1
 			rerolls += 1
@@ -330,9 +331,10 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 
 func set_fight_mode():
-	transition_audio("uid://mysomdex1y7k", 0.5)
-	$UpgradePanel.pause_all_inputs()
 	current_mode = Modes.FIGHT
+	upgrade_menu.hide()
+	transition_audio("uid://mysomdex1y7k", 0.5)
+	upgrade_menu.pause_all_inputs()
 	current_round += 1
 	reset_specials_text()
 	$Specials.visible = true
@@ -344,12 +346,11 @@ func set_fight_mode():
 	else:
 		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	sudden_death_timer.start()
-	get_node("UpgradePanel").visible = false
 	for player in players:
 		var monster = player.monster
 		monster.move_name_fight()
-		monster.state_machine.transition_state("fightstart")
 		monster.target_point = player.fight_pos
+		monster.state_machine.transition_state("fightstart")
 
 
 func _on_sudden_death_timer_timeout():
@@ -394,6 +395,7 @@ func _on_round_over_delay_timer_timeout():
 	for player in players:
 		print(player.name, "(", player.monster.mon_name, ") : ", player.victory_points, " points")
 	print("\n")
+	print("wut")
 
 
 func _on_upgrade_over_delay_timer_timeout():
@@ -535,7 +537,7 @@ func apply_card_attribute(attribute, amount, player):
 	match attribute:
 		CardResourceScript.Attributes.HP:
 			player.monster.modify_max_hp(amount)
-			player.monster.modify_hp(player.monster.max_hp)
+			player.monster.modify_hp(null, player.monster.max_hp)
 		CardResourceScript.Attributes.MOVE_SPEED:
 			player.monster.move_speed += amount
 		CardResourceScript.Attributes.BASE_DAMAGE:
@@ -600,30 +602,27 @@ func check_if_game_over() -> bool:
 		for player in players:
 			rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var highest_score = players[0].victory_points
-		var winners = players.filter(func(p): return p.victory_points == highest_score)
+		winners = players.filter(func(p): return p.victory_points == highest_score)
 		if winners.size() == 1:
 			print("Winner:", winners[0].name)
 			$WinnersLabel.text = "WINNER! (Press START to play again)"
 			$WinnersLabel.show()
 			for player in players:
+				player.monster.target_point = player.customize_pos
 				if player not in winners:
 					player.get_child(0).hide()
+			return true
 		else:
 			# There is a tie, time for more sudden death!
-			print("There was a tie!")
 			$SuddenDeathTimer.wait_time = 1
 			set_fight_mode()
+			print("There was a tie!")
+			
 			for player in players:
 				if player not in winners:
 					player.zombie = false
 					player.zombie_sudden_death = false
 					player.monster.take_damage(null, "", false, 0, 999)
-			$WinnersLabel.hide()
-			return false
-		for player in players:
-			var monster = player.monster
-			monster.target_point = player.customize_pos
-		return true
 	return false
 
 

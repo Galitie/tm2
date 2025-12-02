@@ -194,8 +194,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = round(attacker.base_damage * (attacker.crit_multiplier if critted else 1.0) * attacker.damage_dealt_mult * damage_received_mult) + random_modifier 
 		if damage == 0:
 			damage = 1
-		print("damage: ", damage)
-		modify_hp(-(damage))
+		modify_hp(-damage)
 	elif type == attack_type.THORN:
 		damage = 1
 		mod_text = " THORN"
@@ -226,7 +225,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		mod_text = " SLIME"
 		modify_hp(-damage)
 	if Globals.is_sudden_death_mode:
-		modify_hp(-max_hp)
+		damage = 999
+		modify_hp(-damage)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
 	animation_player_damage.play("damage")
 	hit_effect(critted)
@@ -239,11 +239,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			zombify()
 			return
 		toggle_collisions(false)
-		Globals.game.count_death(self)
 		if Globals.is_sudden_death_mode:
 			send_flying(attacker)
 		if player.death_explode:
 			explode_on_death()
+		Globals.game.count_death(self)
 
 
 #TODO: Raam explosion animation???
@@ -303,7 +303,7 @@ func _on_zombie_timer_timeout():
 
 func modify_hp(amount, set_hp_amount = null):
 	if set_hp_amount != null:
-		current_hp = clamp(set_hp_amount, 0, max_hp)
+		current_hp = clamp(set_hp_amount, 1, max_hp)
 	else:
 		current_hp = clamp(current_hp + amount, 0, max_hp)
 	current_hp_label.text = str(current_hp)

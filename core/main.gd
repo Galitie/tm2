@@ -370,6 +370,7 @@ func _on_round_over_delay_timer_timeout():
 		var prev_points = -1
 		var rerolls = 0
 		for player in players:
+			player.monster.move_name_upgrade()
 			player.monster.target_point = player.upgrade_pos
 			if player.randomize_upgrade_points:
 				player.upgrade_points = randi_range(1,6)
@@ -607,6 +608,7 @@ func handle_game_over():
 	rankings.visible = true
 	rankings.text = "Rankings:\n"
 	for player in players:
+		player.monster.move_name_upgrade()
 		player.monster.unzombify()
 		player.monster.state_machine.transition_state("upgradestart")
 		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"

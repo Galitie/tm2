@@ -54,12 +54,12 @@ func debug_stuff():
 		var targetable_monsters: Array[CharacterBody2D] = []
 		var monster_collection : Array[Node] = get_tree().get_nodes_in_group("Monster")
 		for monster in monster_collection:
-			var state_machine = monster.get_node("StateMachine")
-			if monster.current_hp > 0:
+			if monster.current_hp > 0 and monster.state_machine.current_state.name != "knockedout":
 				targetable_monsters.append(monster)
 		if targetable_monsters.size():
 			var target_monster = targetable_monsters.pick_random()
-			target_monster.take_damage(null, "", false, 0, 999)
+			if target_monster.current_hp > 0 and target_monster.state_machine.current_state.name != "knockedout":
+				target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
@@ -252,6 +252,7 @@ func set_customize_mode():
 
 func set_upgrade_mode():
 	clean_up_screen()
+	clear_knocked_out_monsters()
 	if current_round == total_rounds - 1:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
 		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL UPGRADE ROUND"
@@ -263,6 +264,11 @@ func set_upgrade_mode():
 		player.monster.target_point = player.upgrade_pos
 		player.monster.state_machine.transition_state("upgradestart")
 		player.monster.move_name_upgrade()
+	if sudden_death_speed_set:
+		sudden_death_speed_set = false
+		for player in players:
+			player.monster.move_speed -= sudden_death_speed
+	sudden_death_label.visible = false
 	if check_if_game_over():
 		return
 	$UpgradePanel.unpause_all_inputs()
@@ -270,17 +276,9 @@ func set_upgrade_mode():
 		audio_player.stream = load("uid://bnfvpcj04flvs")
 		audio_player.play()
 	current_mode = Modes.UPGRADE
-	sudden_death_label.visible = false
-	
-	if sudden_death_speed_set:
-		sudden_death_speed_set = false
-		for player in players:
-			player.monster.move_speed -= sudden_death_speed
-	
 	rankings.visible = false
 	rankings.text = "Previous round points:\n"
 	$Specials.visible = false
-	clear_knocked_out_monsters()
 	
 	var current_place = 0
 	var prev_points = -1
@@ -302,7 +300,7 @@ func set_upgrade_mode():
 		player.special_used = false
 		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		
-		var monster = player.get_node("Monster")
+		var monster = player.monster
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
 		
@@ -337,9 +335,7 @@ func set_fight_mode():
 	current_mode = Modes.FIGHT
 	current_round += 1
 	reset_specials_text()
-	#if debug_mode:
 	$Specials.visible = true
-	rankings.visible = true
 	rankings.visible = true
 	if current_round == total_rounds:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
@@ -350,7 +346,7 @@ func set_fight_mode():
 	sudden_death_timer.start()
 	get_node("UpgradePanel").visible = false
 	for player in players:
-		var monster = player.get_node("Monster")
+		var monster = player.monster
 		monster.move_name_fight()
 		monster.state_machine.transition_state("fightstart")
 		monster.target_point = player.fight_pos
@@ -535,7 +531,6 @@ func apply_card_resource_effects(card_resource : Resource, player):
 		player.upgrade_panel.resource_array.erase(card_resource)
 
 
-
 func apply_card_attribute(attribute, amount, player):
 	match attribute:
 		CardResourceScript.Attributes.HP:
@@ -592,14 +587,14 @@ func reroll_pressed(upgrade_panel):
 		upgrade_panel.reroll_button.text = "NO 🎲 LEFT"
 		upgrade_panel.reroll_button.disabled = true
 
-#TODO: Make a real game over scene, placeholder for playtesting
+
 func check_if_game_over() -> bool:
 	if current_round >= total_rounds:
-		current_mode = Modes.GAME_END
+		print("Game over - check for ties")
+		$UpgradePanel.pause_all_inputs()
 		$UpgradePanel.hide()
-		print("game over")
+		current_mode = Modes.GAME_END
 		players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
-		#if debug_mode:
 		rankings.visible = true
 		rankings.text = "Rankings:\n"
 		for player in players:
@@ -614,19 +609,23 @@ func check_if_game_over() -> bool:
 				if player not in winners:
 					player.get_child(0).hide()
 		else:
-			print("It's a tie between:")
-			$WinnersLabel.text = "WINNERS! (Press START to play again)"
-			$WinnersLabel.show()
-			for winner in winners:
-				print("- ", winner.name)
+			# There is a tie, time for more sudden death!
+			print("There was a tie!")
+			$SuddenDeathTimer.wait_time = 1
+			set_fight_mode()
 			for player in players:
 				if player not in winners:
-					player.get_child(0).hide()
+					player.zombie = false
+					player.zombie_sudden_death = false
+					player.monster.take_damage(null, "", false, 0, 999)
+			$WinnersLabel.hide()
+			return false
 		for player in players:
-			var monster = player.get_node("Monster")
+			var monster = player.monster
 			monster.target_point = player.customize_pos
 		return true
 	return false
+
 
 func clear_knocked_out_monsters():
 	current_knocked_out_monsters.clear()

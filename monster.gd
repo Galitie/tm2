@@ -144,7 +144,10 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	var random_modifier : int
 	var is_blocking : bool = false
 	var shield_broken : bool = false
-	if current_state.contains("block"):
+	if override_damage:
+		modify_hp(-override_damage)
+		damage = override_damage
+	elif current_state.contains("block"):
 		is_blocking = true
 		if attacker is Monster:
 			if attacker.player.shield_breaker:
@@ -222,9 +225,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 1
 		mod_text = " SLIME"
 		modify_hp(-damage)
-	if override_damage:
-		modify_hp(-override_damage)
-		damage = override_damage
 	if Globals.is_sudden_death_mode:
 		modify_hp(-max_hp)
 	$Damage.text = str(int(damage)) + crit_text + mod_text

@@ -19,6 +19,10 @@ func Enter():
 	monster.toggle_effect_graphic(true, Monster.EffectType.BLOCK)
 
 
+func Exit():
+	monster.toggle_effect_graphic(false)
+
+
 func animation_finished(anim_name: String):
 	if anim_name == "block":
 		if !done_blocking:
@@ -31,7 +35,5 @@ func animation_finished(anim_name: String):
 		if block_cycles >= block_threshold:
 			monster.animation_player.play("block", -1.0, -1.0, true)
 			done_blocking = true
-			monster.toggle_effect_graphic(false)
-			#monster.hurtbox_collision.disabled = false
 		else:
 			monster.animation_player.play("block_idle")

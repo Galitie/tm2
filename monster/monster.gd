@@ -263,7 +263,7 @@ func explode_on_death():
 	temp_timer.timeout.connect(_on_temp_timer_timeout)
 	temp_area.add_child(temp_sprite)
 	temp_area.add_child(temp_timer)
-	temp_timer.wait_time = .40
+	temp_timer.wait_time = .30
 	temp_timer.autostart = true
 	call_deferred("add_child", temp_area)
 

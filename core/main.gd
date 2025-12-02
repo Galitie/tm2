@@ -255,7 +255,6 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
-	print("going into upgrade mode")
 	current_mode = Modes.UPGRADE
 	clean_up_screen()
 	if current_round == 0:
@@ -285,7 +284,6 @@ func set_upgrade_mode():
 	$Camera2D/CanvasLayer/Specials.visible = false
 
 	for player in players:
-		player.upgrade_panel.update_place_text(player)
 		player.special_used = false
 		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.monster
@@ -303,7 +301,6 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 
 
 func set_fight_mode():
-	print("entered fight mode")
 	current_mode = Modes.FIGHT
 	current_round += 1
 	upgrade_menu.pause_all_inputs()
@@ -364,8 +361,8 @@ func _on_round_over_delay_timer_timeout():
 			victory_points_gained = 3
 		elif victory_points_gained == 3:
 			victory_points_gained = 5
-	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	clear_knocked_out_monsters()
+	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	var game_over = check_if_game_over()
 	if !game_over:
 		var current_place = 0
@@ -374,24 +371,28 @@ func _on_round_over_delay_timer_timeout():
 		for player in players:
 			player.monster.move_name_upgrade()
 			player.monster.target_point = player.upgrade_pos
-			if player.randomize_upgrade_points:
-				player.upgrade_points = randi_range(1,6)
-			else:
-				if player.place == 1:
-					player.upgrade_points = 2
-				if player.place == 2:
-					player.upgrade_points = 3
-				if player.place == 3:
-					player.upgrade_points = 4
-				if player.place == 4:
-					player.upgrade_points = 5
+
 			if player.victory_points != prev_points:
 				current_place += 1
 				rerolls += 1
 				prev_points = player.victory_points
+
+			player.place = current_place
+			player.rerolls = rerolls + player.bonus_rerolls
+
+		for player in players:
+			if player.randomize_upgrade_points:
+				player.upgrade_points = randi_range(1, 6)
 			else:
-				player.place = current_place
-				player.rerolls = rerolls + player.bonus_rerolls
+				if player.place == 1:
+					player.upgrade_points = 2
+				elif player.place == 2:
+					player.upgrade_points = 3
+				elif player.place == 3:
+					player.upgrade_points = 4
+				elif player.place == 4:
+					player.upgrade_points = 5
+			player.upgrade_panel.update_place_text(player)
 		set_upgrade_mode()
 
 	print("Current Round: ", current_round)
@@ -593,7 +594,6 @@ func reroll_pressed(upgrade_panel):
 
 
 func check_if_game_over() -> bool:
-	print("Checking if game over")
 	if current_round >= total_rounds:
 		handle_game_over()
 		return true

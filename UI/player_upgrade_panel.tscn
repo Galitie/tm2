@@ -1,16 +1,66 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=19 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
+[ext_resource type="Texture2D" uid="uid://co52gfugmmrle" path="res://UI/reroll_off.png" id="2_16opa"]
+[ext_resource type="Texture2D" uid="uid://ch86a4g5wj2pn" path="res://UI/reroll_active_1.png" id="3_8t47v"]
+[ext_resource type="Texture2D" uid="uid://dj7xxeo0v2hfb" path="res://UI/reroll_on.png" id="3_qi4jj"]
 [ext_resource type="PackedScene" uid="uid://cbeuoiqc8avud" path="res://UI/post_card.tscn" id="4_5aacw"]
 [ext_resource type="AudioStream" uid="uid://o81tlwdlwbgw" path="res://sounds/stamp.ogg" id="4_22x0x"]
+[ext_resource type="Texture2D" uid="uid://c7t0ovvwibw4q" path="res://UI/reroll_active_2.png" id="4_qi4jj"]
 [ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
 [ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="5_ad54b"]
+[ext_resource type="Texture2D" uid="uid://jq58cfiae1qk" path="res://UI/reroll_active_3.png" id="5_euvj6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0
 content_margin_right = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_22x0x"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tirdh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qi4jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_16opa")
+}],
+"loop": true,
+"name": &"active",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_16opa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8t47v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qi4jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_euvj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qi4jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_8t47v")
+}],
+"loop": true,
+"name": &"done",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_16opa")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aacw"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -40,7 +90,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cuncv"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ad54b"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -70,7 +120,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aacw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_16opa"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -113,6 +163,7 @@ layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="UpgradeTitle" type="MarginContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
@@ -132,6 +183,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="Reroll" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
 text = "🎲 x3"
@@ -143,24 +195,48 @@ alignment = 2
 
 [node name="Banish" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "🔥 BANISH [x3]"
 
+[node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
+position = Vector2(135, 39)
+sprite_frames = SubResource("SpriteFrames_tirdh")
+animation = &"done"
+
+[node name="Label" type="Label" parent="VBoxContainer/reroll"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = -36.0
+offset_right = -43.5
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.862745, 0.113725, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 7
+text = "x3"
+horizontal_alignment = 1
+
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_22x0x")
+material = SubResource("ShaderMaterial_5aacw")
 position = Vector2(135, 141)
 texture = SubResource("ViewportTexture_8t47v")
 deck_order = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_cuncv")
+material = SubResource("ShaderMaterial_ad54b")
 position = Vector2(135, 262)
 texture = SubResource("ViewportTexture_qi4jj")
 deck_order = 1
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_5aacw")
+material = SubResource("ShaderMaterial_16opa")
 position = Vector2(135, 384)
 texture = SubResource("ViewportTexture_tirdh")
 

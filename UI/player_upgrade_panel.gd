@@ -3,7 +3,7 @@ class_name PlayerUpgradePanel
 
 signal reroll_pressed(upgrade_panel)
 
-@onready var reroll_button : Button = $VBoxContainer/HBoxContainer/Reroll
+@onready var reroll_button = $VBoxContainer/reroll
 @onready var upgrade_cards = [$VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3 ]
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
@@ -20,11 +20,16 @@ var input_paused: bool = false
 
 var stamp_sfx = load("uid://o81tlwdlwbgw")
 var fire_sfx = load("uid://cqg3cxtk5uaua")
+var dice_sfx = load("uid://c00bd21trfdkx")
 
 func _ready():
 	for card in upgrade_cards:
 		card.upgrade_panel = self
 	create_stylebox()
+	
+	await get_tree().physics_frame
+	if player.player_state == player.PlayerState.BOT:
+		reroll_button.visible = false
 
 
 func press_card(button, acc_idx: int = 0, input = null) -> void:
@@ -65,6 +70,7 @@ func burn_card(button):
 func _physics_process(_delta):
 	if input_paused:
 		return
+		
 	# make sure bunnies are back in their spot
 	if player.upgrade_points > 0 and player.monster.global_position == player.monster.target_point and Globals.game.current_mode == Globals.game.Modes.UPGRADE:
 		#handle bots
@@ -74,10 +80,10 @@ func _physics_process(_delta):
 			await get_tree().create_timer(1).timeout
 			press_card(button, 1, JOY_BUTTON_A)
 			input_paused = false
+			return
 		
 		if current_user_position_in_button_array == 0:
-			reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
-			reroll_button.add_theme_stylebox_override("disabled", new_stylebox_normal)
+			select_reroll()
 			
 		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
 		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
@@ -92,15 +98,14 @@ func _physics_process(_delta):
 			var button = button_array[current_user_position_in_button_array]
 			
 			if button == reroll_button:
-				reroll_button.add_theme_stylebox_override("normal", new_stylebox_normal)
+				select_reroll()
 			else:
 				button.select()
 				
 			for other_button in button_array:
 				if other_button != button:
 					if other_button == reroll_button:
-						other_button.remove_theme_stylebox_override("panel")
-						reroll_button.remove_theme_stylebox_override("normal")
+						deselect_reroll()
 					else:
 						if other_button.selected:
 							other_button.deselect()
@@ -162,8 +167,7 @@ func _physics_process(_delta):
 	else:
 		var button = button_array[current_user_position_in_button_array]
 		if button == reroll_button:
-			reroll_button.remove_theme_stylebox_override("normal")
-			reroll_button.remove_theme_stylebox_override("disabled")
+			deselect_reroll()
 		else:
 			button.deselect()
 
@@ -173,8 +177,21 @@ func disable_cards():
 		card.disable()
 		card.hide()
 
+func select_reroll() -> void:
+	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.3, 1.3), 0.15)
+	if player.rerolls > 0:
+		reroll_button.play("active")
+	else:
+		reroll_button.play("off")
+	
+func deselect_reroll() -> void:
+	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.0, 1.0), 0.15)
+	if player.rerolls > 0:
+		reroll_button.play("done")
+	else:
+		reroll_button.play("off")
 
-func setup_cards():
+func setup_cards(reroll = false):
 	current_user_position_in_button_array = 0
 	var temp_resources = resource_array.duplicate(true)
 	for card in upgrade_cards:
@@ -186,6 +203,8 @@ func setup_cards():
 		if random_resource.unique:
 			temp_resources.erase(random_resource)
 		card.choose_card_resource(random_resource)
+		if reroll:
+			card.flip()
 		card.enable()
 
 
@@ -194,22 +213,22 @@ func update_victory_points():
 
 
 func setup_rerolls():
+	if player.player_state == Player.PlayerState.BOT:
+		reroll_button.visible = false
+	else:
+		reroll_button.visible = true
 	var bonus_text = ""
 	if player.bonus_rerolls > 0:
 		pass
 		#bonus_text = " Includes Bonus"
-	if player.rerolls > 0:
-		reroll_button.text = "🎲 ALL " + "[x" + str(player.rerolls) + "]" + bonus_text
-		reroll_button.disabled = false
-	else:
-		reroll_button.text = "NO 🎲 LEFT"
-		reroll_button.disabled = true
+	reroll_button.get_node("Label").text = "x" + str(player.rerolls)
 
 
 # reroll button
 func _on_button_pressed():
+	%AudioStreamPlayer.stream = dice_sfx
+	%AudioStreamPlayer.play()
 	emit_signal("reroll_pressed", self) #Caught by game scene
-
 
 func create_stylebox():
 	new_stylebox_normal.border_width_top = 5

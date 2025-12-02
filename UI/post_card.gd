@@ -165,6 +165,11 @@ func hide_text(toggle: bool) -> void:
 	description.visible = !toggle
 	stats.visible = !toggle
 	
+func flip() -> void:
+	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished
+	material.set_shader_parameter("y_rot", -90.0)
+	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
+
 func show_accessories() -> void:
 	showing_accessories = true
 	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished

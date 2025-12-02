@@ -8,7 +8,7 @@ var current_user_position_in_bot_button_array : int = 0
 
 var new_stylebox_normal = StyleBoxFlat.new()
 var input_paused : bool = false
-var main_scene = preload("res://main.tscn")
+var main_scene = preload("uid://cnviuf3qmq26f")
 
 var human_players_selected : bool = false
 var bot_players_selected : bool = false

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=6 format=3 uid="uid://beo0p0kljyb5g"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_es4dy"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_6kmbr"]
+[ext_resource type="Resource" uid="uid://dj5fe8fy1ss3n" path="res://card/cards/longer_slime.tres" id="3_lkoga"]
+[ext_resource type="Resource" uid="uid://qqdwbq831ev6" path="res://card/cards/larger_slimes.tres" id="4_ckl7f"]
+[ext_resource type="Resource" uid="uid://dr6d21dxjpmtp" path="res://card/cards/more_slime.tres" id="5_ckl7f"]
+
+[resource]
+script = ExtResource("2_6kmbr")
+card_name = "SLIME TRAIL"
+description = "Leave a SLIME trail that DMGS monsters that enter it"
+Type = "passive"
+state_id = "slime_trail"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_es4dy")]([])
+attribute_1 = 2
+attribute_label_1 = "SPD"
+attribute_amount_1 = 5
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("2_6kmbr")]([ExtResource("3_lkoga"), ExtResource("4_ckl7f"), ExtResource("5_ckl7f")])
+remove_cards = Array[ExtResource("2_6kmbr")]([])

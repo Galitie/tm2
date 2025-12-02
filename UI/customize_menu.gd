@@ -14,7 +14,7 @@ func disable():
 
 func set_customize_panels(players):
 	for player in players:
-		var panel = load("res://UI/player_customize_panel.tscn").instantiate() as PlayerCustomizePanel
+		var panel = load("uid://laiyva0qmjkd").instantiate() as PlayerCustomizePanel
 		panel.add_to_group("PlayerCustomizePanel")
 		playerContainer.add_child(panel)
 	player_customize_panels = get_tree().get_nodes_in_group("PlayerCustomizePanel")

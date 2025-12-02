@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://fk8ruy5a3i6t"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_qhefq"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_g4okw"]
+[ext_resource type="Resource" uid="uid://i8cqjhscnrf7" path="res://card/cards/zombie_sudden_death.tres" id="3_qhefq"]
+
+[resource]
+script = ExtResource("3_g4okw")
+card_name = "ZOMBIE"
+description = "Once per round, if you are KNOCKED OUT before SUDDEN DEATH, come back with 1 HP"
+Type = "passive"
+state_id = "zombie"
+unique = true
+is_special = false
+remove_specific_states = Array[int]([])
+parts_and_acc = Array[ExtResource("1_qhefq")]([])
+attribute_1 = 0
+attribute_label_1 = ""
+attribute_amount_1 = 0
+attribute_2 = 0
+attribute_label_2 = ""
+attribute_amount_2 = 0
+attribute_3 = 0
+attribute_label_3 = ""
+attribute_amount_3 = 0.0
+unlocked_cards = Array[ExtResource("3_g4okw")]([ExtResource("3_qhefq")])
+remove_cards = Array[ExtResource("3_g4okw")]([])

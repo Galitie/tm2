@@ -1,0 +1,204 @@
+[gd_scene load_steps=17 format=4 uid="uid://b03qji6okxywb"]
+
+[ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="1_a7brd"]
+[ext_resource type="Texture2D" uid="uid://b5sjapvyrr6u7" path="res://projectiles/poo.png" id="1_lpi03"]
+[ext_resource type="Script" uid="uid://dp6gfj8biibis" path="res://projectiles/poop.gd" id="1_vqr27"]
+[ext_resource type="Texture2D" uid="uid://dyd1506i4ywry" path="res://projectiles/poo_gun.png" id="3_a7brd"]
+[ext_resource type="AudioStream" uid="uid://b72fw0suma1hh" path="res://sounds/gun.ogg" id="5_3qwmj"]
+[ext_resource type="Texture2D" uid="uid://d34o21umbbvac" path="res://projectiles/poop_shoot.png" id="5_xsvd0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7brd"]
+resource_local_to_scene = true
+shader = ExtResource("1_a7brd")
+shader_parameter/alpha = 1.0
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/line_thickness = 2.5
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(0, 0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuxsx"]
+atlas = ExtResource("1_lpi03")
+region = Rect2(0, 0, 34, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qwmj"]
+atlas = ExtResource("3_a7brd")
+region = Rect2(0, 0, 42, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xsvd0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uuxsx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qwmj")
+}],
+"loop": true,
+"name": &"gun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_xsvd0")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqr27"]
+radius = 15.52
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7brd"]
+radius = 15.52
+
+[sub_resource type="Animation" id="Animation_uuxsx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -19)]
+}
+
+[sub_resource type="Animation" id="Animation_a7brd"]
+resource_name = "idle"
+length = 3.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6, 2.4, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1.05), Vector2(1, 0.95), Vector2(1, 1.05), Vector2(1, 0.95), Vector2(1, 1.05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6, 2.4, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0523599, 0.0, -0.0523599, 0.0, 0.0523599]
+}
+
+[sub_resource type="Animation" id="Animation_s7ckq"]
+resource_name = "shoot"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasGroup/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(3.01, -21.345), Vector2(0, -19)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasGroup/Sprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"shoot", &"gun"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uuxsx"]
+_data = {
+&"RESET": SubResource("Animation_uuxsx"),
+&"idle": SubResource("Animation_a7brd"),
+&"shoot": SubResource("Animation_s7ckq")
+}
+
+[node name="Poop" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_vqr27")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_a7brd")
+position = Vector2(0, 14)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="CanvasGroup"]
+sprite_frames = SubResource("SpriteFrames_xsvd0")
+offset = Vector2(0, -19)
+
+[node name="BodyCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vqr27")
+disabled = true
+
+[node name="CheckToSpawnCollision" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckToSpawnCollision"]
+shape = SubResource("CircleShape2D_a7brd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_uuxsx")
+}
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3qwmj")
+volume_db = -20.0
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

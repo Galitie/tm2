@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bkmgtnnpyvqux"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://bkmgtnnpyvqux"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_u1lrw"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_j6lm7"]
+[ext_resource type="Resource" uid="uid://bn1d6phtvfhry" path="res://card/cards/poop_summon.tres" id="3_j6lm7"]
 
 [resource]
 script = ExtResource("2_j6lm7")
@@ -23,4 +24,4 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 unlocked_cards = Array[ExtResource("2_j6lm7")]([])
-remove_cards = Array[ExtResource("2_j6lm7")]([])
+remove_cards = Array[ExtResource("2_j6lm7")]([ExtResource("3_j6lm7")])

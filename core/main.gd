@@ -540,7 +540,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.upgrade_panel.resource_array.append(load(card.get_path()))
 	if card_resource.remove_cards:
 		for card in card_resource.remove_cards:
-			player.upgrade_panel.resource_array.erase(card)
+			if player.upgrade_panel.resource_array.has(card):
+				player.upgrade_panel.resource_array.erase(card)
 	if card_resource.unique:
 		player.upgrade_panel.resource_array.erase(card_resource)
 

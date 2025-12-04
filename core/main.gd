@@ -128,7 +128,6 @@ func _ready():
 	if Globals.game_length != -1:
 		total_rounds = Globals.game_length
 	if override_total_rounds != -1:
-		print("hello")
 		total_rounds = override_total_rounds
 	var player_counter = 1
 	for player in Globals.player_states:
@@ -527,6 +526,9 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.slime_timer.wait_time = .50
 			"bite_heal_more":
 				player.bite_heal_more = true
+			"bombs_only":
+				player.monster.state_machine.state_choices["poop"].clear()
+				player.monster.state_machine.state_choices["poop"].append("bombing")
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

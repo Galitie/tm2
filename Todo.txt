@@ -6,6 +6,7 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Test balance of all the new changes
+	Maybe bomb build? Another bomb card?
 	
 	Shield breaker add effect animation (Raam?)
 	Final upgrade round is unclear that it's the final round (Raam)
@@ -16,16 +17,18 @@ Features to make it playtest ready:
 	Show preview of accessory or body part (Raam)
 	Sound - Background, effects etc.
 	Menus - sound, etc.
+	Intro menu?
 	
 	Bonuses:
 		Backgrounds
 			Ideas have been references to old Tyler games
-		Save, play games to get achievements to unlock accessories
+		Save, play games to get achievements to unlock accessories???
 			When should it load and save?
 			Load at main menu?
 			Save at end of each fight/upgrade round?
 			How to view achievements?
 				Main menu?
+			Popup for getting an achievement
 			Achievement ideas:
 				End game with 0 points
 				total kills > 100, 1000, etc
@@ -35,7 +38,9 @@ Features to make it playtest ready:
 				All slime upgrades
 				All Poop upgrades
 				All block upgrades
+				All crit upgrades
 				# of poop summons (idk what number here)
+				Bomb yourself to death
 				Block x amount of attacks
 			- Per player? All players? How to count these?
 

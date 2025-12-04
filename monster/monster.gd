@@ -254,7 +254,7 @@ func explode_on_death():
 	var temp_sprite = Sprite2D.new()
 	temp_sprite.texture = load("uid://cgrc4jxdyeooy")
 	temp_sprite.scale = Vector2(3,3)
-	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1
+	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.15
 	temp_collision.shape = temp_shape_resource
 	temp_area.add_to_group("Bomb")
 	temp_area.add_to_group("CleanUp")

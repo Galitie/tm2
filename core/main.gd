@@ -128,6 +128,7 @@ func _ready():
 	if Globals.game_length != -1:
 		total_rounds = Globals.game_length
 	if override_total_rounds != -1:
+		print("hello")
 		total_rounds = override_total_rounds
 	var player_counter = 1
 	for player in Globals.player_states:

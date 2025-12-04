@@ -7,7 +7,7 @@ Guiding lights:
 Features to make it playtest ready:
 	Test balance of all the new changes
 	
-	Test shield breaker and add effect animation (Raam?)
+	Shield breaker add effect animation (Raam?)
 	Final upgrade round is unclear that it's the final round (Raam)
 	Bullets from poops not clear when they disappear, maybe hit and disappear animation (Raam?)
 	Add dance animation (hook up in dance state) (Raam)
@@ -18,8 +18,6 @@ Features to make it playtest ready:
 	Menus - sound, etc.
 	
 	Bonuses:
-		Modes
-			Quickplay, Regular etc. (5 rounds vs 10 rounds)
 		Backgrounds
 			Ideas have been references to old Tyler games
 		Save, play games to get achievements to unlock accessories

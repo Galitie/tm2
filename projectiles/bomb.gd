@@ -30,10 +30,14 @@ func _ready():
 		target = position + Vector2(randi_range(50,125),0)
 		spin_sign = 1
 	distance = position.distance_to(target)
-	$ExplosionCountdown.wait_time = randf_range(3,5)
-	$ExplosionCountdown.start()
-
-	await get_tree().create_timer(2.5).timeout
+	if monster.player.faster_bombs:
+		$ExplosionCountdown.wait_time = randf_range(1,3)
+		$ExplosionCountdown.start()
+		await get_tree().create_timer(1.5).timeout
+	else:
+		$ExplosionCountdown.wait_time = randf_range(3,5)
+		$ExplosionCountdown.start()
+		await get_tree().create_timer(2.5).timeout
 	animation_player.play("freakout")
 
 func _physics_process(delta: float) -> void:

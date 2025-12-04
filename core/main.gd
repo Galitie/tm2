@@ -529,6 +529,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"bombs_only":
 				player.monster.state_machine.state_choices["poop"].clear()
 				player.monster.state_machine.state_choices["poop"].append("bombing")
+			"bomb_explode_faster":
+				player.faster_bombs = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

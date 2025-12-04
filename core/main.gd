@@ -372,7 +372,7 @@ func _on_round_over_delay_timer_timeout():
 	if !game_over:
 		var current_place = 0
 		var prev_points = -1
-		var rerolls = 0
+		var rerolls = 1
 		for player in players:
 			player.monster.move_name_upgrade()
 			player.monster.target_point = player.upgrade_pos

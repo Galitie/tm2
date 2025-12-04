@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_gc576")
 card_name = "LOADED BOOM"
-description = "SUMMONS are bigger and shoot PROJECTILES more often / BOMBS will have a bigger EXPLOSION"
+description = "POOP SUMMONS are bigger and shoot PROJECTILES more often / POOP BOMBS will have a bigger EXPLOSION"
 Type = "passive"
 state_id = "larger_poops"
 unique = true

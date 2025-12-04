@@ -3,6 +3,7 @@ var game : Game
 var is_sudden_death_mode : bool = false
 var debug_mode : bool = false
 var player_states : Array[Player.PlayerState] = [Player.PlayerState.NONE, Player.PlayerState.NONE, Player.PlayerState.NONE, Player.PlayerState.NONE]
+var game_length : int = -1
 
 func get_window_size_diff() -> float:
 	var window_size: Vector2 = DisplayServer.window_get_size()

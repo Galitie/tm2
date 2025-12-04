@@ -1,7 +1,8 @@
 extends Node2D
 class_name Game
 
-@export var total_rounds : int = 10
+var total_rounds : int = 7
+@export var override_total_rounds : int = -1
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
 @export var override_sudden_death_time : float
@@ -124,6 +125,10 @@ func freeze_frame(monster: Monster) -> void:
 
 func _ready():
 	# Generate player nodes off of player states
+	if Globals.game_length != -1:
+		total_rounds = Globals.game_length
+	if override_total_rounds != -1:
+		total_rounds = override_total_rounds
 	var player_counter = 1
 	for player in Globals.player_states:
 		if player != Player.PlayerState.NONE:

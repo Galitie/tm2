@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=40 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
-[ext_resource type="Resource" uid="uid://2dwrrigu8sux" path="res://card/cards/bomber.tres" id="2_kgxju"]
 [ext_resource type="Texture2D" uid="uid://c73ac2auwuwbw" path="res://effects/thorn_aura.png" id="3_hqfdu"]
 [ext_resource type="Script" uid="uid://dqxdicc1n2yxv" path="res://states/zombie.gd" id="7_3x5v3"]
 [ext_resource type="Script" uid="uid://cf6ii5kxgqg8h" path="res://states/getupand_wander.gd" id="8_14274"]
@@ -183,7 +182,6 @@ y_sort_enabled = true
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
-pre_loaded_cards = Array[Resource]([ExtResource("2_kgxju")])
 
 [node name="root" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_lqt3o")

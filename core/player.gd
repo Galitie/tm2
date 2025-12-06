@@ -29,6 +29,7 @@ var poop_summons : bool = false
 var more_poops : bool = false
 var larger_poops : bool = false
 var faster_bombs : bool = false
+var bomb_no_damage : bool = false
 var larger_slimes : bool = false
 var longer_slimes : bool = false
 var death_explode : bool = false

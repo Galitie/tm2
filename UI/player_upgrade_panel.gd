@@ -226,8 +226,9 @@ func setup_rerolls():
 
 # reroll button
 func _on_button_pressed():
-	%AudioStreamPlayer.stream = dice_sfx
-	%AudioStreamPlayer.play()
+	if player.rerolls > 0:
+		%AudioStreamPlayer.stream = dice_sfx
+		%AudioStreamPlayer.play()
 	emit_signal("reroll_pressed", self) #Caught by game scene
 
 func create_stylebox():
@@ -239,8 +240,8 @@ func create_stylebox():
 
 
 func remove_from_card_pool(resource):
-	var found_index = resource_array.find(resource)
-	resource_array.remove_at(found_index)
+	if resource_array.has(resource):
+		resource_array.erase(resource)
 
 
 func update_banish_text():

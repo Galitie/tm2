@@ -5,9 +5,12 @@ Guiding lights:
 
 
 Features to make it playtest ready:
-	Test balance of all the new changes
-	Maybe bomb build? Another bomb card?
+	Constipated should go away after some amount of poop / bomb upgrades?
+	Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
+	Tries to reference items that don't exist...might be the order of removal and adding
 	
+	Outline texture cut off (Raam)
+	Reroll sound still triggers when no rerolls - maybe error sound?
 	Shield breaker add effect animation (Raam?)
 	Final upgrade round is unclear that it's the final round (Raam)
 	Bullets from poops not clear when they disappear, maybe hit and disappear animation (Raam?)

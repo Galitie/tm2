@@ -129,7 +129,11 @@ func _on_hurtbox_area_entered(area):
 			take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		elif area.is_in_group("Bomb"):
-			take_damage(attacker, current_state, true, attack_type.BOMB)
+			if area.owner == Drop:
+				attacker = area.owner.monster
+				take_damage(attacker, current_state, true, attack_type.BOMB)
+			else:
+				take_damage(null, current_state, true, attack_type.BOMB)
 		
 		elif area.is_in_group("Slime") and area.owner.monster != self:
 			if area.global_position.y > global_position.y:
@@ -201,6 +205,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 		thorn_effect()
 	elif type == attack_type.BOMB:
+		if attacker != null:
+			if player.bomb_no_damage and attacker.owner.monster == self:
+				block_feedback()
+				print("Take no damage from own bomb")
+				return
 		random_modifier = randi_range(-3,0)
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)

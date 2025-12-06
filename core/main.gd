@@ -534,6 +534,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"more_banish":
 				player.banish_amount += 3
 				player.upgrade_panel.update_banish_text()
+			"bombs_no_damage":
+				player.bomb_no_damage = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -545,8 +547,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.upgrade_panel.resource_array.append(load(card.get_path()))
 	if card_resource.remove_cards:
 		for card in card_resource.remove_cards:
-			if player.upgrade_panel.resource_array.has(card):
-				player.upgrade_panel.resource_array.erase(card)
+			player.upgrade_panel.remove_from_card_pool(card)
 	if card_resource.unique:
 		player.upgrade_panel.resource_array.erase(card_resource)
 
@@ -599,7 +600,6 @@ func reroll_pressed(upgrade_panel):
 	if player.rerolls != 0 and player.upgrade_points > 0:
 		var bonus_text = ""
 		if player.bonus_rerolls > 0:
-			#bonus_text = " Includes Bonus"
 			pass
 	upgrade_panel.reroll_button.get_node("Label").text = "x" + str(player.rerolls)
 

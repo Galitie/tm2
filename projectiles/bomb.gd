@@ -20,6 +20,12 @@ var distance: float
 
 func _ready():
 	animation_player.play("idle")
+	#TODO: Would love to have the player outline, but this breaks stuff maybe be cause they rotate?
+	#var size_diff: float = Globals.get_window_size_diff()
+	#var original_line_thickness: float = $CanvasGroup.material.get_shader_parameter("line_thickness")
+	#var new_thickness: float = size_diff * original_line_thickness
+	#$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
+	#$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)
 	
 	if monster.facing == "right":
 		direction = Vector2(-1, 0)
@@ -40,10 +46,12 @@ func _ready():
 		await get_tree().create_timer(2.5).timeout
 	animation_player.play("freakout")
 
+
 func _physics_process(delta: float) -> void:
 	var decay = position.distance_to(target) / distance
 	position.x = move_toward(position.x, target.x, speed * delta)
 	rotation += spin_speed * spin_sign * delta * decay
+
 
 func _on_explosion_countdown_timeout():
 	$Area2D/ExplosionHitBox.disabled = false
@@ -51,6 +59,7 @@ func _on_explosion_countdown_timeout():
 	animation_player.play("explode")
 	exploding = true
 	$AudioStreamPlayer.play()
+
 
 func _on_explosion_time_timeout():
 	$Area2D/ExplosionHitBox.disabled = true

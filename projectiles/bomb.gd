@@ -20,12 +20,7 @@ var distance: float
 
 func _ready():
 	animation_player.play("idle")
-	#TODO: Would love to have the player outline, but this breaks stuff maybe be cause they rotate?
-	#var size_diff: float = Globals.get_window_size_diff()
-	#var original_line_thickness: float = $CanvasGroup.material.get_shader_parameter("line_thickness")
-	#var new_thickness: float = size_diff * original_line_thickness
-	#$CanvasGroup.material.set_shader_parameter("line_thickness", new_thickness)
-	#$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)
+	$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)
 	
 	if monster.facing == "right":
 		direction = Vector2(-1, 0)

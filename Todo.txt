@@ -6,9 +6,10 @@ Guiding lights:
 
 Features to make it playtest ready:
 	Constipated should go away after some amount of poop / bomb upgrades?
-	Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
-	Tries to reference items that don't exist...might be the order of removal and adding
+	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
+	- Tries to reference items that don't exist...might be the order of removal and adding
 	
+	Add outline to bombs (Gets fucky, wonder if it's because the bombs rotate) (Raam)
 	Outline texture cut off (Raam)
 	Reroll sound still triggers when no rerolls - maybe error sound?
 	Shield breaker add effect animation (Raam?)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxj6g8em7kfy3" path="res://UI/leaderboard.gd" id="1_27m2f"]
 
-[node name="Leaderboard" type="Control" groups=["Persist"]]
+[node name="Leaderboard" type="Control" groups=["Leaderboard", "Persist"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

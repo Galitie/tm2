@@ -6,7 +6,8 @@ var ordered_leaders = []
 
 
 func _ready():
-	name = "Leaderboard"
+	if name != "Leaderboard":
+		name = "Leaderboard"
 
 
 func save():

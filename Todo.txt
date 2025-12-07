@@ -9,6 +9,8 @@ Features to make it playtest ready:
 	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
 	- Tries to reference items that don't exist...might be the order of removal and adding
 	
+	
+	Add leaderboard visuals (Raam)
 	Outline texture cut off (Raam)
 	Reroll sound still triggers when no rerolls - maybe error sound?
 	Shield breaker add effect animation (Raam?)
@@ -23,9 +25,6 @@ Features to make it playtest ready:
 	Intro menu?
 	
 	Bonuses:
-		Leader board
-			- Show the top 5 bunnies with the most victory points
-			- Put at the top of ties, push out the oldest
 		Comments about the bunnies
 			- Most killable
 			- Chunkiest boi

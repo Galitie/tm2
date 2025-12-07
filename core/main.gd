@@ -638,7 +638,8 @@ func handle_game_over():
 			player.monster.target_point = player.customize_pos
 			if player not in winners:
 				player.get_child(0).hide()
-		$Camera2D/CanvasLayer/Leaderboard.handle_leaderboard(win_player)
+		var leaderboard = get_tree().get_nodes_in_group("Leaderboard")
+		await leaderboard[0].handle_leaderboard(win_player)
 		Globals.save_game()
 	else:
 		print("It's a tie!")

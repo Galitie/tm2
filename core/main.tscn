@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=12 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dx62hcn5hjs1n" path="res://stages/grass.png" id="2_brq4u"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://effects/sudden_death.gdshader" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="6_ycdy4"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="7_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dr81edv1mxj0r" path="res://UI/leaderboard.tscn" id="8_jsmgm"]
 [ext_resource type="AudioStream" uid="uid://bnd7vmemesdbl" path="res://sounds/sudden_death.ogg" id="8_vivmo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4v2"]
@@ -187,6 +188,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 18
+
+[node name="Leaderboard" parent="Camera2D/CanvasLayer" instance=ExtResource("8_jsmgm")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3

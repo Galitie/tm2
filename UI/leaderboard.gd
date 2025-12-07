@@ -39,6 +39,6 @@ func _add_leader(winner : Player):
 	mon_names.sort_custom(func(a, b): return int(leaders[a]) > int(leaders[b]))
 	
 	if mon_names.size() > 10:
-		for i in range(5, mon_names.size()):
+		for i in range(10, mon_names.size()):
 			leaders.erase(mon_names[i])
 	print("Leaders: ", leaders)

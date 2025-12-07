@@ -43,6 +43,7 @@ Bomb=""
 CleanUp=""
 PlayerCustomizePanel=""
 Slime=""
+Persist="For saving and loading"
 
 [input]
 

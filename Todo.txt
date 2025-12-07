@@ -9,7 +9,6 @@ Features to make it playtest ready:
 	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
 	- Tries to reference items that don't exist...might be the order of removal and adding
 	
-	Add outline to bombs (Gets fucky, wonder if it's because the bombs rotate) (Raam)
 	Outline texture cut off (Raam)
 	Reroll sound still triggers when no rerolls - maybe error sound?
 	Shield breaker add effect animation (Raam?)
@@ -24,8 +23,13 @@ Features to make it playtest ready:
 	Intro menu?
 	
 	Bonuses:
-		Backgrounds
-			Ideas have been references to old Tyler games
+		Leader board
+			- Show the top 5 bunnies with the most victory points
+			- Put at the top of ties, push out the oldest
+		Comments about the bunnies
+			- Most killable
+			- Chunkiest boi
+			etc.
 		Save, play games to get achievements to unlock accessories???
 			When should it load and save?
 			Load at main menu?
@@ -47,7 +51,8 @@ Features to make it playtest ready:
 				Bomb yourself to death
 				Block x amount of attacks
 			- Per player? All players? How to count these?
-
+		Backgrounds
+			Ideas have been references to old Tyler games
 
 Card ideas:
 	Boxy looking shader was cool

@@ -124,10 +124,12 @@ func freeze_frame(monster: Monster) -> void:
 
 
 func _ready():
+	Globals.load_game()
 	# Generate player nodes off of player states
 	if Globals.game_length != -1:
 		total_rounds = Globals.game_length
 	if override_total_rounds != -1:
+		print("rounds overwritten")
 		total_rounds = override_total_rounds
 	var player_counter = 1
 	for player in Globals.player_states:
@@ -629,13 +631,15 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
-		print("Winner:", winners[0].name)
+		var win_player = winners[0]
 		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
 		$Camera2D/CanvasLayer/WinnersLabel.show()
 		for player in players:
 			player.monster.target_point = player.customize_pos
 			if player not in winners:
 				player.get_child(0).hide()
+		$Camera2D/CanvasLayer/Leaderboard.handle_leaderboard(win_player)
+		Globals.save_game()
 	else:
 		print("It's a tie!")
 		$Camera2D/CanvasLayer/WinnersLabel.text = "THERE'S A TIE!"

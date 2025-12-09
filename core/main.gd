@@ -66,14 +66,6 @@ func debug_stuff():
 				target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
-		$Camera2D/CanvasLayer/CustomizeMenu.disable()
-		$Camera2D/CanvasLayer/CustomizeMenu.hide()
-		if start_in_fight_mode:
-			set_fight_mode()
-		else:
-			transition_audio("uid://bnfvpcj04flvs", 0.0)
-			set_upgrade_mode()
 
  
 func listen_for_special_trigger():
@@ -217,13 +209,6 @@ func _process(_delta):
 				camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
 				camera.global_position = lerp(camera.global_position, monster_avg_position / alive_monsters, 5.0 * _delta)
 	if ready_players.size() == players.size() and current_mode == Modes.CUSTOMIZE:
-		$Camera2D/CanvasLayer/CustomizeMenu.disable()
-		$Camera2D/CanvasLayer/CustomizeMenu.hide()
-		if start_in_fight_mode:
-			set_fight_mode()
-		else:
-			set_upgrade_mode()
-	if ready_players.size() == 1 and current_mode == Modes.CUSTOMIZE and debug_mode:
 		$Camera2D/CanvasLayer/CustomizeMenu.disable()
 		$Camera2D/CanvasLayer/CustomizeMenu.hide()
 		if start_in_fight_mode:
@@ -475,7 +460,6 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				var other_index = player.monster.state_machine.keys.find("poop")
 				player.monster.state_machine.weights[other_index] += .50
 			"thorns":
-				#player.monster.thorns = true
 				player.monster.set_thorns()
 			"death_explode":
 				player.death_explode = true

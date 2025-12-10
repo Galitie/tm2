@@ -619,6 +619,8 @@ func handle_game_over():
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
 		var win_player = winners[0]
+		$Camera2D/CanvasLayer/RoundLabel.hide()
+		$Camera2D/CanvasLayer/Specials.hide()
 		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
 		$Camera2D/CanvasLayer/WinnersLabel.show()
 		for player in players:
@@ -626,7 +628,7 @@ func handle_game_over():
 			if player not in winners:
 				player.get_child(0).hide()
 		var leaderboard = get_tree().get_nodes_in_group("Leaderboard")
-		await leaderboard[0].handle_leaderboard(win_player)
+		await leaderboard[0].handle_leaderboard(players)
 		Globals.save_game()
 	else:
 		print("It's a tie!")

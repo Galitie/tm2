@@ -140,7 +140,6 @@ metadata/_edit_lock_ = true
 [node name="CustomizeMenu" parent="Camera2D/CanvasLayer" instance=ExtResource("4_efxa6")]
 
 [node name="RoundLabel" type="Label" parent="Camera2D/CanvasLayer"]
-visible = false
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 45.0
@@ -198,7 +197,6 @@ theme_override_font_sizes/font_size = 18
 [node name="Menu" parent="Camera2D/CanvasLayer" instance=ExtResource("8_xhu5d")]
 
 [node name="Leaderboard" parent="Camera2D/CanvasLayer" instance=ExtResource("8_jsmgm")]
-visible = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3

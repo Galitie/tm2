@@ -11,7 +11,6 @@ var current_user_position_in_round_button_array : int = 0
 
 var new_stylebox_normal = StyleBoxFlat.new()
 var input_paused : bool = false
-var main_scene = preload("uid://cnviuf3qmq26f")
 
 var human_players_selected : bool = false
 var bot_players_selected : bool = false
@@ -137,7 +136,9 @@ func _on_button_pressed(button_index):
 		bot_players_selected = true
 		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
-				get_tree().change_scene_to_packed(main_scene)
+				input_paused = true
+				hide()
+				Globals.game.set_up_game()
 				return
 			"1":
 				var counter = 1
@@ -180,14 +181,18 @@ func _on_button_pressed(button_index):
 		input_paused = false
 	
 	if human_players_selected and bot_players_selected and rounds_selected:
-		get_tree().change_scene_to_packed(main_scene)
+		input_paused = true
+		hide()
+		Globals.game.set_up_game()
 		return
 
 
 func build_bot_buttons(human_player_amount : int):
 	match human_player_amount:
 		4:
-			get_tree().change_scene_to_packed(main_scene)
+			input_paused = true
+			hide()
+			Globals.game.set_up_game()
 			return
 		3:
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()

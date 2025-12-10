@@ -117,6 +117,9 @@ func freeze_frame(monster: Monster) -> void:
 
 func _ready():
 	Globals.load_game()
+
+
+func set_up_game():
 	# Generate player nodes off of player states
 	if Globals.game_length != -1:
 		total_rounds = Globals.game_length

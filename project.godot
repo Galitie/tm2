@@ -45,6 +45,7 @@ PlayerCustomizePanel=""
 Slime=""
 Persist="For saving and loading"
 Leaderboard=""
+Unlocks=""
 
 [input]
 

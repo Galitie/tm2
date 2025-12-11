@@ -141,6 +141,8 @@ func _on_hurtbox_area_entered(area):
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
+	var unlocks = get_tree().get_nodes_in_group("Unlocks")
+	unlocks = unlocks[0]
 	var damage : int
 	var critted : bool
 	var crit_text : String
@@ -237,6 +239,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 999
 		modify_hp(-damage)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
+	unlocks.add_counter("total_damage_dealt", int(damage))
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
@@ -253,6 +256,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		if player.death_explode:
 			explode_on_death()
 		Globals.game.count_death(self)
+		unlocks.add_counter("total_bunnies_killed", 1)
 
 
 #TODO: Raam explosion animation???

@@ -32,7 +32,6 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 var winners = []
-var menu_scene = preload("uid://405m25td441q")
 
 
 
@@ -220,7 +219,7 @@ func _process(_delta):
 			set_upgrade_mode()
 	#TODO: Make a real game end scene, placeholder for playtesting
 	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene_to_packed(menu_scene)
+		get_tree().change_scene_to_packed(load("uid://cnviuf3qmq26f"))
 
 
 func count_death(monster: Monster):
@@ -406,7 +405,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 		player.banish_amount -= 1
 		card.upgrade_panel.update_banish_text()
 		await player.upgrade_panel.burn_card(button)
-		player.upgrade_panel.resource_array.erase(card.chosen_resource)
+		player.upgrade_panel.unlocked_resources.erase(card.chosen_resource)
 		check_if_upgrade_round_over(card, player)
 		return
 	if input == JOY_BUTTON_Y:
@@ -415,7 +414,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 		if acc_index < card.chosen_resource.parts_and_acc.size() :
 			var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]
 			MonsterGeneration.AddPartToMonster(player.monster, part)
-	var resource_array : Array[Resource] = card.upgrade_panel.resource_array
+	var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	apply_card_resource_effects(card.chosen_resource, player)
@@ -532,13 +531,14 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			player.monster.state_machine.weights[state_index] = 0
 	if card_resource.unlocked_cards:
 		for card in card_resource.unlocked_cards:
-			if !player.upgrade_panel.resource_array.has(card):
-				player.upgrade_panel.resource_array.append(load(card.get_path()))
+			if !player.upgrade_panel.unlocked_resources.has(card):
+				player.upgrade_panel.unlocked_resources.append(load(card.get_path()))
 	if card_resource.remove_cards:
 		for card in card_resource.remove_cards:
-			player.upgrade_panel.remove_from_card_pool(card)
+			if player.upgrade_panel.unlocked_resources.has(card):
+				player.upgrade_panel.remove_from_card_pool(card)
 	if card_resource.unique:
-		player.upgrade_panel.resource_array.erase(card_resource)
+		player.upgrade_panel.unlocked_resources.erase(card_resource)
 
 
 func apply_card_attribute(attribute, amount, player):
@@ -563,7 +563,7 @@ func apply_card_attribute(attribute, amount, player):
 func check_if_upgrade_round_over(card, player):
 	var upgrade_panel = card.upgrade_panel
 	if player.upgrade_points > 0:
-		var deep_copy = upgrade_panel.resource_array.duplicate(true)
+		var deep_copy = upgrade_panel.unlocked_resources.duplicate(true)
 		for panel_card in upgrade_panel.upgrade_cards:
 			if panel_card.chosen_resource.unique:
 				deep_copy.erase(panel_card.chosen_resource)
@@ -629,6 +629,9 @@ func handle_game_over():
 				player.get_child(0).hide()
 		var leaderboard = get_tree().get_nodes_in_group("Leaderboard")
 		await leaderboard[0].handle_leaderboard(players)
+		var unlocks = get_tree().get_nodes_in_group("Unlocks")
+		unlocks = unlocks[0]
+		unlocks.add_counter("total_games_played", 1)
 		Globals.save_game()
 	else:
 		print("It's a tie!")
@@ -665,6 +668,8 @@ func spawn_poop(monster):
 	else:
 		poop.poop_shoot_interval = randf_range(5,15)
 	add_child(poop)
+	var unlocks = get_tree().get_nodes_in_group("Unlocks")
+	unlocks[0].add_counter("total_poops_pooped", 1)
 	poop.add_to_group("CleanUp")
 
 

@@ -11,6 +11,7 @@ Type = "passive"
 state_id = "more_slime"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_kvgmt")]([])
 attribute_1 = 1

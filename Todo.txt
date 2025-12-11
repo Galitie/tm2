@@ -7,12 +7,11 @@ Guiding lights:
 Features to make it playtest ready:
 	Constipated should go away after some amount of poop / bomb upgrades?
 	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
-	- Tries to reference items that don't exist...might be the order of removal and adding
-	
+	- Tries to reference items that don't exist
+	- Think it might be a cyclical resource bug(?)
 	
 	Add leaderboard visuals (Raam)
 	Outline texture cut off (Raam)
-	Reroll sound still triggers when no rerolls - maybe error sound?
 	Shield breaker add effect animation (Raam?)
 	Final upgrade round is unclear that it's the final round (Raam)
 	Bullets from poops not clear when they disappear, maybe hit and disappear animation (Raam?)
@@ -25,11 +24,14 @@ Features to make it playtest ready:
 	Intro menu?
 	
 	Bonuses:
-		Comments about the bunnies
+		Comments about the bunnies, lethal company style
 			- Most killable
 			- Chunkiest boi
+			- The poopiest
+			- On a list
 			etc.
 		Save, play games to get achievements to unlock accessories???
+			Unlock cards?
 			When should it load and save?
 			Load at main menu?
 			Save at end of each fight/upgrade round?

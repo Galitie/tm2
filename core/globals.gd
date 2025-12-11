@@ -15,6 +15,7 @@ func get_window_size_diff() -> float:
 func save_game():
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
+
 	for node in save_nodes:
 		
 		if node.scene_file_path.is_empty():
@@ -36,6 +37,7 @@ func load_game():
 		return
 
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	print(save_nodes)
 	for i in save_nodes:
 		i.queue_free()
 

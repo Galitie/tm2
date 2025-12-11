@@ -18,6 +18,7 @@ var type: CardType = CardType.COMMON
 @onready var header = $SubViewport/Sprite2D/Header
 @onready var description = $SubViewport/Sprite2D/Description
 @onready var stats = $SubViewport/Sprite2D/Stats
+@onready var banish = $SubViewport/Sprite2D/Banish
 
 @onready var common_texture = load("uid://tsfcfyle4b6g")
 @onready var common_backside = load("uid://dfcg1ysqsucr6")
@@ -62,6 +63,9 @@ func select() -> void:
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("inset", value), 0.4, 0.0, 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("shadow_offset", value), Vector2(-10.0, -10.0), Vector2(-20.0, -20.0), 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("blur_amount", value), 0.0, 1.5, 0.15)
+	set_banish_text()
+	banish.visible = true
+	
 	material.set_shader_parameter("rand_trans_power", 1.0)
 	z_index = 3
 	selected = true
@@ -71,6 +75,7 @@ func deselect() -> void:
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("shadow_offset", value), Vector2(-20.0, -20.0), Vector2(-10.0, -10.0), 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("blur_amount", value), 1.5, 0.0, 0.15)
 	material.set_shader_parameter("rand_trans_power", 0)
+	banish.visible = false
 	z_index = deck_order
 	selected = false
 
@@ -112,9 +117,15 @@ func change_text_style() -> void:
 			accessory_header.add_theme_color_override("default_color", Color("27502f"))
 			accessory_header.add_theme_color_override("font_outline_color", Color("c7dcba"))
 
+func set_banish_text():
+	banish.text = "[font_size=17]x[/font_size]" + str(upgrade_panel.player.banish_amount) + "[font_size=26]🔥"
+
+
 func choose_card_resource(card_resource):
 	chosen_resource = card_resource
 	header.text = chosen_resource.card_name
+	
+	set_banish_text()
 	
 	var source_sprite: Sprite2D = $SubViewport/Sprite2D
 	if card_resource.is_special:

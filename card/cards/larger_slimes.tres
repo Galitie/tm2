@@ -11,6 +11,7 @@ Type = "passive"
 state_id = "larger_slimes"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_ltuqc")]([])
 attribute_1 = 2

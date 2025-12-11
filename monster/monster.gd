@@ -129,7 +129,11 @@ func _on_hurtbox_area_entered(area):
 			take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		elif area.is_in_group("Bomb"):
-			take_damage(attacker, current_state, true, attack_type.BOMB)
+			if area.owner == Drop:
+				attacker = area.owner.monster
+				take_damage(attacker, current_state, true, attack_type.BOMB)
+			else:
+				take_damage(null, current_state, true, attack_type.BOMB)
 		
 		elif area.is_in_group("Slime") and area.owner.monster != self:
 			if area.global_position.y > global_position.y:
@@ -137,6 +141,8 @@ func _on_hurtbox_area_entered(area):
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
+	var unlocks = get_tree().get_nodes_in_group("Unlocks")
+	unlocks = unlocks[0]
 	var damage : int
 	var critted : bool
 	var crit_text : String
@@ -201,6 +207,11 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 		thorn_effect()
 	elif type == attack_type.BOMB:
+		if attacker != null:
+			if player.bomb_no_damage and attacker.owner.monster == self:
+				block_feedback()
+				print("Take no damage from own bomb")
+				return
 		random_modifier = randi_range(-3,0)
 		damage = round(10 + random_modifier)
 		modify_hp(-damage)
@@ -228,6 +239,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = 999
 		modify_hp(-damage)
 	$Damage.text = str(int(damage)) + crit_text + mod_text
+	unlocks.add_counter("total_damage_dealt", int(damage))
 	animation_player_damage.play("damage")
 	hit_effect(critted)
 	state_machine.transition_state("hurt")
@@ -244,6 +256,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		if player.death_explode:
 			explode_on_death()
 		Globals.game.count_death(self)
+		unlocks.add_counter("total_bunnies_killed", 1)
 
 
 #TODO: Raam explosion animation???
@@ -254,7 +267,7 @@ func explode_on_death():
 	var temp_sprite = Sprite2D.new()
 	temp_sprite.texture = load("uid://cgrc4jxdyeooy")
 	temp_sprite.scale = Vector2(3,3)
-	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1
+	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.15
 	temp_collision.shape = temp_shape_resource
 	temp_area.add_to_group("Bomb")
 	temp_area.add_to_group("CleanUp")
@@ -263,7 +276,7 @@ func explode_on_death():
 	temp_timer.timeout.connect(_on_temp_timer_timeout)
 	temp_area.add_child(temp_sprite)
 	temp_area.add_child(temp_timer)
-	temp_timer.wait_time = .40
+	temp_timer.wait_time = .30
 	temp_timer.autostart = true
 	call_deferred("add_child", temp_area)
 

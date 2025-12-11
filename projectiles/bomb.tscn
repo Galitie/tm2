@@ -14,7 +14,7 @@ shader = ExtResource("2_6w74q")
 shader_parameter/alpha = 1.0
 shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/line_thickness = 2.5
+shader_parameter/line_thickness = 5.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 shader_parameter/outer_color = Color(0, 0, 0, 0)
 

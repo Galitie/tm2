@@ -1,7 +1,8 @@
 extends Node2D
 class_name Game
 
-@export var total_rounds : int = 10
+var total_rounds : int = 7
+@export var override_total_rounds : int = -1
 @export var debug_mode : bool = true
 @export var start_in_fight_mode : bool
 @export var override_sudden_death_time : float
@@ -31,7 +32,6 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 var winners = []
-var menu_scene = preload("uid://405m25td441q")
 
 
 
@@ -65,14 +65,6 @@ func debug_stuff():
 				target_monster.take_damage(null, "", false, 0, 999)
 	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.UPGRADE:
 		set_fight_mode()
-	if Input.is_action_just_pressed("ui_accept") and current_mode == Modes.CUSTOMIZE:
-		$Camera2D/CanvasLayer/CustomizeMenu.disable()
-		$Camera2D/CanvasLayer/CustomizeMenu.hide()
-		if start_in_fight_mode:
-			set_fight_mode()
-		else:
-			transition_audio("uid://bnfvpcj04flvs", 0.0)
-			set_upgrade_mode()
 
  
 func listen_for_special_trigger():
@@ -123,7 +115,16 @@ func freeze_frame(monster: Monster) -> void:
 
 
 func _ready():
+	Globals.load_game()
+
+
+func set_up_game():
 	# Generate player nodes off of player states
+	if Globals.game_length != -1:
+		total_rounds = Globals.game_length
+	if override_total_rounds != -1:
+		print("rounds overwritten")
+		total_rounds = override_total_rounds
 	var player_counter = 1
 	for player in Globals.player_states:
 		if player != Player.PlayerState.NONE:
@@ -216,16 +217,9 @@ func _process(_delta):
 			set_fight_mode()
 		else:
 			set_upgrade_mode()
-	if ready_players.size() == 1 and current_mode == Modes.CUSTOMIZE and debug_mode:
-		$Camera2D/CanvasLayer/CustomizeMenu.disable()
-		$Camera2D/CanvasLayer/CustomizeMenu.hide()
-		if start_in_fight_mode:
-			set_fight_mode()
-		else:
-			set_upgrade_mode()
 	#TODO: Make a real game end scene, placeholder for playtesting
 	if current_mode == Modes.GAME_END and Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene_to_packed(menu_scene)
+		get_tree().change_scene_to_packed(load("uid://cnviuf3qmq26f"))
 
 
 func count_death(monster: Monster):
@@ -367,7 +361,7 @@ func _on_round_over_delay_timer_timeout():
 	if !game_over:
 		var current_place = 0
 		var prev_points = -1
-		var rerolls = 0
+		var rerolls = 1
 		for player in players:
 			player.monster.move_name_upgrade()
 			player.monster.target_point = player.upgrade_pos
@@ -411,7 +405,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 		player.banish_amount -= 1
 		card.upgrade_panel.update_banish_text()
 		await player.upgrade_panel.burn_card(button)
-		player.upgrade_panel.resource_array.erase(card.chosen_resource)
+		player.upgrade_panel.unlocked_resources.erase(card.chosen_resource)
 		check_if_upgrade_round_over(card, player)
 		return
 	if input == JOY_BUTTON_Y:
@@ -420,7 +414,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 		if acc_index < card.chosen_resource.parts_and_acc.size() :
 			var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]
 			MonsterGeneration.AddPartToMonster(player.monster, part)
-	var resource_array : Array[Resource] = card.upgrade_panel.resource_array
+	var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
 	player.upgrade_points -= 1
 	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
 	apply_card_resource_effects(card.chosen_resource, player)
@@ -446,7 +440,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.more_poops = true
 			"dbl_dmg":
 				player.monster.damage_dealt_mult = 1.50
-				player.monster.damage_received_mult = 2.0
+				player.monster.damage_received_mult = 1.75
 			"larger_poops":
 				player.larger_poops = true
 			"chaser":
@@ -468,7 +462,6 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				var other_index = player.monster.state_machine.keys.find("poop")
 				player.monster.state_machine.weights[other_index] += .50
 			"thorns":
-				#player.monster.thorns = true
 				player.monster.set_thorns()
 			"death_explode":
 				player.death_explode = true
@@ -521,6 +514,16 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.slime_timer.wait_time = .50
 			"bite_heal_more":
 				player.bite_heal_more = true
+			"bombs_only":
+				player.monster.state_machine.state_choices["poop"].clear()
+				player.monster.state_machine.state_choices["poop"].append("bombing")
+			"bomb_explode_faster":
+				player.faster_bombs = true
+			"more_banish":
+				player.banish_amount += 3
+				player.upgrade_panel.update_banish_text()
+			"bombs_no_damage":
+				player.bomb_no_damage = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -528,12 +531,14 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			player.monster.state_machine.weights[state_index] = 0
 	if card_resource.unlocked_cards:
 		for card in card_resource.unlocked_cards:
-			player.upgrade_panel.resource_array.append(load(card.get_path()))
+			if !player.upgrade_panel.unlocked_resources.has(card):
+				player.upgrade_panel.unlocked_resources.append(load(card.get_path()))
 	if card_resource.remove_cards:
 		for card in card_resource.remove_cards:
-			player.upgrade_panel.resource_array.erase(card)
+			if player.upgrade_panel.unlocked_resources.has(card):
+				player.upgrade_panel.remove_from_card_pool(card)
 	if card_resource.unique:
-		player.upgrade_panel.resource_array.erase(card_resource)
+		player.upgrade_panel.unlocked_resources.erase(card_resource)
 
 
 func apply_card_attribute(attribute, amount, player):
@@ -558,7 +563,7 @@ func apply_card_attribute(attribute, amount, player):
 func check_if_upgrade_round_over(card, player):
 	var upgrade_panel = card.upgrade_panel
 	if player.upgrade_points > 0:
-		var deep_copy = upgrade_panel.resource_array.duplicate(true)
+		var deep_copy = upgrade_panel.unlocked_resources.duplicate(true)
 		for panel_card in upgrade_panel.upgrade_cards:
 			if panel_card.chosen_resource.unique:
 				deep_copy.erase(panel_card.chosen_resource)
@@ -584,7 +589,6 @@ func reroll_pressed(upgrade_panel):
 	if player.rerolls != 0 and player.upgrade_points > 0:
 		var bonus_text = ""
 		if player.bonus_rerolls > 0:
-			#bonus_text = " Includes Bonus"
 			pass
 	upgrade_panel.reroll_button.get_node("Label").text = "x" + str(player.rerolls)
 
@@ -602,6 +606,7 @@ func handle_game_over():
 	upgrade_menu.pause_all_inputs()
 	current_mode = Modes.GAME_END
 	upgrade_menu.visible = false
+	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
 	rankings.visible = true
 	rankings.text = "Rankings:\n"
@@ -613,13 +618,21 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
-		print("Winner:", winners[0].name)
+		var win_player = winners[0]
+		$Camera2D/CanvasLayer/RoundLabel.hide()
+		$Camera2D/CanvasLayer/Specials.hide()
 		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
 		$Camera2D/CanvasLayer/WinnersLabel.show()
 		for player in players:
 			player.monster.target_point = player.customize_pos
 			if player not in winners:
 				player.get_child(0).hide()
+		var leaderboard = get_tree().get_nodes_in_group("Leaderboard")
+		await leaderboard[0].handle_leaderboard(players)
+		var unlocks = get_tree().get_nodes_in_group("Unlocks")
+		unlocks = unlocks[0]
+		unlocks.add_counter("total_games_played", 1)
+		Globals.save_game()
 	else:
 		print("It's a tie!")
 		$Camera2D/CanvasLayer/WinnersLabel.text = "THERE'S A TIE!"
@@ -655,6 +668,8 @@ func spawn_poop(monster):
 	else:
 		poop.poop_shoot_interval = randf_range(5,15)
 	add_child(poop)
+	var unlocks = get_tree().get_nodes_in_group("Unlocks")
+	unlocks[0].add_counter("total_poops_pooped", 1)
 	poop.add_to_group("CleanUp")
 
 

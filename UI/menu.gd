@@ -6,12 +6,15 @@ var current_user_position_in_human_button_array : int = 0
 var bot_button_array: Array[Node]
 var current_user_position_in_bot_button_array : int = 0
 
+@onready var round_button_array: Array[Node] = [$"MarginContainer/RoundMenu/VBoxContainer/1", $"MarginContainer/RoundMenu/VBoxContainer/2", $"MarginContainer/RoundMenu/VBoxContainer/3"]
+var current_user_position_in_round_button_array : int = 0
+
 var new_stylebox_normal = StyleBoxFlat.new()
 var input_paused : bool = false
-var main_scene = preload("uid://cnviuf3qmq26f")
 
 var human_players_selected : bool = false
 var bot_players_selected : bool = false
+var rounds_selected : bool = false
 
 
 func _ready():
@@ -23,13 +26,14 @@ func _physics_process(_delta):
 	if input_paused:
 		return
 	
+	var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
+	var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
 	if !human_players_selected:
 		var button = human_button_array[current_user_position_in_human_button_array]
 
 		if current_user_position_in_human_button_array == 0:
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
-		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
-		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
+
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
 			current_user_position_in_human_button_array += dpad_vertical_input
@@ -47,13 +51,10 @@ func _physics_process(_delta):
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
 			button = human_button_array[current_user_position_in_human_button_array]
 			_on_button_pressed(current_user_position_in_human_button_array)
-	else:
+	elif !bot_players_selected:
 		var button = bot_button_array[current_user_position_in_bot_button_array]
 		if current_user_position_in_bot_button_array == 0:
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
-		
-		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
-		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
 			current_user_position_in_bot_button_array += dpad_vertical_input
@@ -72,7 +73,31 @@ func _physics_process(_delta):
 			button = bot_button_array[current_user_position_in_bot_button_array]
 			if button.get_child(0).disabled == false:
 				_on_button_pressed(current_user_position_in_bot_button_array)
+	
+	if human_players_selected and bot_players_selected:
+		var button = round_button_array[current_user_position_in_round_button_array]
 
+		if current_user_position_in_round_button_array == 0:
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			current_user_position_in_round_button_array += dpad_vertical_input
+			if current_user_position_in_round_button_array <= -1:
+				current_user_position_in_round_button_array = round_button_array.size() - 1
+			if current_user_position_in_round_button_array >= round_button_array.size():
+				current_user_position_in_round_button_array = 0
+
+			button = round_button_array[current_user_position_in_round_button_array]
+			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+			for other_button in round_button_array:
+				if other_button != button:
+					other_button.remove_theme_stylebox_override("panel")
+			
+		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			button = round_button_array[current_user_position_in_round_button_array]
+			_on_button_pressed(current_user_position_in_round_button_array)
+		
+		
 
 func create_stylebox():
 	new_stylebox_normal.border_width_top = 5
@@ -86,7 +111,7 @@ func _on_button_pressed(button_index):
 	input_paused = true
 	new_stylebox_normal.border_color = Color.GREEN
 	new_stylebox_normal.bg_color = Color.GREEN
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().create_timer(0.15).timeout
 	
 	if !human_players_selected:
 		match button_index:
@@ -106,12 +131,14 @@ func _on_button_pressed(button_index):
 		build_bot_buttons(button_index + 1)
 		human_players_selected = true
 		input_paused = false
-	else:
+	elif !bot_players_selected:
 		input_paused = true
 		bot_players_selected = true
 		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
-				get_tree().change_scene_to_packed(main_scene)
+				input_paused = true
+				hide()
+				Globals.game.set_up_game()
 				return
 			"1":
 				var counter = 1
@@ -137,17 +164,35 @@ func _on_button_pressed(button_index):
 						Globals.player_states[index] = Player.PlayerState.BOT
 						counter -= 1
 					index += 1
-		input_paused = false	
+		input_paused = false
+		$MarginContainer/BotsMenu.hide()
+		$MarginContainer/RoundMenu.show()
 	
-	if human_players_selected and bot_players_selected:
-		get_tree().change_scene_to_packed(main_scene)
+	elif human_players_selected and bot_players_selected:
+		input_paused = true
+		rounds_selected = true
+		match button_index:
+			0:
+				Globals.game_length = 7
+			1:
+				Globals.game_length = 5
+			2:
+				Globals.game_length = 10
+		input_paused = false
+	
+	if human_players_selected and bot_players_selected and rounds_selected:
+		input_paused = true
+		hide()
+		Globals.game.set_up_game()
 		return
 
 
 func build_bot_buttons(human_player_amount : int):
 	match human_player_amount:
 		4:
-			get_tree().change_scene_to_packed(main_scene)
+			input_paused = true
+			hide()
+			Globals.game.set_up_game()
 			return
 		3:
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()

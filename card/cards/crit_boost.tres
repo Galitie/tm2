@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_vhuie")
 card_name = "CRIT BOOST"
-description = "Increase CRIT chance"
+description = "Increase CRIT chance for ATTACKS (doesn't include projectiles or effects)"
 Type = "immediate"
 state_id = ""
 unique = false

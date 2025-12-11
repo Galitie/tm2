@@ -20,6 +20,7 @@ var distance: float
 
 func _ready():
 	animation_player.play("idle")
+	$CanvasGroup.material.set_shader_parameter("outer_color", monster.player_color)
 	
 	if monster.facing == "right":
 		direction = Vector2(-1, 0)
@@ -30,16 +31,22 @@ func _ready():
 		target = position + Vector2(randi_range(50,125),0)
 		spin_sign = 1
 	distance = position.distance_to(target)
-	$ExplosionCountdown.wait_time = randf_range(3,5)
-	$ExplosionCountdown.start()
-
-	await get_tree().create_timer(2.5).timeout
+	if monster.player.faster_bombs:
+		$ExplosionCountdown.wait_time = randf_range(1,3)
+		$ExplosionCountdown.start()
+		await get_tree().create_timer(1.5).timeout
+	else:
+		$ExplosionCountdown.wait_time = randf_range(3,5)
+		$ExplosionCountdown.start()
+		await get_tree().create_timer(2.5).timeout
 	animation_player.play("freakout")
+
 
 func _physics_process(delta: float) -> void:
 	var decay = position.distance_to(target) / distance
 	position.x = move_toward(position.x, target.x, speed * delta)
 	rotation += spin_speed * spin_sign * delta * decay
+
 
 func _on_explosion_countdown_timeout():
 	$Area2D/ExplosionHitBox.disabled = false
@@ -47,6 +54,7 @@ func _on_explosion_countdown_timeout():
 	animation_player.play("explode")
 	exploding = true
 	$AudioStreamPlayer.play()
+
 
 func _on_explosion_time_timeout():
 	$Area2D/ExplosionHitBox.disabled = true

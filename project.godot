@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="TM2"
-run/main_scene="uid://405m25td441q"
+run/main_scene="uid://cnviuf3qmq26f"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [audio]
@@ -43,6 +43,9 @@ Bomb=""
 CleanUp=""
 PlayerCustomizePanel=""
 Slime=""
+Persist="For saving and loading"
+Leaderboard=""
+Unlocks=""
 
 [input]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=14 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dx62hcn5hjs1n" path="res://stages/grass.png" id="2_brq4u"]
@@ -7,7 +7,10 @@
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://effects/sudden_death.gdshader" id="5_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="6_ycdy4"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="7_w48qg"]
+[ext_resource type="PackedScene" uid="uid://dr81edv1mxj0r" path="res://UI/leaderboard.tscn" id="8_jsmgm"]
 [ext_resource type="AudioStream" uid="uid://bnd7vmemesdbl" path="res://sounds/sudden_death.ogg" id="8_vivmo"]
+[ext_resource type="PackedScene" uid="uid://405m25td441q" path="res://UI/menu.tscn" id="8_xhu5d"]
+[ext_resource type="PackedScene" uid="uid://2jnj3vk2ckgs" path="res://UI/unlocks.tscn" id="11_rayt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4v2"]
 size = Vector2(1174, 20)
@@ -24,8 +27,6 @@ shader_parameter/Freq = 10.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_5vw27")
-total_rounds = 7
-debug_mode = false
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -99
@@ -86,6 +87,7 @@ position = Vector2(575, 325)
 
 [node name="SuddenDeath" type="Sprite2D" parent="Camera2D/CanvasLayer"]
 process_mode = 3
+visible = false
 material = SubResource("ShaderMaterial_8pr8v")
 scale = Vector2(1153.78, 650)
 texture = ExtResource("6_ycdy4")
@@ -93,6 +95,7 @@ centered = false
 
 [node name="SuddenDeathLabel" type="RichTextLabel" parent="Camera2D/CanvasLayer"]
 process_mode = 3
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -124,6 +127,7 @@ autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="Rankings" type="Label" parent="Camera2D/CanvasLayer"]
+visible = false
 offset_left = 5.0
 offset_top = 34.0
 offset_right = 45.0
@@ -155,6 +159,7 @@ text = "WINNER! (Press START to play again)
 horizontal_alignment = 1
 
 [node name="Specials" type="HBoxContainer" parent="Camera2D/CanvasLayer"]
+visible = false
 offset_left = 3.0
 offset_top = 609.0
 offset_right = 1154.0
@@ -190,6 +195,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 18
 
+[node name="Menu" parent="Camera2D/CanvasLayer" instance=ExtResource("8_xhu5d")]
+
+[node name="Leaderboard" parent="Camera2D/CanvasLayer" instance=ExtResource("8_jsmgm")]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_vivmo")
@@ -197,6 +206,9 @@ parameters/looping = true
 
 [node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2
+
+[node name="Unlocks" parent="." instance=ExtResource("11_rayt5")]
+visible = false
 
 [connection signal="timeout" from="RoundOverDelayTimer" to="." method="_on_round_over_delay_timer_timeout"]
 [connection signal="timeout" from="UpgradeOverDelayTimer" to="." method="_on_upgrade_over_delay_timer_timeout"]

@@ -8,21 +8,28 @@ signal reroll_pressed(upgrade_panel)
 @onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
 
 var player : Player
-var resource_array: Array[Resource] = [load("uid://bsvu0x8037yil"),load("uid://dbvivyf8n66v3"),load("uid://fk8ruy5a3i6t"),load("uid://ypvgbouvw3wv"),load("uid://f53own34678k"),load("uid://beo0p0kljyb5g"), load("uid://0fnohogd0jnj"), load("uid://bnduresmutm6t"), load("uid://cjql6et6c05ls"), load("uid://n6000538073l"), load("uid://cgypuyq157lm6"), load("uid://phcwpn7m4yun"), load("uid://cgnshcx2dt16q"), load("uid://bd56nejnv5k61"), load("uid://dowb4h6fynu1t"), load("uid://d38rynb3vrmjg"), load("uid://2dwrrigu8sux"), load("uid://bn1d6phtvfhry"),load("uid://bkgtuu1m8soho"),load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg"), load("uid://b7mqshabtd6un"), load("uid://d4m0ycr7geqti")]
+
+var resource_array: Array[Resource] = [load("uid://dffb24h22tnbi"), load("uid://bsvu0x8037yil"),load("uid://dbvivyf8n66v3"),load("uid://fk8ruy5a3i6t"),load("uid://ypvgbouvw3wv"), load("uid://f53own34678k"),load("uid://beo0p0kljyb5g"), load("uid://0fnohogd0jnj"), load("uid://bnduresmutm6t"), load("uid://cjql6et6c05ls"), load("uid://n6000538073l"), load("uid://cgypuyq157lm6"), load("uid://phcwpn7m4yun"), load("uid://cgnshcx2dt16q"), load("uid://bd56nejnv5k61"), load("uid://dowb4h6fynu1t"), load("uid://d38rynb3vrmjg"), load("uid://2dwrrigu8sux"), load("uid://bn1d6phtvfhry"),load("uid://bkgtuu1m8soho"),load("uid://dyvymb65crfuv"),load("uid://c37d7vyo0m6jb"), load("uid://3aquqn25lskq"), load("uid://cvtqvsltnme3w"), load("uid://cv4dcuvdmk4d"), load("uid://cr0ughlj0g43p"), load("uid://c6dyyjnj08tgh"), load("uid://ds51dyaoyuqjg"), load("uid://b7mqshabtd6un"), load("uid://d4m0ycr7geqti")]
+var unlocked_resources: Array[Resource] = []
+var unlocked_locked_resources: Array[Resource] = []
+
 @onready var button_array: Array[Node] = [reroll_button, $VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3]
 var current_user_position_in_button_array : int = 0
 var new_stylebox_normal = StyleBoxFlat.new()
-
 var current_user_position_in_accessory_array : int = 0
 var in_accessory_menu = false
-
 var input_paused: bool = false
 
 var stamp_sfx = load("uid://o81tlwdlwbgw")
 var fire_sfx = load("uid://cqg3cxtk5uaua")
 var dice_sfx = load("uid://c00bd21trfdkx")
 
+
 func _ready():
+	for resource in resource_array:
+		if !resource.locked or Globals.unlocks.unlocked_locked_resources.has(resource):
+			unlocked_resources.append(resource)
+	
 	for card in upgrade_cards:
 		card.upgrade_panel = self
 	create_stylebox()
@@ -193,7 +200,7 @@ func deselect_reroll() -> void:
 
 func setup_cards(reroll = false):
 	current_user_position_in_button_array = 0
-	var temp_resources = resource_array.duplicate(true)
+	var temp_resources = unlocked_resources.duplicate(true)
 	for card in upgrade_cards:
 		if player.player_state == Player.PlayerState.BOT:
 			card.hide()
@@ -226,8 +233,9 @@ func setup_rerolls():
 
 # reroll button
 func _on_button_pressed():
-	%AudioStreamPlayer.stream = dice_sfx
-	%AudioStreamPlayer.play()
+	if player.rerolls > 0:
+		%AudioStreamPlayer.stream = dice_sfx
+		%AudioStreamPlayer.play()
 	emit_signal("reroll_pressed", self) #Caught by game scene
 
 func create_stylebox():
@@ -239,8 +247,8 @@ func create_stylebox():
 
 
 func remove_from_card_pool(resource):
-	var found_index = resource_array.find(resource)
-	resource_array.remove_at(found_index)
+	if unlocked_resources.has(resource):
+		unlocked_resources.erase(resource)
 
 
 func update_banish_text():

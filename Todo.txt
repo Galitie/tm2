@@ -10,15 +10,13 @@ Features to make it playtest ready:
 	- Tries to reference items that don't exist
 	- Think it might be a cyclical resource bug(?)
 	
-	Add leaderboard visuals (Raam)
-	Outline texture cut off (Raam)
+	Add dance animation (hook up in dance state)
+	Add leaderboard visuals 
+	Outline texture cut off 
 	Shield breaker add effect animation (Raam?)
-	Final upgrade round is unclear that it's the final round (Raam)
-	Bullets from poops not clear when they disappear, maybe hit and disappear animation (Raam?)
-	Add dance animation (hook up in dance state) (Raam)
-	Replace temp explode on death animation (monster) (Raam)
-	More Accessories (Raam)
-	Show preview of accessory or body part (Raam)
+	Bullets from poops not clear when they disappear, maybe hit and disappear animation 
+	More Accessories 
+	Show preview of accessory or body part?
 	Sound - Background, effects etc.
 	Menus - sound, etc.
 	Intro menu?
@@ -54,6 +52,7 @@ Features to make it playtest ready:
 			- Per player? All players? How to count these?
 		Backgrounds
 			Ideas have been references to old Tyler games
+
 
 Card ideas:
 	Boxy looking shader was cool

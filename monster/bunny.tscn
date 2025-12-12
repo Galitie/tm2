@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://cb6yyn4s5fwt0" path="res://parts/pirate_cape.png" id="13_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://nctfyokktwby" path="res://parts/poop_cape.png" id="13_3wgw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")

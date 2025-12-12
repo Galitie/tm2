@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=8 format=3 uid="uid://bn1d6phtvfhry"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=9 format=3 uid="uid://bn1d6phtvfhry"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_k2dmc"]
+[ext_resource type="Resource" uid="uid://bqy2slc4apj0a" path="res://parts/poop_cape.tres" id="2_1pe4p"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_k3gwj"]
 [ext_resource type="Resource" uid="uid://d1mv22yolom78" path="res://card/cards/bigger_poops.tres" id="3_7lgqm"]
 [ext_resource type="Resource" uid="uid://b1yf5pmgknoky" path="res://card/cards/double_poop.tres" id="4_hpxhg"]
@@ -16,8 +17,9 @@ Type = "poop"
 state_id = "poop_summon"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_k2dmc")]([])
+parts_and_acc = Array[ExtResource("1_k2dmc")]([ExtResource("2_1pe4p")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

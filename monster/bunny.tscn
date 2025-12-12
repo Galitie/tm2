@@ -9,12 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://cifioeobtcfnv" path="res://parts/clown_node.png" id="6_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://monster/back.gdshader" id="6_vonwv"]
-[ext_resource type="Texture2D" uid="uid://1hqncccbmrnj" path="res://parts/party_hat.png" id="7_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://bj1ayeiyd1d87" path="res://parts/crown_hat.png" id="7_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://d0olomib4o3l5" path="res://parts/bunny_hindleg.png" id="7_qx6ai"]
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://c2pqaxjtoscyh" path="res://parts/bat_wings.png" id="13_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://r240mue7cck8" path="res://parts/royal_cape.png" id="13_3wgw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -86,7 +86,7 @@ rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAT/HAT_anim_offset"]
 texture = ExtResource("7_3wgw3")
-offset = Vector2(-5, -25)
+offset = Vector2(-3, -10)
 
 [node name="EAR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
 position = Vector2(3.905, -20.59)
@@ -171,7 +171,7 @@ position = Vector2(-15.065, -31.86)
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
 texture = ExtResource("13_3wgw3")
-offset = Vector2(-10, -25)
+offset = Vector2(13, 22)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" groups=["HurtBox"]]

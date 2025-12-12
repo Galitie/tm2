@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://dyvymb65crfuv"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_2cjdi"]
-[ext_resource type="Resource" uid="uid://bwull041xrsta" path="res://parts/halo_hat.tres" id="2_fj1wi"]
+[ext_resource type="Resource" uid="uid://c82c1ordcur8r" path="res://parts/wizard_hat.tres" id="2_fj1wi"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_q4vpd"]
 [ext_resource type="Resource" uid="uid://cjyy73ki5m4k6" path="res://card/cards/mirror_block_all.tres" id="3_o280t"]
 

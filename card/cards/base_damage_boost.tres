@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://cv4dcuvdmk4d"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cv4dcuvdmk4d"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_in657"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="1_lrdyw"]
+[ext_resource type="Resource" uid="uid://c4jyqnfvodbl5" path="res://parts/pumpkin_hat.tres" id="2_1quhm"]
 
 [resource]
 script = ExtResource("1_lrdyw")
@@ -11,8 +12,9 @@ Type = "immediate"
 state_id = ""
 unique = false
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_in657")]([])
+parts_and_acc = Array[ExtResource("1_in657")]([ExtResource("2_1quhm")])
 attribute_1 = 3
 attribute_label_1 = "DMG"
 attribute_amount_1 = 1

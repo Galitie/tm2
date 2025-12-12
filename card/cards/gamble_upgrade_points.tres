@@ -12,6 +12,7 @@ Type = "passive"
 state_id = ""
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("2_f2tp1")]([ExtResource("3_bw1jv")])
 attribute_1 = 5

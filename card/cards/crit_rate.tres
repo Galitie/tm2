@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://bkgtuu1m8soho"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://bkgtuu1m8soho"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_5rp5m"]
+[ext_resource type="Resource" uid="uid://dglmbo2neinug" path="res://parts/sword.tres" id="2_ylk1e"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_yq1ji"]
 
 [resource]
@@ -11,8 +12,9 @@ Type = "immediate"
 state_id = ""
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_5rp5m")]([])
+parts_and_acc = Array[ExtResource("1_5rp5m")]([ExtResource("2_ylk1e")])
 attribute_1 = 6
 attribute_label_1 = "CRIT"
 attribute_amount_1 = 10

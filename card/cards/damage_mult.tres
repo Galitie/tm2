@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://d4m0ycr7geqti"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_a1xy7"]
-[ext_resource type="Resource" uid="uid://bbl3gfk2tdsed" path="res://parts/sick_shades.tres" id="2_ing2r"]
+[ext_resource type="Resource" uid="uid://bshsi2tkoro12" path="res://parts/helmet.tres" id="2_2m17a"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_pkltb"]
 
 [resource]
@@ -12,8 +12,9 @@ Type = "immediate"
 state_id = "dbl_dmg"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_a1xy7")]([ExtResource("2_ing2r")])
+parts_and_acc = Array[ExtResource("1_a1xy7")]([ExtResource("2_2m17a")])
 attribute_1 = 1
 attribute_label_1 = "HP"
 attribute_amount_1 = 5

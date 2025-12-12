@@ -67,7 +67,7 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 	button._on_button_pressed(acc_idx, input, button)
 	
 func bump_upgrade_title() -> void:
-	await get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.3, 1.3), 0.1).finished
+	await get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.4, 1.4), 0.1).finished
 	get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.0, 1.0), 0.1)
 
 func burn_card(button):

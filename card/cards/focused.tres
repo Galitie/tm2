@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_k72it"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="1_lnc4m"]
-[ext_resource type="Resource" uid="uid://cwa076t5bv4ir" path="res://parts/fat_mallard.tres" id="2_2buue"]
+[ext_resource type="Resource" uid="uid://dpi552f8framh" path="res://parts/skeleton.tres" id="2_ikre8"]
 
 [resource]
 script = ExtResource("1_lnc4m")
@@ -12,8 +12,9 @@ Type = "passive"
 state_id = ""
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([2])
-parts_and_acc = Array[ExtResource("1_k72it")]([ExtResource("2_2buue")])
+parts_and_acc = Array[ExtResource("1_k72it")]([ExtResource("2_ikre8")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

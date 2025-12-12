@@ -11,6 +11,7 @@ Type = "immediate"
 state_id = ""
 unique = false
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_0n8w0")]([])
 attribute_1 = 1

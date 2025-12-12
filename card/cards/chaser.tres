@@ -11,6 +11,7 @@ Type = "chase"
 state_id = "chaser"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_2ngyt")]([])
 attribute_1 = 2

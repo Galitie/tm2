@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://ikwvs1t8uut" path="res://parts/clown_collar.png" id="13_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://c2pqaxjtoscyh" path="res://parts/bat_wings.png" id="13_3wgw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -171,7 +171,7 @@ position = Vector2(-15.065, -31.86)
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
 texture = ExtResource("13_3wgw3")
-offset = Vector2(40, 15)
+offset = Vector2(-10, -25)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" groups=["HurtBox"]]

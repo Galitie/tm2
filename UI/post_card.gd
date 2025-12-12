@@ -64,7 +64,8 @@ func select() -> void:
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("shadow_offset", value), Vector2(-10.0, -10.0), Vector2(-20.0, -20.0), 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("blur_amount", value), 0.0, 1.5, 0.15)
 	set_banish_text()
-	banish.visible = true
+	if upgrade_panel.player.banish_amount:
+		banish.visible = true
 	
 	material.set_shader_parameter("rand_trans_power", 1.0)
 	z_index = 3
@@ -124,6 +125,9 @@ func set_banish_text():
 func choose_card_resource(card_resource):
 	chosen_resource = card_resource
 	header.text = chosen_resource.card_name
+	
+	if selected:
+		banish.visible = (upgrade_panel.player.banish_amount > 0)
 	
 	set_banish_text()
 	
@@ -201,7 +205,8 @@ func hide_accessories(instant: bool = false) -> void:
 	if instant:
 		showing_accessories = false
 		accessory_panel.visible = false
-		banish.visible = true
+		if upgrade_panel.player.banish_amount:
+			banish.visible = true
 		hide_text(false)
 		material.set_shader_parameter("y_rot", 0.0)
 		return
@@ -217,7 +222,8 @@ func hide_accessories(instant: bool = false) -> void:
 			$SubViewport/Sprite2D.texture = special_texture
 	material.set_shader_parameter("y_rot", -90.0)
 	accessory_panel.visible = false
-	banish.visible = true
+	if upgrade_panel.player.banish_amount:
+		banish.visible = true
 	hide_text(false)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
 	

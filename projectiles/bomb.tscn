@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://boyc823kxorwi" path="res://sounds/bomb.ogg" id="8_ugjkb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bwkwj"]
+resource_local_to_scene = true
 shader = ExtResource("2_6w74q")
 shader_parameter/alpha = 1.0
 shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)

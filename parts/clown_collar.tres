@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://dmhj5x54yrkhm"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_u88gw"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_ox527"]
+[ext_resource type="Texture2D" uid="uid://ikwvs1t8uut" path="res://parts/clown_collar.png" id="3_u88gw"]
+
+[resource]
+script = ExtResource("2_ox527")
+monster_type = 0
+type = 9
+texture = ExtResource("3_u88gw")
+offset = Vector2(40, 15)
+connections = Array[ExtResource("1_u88gw")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

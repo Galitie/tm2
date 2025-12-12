@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://v1mg73q1xewp"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_tmlwb"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_ybtxq"]
+[ext_resource type="Texture2D" uid="uid://cifioeobtcfnv" path="res://parts/clown_node.png" id="3_tmlwb"]
+
+[resource]
+script = ExtResource("2_ybtxq")
+monster_type = 0
+type = 10
+texture = ExtResource("3_tmlwb")
+offset = Vector2(12, -3)
+connections = Array[ExtResource("1_tmlwb")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://cjyy73ki5m4k6"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cjyy73ki5m4k6"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_a2vpg"]
+[ext_resource type="Resource" uid="uid://bj1lvcawumt3d" path="res://parts/wings.tres" id="2_84325"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_f0ni2"]
 
 [resource]
@@ -11,8 +12,9 @@ Type = "block"
 state_id = "mirrorblock_all"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_a2vpg")]([])
+parts_and_acc = Array[ExtResource("1_a2vpg")]([ExtResource("2_84325")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

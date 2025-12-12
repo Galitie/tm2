@@ -13,6 +13,7 @@ Type = "passive"
 state_id = "matrix"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_u8ihq")]([ExtResource("2_bdkyc")])
 attribute_1 = 0

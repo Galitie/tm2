@@ -126,6 +126,11 @@ func _on_button_pressed(button_index):
 			3:
 				for player in 4:
 					Globals.player_states[player] = Player.PlayerState.HUMAN
+				input_paused = true
+				hide()
+				Globals.game.set_up_game()
+				return
+				
 		$MarginContainer/HumanMenu.hide()
 		$MarginContainer/BotsMenu.show()
 		build_bot_buttons(button_index + 1)

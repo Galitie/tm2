@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cwh7rpj3fn4nl" path="res://monster/monster_part_node.gd" id="3_m81kn"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="4_vonwv"]
 [ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="5_5ecvt"]
-[ext_resource type="Texture2D" uid="uid://bf5x0l3xlhc8q" path="res://parts/blush.png" id="6_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://c5kqlw81cp0vg" path="res://parts/goggles.png" id="6_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://monster/back.gdshader" id="6_vonwv"]
 [ext_resource type="Texture2D" uid="uid://dbdocyu5ncto0" path="res://parts/bandana_hat.png" id="7_3wgw3"]
@@ -75,7 +75,7 @@ rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset"]
 texture = ExtResource("6_3wgw3")
-offset = Vector2(-8, 10)
+offset = Vector2(-10, -2)
 metadata/_edit_lock_ = true
 
 [node name="HAT" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]

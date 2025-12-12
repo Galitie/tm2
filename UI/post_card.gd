@@ -184,6 +184,7 @@ func flip() -> void:
 func show_accessories() -> void:
 	showing_accessories = true
 	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished
+	banish.visible = false
 	material.set_shader_parameter("y_rot", -90.0)
 	hide_text(true)
 	match type:
@@ -200,6 +201,7 @@ func hide_accessories(instant: bool = false) -> void:
 	if instant:
 		showing_accessories = false
 		accessory_panel.visible = false
+		banish.visible = true
 		hide_text(false)
 		material.set_shader_parameter("y_rot", 0.0)
 		return
@@ -215,6 +217,7 @@ func hide_accessories(instant: bool = false) -> void:
 			$SubViewport/Sprite2D.texture = special_texture
 	material.set_shader_parameter("y_rot", -90.0)
 	accessory_panel.visible = false
+	banish.visible = true
 	hide_text(false)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
 	

@@ -12,6 +12,7 @@ Type = "block"
 state_id = "block_longer"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_neo1f")]([ExtResource("2_j1ana")])
 attribute_1 = 0

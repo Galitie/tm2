@@ -13,6 +13,7 @@ Type = "basic_attack"
 state_id = "bite"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_8q2ex")]([ExtResource("2_qdf7j")])
 attribute_1 = 1

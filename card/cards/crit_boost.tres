@@ -6,11 +6,12 @@
 [resource]
 script = ExtResource("2_vhuie")
 card_name = "CRIT BOOST"
-description = "Increase CRIT chance for ATTACKS (doesn't include projectiles or effects)"
+description = "Increase CRIT chance for ATTACKS, doesn't include projectiles or effects"
 Type = "immediate"
 state_id = ""
 unique = false
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_h83rr")]([])
 attribute_1 = 6

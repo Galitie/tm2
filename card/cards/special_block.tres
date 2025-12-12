@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://cjql6et6c05ls"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cjql6et6c05ls"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_2ilnu"]
+[ext_resource type="Resource" uid="uid://jxxcjm4y2nho" path="res://parts/sharkfin.tres" id="2_kw5xw"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_skv6c"]
 
 [resource]
@@ -11,8 +12,9 @@ Type = "special"
 state_id = "specialblock"
 unique = true
 is_special = true
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_2ilnu")]([])
+parts_and_acc = Array[ExtResource("1_2ilnu")]([ExtResource("2_kw5xw")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

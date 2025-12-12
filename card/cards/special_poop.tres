@@ -11,6 +11,7 @@ Type = "special"
 state_id = "specialpoop"
 unique = true
 is_special = true
+locked = false
 remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_7i84x")]([])
 attribute_1 = 0

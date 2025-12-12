@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://dk6ydtrurrur8"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_ec3ft"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_gs0o1"]
+[ext_resource type="Texture2D" uid="uid://dtkyvaxjem28n" path="res://parts/box.png" id="3_ec3ft"]
+
+[resource]
+script = ExtResource("2_gs0o1")
+monster_type = 0
+type = 9
+texture = ExtResource("3_ec3ft")
+offset = Vector2(10, 15)
+connections = Array[ExtResource("1_ec3ft")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

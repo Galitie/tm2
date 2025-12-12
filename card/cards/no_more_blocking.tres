@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=7 format=3 uid="uid://dbvivyf8n66v3"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=8 format=3 uid="uid://dbvivyf8n66v3"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_nllc7"]
+[ext_resource type="Resource" uid="uid://cp6rcmeg0g6nu" path="res://parts/camo.tres" id="2_oike5"]
 [ext_resource type="Resource" uid="uid://dowb4h6fynu1t" path="res://card/cards/blocker.tres" id="3_y4270"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_yjh64"]
 [ext_resource type="Resource" uid="uid://ypvgbouvw3wv" path="res://card/cards/block_longer.tres" id="4_nqf1n"]
@@ -15,8 +16,9 @@ Type = "passive"
 state_id = ""
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([5])
-parts_and_acc = Array[ExtResource("1_nllc7")]([])
+parts_and_acc = Array[ExtResource("1_nllc7")]([ExtResource("2_oike5")])
 attribute_1 = 1
 attribute_label_1 = "HP"
 attribute_amount_1 = 5

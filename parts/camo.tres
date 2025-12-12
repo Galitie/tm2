@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://cp6rcmeg0g6nu"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_duknt"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_tixal"]
+[ext_resource type="Texture2D" uid="uid://dkb5t1dnagyyl" path="res://parts/snake_outfit.png" id="3_duknt"]
+
+[resource]
+script = ExtResource("2_tixal")
+monster_type = 0
+type = 9
+texture = ExtResource("3_duknt")
+offset = Vector2(19, 31)
+connections = Array[ExtResource("1_duknt")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

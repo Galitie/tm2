@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_u1lrw"]
 [ext_resource type="Resource" uid="uid://1ypxbcfm3ttj" path="res://parts/pirate_hat.tres" id="2_cpfsv"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_j6lm7"]
-[ext_resource type="Resource" uid="uid://bt1ba5aa88boj" path="res://parts/bomb_no_damage.tres" id="4_pcdsl"]
+[ext_resource type="Resource" uid="uid://bt1ba5aa88boj" path="res://card/cards/bomb_no_damage.tres" id="4_pcdsl"]
 
 [resource]
 script = ExtResource("2_j6lm7")

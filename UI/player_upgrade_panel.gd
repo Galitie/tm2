@@ -5,7 +5,7 @@ signal reroll_pressed(upgrade_panel)
 
 @onready var reroll_button = $VBoxContainer/reroll
 @onready var upgrade_cards = [$VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3 ]
-@onready var upgrade_title = $VBoxContainer/UpgradeTitle/Label
+@onready var upgrade_title = $VBoxContainer/Upgrades
 
 var player : Player
 
@@ -222,14 +222,21 @@ func update_victory_points():
 func setup_rerolls():
 	if player.player_state == Player.PlayerState.BOT:
 		reroll_button.visible = false
+		upgrade_title.visible = false
 	else:
 		reroll_button.visible = true
+		upgrade_title.visible = true
 	var bonus_text = ""
 	if player.bonus_rerolls > 0:
 		pass
 		#bonus_text = " Includes Bonus"
-	reroll_button.get_node("Label").text = "x" + str(player.rerolls)
+	set_reroll_text()
 
+func set_reroll_text() -> void:
+	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + str(player.rerolls) + "[font_size=26]"
+
+func set_upgrade_text() -> void:
+	upgrade_title.get_node("Label").text = "[font_size=17]x[/font_size]" + str(player.upgrade_points) + "[font_size=26]"
 
 # reroll button
 func _on_button_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=21 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="Texture2D" uid="uid://co52gfugmmrle" path="res://UI/reroll_off.png" id="2_16opa"]
@@ -10,10 +10,102 @@
 [ext_resource type="Texture2D" uid="uid://c4pmak0d7r8rm" path="res://UI/stamp.png" id="5_22x0x"]
 [ext_resource type="Shader" uid="uid://bnst8briuw107" path="res://UI/hover.gdshader" id="5_ad54b"]
 [ext_resource type="Texture2D" uid="uid://jq58cfiae1qk" path="res://UI/reroll_active_3.png" id="5_euvj6"]
+[ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="7_euvj6"]
+[ext_resource type="Texture2D" uid="uid://ls0wwygbrhxo" path="res://UI/cardstack.png" id="8_tirdh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0
 content_margin_right = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_euvj6"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tirdh"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyuhs"]
+resource_local_to_scene = true
+shader = ExtResource("5_ad54b")
+shader_parameter/debug = false
+shader_parameter/border_scale = 1.5
+shader_parameter/shadow_offset = Vector2(-10, -10)
+shader_parameter/color = Color(0, 0, 0, 0.431373)
+shader_parameter/blur_amount = 0.0
+shader_parameter/shadow_scale = 0.0
+shader_parameter/disable_rotating = false
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.4
+shader_parameter/hovering = 0.0
+shader_parameter/rand_trans_power = 0.0
+shader_parameter/rand_seed = 0.0
+shader_parameter/vortex_amt = 0.0
+shader_parameter/rotation = 0.0
+shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/borderWidth = 0.02
+shader_parameter/burnMult = 0.135
+shader_parameter/burnColor = Color(0, 0, 0, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tirdh"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tirdh"]
 animations = [{
@@ -59,96 +151,6 @@ animations = [{
 "name": &"off",
 "speed": 5.0
 }]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8t47v"]
-resource_local_to_scene = true
-shader = ExtResource("5_ad54b")
-shader_parameter/debug = false
-shader_parameter/border_scale = 1.5
-shader_parameter/shadow_offset = Vector2(-10, -10)
-shader_parameter/color = Color(0, 0, 0, 0.431373)
-shader_parameter/blur_amount = 0.0
-shader_parameter/shadow_scale = 0.0
-shader_parameter/disable_rotating = false
-shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.4
-shader_parameter/hovering = 0.0
-shader_parameter/rand_trans_power = 0.0
-shader_parameter/rand_seed = 0.0
-shader_parameter/vortex_amt = 0.0
-shader_parameter/rotation = 0.0
-shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
-shader_parameter/position = Vector2(0, 0)
-shader_parameter/radius = 0.0
-shader_parameter/borderWidth = 0.02
-shader_parameter/burnMult = 0.135
-shader_parameter/burnColor = Color(0, 0, 0, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qi4jj"]
-resource_local_to_scene = true
-shader = ExtResource("5_ad54b")
-shader_parameter/debug = false
-shader_parameter/border_scale = 1.5
-shader_parameter/shadow_offset = Vector2(-10, -10)
-shader_parameter/color = Color(0, 0, 0, 0.431373)
-shader_parameter/blur_amount = 0.0
-shader_parameter/shadow_scale = 0.0
-shader_parameter/disable_rotating = false
-shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.4
-shader_parameter/hovering = 0.0
-shader_parameter/rand_trans_power = 0.0
-shader_parameter/rand_seed = 0.0
-shader_parameter/vortex_amt = 0.0
-shader_parameter/rotation = 0.0
-shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
-shader_parameter/position = Vector2(0, 0)
-shader_parameter/radius = 0.0
-shader_parameter/borderWidth = 0.02
-shader_parameter/burnMult = 0.135
-shader_parameter/burnColor = Color(0, 0, 0, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_euvj6"]
-resource_local_to_scene = true
-shader = ExtResource("5_ad54b")
-shader_parameter/debug = false
-shader_parameter/border_scale = 1.5
-shader_parameter/shadow_offset = Vector2(-10, -10)
-shader_parameter/color = Color(0, 0, 0, 0.431373)
-shader_parameter/blur_amount = 0.0
-shader_parameter/shadow_scale = 0.0
-shader_parameter/disable_rotating = false
-shader_parameter/fov = 90.0
-shader_parameter/cull_back = true
-shader_parameter/y_rot = 0.0
-shader_parameter/x_rot = 0.0
-shader_parameter/inset = 0.4
-shader_parameter/hovering = 0.0
-shader_parameter/rand_trans_power = 0.0
-shader_parameter/rand_seed = 0.0
-shader_parameter/vortex_amt = 0.0
-shader_parameter/rotation = 0.0
-shader_parameter/mouse_screen_pos_test = Vector2(0, 0)
-shader_parameter/position = Vector2(0, 0)
-shader_parameter/radius = 0.0
-shader_parameter/borderWidth = 0.02
-shader_parameter/burnMult = 0.135
-shader_parameter/burnColor = Color(0, 0, 0, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_tirdh"]
-viewport_path = NodePath("SubViewport")
 
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
 custom_minimum_size = Vector2(275, 0)
@@ -200,45 +202,78 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "🔥 BANISH [x3]"
 
-[node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
-position = Vector2(135, 39)
-sprite_frames = SubResource("SpriteFrames_tirdh")
-animation = &"done"
-
-[node name="Label" type="Label" parent="VBoxContainer/reroll"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -83.5
-offset_top = -36.0
-offset_right = -43.5
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.862745, 0.113725, 0.113725, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 7
-text = "x3"
-horizontal_alignment = 1
-
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_8t47v")
+material = SubResource("ShaderMaterial_euvj6")
 position = Vector2(135, 141)
 texture = SubResource("ViewportTexture_8t47v")
 deck_order = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_qi4jj")
+material = SubResource("ShaderMaterial_tirdh")
 position = Vector2(135, 262)
 texture = SubResource("ViewportTexture_qi4jj")
 deck_order = 1
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_euvj6")
+material = SubResource("ShaderMaterial_yyuhs")
 position = Vector2(135, 384)
 texture = SubResource("ViewportTexture_tirdh")
+
+[node name="Upgrades" type="Sprite2D" parent="VBoxContainer"]
+position = Vector2(174, 38)
+texture = ExtResource("8_tirdh")
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/Upgrades"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -48.0
+offset_top = -5.0
+offset_right = -3.0
+offset_bottom = 42.0
+grow_horizontal = 0
+theme_override_colors/default_color = Color(0.111207, 0.609375, 0.0960531, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_euvj6")
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "[font_size=17]x[/font_size]10[font_size=26]"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
+position = Vector2(78, 38)
+sprite_frames = SubResource("SpriteFrames_tirdh")
+animation = &"done"
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/reroll"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.5
+offset_top = -35.5
+offset_right = -48.5
+offset_bottom = -2.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.862745, 0.113725, 0.113725, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_euvj6")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[font_size=14]x[/font_size]3[font_size=26]"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

@@ -416,7 +416,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 			MonsterGeneration.AddPartToMonster(player.monster, part)
 	var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
 	player.upgrade_points -= 1
-	card.upgrade_panel.upgrade_title.text = "UPG POINTS [x" + str(player.upgrade_points) + "]"
+	card.upgrade_panel.set_upgrade_text()
 	apply_card_resource_effects(card.chosen_resource, player)
 	check_if_upgrade_round_over(card, player)
 
@@ -571,7 +571,7 @@ func check_if_upgrade_round_over(card, player):
 	else:
 		upgrade_panel.disable_cards()
 		upgrade_panel.reroll_button.visible = false
-		upgrade_panel.upgrade_title.text = "DONE UPGRADING"
+		upgrade_panel.upgrade_title.visible = false
 	var players_have_no_points = true
 	for p in players:
 		if p.upgrade_points > 0:
@@ -590,7 +590,7 @@ func reroll_pressed(upgrade_panel):
 		var bonus_text = ""
 		if player.bonus_rerolls > 0:
 			pass
-	upgrade_panel.reroll_button.get_node("Label").text = "x" + str(player.rerolls)
+	upgrade_panel.set_reroll_text()
 
 
 func check_if_game_over() -> bool:

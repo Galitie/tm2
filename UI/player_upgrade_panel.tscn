@@ -247,6 +247,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
 position = Vector2(78, 38)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_tirdh")
 animation = &"done"
 

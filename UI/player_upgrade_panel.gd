@@ -190,14 +190,14 @@ func disable_cards():
 		card.hide()
 
 func select_reroll() -> void:
-	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.3, 1.3), 0.15)
+	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.1, 1.1), 0.15)
 	if player.rerolls > 0:
 		reroll_button.play("active")
 	else:
 		reroll_button.play("off")
 	
 func deselect_reroll() -> void:
-	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.0, 1.0), 0.15)
+	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(0.8, 0.8), 0.15)
 	if player.rerolls > 0:
 		reroll_button.play("done")
 	else:

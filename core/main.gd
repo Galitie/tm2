@@ -115,6 +115,7 @@ func freeze_frame(monster: Monster) -> void:
 
 
 func _ready():
+	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	Globals.load_game()
 
 
@@ -140,7 +141,7 @@ func set_up_game():
 	upgrade_menu.set_upgrade_panels(players)
 	$PauseTimer.timeout.connect(_unpause)
 	
-	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
+	
 	sudden_death_label.visible = false;
 	sudden_death_label.scale = Vector2(4.0, 4.0)
 	$SuddenDeathTimer.wait_time = override_sudden_death_time if override_sudden_death_time != 0.00 else $SuddenDeathTimer.wait_time

@@ -6,15 +6,15 @@
 [ext_resource type="Script" uid="uid://cwh7rpj3fn4nl" path="res://monster/monster_part_node.gd" id="3_m81kn"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="4_vonwv"]
 [ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="5_5ecvt"]
-[ext_resource type="Texture2D" uid="uid://bqwf0vmacytjd" path="res://parts/top_hat.png" id="5_11snv"]
+[ext_resource type="Texture2D" uid="uid://dfltcuagi4c8" path="res://parts/pirate_eyepatch.png" id="6_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://monster/back.gdshader" id="6_vonwv"]
 [ext_resource type="Texture2D" uid="uid://d0olomib4o3l5" path="res://parts/bunny_hindleg.png" id="7_qx6ai"]
-[ext_resource type="Texture2D" uid="uid://csfnvshi7c1bf" path="res://parts/monocle.png" id="8_6sma1"]
+[ext_resource type="Texture2D" uid="uid://dr7hkyt7x5m2a" path="res://parts/pirate_hat.png" id="7_u0q66"]
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://djmbj2s1ovlvo" path="res://parts/turtle_shell.png" id="11_km0dj"]
+[ext_resource type="Texture2D" uid="uid://cb6yyn4s5fwt0" path="res://parts/pirate_cape.png" id="13_3wgw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -67,6 +67,17 @@ position = Vector2(24.38, -14.44)
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/EYE/EYE_anim_offset"]
 texture = ExtResource("6_jsbfh")
 
+[node name="GLASSES" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
+position = Vector2(31.53, -15.52)
+
+[node name="GLASSES_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES"]
+rotation = 0.226893
+
+[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset"]
+texture = ExtResource("6_3wgw3")
+offset = Vector2(-15, -6)
+metadata/_edit_lock_ = true
+
 [node name="HAT" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
 position = Vector2(23.905, -34.75)
 
@@ -74,9 +85,8 @@ position = Vector2(23.905, -34.75)
 rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAT/HAT_anim_offset"]
-texture = ExtResource("5_11snv")
-offset = Vector2(-0.205, -12.79)
-metadata/_edit_lock_ = true
+texture = ExtResource("7_u0q66")
+offset = Vector2(-3, -13)
 
 [node name="EAR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
 position = Vector2(3.905, -20.59)
@@ -98,17 +108,6 @@ z_index = -1
 material = SubResource("ShaderMaterial_g5rs1")
 texture = ExtResource("4_vonwv")
 offset = Vector2(-9.09, -27.42)
-metadata/_edit_lock_ = true
-
-[node name="GLASSES" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
-position = Vector2(31.53, -15.52)
-
-[node name="GLASSES_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES"]
-rotation = 0.226893
-
-[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset"]
-texture = ExtResource("8_6sma1")
-offset = Vector2(-7.9, 15.73)
 metadata/_edit_lock_ = true
 
 [node name="FORELEG" type="Node2D" parent="BODY"]
@@ -171,8 +170,8 @@ position = Vector2(-15.065, -31.86)
 [node name="CAPE_anim_offset" type="Node2D" parent="BODY/CAPE"]
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
-texture = ExtResource("11_km0dj")
-offset = Vector2(-0.91, 9.585)
+texture = ExtResource("13_3wgw3")
+offset = Vector2(20, 25)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" groups=["HurtBox"]]

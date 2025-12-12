@@ -4,7 +4,21 @@ Guiding lights:
 	Does it have the spirit of Tylermon 1?
 
 
+Accessories:
+	Robot riding the bunny
+
+Sabrina likes:
+	Robots
+	Octopus
+	Pirates
+	Spiders
+	Velvet
+	Unicorns
+	Bats
+
 Features to make it playtest ready:
+	Make unlockables actually unlock something
+	
 	Constipated should go away after some amount of poop / bomb upgrades?
 	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game
 	- Tries to reference items that don't exist

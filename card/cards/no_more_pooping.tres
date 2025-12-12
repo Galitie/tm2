@@ -21,6 +21,7 @@ Type = "passive"
 state_id = ""
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([6])
 parts_and_acc = Array[ExtResource("1_jsl2o")]([ExtResource("2_5emit")])
 attribute_1 = 0

@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://c52w22vdw33ci"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://c52w22vdw33ci"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_g0kuu"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_box14"]
+[ext_resource type="Resource" uid="uid://bh4hdpdsxpvdr" path="res://parts/googles.tres" id="2_ut8qe"]
+[ext_resource type="Resource" uid="uid://bwull041xrsta" path="res://parts/halo_hat.tres" id="3_a0tjv"]
 
 [resource]
 script = ExtResource("2_box14")
@@ -13,7 +15,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_g0kuu")]([])
+parts_and_acc = Array[ExtResource("1_g0kuu")]([ExtResource("2_ut8qe"), ExtResource("3_a0tjv")])
 attribute_1 = 1
 attribute_label_1 = "HP"
 attribute_amount_1 = 3

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://bkmgtnnpyvqux"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=6 format=3 uid="uid://bkmgtnnpyvqux"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_u1lrw"]
 [ext_resource type="Resource" uid="uid://1ypxbcfm3ttj" path="res://parts/pirate_hat.tres" id="2_cpfsv"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_j6lm7"]
+[ext_resource type="Resource" uid="uid://brchm2pauouc3" path="res://parts/frog_hat.tres" id="3_pcdsl"]
 [ext_resource type="Resource" uid="uid://bt1ba5aa88boj" path="res://card/cards/bomb_no_damage.tres" id="4_pcdsl"]
 
 [resource]
@@ -15,7 +16,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_u1lrw")]([ExtResource("2_cpfsv")])
+parts_and_acc = Array[ExtResource("1_u1lrw")]([ExtResource("2_cpfsv"), ExtResource("3_pcdsl")])
 attribute_1 = 1
 attribute_label_1 = "HP"
 attribute_amount_1 = 3

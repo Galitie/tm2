@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://bkwdvbvoxyvew"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://bkwdvbvoxyvew"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_3ed7a"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_njg50"]
 [ext_resource type="Resource" uid="uid://ds0swrnh22xjw" path="res://parts/bat_wings.tres" id="2_vjfq5"]
+[ext_resource type="Resource" uid="uid://dmhj5x54yrkhm" path="res://parts/clown_collar.tres" id="3_g2taw"]
 
 [resource]
 script = ExtResource("2_njg50")
@@ -14,7 +15,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_3ed7a")]([ExtResource("2_vjfq5")])
+parts_and_acc = Array[ExtResource("1_3ed7a")]([ExtResource("2_vjfq5"), ExtResource("3_g2taw")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

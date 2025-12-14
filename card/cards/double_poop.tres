@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=3 format=3 uid="uid://b1yf5pmgknoky"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://b1yf5pmgknoky"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_7bdyh"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_88tgj"]
+[ext_resource type="Resource" uid="uid://dimli3q7qxffc" path="res://parts/royal_cape.tres" id="2_817qp"]
+[ext_resource type="Resource" uid="uid://bqy2slc4apj0a" path="res://parts/poop_cape.tres" id="3_43u4m"]
 
 [resource]
 script = ExtResource("2_88tgj")
@@ -11,8 +13,9 @@ Type = "passive"
 state_id = "more_poops"
 unique = true
 is_special = false
+locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_7bdyh")]([])
+parts_and_acc = Array[ExtResource("1_7bdyh")]([ExtResource("2_817qp"), ExtResource("3_43u4m")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=10 format=3 uid="uid://2dwrrigu8sux"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=11 format=3 uid="uid://2dwrrigu8sux"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_sef8m"]
 [ext_resource type="Resource" uid="uid://doxppe0k1k3hy" path="res://parts/pirate_eyepatch.tres" id="2_efbun"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_rdoa5"]
+[ext_resource type="Resource" uid="uid://n4ely31qwcs6" path="res://parts/crown_hat.tres" id="3_dubn7"]
 [ext_resource type="Resource" uid="uid://bkmgtnnpyvqux" path="res://card/cards/bombs_only.tres" id="3_lbr1t"]
 [ext_resource type="Resource" uid="uid://x788fm7x6b4i" path="res://card/cards/increase_poop_chance.tres" id="4_t01w5"]
 [ext_resource type="Resource" uid="uid://b1yf5pmgknoky" path="res://card/cards/double_poop.tres" id="5_7upvk"]
@@ -20,7 +21,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_sef8m")]([ExtResource("2_efbun")])
+parts_and_acc = Array[ExtResource("1_sef8m")]([ExtResource("2_efbun"), ExtResource("3_dubn7")])
 attribute_1 = 1
 attribute_label_1 = "HP"
 attribute_amount_1 = 3

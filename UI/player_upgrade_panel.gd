@@ -24,6 +24,7 @@ var stamp_sfx = load("uid://o81tlwdlwbgw")
 var fire_sfx = load("uid://cqg3cxtk5uaua")
 var dice_sfx = load("uid://c00bd21trfdkx")
 var menu_sfx = load("uid://cna6kybw6lt4g")
+var flip_sfx = load("uid://c5r5jokara1wr")
 
 
 func _ready():
@@ -151,6 +152,8 @@ func _physics_process(_delta):
 						in_accessory_menu = false
 						press_card(button, current_user_position_in_accessory_array, input)
 					else:
+						%AudioStreamPlayer.stream = flip_sfx
+						%AudioStreamPlayer.play()
 						button.show_accessories()
 						current_user_position_in_accessory_array = 0
 						var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
@@ -164,6 +167,8 @@ func _physics_process(_delta):
 		
 		var button = button_array[current_user_position_in_button_array]
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
+			%AudioStreamPlayer.stream = flip_sfx
+			%AudioStreamPlayer.play()
 			button.hide_accessories()
 			in_accessory_menu = false
 		
@@ -195,19 +200,22 @@ func disable_cards():
 		card.disable()
 		card.hide()
 
+
 func select_reroll() -> void:
 	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.1, 1.1), 0.15)
 	if player.rerolls > 0:
 		reroll_button.play("active")
 	else:
 		reroll_button.play("off")
-	
+
+
 func deselect_reroll() -> void:
 	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(0.8, 0.8), 0.15)
 	if player.rerolls > 0:
 		reroll_button.play("done")
 	else:
 		reroll_button.play("off")
+
 
 func setup_cards(reroll = false):
 	current_user_position_in_button_array = 0

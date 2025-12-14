@@ -23,6 +23,7 @@ var input_paused: bool = false
 var stamp_sfx = load("uid://o81tlwdlwbgw")
 var fire_sfx = load("uid://cqg3cxtk5uaua")
 var dice_sfx = load("uid://c00bd21trfdkx")
+var menu_sfx = load("uid://cna6kybw6lt4g")
 
 
 func _ready():
@@ -65,10 +66,12 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 	if button.showing_accessories:
 		button.hide_accessories(true)
 	button._on_button_pressed(acc_idx, input, button)
-	
+
+
 func bump_upgrade_title() -> void:
 	await get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.4, 1.4), 0.1).finished
 	get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.0, 1.0), 0.1)
+
 
 func burn_card(button):
 	input_paused = true
@@ -101,6 +104,8 @@ func _physics_process(_delta):
 		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			current_user_position_in_button_array += dpad_vertical_input
 			if current_user_position_in_button_array <= -1:
 				current_user_position_in_button_array = button_array.size() - 1
@@ -165,6 +170,8 @@ func _physics_process(_delta):
 		# For navigating the accessory menu
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
 			if button.accessory_panel.visible:
+				%AudioStreamPlayer.stream = menu_sfx
+				%AudioStreamPlayer.play()
 				current_user_position_in_accessory_array += dpad_horizontal_input
 				if current_user_position_in_accessory_array < 0:
 					current_user_position_in_accessory_array = button.valid_accessories.size() - 1

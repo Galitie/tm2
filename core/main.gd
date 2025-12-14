@@ -117,7 +117,7 @@ func freeze_frame(monster: Monster) -> void:
 func _ready():
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	Globals.load_game()
-
+	transition_audio("uid://bgdq7m0i3hjva", .50)
 
 func set_up_game():
 	# Generate player nodes off of player states
@@ -230,12 +230,12 @@ func count_death(monster: Monster):
 		return
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
+		transition_audio("uid://clrn10gshrneo", .1)
 		sudden_death_timer.stop()
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
 				winner.state_machine.transition_state("dance")
 		$RoundOverDelayTimer.start()
-		transition_audio("uid://bnfvpcj04flvs", 2.0)
 
 
 func set_customize_mode():
@@ -250,6 +250,7 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
+	transition_audio("uid://bnfvpcj04flvs", 1)
 	current_mode = Modes.UPGRADE
 	clean_up_screen()
 	if current_round == 0:
@@ -271,9 +272,6 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	sudden_death_label.visible = false
 	upgrade_menu.unpause_all_inputs()
-	if current_round == 0:
-		audio_player.stream = load("uid://bnfvpcj04flvs")
-		audio_player.play()
 	rankings.visible = false
 	rankings.text = "Previous round points:\n"
 	$Camera2D/CanvasLayer/Specials.visible = false
@@ -300,8 +298,7 @@ func set_fight_mode():
 	current_round += 1
 	upgrade_menu.pause_all_inputs()
 	upgrade_menu.visible = false
-	transition_audio("uid://mysomdex1y7k", 0.5)
-	transition_audio("uid://mysomdex1y7k", 0.5)
+	transition_audio("uid://mysomdex1y7k", 1)
 	reset_specials_text()
 	$Camera2D/CanvasLayer/Specials.visible = true
 	rankings.visible = true

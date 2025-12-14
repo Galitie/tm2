@@ -22,9 +22,16 @@ var menu_sfx = load("uid://cna6kybw6lt4g")
 func _ready():
 	current_user_position_in_human_button_array = 0
 	create_stylebox()
+	input_paused = true
 
 
 func _physics_process(_delta):
+	if Controller.IsButtonJustPressed(0, JOY_BUTTON_START):
+		%AudioStreamPlayer.stream = menu_sfx
+		%AudioStreamPlayer.play()
+		$TextureRect.hide()
+		input_paused = false
+	
 	if input_paused:
 		return
 	
@@ -32,9 +39,10 @@ func _physics_process(_delta):
 	var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
 	if !human_players_selected:
 		var button = human_button_array[current_user_position_in_human_button_array]
-
+		
 		if current_user_position_in_human_button_array == 0:
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
+		
 
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):

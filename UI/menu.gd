@@ -16,6 +16,8 @@ var human_players_selected : bool = false
 var bot_players_selected : bool = false
 var rounds_selected : bool = false
 
+var menu_sfx = load("uid://cna6kybw6lt4g")
+
 
 func _ready():
 	current_user_position_in_human_button_array = 0
@@ -36,6 +38,8 @@ func _physics_process(_delta):
 
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			current_user_position_in_human_button_array += dpad_vertical_input
 			if current_user_position_in_human_button_array <= -1:
 				current_user_position_in_human_button_array = human_button_array.size() - 1
@@ -49,6 +53,8 @@ func _physics_process(_delta):
 					other_button.remove_theme_stylebox_override("panel")
 			
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			button = human_button_array[current_user_position_in_human_button_array]
 			_on_button_pressed(current_user_position_in_human_button_array)
 	elif !bot_players_selected:
@@ -57,6 +63,8 @@ func _physics_process(_delta):
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			current_user_position_in_bot_button_array += dpad_vertical_input
 			if current_user_position_in_bot_button_array <= -1:
 				current_user_position_in_bot_button_array = bot_button_array.size() - 1
@@ -70,6 +78,8 @@ func _physics_process(_delta):
 					other_button.remove_theme_stylebox_override("panel")
 			
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			button = bot_button_array[current_user_position_in_bot_button_array]
 			if button.get_child(0).disabled == false:
 				_on_button_pressed(current_user_position_in_bot_button_array)
@@ -81,6 +91,8 @@ func _physics_process(_delta):
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
 
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			current_user_position_in_round_button_array += dpad_vertical_input
 			if current_user_position_in_round_button_array <= -1:
 				current_user_position_in_round_button_array = round_button_array.size() - 1
@@ -94,6 +106,8 @@ func _physics_process(_delta):
 					other_button.remove_theme_stylebox_override("panel")
 			
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_A):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			button = round_button_array[current_user_position_in_round_button_array]
 			_on_button_pressed(current_user_position_in_round_button_array)
 		

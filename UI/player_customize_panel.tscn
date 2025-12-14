@@ -173,6 +173,9 @@ theme_override_font_sizes/font_size = 14
 text = "I'm finished customizing"
 autowrap_mode = 3
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="VBoxContainer/Custom2/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="VBoxContainer/Custom1/CardInfo" to="." method="_on_button_pressed" binds= [1]]
 [connection signal="pressed" from="VBoxContainer/Done/CardInfo" to="." method="_on_button_pressed" binds= [2]]

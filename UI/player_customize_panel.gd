@@ -17,6 +17,7 @@ var waiting_for_ready_up : bool = false
 @onready var done_text = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Title
 @onready var done_description = $VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription/Description
 
+var menu_sfx = load("uid://cna6kybw6lt4g")
 
 signal finished_customizing(player)
 signal not_finished_customizing(player)
@@ -31,6 +32,8 @@ func _physics_process(_delta):
 	var button = button_array[current_user_position_in_button_array]
 	if waiting_for_ready_up:
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			new_stylebox_normal.border_color = Color.SKY_BLUE
 			new_stylebox_normal.bg_color = Color.WEB_GRAY
 			not_finished_customizing.emit(player)
@@ -49,6 +52,8 @@ func _physics_process(_delta):
 		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			current_user_position_in_button_array += dpad_vertical_input
 			if current_user_position_in_button_array <= -1:
 				current_user_position_in_button_array = button_array.size() - 1
@@ -62,10 +67,14 @@ func _physics_process(_delta):
 					other_button.remove_theme_stylebox_override("panel")
 			
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			button = button_array[current_user_position_in_button_array]
 			_on_button_pressed(current_user_position_in_button_array)
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B):
+			%AudioStreamPlayer.stream = menu_sfx
+			%AudioStreamPlayer.play()
 			if current_user_position_in_button_array == 0: #if current highlighted button is name
 				if mon_names.size() >= 2:
 					var previous_element = mon_names.size() - 2

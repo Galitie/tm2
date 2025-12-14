@@ -138,7 +138,7 @@ func _physics_process(_delta):
 			var input = JOY_BUTTON_Y
 			if button != reroll_button:
 				press_card(button, 0, input)
-			
+
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			var button = button_array[current_user_position_in_button_array]
 			var input = JOY_BUTTON_A
@@ -254,6 +254,7 @@ func setup_rerolls():
 func set_reroll_text() -> void:
 	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + str(player.rerolls) + "[font_size=26]"
 
+
 func set_upgrade_text() -> void:
 	upgrade_title.get_node("Label").text = "[font_size=17]x[/font_size]" + str(player.upgrade_points) + "[font_size=26]"
 
@@ -263,6 +264,7 @@ func _on_button_pressed():
 		%AudioStreamPlayer.stream = dice_sfx
 		%AudioStreamPlayer.play()
 	emit_signal("reroll_pressed", self) #Caught by game scene
+
 
 func create_stylebox():
 	new_stylebox_normal.border_width_top = 5

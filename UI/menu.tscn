@@ -474,6 +474,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= [1]]
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= [2]]

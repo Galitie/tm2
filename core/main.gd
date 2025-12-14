@@ -32,7 +32,7 @@ enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
 var ready_players : Array[Node] = []
 var winners = []
-
+var victory_sfx = load("uid://clrn10gshrneo")
 
 
 func _init():
@@ -230,7 +230,7 @@ func count_death(monster: Monster):
 		return
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
-		transition_audio("uid://clrn10gshrneo", .1)
+		transition_audio("uid://clrn10gshrneo", .50)
 		sudden_death_timer.stop()
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
@@ -616,6 +616,7 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
+		transition_audio("uid://bgdq7m0i3hjva", .50)
 		var win_player = winners[0]
 		$Camera2D/CanvasLayer/RoundLabel.hide()
 		$Camera2D/CanvasLayer/Specials.hide()

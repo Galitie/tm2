@@ -36,7 +36,6 @@ var counters = {
 
 func add_counter(property : String, adjustment : int):
 	counters[property] += adjustment
-	print(counters)
 	check_if_unlocked()
 
 

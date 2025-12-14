@@ -46,6 +46,7 @@ func GetRandomPart(type: MonsterPart.PART_TYPE) -> MonsterPart:
 func GetMonsterPartsGroupName(monster: Monster) -> String:
 	return "monster%f_parts" % monster.player.controller_port
 
+
 func RandomizeColor(monster: Monster, set_colors: Array[Color] = []) -> Array[Color]:
 	var colors : Array[Color] = []
 	if set_colors != []:
@@ -65,12 +66,14 @@ func RandomizeColor(monster: Monster, set_colors: Array[Color] = []) -> Array[Co
 			if part.parent_part != null && part.parent_part.sprite.material != null:
 				part.sprite.material.set_shader_parameter("parent_part_color", part.parent_part.sprite.material.get_shader_parameter("part_color"))
 	return colors
-	
+
+
 func ModulateMonster(monster: Monster, color: Color) -> void:
 	for part: MonsterPartNode in get_tree().get_nodes_in_group(GetMonsterPartsGroupName(monster)):
 		if part.sprite.material != null:
 			part.sprite.material.set_shader_parameter("modulate", color)
-	
+
+
 func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 	var part_to_replace: MonsterPartNode
 	var front_part_to_replace: MonsterPartNode
@@ -95,6 +98,7 @@ func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 		part_to_replace.sprite.texture = monster_part.texture
 	else:
 		print("Part with type %s not found on monster: discarding part" % MonsterPart.PART_TYPE.keys()[monster_part.type])
+
 
 func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:
 	if parent is CanvasGroup && new_part.type == MonsterPart.PART_TYPE.BODY:

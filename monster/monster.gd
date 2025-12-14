@@ -64,6 +64,7 @@ var mod_color: Color = Color.TRANSPARENT
 var temp_timer = Timer.new()
 var temp_area = Area2D.new()
 
+
 func _ready():
 	add_to_group("DepthEntity")
 	

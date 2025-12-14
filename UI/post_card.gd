@@ -169,21 +169,26 @@ func choose_card_resource(card_resource):
 		accessories[accessories.size() - 1].visible = true
 		valid_accessories.append(accessories[accessories.size() - 1])
 
+
 func select_accessory(accessory: ColorRect) -> void:
-	accessory.color = Color.DODGER_BLUE
-	
+	accessory.color = Color.MEDIUM_SPRING_GREEN
+
+
 func deselect_accessory(accessory: ColorRect) -> void:
-	accessory.color = Color.TRANSPARENT
+	accessory.color = Color.LIGHT_GRAY
+
 
 func hide_text(toggle: bool) -> void:
 	header.visible = !toggle
 	description.visible = !toggle
 	stats.visible = !toggle
-	
+
+
 func flip() -> void:
 	await get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), 0.0, 90.0, 0.15).finished
 	material.set_shader_parameter("y_rot", -90.0)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
+
 
 func show_accessories() -> void:
 	showing_accessories = true
@@ -200,7 +205,8 @@ func show_accessories() -> void:
 			$SubViewport/Sprite2D.texture = special_backside
 	accessory_panel.visible = true
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
-	
+
+
 func hide_accessories(instant: bool = false) -> void:
 	if instant:
 		showing_accessories = false
@@ -226,7 +232,8 @@ func hide_accessories(instant: bool = false) -> void:
 		banish.visible = true
 	hide_text(false)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("y_rot", value), -90.0, 0.0, 0.15)
-	
+
+
 func disabled() -> bool:
 	return false
 	#return card_info_panel.disabled

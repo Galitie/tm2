@@ -144,7 +144,6 @@ func _physics_process(_delta):
 					if in_accessory_menu:
 						# already in the acc menu and pressed something
 						in_accessory_menu = false
-						
 						press_card(button, current_user_position_in_accessory_array, input)
 					else:
 						button.show_accessories()

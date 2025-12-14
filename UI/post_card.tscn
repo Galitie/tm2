@@ -188,7 +188,7 @@ alignment = 1
 [node name="Acc1" type="ColorRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 0)
+color = Color(0.302, 0.302, 0.302, 0.823)
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories/Acc1"]
 layout_mode = 1
@@ -210,7 +210,7 @@ stretch_mode = 5
 [node name="Acc2" type="ColorRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-color = Color(0.301961, 0.301961, 0.301961, 0)
+color = Color(0.301961, 0.301961, 0.301961, 0.823529)
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories/Acc2"]
 layout_mode = 1

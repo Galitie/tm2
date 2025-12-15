@@ -495,6 +495,7 @@ autowrap_mode = 2
 unique_name_in_owner = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 1161.0
 offset_bottom = 656.0
 texture = ExtResource("3_4hkxj")
@@ -505,7 +506,7 @@ stretch_mode = 4
 position = Vector2(593, 613)
 sprite_frames = SubResource("SpriteFrames_dte3n")
 autoplay = "default"
-frame_progress = 0.405717
+frame_progress = 0.967242
 
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= [1]]

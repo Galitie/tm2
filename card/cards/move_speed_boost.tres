@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=4 format=3 uid="uid://cvtqvsltnme3w"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://cvtqvsltnme3w"]
 
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="1_6hnit"]
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_wcur4"]
 [ext_resource type="Resource" uid="uid://bh4hdpdsxpvdr" path="res://parts/googles.tres" id="2_wkg33"]
+[ext_resource type="Resource" uid="uid://bbmsn4ym6nrg1" path="res://parts/vampire_teeth.tres" id="3_bju4v"]
 
 [resource]
 script = ExtResource("1_6hnit")
@@ -14,7 +15,7 @@ unique = false
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_wcur4")]([ExtResource("2_wkg33")])
+parts_and_acc = Array[ExtResource("1_wcur4")]([ExtResource("2_wkg33"), ExtResource("3_bju4v")])
 attribute_1 = 2
 attribute_label_1 = "SPD"
 attribute_amount_1 = 25

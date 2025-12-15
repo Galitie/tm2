@@ -130,7 +130,8 @@ func _on_hurtbox_area_entered(area):
 			take_damage(null, current_state, true, attack_type.PROJECTILE)
 				
 		elif area.is_in_group("Bomb"):
-			if area.owner == Drop:
+			if area.owner is Drop:
+				print("found drop")
 				attacker = area.owner.monster
 				take_damage(attacker, current_state, true, attack_type.BOMB)
 			else:
@@ -209,7 +210,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		thorn_effect()
 	elif type == attack_type.BOMB:
 		if attacker != null:
-			if player.bomb_no_damage and attacker.owner.monster == self:
+			print("attacker: ", attacker)
+			if player.bomb_no_damage and attacker == self:
 				block_feedback()
 				print("Take no damage from own bomb")
 				return

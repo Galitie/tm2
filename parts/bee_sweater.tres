@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MonsterPart" load_steps=4 format=3 uid="uid://cuknkrjh8tn1l"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_owph1"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_4wksa"]
+[ext_resource type="Texture2D" uid="uid://bi55pv056bt5d" path="res://parts/bee_sweater.png" id="3_owph1"]
+
+[resource]
+script = ExtResource("2_4wksa")
+monster_type = 0
+type = 9
+texture = ExtResource("3_owph1")
+offset = Vector2(12, 28)
+connections = Array[ExtResource("1_owph1")]([])
+hurtbox_offset = Vector2(0, 0)
+hurtbox_size = Vector2(0, 0)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

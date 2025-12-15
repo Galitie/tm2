@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=5 format=3 uid="uid://fk8ruy5a3i6t"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=6 format=3 uid="uid://fk8ruy5a3i6t"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_qhefq"]
 [ext_resource type="Resource" uid="uid://cg6k203r3el5d" path="res://parts/kraken_cape.tres" id="2_4bk14"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="3_g4okw"]
+[ext_resource type="Resource" uid="uid://jo5hqrcbu3ia" path="res://parts/dr_coat.tres" id="3_hrtpg"]
 [ext_resource type="Resource" uid="uid://i8cqjhscnrf7" path="res://card/cards/zombie_sudden_death.tres" id="3_qhefq"]
 
 [resource]
@@ -15,7 +16,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_qhefq")]([ExtResource("2_4bk14")])
+parts_and_acc = Array[ExtResource("1_qhefq")]([ExtResource("2_4bk14"), ExtResource("3_hrtpg")])
 attribute_1 = 0
 attribute_label_1 = ""
 attribute_amount_1 = 0

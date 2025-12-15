@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=7 format=3 uid="uid://beo0p0kljyb5g"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=8 format=3 uid="uid://beo0p0kljyb5g"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_es4dy"]
 [ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="2_6kmbr"]
 [ext_resource type="Resource" uid="uid://v1mg73q1xewp" path="res://parts/clown_nose.tres" id="2_126w0"]
 [ext_resource type="Resource" uid="uid://dj5fe8fy1ss3n" path="res://card/cards/longer_slime.tres" id="3_lkoga"]
+[ext_resource type="Resource" uid="uid://ikl8hprr2w2x" path="res://parts/surgeon_mask.tres" id="3_st600"]
 [ext_resource type="Resource" uid="uid://qqdwbq831ev6" path="res://card/cards/larger_slimes.tres" id="4_ckl7f"]
 [ext_resource type="Resource" uid="uid://dr6d21dxjpmtp" path="res://card/cards/more_slime.tres" id="5_ckl7f"]
 
@@ -17,7 +18,7 @@ unique = true
 is_special = false
 locked = false
 remove_specific_states = Array[int]([])
-parts_and_acc = Array[ExtResource("1_es4dy")]([ExtResource("2_126w0")])
+parts_and_acc = Array[ExtResource("1_es4dy")]([ExtResource("2_126w0"), ExtResource("3_st600")])
 attribute_1 = 2
 attribute_label_1 = "SPD"
 attribute_amount_1 = 10

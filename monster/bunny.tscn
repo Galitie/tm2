@@ -6,15 +6,15 @@
 [ext_resource type="Script" uid="uid://cwh7rpj3fn4nl" path="res://monster/monster_part_node.gd" id="3_m81kn"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="4_vonwv"]
 [ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="5_5ecvt"]
-[ext_resource type="Texture2D" uid="uid://dyk3mebfpsfx0" path="res://parts/vampire_teeth.png" id="6_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://g5bl0ydh4dow" path="res://parts/surgeon_mask.png" id="6_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://monster/back.gdshader" id="6_vonwv"]
+[ext_resource type="Texture2D" uid="uid://cg3oo6qo0whi0" path="res://parts/bee_hat.png" id="7_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://d0olomib4o3l5" path="res://parts/bunny_hindleg.png" id="7_qx6ai"]
-[ext_resource type="Texture2D" uid="uid://42hi8i6auyau" path="res://parts/spider_hat.png" id="7_u0q66"]
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://b87lqp2kycs4v" path="res://parts/spider_cape.png" id="13_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://bi55pv056bt5d" path="res://parts/bee_sweater.png" id="13_3wgw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -75,7 +75,7 @@ rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset"]
 texture = ExtResource("6_3wgw3")
-offset = Vector2(4, 15)
+offset = Vector2(-9, 7)
 metadata/_edit_lock_ = true
 
 [node name="HAT" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
@@ -85,8 +85,8 @@ position = Vector2(23.905, -34.75)
 rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAT/HAT_anim_offset"]
-texture = ExtResource("7_u0q66")
-offset = Vector2(0, -5)
+texture = ExtResource("7_3wgw3")
+offset = Vector2(-5, -7)
 
 [node name="EAR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset"]
 position = Vector2(3.905, -20.59)
@@ -171,7 +171,7 @@ position = Vector2(-15.065, -31.86)
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
 texture = ExtResource("13_3wgw3")
-offset = Vector2(13, 30)
+offset = Vector2(12, 28)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" groups=["HurtBox"]]

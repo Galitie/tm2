@@ -25,6 +25,7 @@ var fire_sfx = load("uid://cqg3cxtk5uaua")
 var dice_sfx = load("uid://c00bd21trfdkx")
 var menu_sfx = load("uid://cna6kybw6lt4g")
 var flip_sfx = load("uid://c5r5jokara1wr")
+var notice_sfx = load("uid://byg7ghukr83gn")
 
 var current_button
 
@@ -90,6 +91,8 @@ func burn_card(button):
 func show_card_unlock_effect():
 	%CardsUnlocked.global_position = current_button.global_position
 	%CardsUnlocked.visible = true
+	%AudioStreamPlayer.stream = notice_sfx
+	%AudioStreamPlayer.play()
 	await get_tree().create_timer(2).timeout
 	%CardsUnlocked.visible = false
 

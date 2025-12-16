@@ -16,7 +16,6 @@ Sabrina likes:
 	Bats
 
 Features to make it playtest ready:
-	Cards unlocked feedback for clicking a card
 	Make winners screen nicer
 	
 	Make unlockables actually unlock something?

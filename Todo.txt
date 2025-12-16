@@ -16,7 +16,7 @@ Sabrina likes:
 	Bats
 
 Features to make it playtest ready:
-	Make unlockables actually unlock something
+	Make unlockables actually unlock something?
 	
 	Constipated should go away after some amount of poop / bomb upgrades?
 	- Not sure why but when I remove constipated to poop summon and bomber, it crashes the game

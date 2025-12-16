@@ -249,6 +249,7 @@ func set_customize_mode():
 		player.monster.state_machine.transition_state("upgradestart")
 
 
+
 func set_upgrade_mode():
 	transition_audio("uid://bnfvpcj04flvs", 1)
 	current_mode = Modes.UPGRADE
@@ -420,6 +421,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button):
 
 
 func apply_card_resource_effects(card_resource : Resource, player):
+	player.monster.animation_player.play("upgrade_react")
 	var attributes = [
 		[card_resource.attribute_1, card_resource.attribute_amount_1],
 		[card_resource.attribute_2, card_resource.attribute_amount_2],

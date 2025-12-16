@@ -7,6 +7,7 @@ var got_up : bool
 var health_fill_style := load("uid://b1cqxdsndopa") as StyleBox
 var at_target: bool = false
 
+
 func Enter():
 	got_up = false
 	monster.get_node("HPBar").visible = false
@@ -27,7 +28,6 @@ func Enter():
 		get_tree().create_tween().tween_method(func(value): monster.root.material.set_shader_parameter("outer_color", value), Color(0.0, 0.0, 0.0, 0.0), monster.player_color, 0.25)
 	else:
 		got_up = true
-		# Should be "run", but it's debatable if I should make run animations
 		monster.animation_player.play("walk", -1.0, 2.0)
 	monster.toggle_collisions(false)
 	monster.velocity = Vector2()
@@ -45,8 +45,10 @@ func animation_finished(anim_name: String):
 		else:
 			s.x = abs(s.x)  
 		root.scale = s
-		# Should be "run", but it's debatable if I should make run animations
 		monster.animation_player.play("walk", -1.0, 2.0)
+	
+	if anim_name == "upgrade_react":
+		monster.animation_player.play("idle")
 
 
 func Physics_Update(_delta:float):
@@ -60,3 +62,4 @@ func Physics_Update(_delta:float):
 		root.scale = s
 		monster.global_position = monster.target_point
 		monster.animation_player.play("idle")
+		Transitioned.emit("upgradeidle")

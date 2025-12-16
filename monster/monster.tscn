@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=41 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://buxkyj050pe6q" path="res://states/idle.gd" id="20_772v6"]
 [ext_resource type="Texture2D" uid="uid://c03daih7paasg" path="res://UI/healthbar.png" id="20_u8wmr"]
 [ext_resource type="Script" uid="uid://cxwy6h8ky36h" path="res://states/hurt.gd" id="21_j21k1"]
+[ext_resource type="Script" uid="uid://ctj23y5tbs706" path="res://monster/upgrade_idle.gd" id="21_kgxju"]
 [ext_resource type="Script" uid="uid://ljj4p0w8v65v" path="res://states/punch.gd" id="22_lrr1d"]
 [ext_resource type="AudioStream" uid="uid://dfjgpdho3lcvd" path="res://sounds/homerun.ogg" id="23_6py8i"]
 [ext_resource type="Script" uid="uid://cwu4k2733qfhb" path="res://states/block.gd" id="23_x38pf"]
@@ -272,6 +273,9 @@ script = ExtResource("24_u8wmr")
 
 [node name="UpgradeStart" type="Node" parent="StateMachine"]
 script = ExtResource("27_14274")
+
+[node name="UpgradeIdle" type="Node" parent="StateMachine"]
+script = ExtResource("21_kgxju")
 
 [node name="FightStart" type="Node" parent="StateMachine"]
 script = ExtResource("28_hqfdu")

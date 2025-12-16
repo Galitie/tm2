@@ -58,9 +58,9 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 			%AudioStreamPlayer.stream = fire_sfx
 			%AudioStreamPlayer.play()
 			button.burn_vfx()
-			await get_tree().create_timer(1.0).timeout
+			await get_tree().create_timer(.25).timeout
 		else:
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.50).timeout
 			
 		bump_upgrade_title()
 	input_paused = false
@@ -79,7 +79,7 @@ func burn_card(button):
 	%AudioStreamPlayer.stream = fire_sfx
 	%AudioStreamPlayer.play()
 	button.burn_vfx()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(.25).timeout
 	input_paused = false
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ba3142spsuljy"]
+[gd_scene load_steps=24 format=3 uid="uid://ba3142spsuljy"]
 
 [ext_resource type="Script" uid="uid://b8r2s0kgideul" path="res://UI/player_upgrade_panel.gd" id="1_kvryu"]
 [ext_resource type="Texture2D" uid="uid://co52gfugmmrle" path="res://UI/reroll_off.png" id="2_16opa"]
@@ -12,12 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://jq58cfiae1qk" path="res://UI/reroll_active_3.png" id="5_euvj6"]
 [ext_resource type="FontFile" uid="uid://2nkx18spb2a2" path="res://fonts/HappySnailMailDemoFilled-lz25.ttf" id="7_euvj6"]
 [ext_resource type="Texture2D" uid="uid://ls0wwygbrhxo" path="res://UI/cardstack.png" id="8_tirdh"]
+[ext_resource type="Texture2D" uid="uid://d4f7bgf8bga7" path="res://UI/more_stamps_1.png" id="13_yyuhs"]
+[ext_resource type="Texture2D" uid="uid://bjn6obuw8uacw" path="res://UI/more_stamps_2.png" id="14_1fm0i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
 content_margin_left = 5.0
 content_margin_right = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_euvj6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyuhs"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -47,7 +49,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_8t47v"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tirdh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1fm0i"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -77,7 +79,7 @@ shader_parameter/burnColor = Color(0, 0, 0, 1)
 [sub_resource type="ViewportTexture" id="ViewportTexture_qi4jj"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyuhs"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mfoc8"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
 shader_parameter/debug = false
@@ -152,6 +154,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_mfoc8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_yyuhs")
+}, {
+"duration": 2.0,
+"texture": ExtResource("14_1fm0i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="PlayerUpgradePanel" type="MarginContainer" groups=["PlayerUpgradePanel"]]
 custom_minimum_size = Vector2(275, 0)
 offset_left = -1.0
@@ -203,19 +219,19 @@ theme_override_font_sizes/font_size = 16
 text = "🔥 BANISH [x3]"
 
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_euvj6")
+material = SubResource("ShaderMaterial_yyuhs")
 position = Vector2(135, 141)
 texture = SubResource("ViewportTexture_8t47v")
 deck_order = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_tirdh")
+material = SubResource("ShaderMaterial_1fm0i")
 position = Vector2(135, 262)
 texture = SubResource("ViewportTexture_qi4jj")
 deck_order = 1
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
-material = SubResource("ShaderMaterial_yyuhs")
+material = SubResource("ShaderMaterial_mfoc8")
 position = Vector2(135, 384)
 texture = SubResource("ViewportTexture_tirdh")
 
@@ -298,5 +314,14 @@ z_index = 4
 position = Vector2(62, 171)
 rotation = -0.436332
 texture = ExtResource("5_22x0x")
+
+[node name="CardsUnlocked" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 999
+position = Vector2(130, 201)
+sprite_frames = SubResource("SpriteFrames_mfoc8")
+autoplay = "default"
+frame_progress = 0.689442
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Reroll" to="." method="_on_button_pressed"]

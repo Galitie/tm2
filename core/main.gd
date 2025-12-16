@@ -398,7 +398,7 @@ func _on_upgrade_over_delay_timer_timeout():
 	set_fight_mode()
 
 
-func card_pressed(card : Sprite2D, acc_index : int, input, button):
+func card_pressed(card : Sprite2D, acc_index : int, input, button): #on_button_pressed
 	var player : Player = card.upgrade_panel.player
 	if input == JOY_BUTTON_Y and player.banish_amount > 0:
 		player.banish_amount -= 1

@@ -26,6 +26,8 @@ var dice_sfx = load("uid://c00bd21trfdkx")
 var menu_sfx = load("uid://cna6kybw6lt4g")
 var flip_sfx = load("uid://c5r5jokara1wr")
 
+var current_button
+
 
 func _ready():
 	for resource in resource_array:
@@ -45,6 +47,8 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 	input_paused = true
 	if input == JOY_BUTTON_A and player.player_state != Player.PlayerState.BOT:
 		input_paused = true
+		if button.chosen_resource.unlocked_cards.size():
+			await show_card_unlock_effect()
 		%Stamp.visible = true
 		%Stamp.global_position = button.global_position
 		%Stamp.scale = Vector2(2.0, 2.0)
@@ -52,7 +56,6 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 		get_tree().create_tween().tween_property(%Stamp, "visible", false, 1.0)
 		%AudioStreamPlayer.stream = stamp_sfx
 		%AudioStreamPlayer.play()
-		
 		if button.is_unique():
 			await %AudioStreamPlayer.finished
 			%AudioStreamPlayer.stream = fire_sfx
@@ -69,6 +72,7 @@ func press_card(button, acc_idx: int = 0, input = null) -> void:
 	button._on_button_pressed(acc_idx, input, button)
 
 
+
 func bump_upgrade_title() -> void:
 	await get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.4, 1.4), 0.1).finished
 	get_tree().create_tween().tween_property(upgrade_title, "scale", Vector2(1.0, 1.0), 0.1)
@@ -83,6 +87,13 @@ func burn_card(button):
 	input_paused = false
 
 
+func show_card_unlock_effect():
+	%CardsUnlocked.global_position = current_button.global_position
+	%CardsUnlocked.visible = true
+	await get_tree().create_timer(2).timeout
+	%CardsUnlocked.visible = false
+
+
 func _physics_process(_delta):
 	if input_paused:
 		return
@@ -93,6 +104,7 @@ func _physics_process(_delta):
 		if player.player_state == player.PlayerState.BOT:
 			input_paused = true
 			var button = button_array[1]
+			current_button = button
 			await get_tree().create_timer(1).timeout
 			press_card(button, 1, JOY_BUTTON_A)
 			input_paused = false
@@ -114,7 +126,7 @@ func _physics_process(_delta):
 				current_user_position_in_button_array = 0
 			# Really shitty way to see what index player is on
 			var button = button_array[current_user_position_in_button_array]
-			
+			current_button = button
 			if button == reroll_button:
 				select_reroll()
 			else:
@@ -138,10 +150,12 @@ func _physics_process(_delta):
 			var input = JOY_BUTTON_Y
 			if button != reroll_button:
 				press_card(button, 0, input)
+			current_button = button
 
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_A):
 			var button = button_array[current_user_position_in_button_array]
 			var input = JOY_BUTTON_A
+			current_button = button
 			if button == reroll_button:
 				_on_button_pressed()
 			else:
@@ -166,6 +180,7 @@ func _physics_process(_delta):
 					press_card(button, 0, input)
 		
 		var button = button_array[current_user_position_in_button_array]
+		current_button = button
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_B) and button != reroll_button and button.accessory_panel.visible:
 			%AudioStreamPlayer.stream = flip_sfx
 			%AudioStreamPlayer.play()
@@ -189,6 +204,7 @@ func _physics_process(_delta):
 						button.deselect_accessory(other_button)
 	else:
 		var button = button_array[current_user_position_in_button_array]
+		current_button = button
 		if button == reroll_button:
 			deselect_reroll()
 		else:
@@ -197,7 +213,6 @@ func _physics_process(_delta):
 
 func disable_cards():
 	for card in upgrade_cards:
-		card.disable()
 		card.hide()
 
 
@@ -231,7 +246,6 @@ func setup_cards(reroll = false):
 		card.choose_card_resource(random_resource)
 		if reroll:
 			card.flip()
-		card.enable()
 
 
 func update_victory_points():
@@ -250,6 +264,7 @@ func setup_rerolls():
 		pass
 		#bonus_text = " Includes Bonus"
 	set_reroll_text()
+
 
 func set_reroll_text() -> void:
 	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + str(player.rerolls) + "[font_size=26]"

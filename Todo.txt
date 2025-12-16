@@ -16,6 +16,9 @@ Sabrina likes:
 	Bats
 
 Features to make it playtest ready:
+	Cards unlocked feedback for clicking a card
+	Make winners screen nicer
+	
 	Make unlockables actually unlock something?
 	
 	Constipated should go away after some amount of poop / bomb upgrades?
@@ -23,16 +26,10 @@ Features to make it playtest ready:
 	- Tries to reference items that don't exist
 	- Think it might be a cyclical resource bug(?)
 	
-	Add dance animation (hook up in dance state)
-	Add leaderboard visuals 
 	Outline texture cut off 
 	Shield breaker add effect animation (Raam?)
 	Bullets from poops not clear when they disappear, maybe hit and disappear animation 
-	More Accessories 
 	Show preview of accessory or body part?
-	Sound - Background, effects etc.
-	Menus - sound, etc.
-	Intro menu?
 	
 	Bonuses:
 		Comments about the bunnies, lethal company style

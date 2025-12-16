@@ -6,11 +6,9 @@ signal card_pressed(resource, player, input, button)
 var chosen_resource : CardResourceScript
 var upgrade_panel : PlayerUpgradePanel
 @onready var accessory_panel = $SubViewport/Sprite2D/AccessoryInfo
-#@onready var card_info_panel = $CardInfo
 @onready var accessories = $SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/Accessories.get_children()
 var valid_accessories: Array = []
 @onready var accessory_header = $SubViewport/Sprite2D/AccessoryInfo/MarginContainer/VBoxContainer/TitleDescription/Header
-#@onready var x_texture = load("res://none_icon.png")
 
 enum CardType { COMMON, UNIQUE, SPECIAL }
 var type: CardType = CardType.COMMON
@@ -30,6 +28,7 @@ var type: CardType = CardType.COMMON
 var selected: bool = false
 var showing_accessories: bool = false
 
+
 func _ready() -> void:
 	material.set_shader_parameter("inset", 0.4)
 	material.set_shader_parameter("color", Color("0000006e"))
@@ -46,19 +45,24 @@ func _ready() -> void:
 	
 	z_index = deck_order
 
+
 func _on_button_pressed(acc_index : int = 0, input = null, button = null):
 	emit_signal("card_pressed", self, acc_index, input, button) # Caught by game scene
-	
+
+
 func burn_vfx() -> void:
 	await get_tree().create_tween().tween_method(set_radius, 0.0, 1.0, 1.0).finished
 	await get_tree().create_tween().tween_method(set_radius, 1.0, 0.0, 0.0).finished
-	
+
+
 func set_radius(radius: float) -> void:
 	material.set_shader_parameter("radius", radius)
-	
+
+
 func is_unique() -> bool:
 	return chosen_resource.unique
-	
+
+
 func select() -> void:
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("inset", value), 0.4, 0.0, 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("shadow_offset", value), Vector2(-10.0, -10.0), Vector2(-20.0, -20.0), 0.15)
@@ -70,7 +74,8 @@ func select() -> void:
 	material.set_shader_parameter("rand_trans_power", 1.0)
 	z_index = 3
 	selected = true
-	
+
+
 func deselect() -> void:
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("inset", value), 0.0, 0.4, 0.15)
 	get_tree().create_tween().tween_method(func(value): material.set_shader_parameter("shadow_offset", value), Vector2(-20.0, -20.0), Vector2(-10.0, -10.0), 0.15)
@@ -79,6 +84,7 @@ func deselect() -> void:
 	banish.visible = false
 	z_index = deck_order
 	selected = false
+
 
 func append_attribute(label, amount) -> void:
 	if !label.is_empty():
@@ -117,6 +123,7 @@ func change_text_style() -> void:
 			stats.add_theme_color_override("font_outline_color", Color("c7dcba"))
 			accessory_header.add_theme_color_override("default_color", Color("27502f"))
 			accessory_header.add_theme_color_override("font_outline_color", Color("c7dcba"))
+
 
 func set_banish_text():
 	banish.text = "[font_size=17]x[/font_size]" + str(upgrade_panel.player.banish_amount) + "[font_size=26]🔥"
@@ -236,34 +243,3 @@ func hide_accessories(instant: bool = false) -> void:
 
 func disabled() -> bool:
 	return false
-	#return card_info_panel.disabled
-
-func reset_card():
-	pass
-	#hide_text()
-	#%Title.visible = true
-	#%Tags.text = ""
-	#accessories = []
-	#var accessories_panel = $AccessoryInfo/MarginContainer/VBoxContainer/Accessories
-	#for panel in accessories_panel.get_children():
-		#panel.queue_free()
-	
-func disable():
-	pass
-	#$CardInfo.disabled = true
-
-func enable():
-	pass
-	#$CardInfo.disabled = false
-
-func make_acc_button(texture : Texture2D):
-	pass
-	#var panel = PanelContainer.new()
-	#var button = Button.new()
-	#button.icon = texture
-	#button.expand_icon = true
-	#button.custom_minimum_size = Vector2(50,50)
-	#button.size = Vector2(50,50)
-	#panel.add_child(button)
-	#$AccessoryInfo/MarginContainer/VBoxContainer/Accessories.add_child(panel)
-	#accessories.append(panel)	

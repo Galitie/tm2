@@ -31,4 +31,4 @@ attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
 unlocked_cards = Array[ExtResource("2_k3gwj")]([ExtResource("3_7lgqm"), ExtResource("4_hpxhg"), ExtResource("5_jdhl5"), ExtResource("6_repba"), ExtResource("7_2nk6j")])
-remove_cards = Array[ExtResource("2_k3gwj")]([])
+remove_cards = Array[ExtResource("2_k3gwj")]([null])

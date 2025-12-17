@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CardResourceScript" load_steps=11 format=3 uid="uid://2dwrrigu8sux"]
+[gd_resource type="Resource" script_class="CardResourceScript" load_steps=12 format=3 uid="uid://2dwrrigu8sux"]
 
 [ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_sef8m"]
 [ext_resource type="Resource" uid="uid://doxppe0k1k3hy" path="res://parts/pirate_eyepatch.tres" id="2_efbun"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://d1mv22yolom78" path="res://card/cards/bigger_poops.tres" id="6_thbba"]
 [ext_resource type="Resource" uid="uid://cn4ovy3i6wd8s" path="res://card/cards/special_poop.tres" id="7_7upvk"]
 [ext_resource type="Resource" uid="uid://c52w22vdw33ci" path="res://card/cards/bomb_faster.tres" id="8_thbba"]
+[ext_resource type="Resource" uid="uid://4pdhr1tis8vw" path="res://card/cards/poop_on_hit.tres" id="11_e6qrd"]
 
 [resource]
 script = ExtResource("2_rdoa5")
@@ -31,5 +32,5 @@ attribute_amount_2 = 0
 attribute_3 = 0
 attribute_label_3 = ""
 attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("2_rdoa5")]([ExtResource("3_lbr1t"), ExtResource("4_t01w5"), ExtResource("5_7upvk"), ExtResource("6_thbba"), ExtResource("7_7upvk"), ExtResource("8_thbba")])
+unlocked_cards = Array[ExtResource("2_rdoa5")]([ExtResource("3_lbr1t"), ExtResource("4_t01w5"), ExtResource("5_7upvk"), ExtResource("6_thbba"), ExtResource("7_7upvk"), ExtResource("8_thbba"), ExtResource("11_e6qrd")])
 remove_cards = Array[ExtResource("2_rdoa5")]([])

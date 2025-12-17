@@ -37,7 +37,6 @@ func load_game():
 		return
 
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	print(save_nodes)
 	for i in save_nodes:
 		i.queue_free()
 

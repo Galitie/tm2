@@ -131,7 +131,6 @@ func _on_hurtbox_area_entered(area):
 				
 		elif area.is_in_group("Bomb"):
 			if area.owner is Drop:
-				print("found drop")
 				attacker = area.owner.monster
 				take_damage(attacker, current_state, true, attack_type.BOMB)
 			else:
@@ -183,7 +182,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			return
 	if type == attack_type.MONSTER:
 		if shield_broken:
-			print("got into the type MONSTER")
+			pass
 			#TODO:Add shield broken effect here?
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
@@ -210,10 +209,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		thorn_effect()
 	elif type == attack_type.BOMB:
 		if attacker != null:
-			print("attacker: ", attacker)
 			if player.bomb_no_damage and attacker == self:
 				block_feedback()
-				print("Take no damage from own bomb")
 				return
 		random_modifier = randi_range(-3,0)
 		damage = round(10 + random_modifier)

@@ -290,7 +290,7 @@ func set_upgrade_mode():
 
 
 func transition_audio(dest_uid: String, length: float = 1.0) -> void:
-	await get_tree().create_tween().tween_property(audio_player_loop, "volume_db", -80.0, length).finished
+	await get_tree().create_tween().tween_property(audio_player_loop, "volume_db", -40.0, length).finished
 	audio_player_loop.stream = load(dest_uid)
 	audio_player_loop.play()
 	await get_tree().create_tween().tween_property(audio_player_loop, "volume_db", 0.00, length).finished

@@ -507,7 +507,6 @@ autowrap_mode = 2
 unique_name_in_owner = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_right = 1161.0
 offset_bottom = 656.0

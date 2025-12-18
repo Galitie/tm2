@@ -625,7 +625,7 @@ func handle_game_over():
 		var win_player = winners[0]
 		$Camera2D/CanvasLayer/RoundLabel.hide()
 		$Camera2D/CanvasLayer/Specials.hide()
-		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER! (Press START to play again)"
+		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER!! Press START to play again"
 		$Camera2D/CanvasLayer/WinnersLabel.show()
 		for player in players:
 			player.monster.target_point = player.customize_pos

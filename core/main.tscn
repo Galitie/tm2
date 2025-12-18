@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=15 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dx62hcn5hjs1n" path="res://stages/grass.png" id="2_brq4u"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="4_efxa6"]
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://effects/sudden_death.gdshader" id="5_dg77c"]
+[ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="6_510js"]
 [ext_resource type="Texture2D" uid="uid://cxxncdpnkjj26" path="res://transparent.png" id="6_ycdy4"]
 [ext_resource type="FontFile" uid="uid://b2elclwq486ug" path="res://fonts/BackheelFreeTrial-5yz6V.otf" id="7_w48qg"]
 [ext_resource type="PackedScene" uid="uid://dr81edv1mxj0r" path="res://UI/leaderboard.tscn" id="8_jsmgm"]
@@ -145,8 +146,9 @@ offset_top = 173.0
 offset_right = 1001.0
 offset_bottom = 314.0
 size_flags_horizontal = 4
+theme = ExtResource("6_510js")
 theme_override_font_sizes/font_size = 50
-text = "WINNER! (Press START to play again)
+text = "WINNER! Press START to play again
 "
 horizontal_alignment = 1
 
@@ -156,6 +158,7 @@ offset_left = 3.0
 offset_top = 609.0
 offset_right = 1154.0
 offset_bottom = 649.0
+theme = ExtResource("6_510js")
 theme_override_constants/separation = 25
 alignment = 1
 
@@ -164,28 +167,28 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 22
 
 [node name="Special2" type="Label" parent="Camera2D/CanvasLayer/Specials"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 22
 
 [node name="Special3" type="Label" parent="Camera2D/CanvasLayer/Specials"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 22
 
 [node name="Special4" type="Label" parent="Camera2D/CanvasLayer/Specials"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 22
 
 [node name="Menu" parent="Camera2D/CanvasLayer" instance=ExtResource("8_xhu5d")]
 

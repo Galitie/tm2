@@ -17,7 +17,6 @@ Sabrina likes:
 
 Features to make it playtest ready:
 	Make winners screen nicer
-	
 	Make unlockables actually unlock something?
 	
 	Constipated should go away after some amount of poop / bomb upgrades?

@@ -492,7 +492,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 			"specialattack":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
-				player.special_name = "QUICK(ER) ATTACK"
+				player.special_name = "QUICK ATTACK"
 				player.has_special = true
 			"specialpoop":
 				player.monster.state_machine.state_choices[card_resource.Type].clear()
@@ -710,6 +710,13 @@ func reset_specials_text():
 		if player.monster.state_machine.special_values != []:
 			specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 			specials[index].text = "Press Y: " + player.special_name
+			var tween := get_tree().create_tween()
+			tween.set_loops(5)
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.set_ease(Tween.EASE_IN_OUT)
+
+			tween.tween_property(specials[index], "scale", Vector2(1.05, 1.05), 0.5)
+			tween.tween_property(specials[index], "scale", Vector2(1, 1), 0.5)
 		index += 1
 
 

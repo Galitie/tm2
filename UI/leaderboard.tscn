@@ -29,6 +29,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_ksej1")
 text = "Leaderboard"
 
 [node name="Board" type="ItemList" parent="VBoxContainer"]

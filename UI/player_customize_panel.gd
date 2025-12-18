@@ -95,7 +95,7 @@ func _physics_process(_delta):
 
 func create_stylebox():
 	new_stylebox_normal.set_border_width_all(5)
-	new_stylebox_normal.border_color = Color.SKY_BLUE
+	new_stylebox_normal.border_color = Color.GREEN
 
 
 func handle_bot():
@@ -136,7 +136,6 @@ func _on_button_pressed(button_index):
 		2:
 			waiting_for_ready_up = true
 			finished_customizing.emit(player)
-			new_stylebox_normal.border_color = Color.GREEN
 			new_stylebox_normal.bg_color = Color.GREEN
 			done_text.text = "Please Wait..."
 			done_description.text = "Press 'B' to go back to customizing"

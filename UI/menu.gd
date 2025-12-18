@@ -126,14 +126,11 @@ func create_stylebox():
 	new_stylebox_normal.border_width_bottom = 5
 	new_stylebox_normal.border_width_left = 5
 	new_stylebox_normal.border_width_right = 5
-	new_stylebox_normal.border_color = Color.SKY_BLUE
+	new_stylebox_normal.border_color = Color.GREEN
 
 
 func _on_button_pressed(button_index):
 	input_paused = true
-	new_stylebox_normal.border_color = Color.GREEN
-	new_stylebox_normal.bg_color = Color.GREEN
-	await get_tree().create_timer(0.15).timeout
 	
 	if !human_players_selected:
 		match button_index:

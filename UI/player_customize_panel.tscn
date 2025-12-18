@@ -23,6 +23,7 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="VBoxContainer/Title"]
 layout_mode = 2
+theme = ExtResource("2_j53iu")
 theme_override_font_sizes/font_size = 28
 text = "CUSTOMIZE"
 horizontal_alignment = 1
@@ -55,6 +56,7 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Custom2/CardInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+alignment = 1
 
 [node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Custom2/CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -63,14 +65,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "CHANGE NAME"
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="VBoxContainer/Custom2/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "Generate a new name"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Custom1" type="PanelContainer" parent="VBoxContainer"]
@@ -99,6 +105,7 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Custom1/CardInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+alignment = 1
 
 [node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Custom1/CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -108,15 +115,19 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "CHANGE COLOR"
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="VBoxContainer/Custom1/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "Get a random new color"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Dude Window" type="MarginContainer" parent="VBoxContainer"]
@@ -155,6 +166,7 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Done/CardInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+alignment = 1
 
 [node name="TitleDescription" type="VBoxContainer" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -163,14 +175,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("2_j53iu")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "READY UP!"
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="VBoxContainer/Done/CardInfo/MarginContainer/VBoxContainer/TitleDescription"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "I'm finished customizing"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]

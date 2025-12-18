@@ -27,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0h2wq")
 script = ExtResource("1_wfiwe")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -54,6 +55,7 @@ theme_override_constants/margin_bottom = 0
 
 [node name="Label" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/UpgradeTitle"]
 layout_mode = 2
+theme = ExtResource("1_0h2wq")
 theme_override_font_sizes/font_size = 28
 text = "Amount of Human Players"
 horizontal_alignment = 1
@@ -92,7 +94,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "1"
 horizontal_alignment = 1
@@ -131,6 +133,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "2"
 horizontal_alignment = 1
@@ -169,6 +172,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "3"
 horizontal_alignment = 1
@@ -207,6 +211,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "4"
 horizontal_alignment = 1
@@ -246,6 +251,7 @@ theme = ExtResource("1_0h2wq")
 [node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "No Bots"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo"]
@@ -275,6 +281,7 @@ theme = ExtResource("1_0h2wq")
 [node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "1"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo"]
@@ -304,6 +311,7 @@ theme = ExtResource("1_0h2wq")
 [node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/2"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "2"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo"]
@@ -333,6 +341,7 @@ theme = ExtResource("1_0h2wq")
 [node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "3"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo"]
@@ -409,6 +418,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "Normal - 7 Rounds"
 horizontal_alignment = 1
@@ -447,6 +457,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "Short - 5 Rounds"
 horizontal_alignment = 1
@@ -485,6 +496,7 @@ alignment = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 theme_override_font_sizes/font_size = 22
 text = "Long - 10 Rounds"
 horizontal_alignment = 1
@@ -495,6 +507,7 @@ autowrap_mode = 2
 unique_name_in_owner = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1161.0
 offset_bottom = 656.0

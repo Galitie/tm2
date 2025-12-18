@@ -44,7 +44,7 @@ func _copy_leaders_to_visible_list(players):
 	for leader in ordered_leaders:
 		var icon : Texture2D = null
 		for player in players:
-			if leader.contains(player.monster.mon_name):
+			if leader.find(player.monster.mon_name) != -1:
 				icon = load("res://UI/star.png")
 		$VBoxContainer/Board.add_item(leader, icon)
 

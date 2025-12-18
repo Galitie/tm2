@@ -605,7 +605,6 @@ func check_if_game_over() -> bool:
 
 
 func handle_game_over():
-	print("Game over - check for ties")
 	upgrade_menu.pause_all_inputs()
 	current_mode = Modes.GAME_END
 	upgrade_menu.visible = false

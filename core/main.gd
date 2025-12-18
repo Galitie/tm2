@@ -21,7 +21,8 @@ var sudden_death_speed : int = 100
 
 @onready var camera: Camera2D = $Camera2D
 var camera_tracking: bool = false
-@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_player_loop: AudioStreamPlayer = $AudioStreamPlayerLoop
+@onready var audio_player_single : AudioStreamPlayer = $AudioStreamPlayerSingle
 
 @onready var rankings = $Camera2D/CanvasLayer/Rankings
 
@@ -117,7 +118,7 @@ func freeze_frame(monster: Monster) -> void:
 func _ready():
 	sudden_death_overlay.material.set_shader_parameter("Radius", 2.5)
 	Globals.load_game()
-	transition_audio("uid://bgdq7m0i3hjva", .50)
+	transition_audio("uid://bgdq7m0i3hjva", 0.0)
 
 func set_up_game():
 	# Generate player nodes off of player states
@@ -230,7 +231,8 @@ func count_death(monster: Monster):
 		return
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
-		transition_audio("uid://clrn10gshrneo", .50)
+		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
+		$AudioStreamPlayerSingle.play()
 		sudden_death_timer.stop()
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
@@ -251,7 +253,7 @@ func set_customize_mode():
 
 
 func set_upgrade_mode():
-	transition_audio("uid://bnfvpcj04flvs", 1)
+	transition_audio("uid://bnfvpcj04flvs", .5)
 	current_mode = Modes.UPGRADE
 	clean_up_screen()
 	if current_round == 0:
@@ -288,10 +290,10 @@ func set_upgrade_mode():
 
 
 func transition_audio(dest_uid: String, length: float = 1.0) -> void:
-	await get_tree().create_tween().tween_property(audio_player, "volume_db", -80.0, length).finished
-	audio_player.volume_db = 0.0
-	audio_player.stream = load(dest_uid)
-	audio_player.play()
+	await get_tree().create_tween().tween_property(audio_player_loop, "volume_db", -80.0, length).finished
+	audio_player_loop.stream = load(dest_uid)
+	get_tree().create_tween().tween_property(audio_player_loop, "volume_db", 0.00, length)
+	audio_player_loop.play()
 
 
 func set_fight_mode():
@@ -299,7 +301,7 @@ func set_fight_mode():
 	current_round += 1
 	upgrade_menu.pause_all_inputs()
 	upgrade_menu.visible = false
-	transition_audio("uid://mysomdex1y7k", 1)
+	transition_audio("uid://mysomdex1y7k", .5)
 	reset_specials_text()
 	$Camera2D/CanvasLayer/Specials.visible = true
 	rankings.visible = true
@@ -320,8 +322,8 @@ func set_fight_mode():
 func _on_sudden_death_timer_timeout():
 	camera_tracking = true
 	
-	audio_player.stream = load("uid://bnd7vmemesdbl")
-	audio_player.play()
+	audio_player_loop.stream = load("uid://bnd7vmemesdbl")
+	audio_player_loop.play()
 	
 	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", SUDDEN_DEATH_MAX_RADIUS, 0.8).set_trans(Tween.TRANS_EXPO)
 	get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.2, 1.2), 0.8).set_trans(Tween.TRANS_ELASTIC)
@@ -618,7 +620,8 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
-		transition_audio("uid://bgdq7m0i3hjva", .50)
+		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
+		$AudioStreamPlayerSingle.play()
 		var win_player = winners[0]
 		$Camera2D/CanvasLayer/RoundLabel.hide()
 		$Camera2D/CanvasLayer/Specials.hide()

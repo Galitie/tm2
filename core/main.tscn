@@ -198,10 +198,14 @@ scale = Vector2(1153.78, 650)
 texture = ExtResource("6_ycdy4")
 centered = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayerLoop" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("8_vivmo")
 parameters/looping = true
+
+[node name="AudioStreamPlayerSingle" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_vivmo")
 
 [node name="PauseTimer" type="Timer" parent="."]
 process_mode = 2

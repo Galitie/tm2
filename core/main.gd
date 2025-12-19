@@ -415,7 +415,10 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button): #on_button_p
 	if card.chosen_resource.parts_and_acc.size() > 0:
 		if acc_index < card.chosen_resource.parts_and_acc.size() :
 			var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]
-			MonsterGeneration.AddPartToMonster(player.monster, part)
+			var partNode: MonsterPartNode = MonsterGeneration.GetMonsterPartNode(player.monster, part)
+			partNode.sprite.offset = part.offset
+			partNode.sprite.texture = part.texture
+			partNode.modulate.a = 1.0
 	var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
 	player.upgrade_points -= 1
 	card.upgrade_panel.set_upgrade_text()

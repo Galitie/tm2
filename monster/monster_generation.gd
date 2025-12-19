@@ -74,7 +74,7 @@ func ModulateMonster(monster: Monster, color: Color) -> void:
 			part.sprite.material.set_shader_parameter("modulate", color)
 
 
-func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
+func GetMonsterPartNode(monster: Monster, monster_part: MonsterPart) -> MonsterPartNode:
 	var part_to_replace: MonsterPartNode
 	var front_part_to_replace: MonsterPartNode
 	var back_part_to_replace: MonsterPartNode
@@ -93,11 +93,14 @@ func AddPartToMonster(monster: Monster, monster_part: MonsterPart) -> void:
 	else:
 		part_to_replace = front_part_to_replace if back_part_to_replace == null else back_part_to_replace
 			
-	if part_to_replace != null:
-		part_to_replace.sprite.offset = monster_part.offset
-		part_to_replace.sprite.texture = monster_part.texture
-	else:
+	#if part_to_replace != null:
+	#	return part_to_replace
+		#part_to_replace.sprite.offset = monster_part.offset
+		#part_to_replace.sprite.texture = monster_part.texture
+	if part_to_replace == null:
 		print("Part with type %s not found on monster: discarding part" % MonsterPart.PART_TYPE.keys()[monster_part.type])
+		
+	return part_to_replace
 
 
 func Generate(monster: Monster, parent: Node2D, new_part: MonsterPart, _connection: MonsterConnection = null, parent_part: MonsterPart = null) -> Node2D:

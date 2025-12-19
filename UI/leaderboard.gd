@@ -22,12 +22,15 @@ func save():
 
 func handle_leaderboard(players : Array):
 	if players != null:
-		for player in players:
-			_add_leader(player)
+		_add_leaders(players)
 	_sort_leaders()
 	_copy_leaders_to_visible_list(players)
-	show()
 
+func toggle_leaderboard():
+	if $VBoxContainer/Board.visible:
+		$VBoxContainer/Board.hide()
+	else:
+		$VBoxContainer/Board.show()
 
 func _sort_leaders():
 	var ordered_leaders_keys = leaders.keys()
@@ -49,17 +52,12 @@ func _copy_leaders_to_visible_list(players):
 		$VBoxContainer/Board.add_item(leader, icon)
 
 
-func _add_leader(player : Player):
-	leaders[player.monster.mon_name] = player.victory_points
+func _add_leaders(players : Array):
+	for player in players:
+		leaders[player.monster.mon_name] = player.victory_points
 	var mon_names : Array = leaders.keys()
 	mon_names.sort_custom(func(a, b): return int(leaders[a]) > int(leaders[b]))
 	
 	if mon_names.size() > 10:
 		for i in range(10, mon_names.size()):
 			leaders.erase(mon_names[i])
-
-# leaders {"monster name" : points}
-# ordered_leaders ["string with monster name"]
-# players [player.mon_name]
-# if leader in ordered_leader.has[player.mon_name]:
-# add star icon

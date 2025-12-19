@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=45 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
+[ext_resource type="Texture2D" uid="uid://cg3oo6qo0whi0" path="res://parts/bee_hat.png" id="2_fhc63"]
 [ext_resource type="Texture2D" uid="uid://c73ac2auwuwbw" path="res://effects/thorn_aura.png" id="3_hqfdu"]
 [ext_resource type="Script" uid="uid://dqxdicc1n2yxv" path="res://states/zombie.gd" id="7_3x5v3"]
 [ext_resource type="Script" uid="uid://cf6ii5kxgqg8h" path="res://states/getupand_wander.gd" id="8_14274"]
@@ -31,6 +32,25 @@
 [ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://states/upgrade.gd" id="27_14274"]
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://states/fight_start.gd" id="28_hqfdu"]
 [ext_resource type="Texture2D" uid="uid://bn3ju1wjp60ea" path="res://projectiles/block.png" id="30_hqfdu"]
+
+[sub_resource type="Curve" id="Curve_j2wpd"]
+_data = [Vector2(0.005797103, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.22654456), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ydc0v"]
+curve = SubResource("Curve_j2wpd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ylcih"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 53.02
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 255.87
+initial_velocity_max = 255.87
+gravity = Vector3(0, 300, 0)
+alpha_curve = SubResource("CurveTexture_ydc0v")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lqt3o"]
 resource_local_to_scene = true
@@ -183,6 +203,17 @@ y_sort_enabled = true
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
+pre_loaded_cards = null
+player_color = null
+
+[node name="WinnerParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 12
+texture = ExtResource("2_fhc63")
+lifetime = 0.85
+explosiveness = 0.06
+randomness = 0.08
+process_material = SubResource("ParticleProcessMaterial_ylcih")
 
 [node name="root" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_lqt3o")

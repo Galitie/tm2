@@ -37,6 +37,7 @@ var player : Player
 @onready var slime_timer = $SlimeTimer
 @onready var audio_player = $AudioStreamPlayer
 @onready var aura = $aura
+@onready var winner_particles = $WinnerParticles
 
 var block_texture = load("uid://bn3ju1wjp60ea")
 var mirror_block_texture = load("uid://ck7a7uoebctrw")

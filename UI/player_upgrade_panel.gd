@@ -29,6 +29,9 @@ var notice_sfx = load("uid://byg7ghukr83gn")
 
 var current_button
 
+var old_part_node: MonsterPartNode = null
+var old_part_texture: Texture2D = null
+var old_part_offset: Vector2 = Vector2.ZERO
 
 func _ready():
 	for resource in resource_array:
@@ -116,8 +119,8 @@ func _physics_process(_delta):
 		if current_user_position_in_button_array == 0:
 			select_reroll()
 			
-		var dpad_vertical_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
-		var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
+		var dpad_vertical_input: int = Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP)
+		var dpad_horizontal_input: int = Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT)
 		
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_UP):
 			%AudioStreamPlayer.stream = menu_sfx
@@ -144,6 +147,7 @@ func _physics_process(_delta):
 							other_button.deselect()
 						if other_button.showing_accessories:
 							other_button.hide_accessories()
+							reset_part()
 		
 			in_accessory_menu = false
 		
@@ -179,6 +183,11 @@ func _physics_process(_delta):
 						for other_button in button.valid_accessories:
 							if other_button != accessory_button:
 								button.deselect_accessory(other_button)
+								
+						var part: MonsterPart = button.chosen_resource.parts_and_acc[current_user_position_in_accessory_array]
+						var part_node: MonsterPartNode = MonsterGeneration.GetMonsterPartNode(player.monster, part)
+						set_old_part(part_node)
+						preview_part(part_node, part)
 				else:
 					press_card(button, 0, input)
 		
@@ -189,6 +198,7 @@ func _physics_process(_delta):
 			%AudioStreamPlayer.play()
 			button.hide_accessories()
 			in_accessory_menu = false
+			reset_part()
 		
 		# For navigating the accessory menu
 		if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_LEFT) and button != reroll_button || Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_DPAD_RIGHT) and button != reroll_button:
@@ -201,6 +211,15 @@ func _physics_process(_delta):
 				if current_user_position_in_accessory_array > button.valid_accessories.size() - 1:
 					current_user_position_in_accessory_array = 0
 				var accessory_button = button.valid_accessories[current_user_position_in_accessory_array]
+				if current_user_position_in_accessory_array < button.valid_accessories.size() - 1:
+					var part : MonsterPart = button.chosen_resource.parts_and_acc[current_user_position_in_accessory_array]
+					var part_node: MonsterPartNode = MonsterGeneration.GetMonsterPartNode(player.monster, part)
+					reset_part()
+					if part_node != old_part_node:
+						set_old_part(part_node)
+					preview_part(part_node, part)
+				else:
+					reset_part()
 				button.select_accessory(accessory_button)
 				for other_button in button.valid_accessories:
 					if other_button != accessory_button:
@@ -213,11 +232,24 @@ func _physics_process(_delta):
 		else:
 			button.deselect()
 
+func set_old_part(part_node: MonsterPartNode) -> void:
+	old_part_node = part_node
+	old_part_texture = part_node.sprite.texture
+	old_part_offset = part_node.sprite.offset
+
+func preview_part(part_node: MonsterPartNode, part: MonsterPart) -> void:
+	part_node.sprite.offset = part.offset
+	part_node.sprite.texture = part.texture
+	part_node.modulate.a = 0.5
+
+func reset_part() -> void:
+	old_part_node.sprite.texture = old_part_texture
+	old_part_node.sprite.offset = old_part_offset
+	old_part_node.modulate.a = 1.0
 
 func disable_cards():
 	for card in upgrade_cards:
 		card.hide()
-
 
 func select_reroll() -> void:
 	get_tree().create_tween().tween_property(reroll_button, "scale", Vector2(1.1, 1.1), 0.15)

@@ -23,7 +23,6 @@ Features to make it playtest ready:
 	
 	Make winners screen nicer / more celebratory? Confetti / bees?
 	
-	Hide / view leaderboard on winners screen?
 	Make unlockables actually unlock something? Maybe? Not sure how much we will play
 	so it might not be worth "hiding" content
 	
@@ -35,7 +34,6 @@ Features to make it playtest ready:
 	Outline texture cut off 
 	Shield breaker add effect animation (Raam?)
 	Bullets from poops not clear when they disappear, maybe hit and disappear animation 
-	Show preview of accessory or body part?
 	
 	Bonuses:
 		Comments about the bunnies, lethal company style

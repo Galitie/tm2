@@ -11,6 +11,7 @@ var current_user_position_in_round_button_array : int = 0
 
 var new_stylebox_normal = StyleBoxFlat.new()
 var input_paused : bool = false
+var started = false
 
 var human_players_selected : bool = false
 var bot_players_selected : bool = false
@@ -26,7 +27,8 @@ func _ready():
 
 
 func _physics_process(_delta):
-	if Controller.IsButtonJustPressed(0, JOY_BUTTON_START):
+	if Controller.IsButtonJustPressed(0, JOY_BUTTON_START) and !started:
+		started = true
 		%AudioStreamPlayer.stream = menu_sfx
 		%AudioStreamPlayer.play()
 		$TextureRect.hide()
@@ -203,6 +205,7 @@ func _on_button_pressed(button_index):
 		input_paused = false
 	
 	if human_players_selected and bot_players_selected and rounds_selected:
+		print("goooo")
 		input_paused = true
 		hide()
 		Globals.game.set_up_game()
@@ -215,6 +218,7 @@ func build_bot_buttons(human_player_amount : int):
 			input_paused = true
 			hide()
 			Globals.game.set_up_game()
+			print("hello? 4 humans")
 			return
 		3:
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()

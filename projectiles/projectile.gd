@@ -11,6 +11,7 @@ var emitter
 
 @onready var pop_texture = load("uid://d1ke45wf2abuj")
 
+
 func _ready() -> void:
 	lifespan = randf_range(1,1.5)
 

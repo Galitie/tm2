@@ -36,14 +36,11 @@ func _physics_process(_delta):
 		return
 	
 	var dpad_vertical_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP)
-	var dpad_horizontal_input: int =  Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_RIGHT) - Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_LEFT)
 	if !human_players_selected:
 		var button = human_button_array[current_user_position_in_human_button_array]
 		
 		if current_user_position_in_human_button_array == 0:
 			button.add_theme_stylebox_override("panel", new_stylebox_normal)
-		
-
 		
 		if Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_DOWN) || Controller.IsButtonJustPressed(0, JOY_BUTTON_DPAD_UP):
 			%AudioStreamPlayer.stream = menu_sfx
@@ -92,7 +89,7 @@ func _physics_process(_delta):
 			if button.get_child(0).disabled == false:
 				_on_button_pressed(current_user_position_in_bot_button_array)
 	
-	if human_players_selected and bot_players_selected:
+	elif human_players_selected and bot_players_selected:
 		var button = round_button_array[current_user_position_in_round_button_array]
 
 		if current_user_position_in_round_button_array == 0:
@@ -155,6 +152,7 @@ func _on_button_pressed(button_index):
 		build_bot_buttons(button_index + 1)
 		human_players_selected = true
 		input_paused = false
+	
 	elif !bot_players_selected:
 		input_paused = true
 		bot_players_selected = true
@@ -191,8 +189,8 @@ func _on_button_pressed(button_index):
 		input_paused = false
 		$MarginContainer/BotsMenu.hide()
 		$MarginContainer/RoundMenu.show()
-	
-	elif human_players_selected and bot_players_selected:
+
+	elif human_players_selected and bot_players_selected and !rounds_selected:
 		input_paused = true
 		rounds_selected = true
 		match button_index:

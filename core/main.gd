@@ -50,6 +50,12 @@ func _physics_process(_delta: float) -> void:
 	for i: int in range(depth_entities.size()):
 		var entity = depth_entities[i]
 		entity.z_index = i
+	if current_mode == Modes.GAME_END:
+		for player in players:
+			if Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y):
+				var leaderboard = get_tree().get_first_node_in_group("Leaderboard")
+				leaderboard.toggle_leaderboard()
+		
 
 
 func debug_stuff():
@@ -207,7 +213,9 @@ func _process(_delta):
 			var alive_monsters: int
 			for monster: Monster in monsters:
 				if monster.current_hp > 0:
+					@warning_ignore("unassigned_variable_op_assign")
 					monster_avg_position += monster.global_position
+					@warning_ignore("unassigned_variable_op_assign")
 					alive_monsters += 1
 			if alive_monsters:
 				camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)
@@ -294,7 +302,6 @@ func transition_audio(dest_uid: String, length: float = 1.0) -> void:
 	audio_player_loop.stream = load(dest_uid)
 	audio_player_loop.play()
 	await get_tree().create_tween().tween_property(audio_player_loop, "volume_db", 0.00, length).finished
-	
 
 
 func set_fight_mode():
@@ -416,7 +423,7 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button): #on_button_p
 		if acc_index < card.chosen_resource.parts_and_acc.size() :
 			var part : MonsterPart = card.chosen_resource.parts_and_acc[acc_index]
 			MonsterGeneration.AddPartToMonster(player.monster, part)
-	var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
+	#var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
 	player.upgrade_points -= 1
 	card.upgrade_panel.set_upgrade_text()
 	apply_card_resource_effects(card.chosen_resource, player)
@@ -590,7 +597,6 @@ func reroll_pressed(upgrade_panel):
 		player.rerolls -= 1
 		upgrade_panel.setup_cards(true)
 	if player.rerolls != 0 and player.upgrade_points > 0:
-		var bonus_text = ""
 		if player.bonus_rerolls > 0:
 			pass
 	upgrade_panel.set_reroll_text()
@@ -620,9 +626,9 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
+		winners[0].monster.winner_particles.emitting = true
 		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
 		$AudioStreamPlayerSingle.play()
-		var win_player = winners[0]
 		$Camera2D/CanvasLayer/RoundLabel.hide()
 		$Camera2D/CanvasLayer/Specials.hide()
 		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER!! Press START to play again"
@@ -631,8 +637,9 @@ func handle_game_over():
 			player.monster.target_point = player.customize_pos
 			if player not in winners:
 				player.get_child(0).hide()
-		var leaderboard = get_tree().get_nodes_in_group("Leaderboard")
-		await leaderboard[0].handle_leaderboard(players)
+		var leaderboard = get_tree().get_first_node_in_group("Leaderboard")
+		await leaderboard.handle_leaderboard(players)
+		leaderboard.show()
 		var unlocks = get_tree().get_nodes_in_group("Unlocks")
 		unlocks = unlocks[0]
 		unlocks.add_counter("total_games_played", 1)

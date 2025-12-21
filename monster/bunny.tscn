@@ -170,6 +170,7 @@ position = Vector2(-15.065, -31.86)
 [node name="CAPE_anim_offset" type="Node2D" parent="BODY/CAPE"]
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset"]
+visible = false
 texture = ExtResource("13_3wgw3")
 offset = Vector2(12, 28)
 metadata/_edit_lock_ = true

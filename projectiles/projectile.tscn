@@ -18,4 +18,7 @@ texture = ExtResource("2_dgwo2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_sxmqc")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = 1.0
+
 [connection signal="area_entered" from="Area2D" to="." method="area_entered"]

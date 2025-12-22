@@ -126,7 +126,7 @@ func change_text_style() -> void:
 
 
 func set_banish_text():
-	banish.text = "[font_size=17]x[/font_size]" + str(upgrade_panel.player.banish_amount) + "[font_size=26]🔥"
+	banish.text = "[font_size=17]x[/font_size]" + str(upgrade_panel.player.banish_amount) + "[font_size=24]🔥"
 
 
 func choose_card_resource(card_resource):

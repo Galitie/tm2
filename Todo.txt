@@ -18,6 +18,10 @@ Sabrina likes:
 
 
 Features to make it playtest ready:
+	Wasn't clear what banish does
+	Didn't know reroll was
+	Didn't know what the upgrade points were
+	
 	Round animation - center of screen, go up to the corner?
 	Place and point graphics / animation?
 	

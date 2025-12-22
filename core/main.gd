@@ -177,7 +177,6 @@ func set_up_game():
 		card.connect("card_pressed", card_pressed)
 	for player_upgrade_panel in player_upgrade_panels:
 		player_upgrade_panel.connect("reroll_pressed", reroll_pressed)
-		player_upgrade_panel.update_banish_text()
 	
 	if debug_mode:
 		Globals.game.debug_mode = true
@@ -412,7 +411,6 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button): #on_button_p
 	var player : Player = card.upgrade_panel.player
 	if input == JOY_BUTTON_Y and player.banish_amount > 0:
 		player.banish_amount -= 1
-		card.upgrade_panel.update_banish_text()
 		await player.upgrade_panel.burn_card(button)
 		player.upgrade_panel.unlocked_resources.erase(card.chosen_resource)
 		check_if_upgrade_round_over(card, player)
@@ -534,7 +532,6 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.faster_bombs = true
 			"more_banish":
 				player.banish_amount += 3
-				player.upgrade_panel.update_banish_text()
 			"bombs_no_damage":
 				player.bomb_no_damage = true
 			_:

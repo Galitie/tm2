@@ -302,11 +302,11 @@ func setup_rerolls():
 
 
 func set_reroll_text() -> void:
-	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + str(player.rerolls) + "[font_size=26]"
+	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.rerolls) + "[/font_size]"
 
 
 func set_upgrade_text() -> void:
-	upgrade_title.get_node("Label").text = "[font_size=17]x[/font_size]" + str(player.upgrade_points) + "[font_size=26]"
+	upgrade_title.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.upgrade_points) + "[/font_size]"
 
 # reroll button
 func _on_button_pressed():
@@ -327,14 +327,6 @@ func create_stylebox():
 func remove_from_card_pool(resource):
 	if unlocked_resources.has(resource):
 		unlocked_resources.erase(resource)
-
-
-func update_banish_text():
-	if player.banish_amount > 0:
-		%Banish.text = "🔥" + " BANISH " + "[x" + str(player.banish_amount) + "]"
-	else:
-		%Banish.add_theme_color_override("font_color", Color(1,1,1,.5))
-		%Banish.text = "NO 🔥 LEFT"
 
 
 func update_place_text(player):

@@ -203,8 +203,6 @@ y_sort_enabled = true
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
-pre_loaded_cards = null
-player_color = null
 
 [node name="WinnerParticles" type="GPUParticles2D" parent="."]
 emitting = false

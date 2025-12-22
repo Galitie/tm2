@@ -236,7 +236,7 @@ position = Vector2(135, 384)
 texture = SubResource("ViewportTexture_tirdh")
 
 [node name="Upgrades" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(174, 38)
+position = Vector2(195.99998, 38)
 texture = ExtResource("8_tirdh")
 
 [node name="Label" type="RichTextLabel" parent="VBoxContainer/Upgrades"]
@@ -256,14 +256,13 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("7_euvj6")
 theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
-text = "[font_size=17]x[/font_size]10[font_size=26]"
+text = "[font_size=14]x[/font_size][font_size=26]5[/font_size]"
 fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
 [node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
-position = Vector2(78, 38)
-scale = Vector2(0.8, 0.8)
+position = Vector2(88, 38)
 sprite_frames = SubResource("SpriteFrames_tirdh")
 animation = &"done"
 
@@ -279,7 +278,7 @@ offset_right = -48.5
 offset_bottom = -2.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/default_color = Color(0.862745, 0.113725, 0.113725, 1)
+theme_override_colors/default_color = Color(0.1764706, 0.27058825, 1, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 2

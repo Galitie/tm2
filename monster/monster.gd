@@ -204,6 +204,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			damage = 1
 		modify_hp(-damage)
 	elif type == attack_type.THORN:
+		await get_tree().create_timer(.25).timeout
 		damage = 1
 		mod_text = " THORN"
 		modify_hp(-damage)

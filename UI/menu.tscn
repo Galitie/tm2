@@ -242,19 +242,19 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[node name="0" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="3" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
-text = "No Bots"
+text = "3"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -267,37 +267,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo/MarginContainer"]
-layout_mode = 2
-theme = ExtResource("1_0h2wq")
-alignment = 1
-
-[node name="1" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("1_0h2wq")
-
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1"]
-layout_mode = 2
-theme = ExtResource("1_0h2wq")
-theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
-text = "1"
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_0h2wq")
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
@@ -332,19 +302,19 @@ layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="3" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="1" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
-text = "3"
+text = "1"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -357,7 +327,37 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+alignment = 1
+
+[node name="0" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0h2wq")
+
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0"]
+layout_mode = 2
+theme = ExtResource("1_0h2wq")
+theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
+text = "No Bots"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0h2wq")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
@@ -524,10 +524,10 @@ frame_progress = 0.967242
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= [1]]
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= [2]]
 [connection signal="pressed" from="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo" to="." method="_on_button_pressed" binds= [3]]
-[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo" to="." method="_on_button_pressed" binds= [0]]
-[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= ["1"]]
-[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= ["2"]]
 [connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= ["3"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= ["2"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= ["1"]]
+[connection signal="pressed" from="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo" to="." method="_on_button_pressed" binds= [0]]
 [connection signal="pressed" from="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo" to="." method="_on_button_pressed" binds= [1]]
 [connection signal="pressed" from="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo" to="." method="_on_button_pressed" binds= [2]]

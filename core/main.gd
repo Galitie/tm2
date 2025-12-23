@@ -629,6 +629,7 @@ func handle_game_over():
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:
+		$GameEndParticles.emitting = true
 		winners[0].monster.winner_particles.emitting = true
 		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
 		$AudioStreamPlayerSingle.play()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=17 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dx62hcn5hjs1n" path="res://stages/grass.png" id="2_brq4u"]
 [ext_resource type="PackedScene" uid="uid://caig5oumsc857" path="res://UI/upgrade_menu.tscn" id="3_4c57u"]
+[ext_resource type="Texture2D" uid="uid://b5sjapvyrr6u7" path="res://projectiles/poo.png" id="3_7ua4h"]
 [ext_resource type="PackedScene" uid="uid://cgti6mrpdekpx" path="res://UI/customize_menu.tscn" id="4_efxa6"]
 [ext_resource type="Shader" uid="uid://b6o0xr86w36i8" path="res://effects/sudden_death.gdshader" id="5_dg77c"]
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="6_510js"]
@@ -12,6 +13,15 @@
 [ext_resource type="AudioStream" uid="uid://bnd7vmemesdbl" path="res://sounds/sudden_death.ogg" id="8_vivmo"]
 [ext_resource type="PackedScene" uid="uid://405m25td441q" path="res://UI/menu.tscn" id="8_xhu5d"]
 [ext_resource type="PackedScene" uid="uid://2jnj3vk2ckgs" path="res://UI/unlocks.tscn" id="11_rayt5"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ntwa4"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(600, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, 98, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4v2"]
 size = Vector2(1174, 20)
@@ -45,6 +55,16 @@ grow_vertical = 2
 texture = ExtResource("2_brq4u")
 stretch_mode = 1
 metadata/_edit_lock_ = true
+
+[node name="GameEndParticles" type="GPUParticles2D" parent="."]
+z_index = 999
+position = Vector2(556, 0)
+emitting = false
+amount = 60
+texture = ExtResource("3_7ua4h")
+lifetime = 4.0
+randomness = 0.12
+process_material = SubResource("ParticleProcessMaterial_ntwa4")
 
 [node name="Walls" type="StaticBody2D" parent="."]
 
@@ -148,6 +168,8 @@ offset_right = 1001.0
 offset_bottom = 314.0
 size_flags_horizontal = 4
 theme = ExtResource("6_510js")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 50
 text = "WINNER! Press START to play again
 "

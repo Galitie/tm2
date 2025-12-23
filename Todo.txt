@@ -18,9 +18,9 @@ Sabrina likes:
 
 
 Features to make it playtest ready:
+	Considering moving banish to top of screen and upgrade points to cards?
 	
 	Round animation - center of screen, go up to the corner?
-	Place and point graphics / animation?
 	
 	Make winners screen nicer / more celebratory? Confetti / bees?
 	

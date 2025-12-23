@@ -144,10 +144,8 @@ func _on_button_pressed(button_index):
 			3:
 				for player in 4:
 					Globals.player_states[player] = Player.PlayerState.HUMAN
-				input_paused = true
-				hide()
-				Globals.game.set_up_game()
-				return
+				$MarginContainer/RoundMenu.show()
+				bot_players_selected = true
 				
 		$MarginContainer/HumanMenu.hide()
 		$MarginContainer/BotsMenu.show()
@@ -160,10 +158,7 @@ func _on_button_pressed(button_index):
 		bot_players_selected = true
 		match bot_button_array[int(button_index)].get_child(0).text:
 			"No Bots":
-				input_paused = true
-				hide()
-				Globals.game.set_up_game()
-				return
+				pass
 			"1":
 				var counter = 1
 				var index = 0
@@ -215,11 +210,7 @@ func _on_button_pressed(button_index):
 func build_bot_buttons(human_player_amount : int):
 	match human_player_amount:
 		4:
-			input_paused = true
-			hide()
-			Globals.game.set_up_game()
-			print("hello? 4 humans")
-			return
+			$MarginContainer/BotsMenu.hide()
 		3:
 			$"MarginContainer/BotsMenu/VBoxContainer/2".hide()
 			$"MarginContainer/BotsMenu/VBoxContainer/3".hide()

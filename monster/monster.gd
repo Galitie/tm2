@@ -253,16 +253,17 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			zombify()
 			return
 		toggle_collisions(false)
+		if player.death_explode and !Globals.is_sudden_death_mode:
+			explode_on_death()
 		if Globals.is_sudden_death_mode:
 			send_flying(attacker)
-		if player.death_explode:
-			explode_on_death()
 		Globals.game.count_death(self)
 		unlocks.add_counter("total_bunnies_killed", 1)
 
 
 #TODO: Raam explosion animation???
 func explode_on_death():
+	mod_monster(Color("ff0e1b"))
 	temp_area = Area2D.new()
 	var temp_collision = CollisionShape2D.new()
 	var temp_shape_resource = CircleShape2D.new()
@@ -280,6 +281,7 @@ func explode_on_death():
 	temp_area.add_child(temp_timer)
 	temp_timer.wait_time = .30
 	temp_timer.autostart = true
+	await get_tree().create_timer(.50).timeout
 	call_deferred("add_child", temp_area)
 
 

@@ -1,16 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://bk6jk4xfo8vaq"]
+[gd_scene load_steps=6 format=4 uid="uid://bk6jk4xfo8vaq"]
 
 [ext_resource type="Script" uid="uid://bxqxd74wk8tqd" path="res://projectiles/projectile.gd" id="1_qxf0c"]
+[ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_7nr1q"]
 [ext_resource type="Texture2D" uid="uid://b3x04u88qmh5n" path="res://projectiles/projectile_placeholder.png" id="2_dgwo2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ypqm"]
+resource_local_to_scene = true
+shader = ExtResource("2_7nr1q")
+shader_parameter/alpha = 1.0
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/line_thickness = 2.5
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(0, 0, 0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
 radius = 6.0
 
 [node name="Projectile" type="Node2D" groups=["CleanUp", "Projectile"]]
-z_index = 2
+z_index = 999
 script = ExtResource("1_qxf0c")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_7ypqm")
+position = Vector2(0, 14)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(0, -14)
 texture = ExtResource("2_dgwo2")
 
 [node name="Area2D" type="Area2D" parent="." groups=["Projectile"]]

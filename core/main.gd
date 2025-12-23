@@ -238,12 +238,13 @@ func count_death(monster: Monster):
 		return
 	current_knocked_out_monsters.append(monster)
 	if current_knocked_out_monsters.size() == players.size() - 1 || current_knocked_out_monsters.size() >= players.size():
-		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
-		$AudioStreamPlayerSingle.play()
 		sudden_death_timer.stop()
+		await get_tree().create_timer(.5).timeout
 		for winner in monsters:
 			if !current_knocked_out_monsters.has(winner):
 				winner.state_machine.transition_state("dance")
+		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
+		$AudioStreamPlayerSingle.play()
 		$RoundOverDelayTimer.start()
 
 

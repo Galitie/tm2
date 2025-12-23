@@ -18,7 +18,6 @@ Sabrina likes:
 
 
 Features to make it playtest ready:
-	Projectiles always above and have outlines
 	Winner of round shown for longer, wait before final hit and victory
 	
 	Considering moving banish to top of screen and upgrade points to cards?

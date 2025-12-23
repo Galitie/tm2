@@ -92,7 +92,7 @@ shape = SubResource("RectangleShape2D_vp4v2")
 [node name="Players" type="Node" parent="."]
 
 [node name="RoundOverDelayTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 3.5
 one_shot = true
 
 [node name="UpgradeOverDelayTimer" type="Timer" parent="."]

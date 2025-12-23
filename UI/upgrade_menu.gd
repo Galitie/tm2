@@ -13,8 +13,6 @@ func setup():
 		player_upgrade_panel.setup_rerolls()
 		player_upgrade_panel.set_upgrade_text()
 		player_upgrade_panel.update_victory_points()
-		if player_upgrade_panel.player.player_state == Player.PlayerState.BOT:
-			player_upgrade_panel.hide_bot_stats()
 
 
 func pause_all_inputs():

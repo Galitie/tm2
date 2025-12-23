@@ -15,10 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://d4f7bgf8bga7" path="res://UI/more_stamps_1.png" id="13_yyuhs"]
 [ext_resource type="Texture2D" uid="uid://bjn6obuw8uacw" path="res://UI/more_stamps_2.png" id="14_1fm0i"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
-content_margin_left = 5.0
-content_margin_right = 5.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyuhs"]
 resource_local_to_scene = true
 shader = ExtResource("5_ad54b")
@@ -154,6 +150,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1e1ab"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mfoc8"]
 animations = [{
 "frames": [{
@@ -177,66 +177,29 @@ size_flags_vertical = 3
 script = ExtResource("1_kvryu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 650)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="UpgradeTitle" type="MarginContainer" parent="VBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
-
-[node name="Label" type="Label" parent="VBoxContainer/UpgradeTitle"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "UPGRADE"
-horizontal_alignment = 1
-vertical_alignment = 3
-autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="Reroll" type="Button" parent="VBoxContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
-text = "🎲 x3"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 2
-
-[node name="Banish" type="Label" parent="VBoxContainer/HBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "🔥 BANISH [x3]"
-
 [node name="UpgradeCard1" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
 material = SubResource("ShaderMaterial_yyuhs")
-position = Vector2(135, 141)
+position = Vector2(142, 147)
 texture = SubResource("ViewportTexture_8t47v")
 deck_order = 2
 
 [node name="UpgradeCard2" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
 material = SubResource("ShaderMaterial_1fm0i")
-position = Vector2(135, 262)
+position = Vector2(143, 266)
 texture = SubResource("ViewportTexture_qi4jj")
 deck_order = 1
 
 [node name="UpgradeCard3" parent="VBoxContainer" groups=["UpgradeCard"] instance=ExtResource("4_5aacw")]
 material = SubResource("ShaderMaterial_mfoc8")
-position = Vector2(135, 384)
+position = Vector2(144, 387)
 texture = SubResource("ViewportTexture_tirdh")
 
 [node name="Upgrades" type="Sprite2D" parent="VBoxContainer"]
-position = Vector2(186.99998, 38)
+position = Vector2(194.99998, 44)
 texture = ExtResource("8_tirdh")
 
 [node name="Label" type="RichTextLabel" parent="VBoxContainer/Upgrades"]
@@ -268,7 +231,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="reroll" type="AnimatedSprite2D" parent="VBoxContainer"]
-position = Vector2(69, 38)
+position = Vector2(77, 44)
 sprite_frames = SubResource("SpriteFrames_tirdh")
 animation = &"done"
 
@@ -297,15 +260,41 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Reroll" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1e1ab")
+text = "🎲 x3"
+
+[node name="vbox" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 
-[node name="Place" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/vbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 60
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/vbox/MarginContainer"]
 layout_mode = 2
 
-[node name="Victory" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="hboxPlace" type="HBoxContainer" parent="VBoxContainer/vbox/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Place" type="Label" parent="VBoxContainer/vbox/MarginContainer/HBoxContainer/hboxPlace"]
+layout_mode = 2
+
+[node name="hboxVictory" type="HBoxContainer" parent="VBoxContainer/vbox/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 100
+
+[node name="Victory" type="Label" parent="VBoxContainer/vbox/MarginContainer/HBoxContainer/hboxVictory"]
 layout_mode = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

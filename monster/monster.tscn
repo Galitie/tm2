@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://bn3ju1wjp60ea" path="res://projectiles/block.png" id="30_hqfdu"]
 
 [sub_resource type="Curve" id="Curve_j2wpd"]
-_data = [Vector2(0.005797103, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.22654456), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.005797103, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.43713576), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ydc0v"]
@@ -208,7 +208,6 @@ script = ExtResource("1_ni8ke")
 emitting = false
 amount = 12
 texture = ExtResource("2_fhc63")
-lifetime = 0.85
 explosiveness = 0.06
 randomness = 0.08
 process_material = SubResource("ParticleProcessMaterial_ylcih")

@@ -6,6 +6,8 @@ signal reroll_pressed(upgrade_panel)
 @onready var reroll_button = $VBoxContainer/reroll
 @onready var upgrade_cards = [$VBoxContainer/UpgradeCard1, $VBoxContainer/UpgradeCard2, $VBoxContainer/UpgradeCard3 ]
 @onready var upgrade_title = $VBoxContainer/Upgrades
+@onready var victory = $VBoxContainer/vbox/MarginContainer/HBoxContainer/hboxVictory/Victory
+@onready var place = $VBoxContainer/vbox/MarginContainer/HBoxContainer/hboxPlace/Place
 
 var player : Player
 
@@ -284,7 +286,7 @@ func setup_cards(reroll = false):
 
 
 func update_victory_points():
-	$VBoxContainer/VBoxContainer/Victory.text = "👑 " + str(player.victory_points)
+	victory.text = "👑 " + str(player.victory_points)
 
 
 func setup_rerolls():
@@ -294,7 +296,6 @@ func setup_rerolls():
 	else:
 		reroll_button.visible = true
 		upgrade_title.visible = true
-	var bonus_text = ""
 	if player.bonus_rerolls > 0:
 		pass
 		#bonus_text = " Includes Bonus"
@@ -332,15 +333,10 @@ func remove_from_card_pool(resource):
 
 func update_place_text(player):
 	if player.place == 1:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "1st"
+		place.text = "🏆 " + "1st"
 	elif player.place == 2:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "2nd"
+		place.text = "🏆 " + "2nd"
 	elif player.place == 3:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "3rd"
+		place.text = "🏆 " + "3rd"
 	elif player.place == 4:
-		$VBoxContainer/VBoxContainer/Place.text = "🏆 " + "4th"
-
-
-func hide_bot_stats():
-	$VBoxContainer/HBoxContainer/Reroll.hide()
-	$VBoxContainer/HBoxContainer/HBoxContainer/Banish.hide()
+		place.text = "🏆 " + "4th"

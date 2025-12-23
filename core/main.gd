@@ -319,6 +319,7 @@ func set_fight_mode():
 	else:
 		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
 	for player in players:
+		player.monster.winner_particles.emitting = false
 		var monster = player.monster
 		monster.move_name_fight()
 		monster.target_point = player.fight_pos
@@ -380,6 +381,8 @@ func _on_round_over_delay_timer_timeout():
 				prev_points = player.victory_points
 
 			player.place = current_place
+			if player.place == 1:
+				player.monster.winner_particles.emitting = true
 			player.rerolls = rerolls + player.bonus_rerolls
 
 		for player in players:
@@ -735,26 +738,26 @@ func add_player_node(player_number):
 			player_node.name = "Player1"
 			monster.player_color = Color.RED
 			player_node.customize_pos = Vector2(149,400)
-			player_node.upgrade_pos = Vector2(149, 575)
+			player_node.upgrade_pos = Vector2(149, 560)
 			player_node.fight_pos = Vector2(252,200)
 		2:
 			player_node.name = "Player2"
 			monster.player_color = Color.BLUE
 			player_node.customize_pos = Vector2(436,400)
-			player_node.upgrade_pos = Vector2(436, 575)
+			player_node.upgrade_pos = Vector2(436, 560)
 			player_node.fight_pos = Vector2(870,171)
 
 		3:
 			player_node.name = "Player3"
 			monster.player_color = Color.YELLOW
 			player_node.customize_pos = Vector2(720,400)
-			player_node.upgrade_pos = Vector2(720, 575)
+			player_node.upgrade_pos = Vector2(720, 560)
 			player_node.fight_pos = Vector2(240,427)
 		4:
 			player_node.name = "Player4"
 			monster.player_color = Color.GREEN
 			player_node.customize_pos = Vector2(1000,400)
-			player_node.upgrade_pos = Vector2(1000, 575)
+			player_node.upgrade_pos = Vector2(1000, 560)
 			player_node.fight_pos = Vector2(860,455)
 	
 	monster.add_to_group("Monster")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=47 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
@@ -31,6 +31,8 @@
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="25_s0vvg"]
 [ext_resource type="Script" uid="uid://cmy3x5k4a4fuf" path="res://states/upgrade.gd" id="27_14274"]
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://states/fight_start.gd" id="28_hqfdu"]
+[ext_resource type="Script" uid="uid://bkltgssabl5ti" path="res://states/win.gd" id="28_j2wpd"]
+[ext_resource type="Script" uid="uid://cgu2kercj8fnr" path="res://states/lose.gd" id="29_ydc0v"]
 [ext_resource type="Texture2D" uid="uid://bn3ju1wjp60ea" path="res://projectiles/block.png" id="30_hqfdu"]
 
 [sub_resource type="Curve" id="Curve_j2wpd"]
@@ -319,6 +321,12 @@ script = ExtResource("17_lqt3o")
 
 [node name="Bombing" type="Node" parent="StateMachine"]
 script = ExtResource("18_a7j2b")
+
+[node name="Win" type="Node" parent="StateMachine"]
+script = ExtResource("28_j2wpd")
+
+[node name="Lose" type="Node" parent="StateMachine"]
+script = ExtResource("29_ydc0v")
 
 [node name="HPBar" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true

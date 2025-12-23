@@ -640,7 +640,9 @@ func handle_game_over():
 		for player in players:
 			player.monster.target_point = player.customize_pos
 			if player not in winners:
-				player.get_child(0).hide()
+				player.monster.state_machine.transition_state("lose")
+			else:
+				player.monster.state_machine.transition_state("win")
 		var leaderboard = get_tree().get_first_node_in_group("Leaderboard")
 		await leaderboard.handle_leaderboard(players)
 		leaderboard.show()

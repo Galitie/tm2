@@ -302,11 +302,12 @@ func setup_rerolls():
 
 
 func set_reroll_text() -> void:
-	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.rerolls) + "[/font_size]"
+	reroll_button.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.rerolls) + " REROLL" + "[/font_size]"
 
 
 func set_upgrade_text() -> void:
-	upgrade_title.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.upgrade_points) + "[/font_size]"
+	upgrade_title.get_node("Label").text = "[font_size=14]x[/font_size]" + "[font_size=26]" + str(player.upgrade_points) + " UPGRADE" + "[br]" + "POINTS"
+	upgrade_title.get_node("Label").horizontal_alignment = 1
 
 # reroll button
 func _on_button_pressed():

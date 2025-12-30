@@ -281,13 +281,13 @@ func set_upgrade_mode():
 			player.monster.move_speed -= sudden_death_speed
 	sudden_death_label.visible = false
 	upgrade_menu.unpause_all_inputs()
-	rankings.visible = false
-	rankings.text = "Previous round points:\n"
+	#rankings.visible = false
+	#rankings.text = "Previous round points:\n"
 	$Camera2D/CanvasLayer/Specials.visible = false
 
 	for player in players:
 		player.special_used = false
-		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		#rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 		var monster = player.monster
 		if !monster.is_in_group("DepthEntity"):
 			monster.add_to_group("DepthEntity")
@@ -310,7 +310,7 @@ func set_fight_mode():
 	transition_audio("uid://mysomdex1y7k", .5)
 	reset_specials_text()
 	$Camera2D/CanvasLayer/Specials.visible = true
-	rankings.visible = true
+	#rankings.visible = true
 	if current_round == total_rounds:
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
 		$Camera2D/CanvasLayer/RoundLabel.add_theme_font_size_override("font_size", 36)
@@ -618,13 +618,13 @@ func handle_game_over():
 	upgrade_menu.visible = false
 	clean_up_screen()
 	players.sort_custom(func(a, b): return a.victory_points > b.victory_points)
-	rankings.visible = true
-	rankings.text = "Rankings:\n"
+	#rankings.visible = true
+	#rankings.text = "Rankings:\n"
 	for player in players:
 		player.monster.move_name_upgrade()
 		player.monster.unzombify()
 		player.monster.state_machine.transition_state("upgradestart")
-		rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
+		#rankings.text += str(player.name + " (" + player.monster.mon_name + "): " + str(player.victory_points) + " points") + "\n"
 	var highest_score = players[0].victory_points
 	winners = players.filter(func(p): return p.victory_points == highest_score)
 	if winners.size() == 1:

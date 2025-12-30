@@ -269,8 +269,8 @@ func set_upgrade_mode():
 			player.rerolls = 3
 	if current_round == total_rounds - 1:
 		round_label.add_theme_color_override("font_color", Color.RED)
-		round_label.text = "FINAL UPGRADE ROUND"
-		round_label.global_position = Vector2(23,0)
+		round_label.text = " FINAL UPGRADE ROUND"
+		round_label.global_position = Vector2(30,0)
 	for player in players:
 		player.monster.unzombify()
 		player.monster.state_machine.transition_state("upgradestart")
@@ -313,9 +313,9 @@ func set_fight_mode():
 	#rankings.visible = true
 	if current_round == total_rounds:
 		round_label.add_theme_color_override("font_color", Color.RED)
-		round_label.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+		round_label.text = " FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
 	else:
-		round_label.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+		round_label.text = " ROUND: " + str(current_round) + " / " + str(total_rounds)
 	_round_label_animation()
 	for player in players:
 		player.monster.winner_particles.emitting = false

@@ -200,7 +200,7 @@ func _on_button_pressed(button_index):
 		input_paused = false
 		$MarginContainer/RoundMenu.hide()
 		$Loading.show()
-		await get_tree().create_timer(.25).timeout
+		await get_tree().create_timer(.15).timeout
 	
 	if human_players_selected and bot_players_selected and rounds_selected:
 		input_paused = true

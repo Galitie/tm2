@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnviuf3qmq26f"]
+[gd_scene load_steps=18 format=3 uid="uid://cnviuf3qmq26f"]
 
 [ext_resource type="Script" uid="uid://dufq3qd8bqo5y" path="res://core/main.gd" id="1_5vw27"]
 [ext_resource type="Texture2D" uid="uid://dx62hcn5hjs1n" path="res://stages/grass.png" id="2_brq4u"]
@@ -25,6 +25,8 @@ gravity = Vector3(0, 98, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4v2"]
 size = Vector2(1174, 20)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8pr8v"]
 shader = ExtResource("5_dg77c")
@@ -160,6 +162,8 @@ offset_left = 5.0
 offset_top = 5.0
 offset_right = 45.0
 offset_bottom = 28.0
+theme = ExtResource("6_510js")
+label_settings = SubResource("LabelSettings_7ua4h")
 
 [node name="WinnersLabel" type="Label" parent="Camera2D/CanvasLayer"]
 visible = false

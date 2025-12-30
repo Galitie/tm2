@@ -274,13 +274,13 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="Banish" type="RichTextLabel" parent="SubViewport/Sprite2D"]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -65.0
+offset_top = 5.0
 offset_right = 135.0
-offset_bottom = 60.0
+offset_bottom = 65.0
 grow_horizontal = 0
 rotation = -0.30543262
 scale = Vector2(0.8, 0.8)

@@ -198,12 +198,14 @@ func _on_button_pressed(button_index):
 			2:
 				Globals.game_length = 10
 		input_paused = false
+		$MarginContainer/RoundMenu.hide()
+		$Loading.show()
+		await get_tree().create_timer(.15).timeout
 	
 	if human_players_selected and bot_players_selected and rounds_selected:
-		print("goooo")
 		input_paused = true
-		hide()
 		Globals.game.set_up_game()
+		$Loading.hide()
 		return
 
 

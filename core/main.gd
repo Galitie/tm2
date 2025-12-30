@@ -212,9 +212,7 @@ func _process(_delta):
 			var alive_monsters: int
 			for monster: Monster in monsters:
 				if monster.current_hp > 0:
-					@warning_ignore("unassigned_variable_op_assign")
 					monster_avg_position += monster.global_position
-					@warning_ignore("unassigned_variable_op_assign")
 					alive_monsters += 1
 			if alive_monsters:
 				camera.zoom = lerp(camera.zoom, Vector2(1.2, 1.2), 2.5 * _delta)

@@ -18,11 +18,9 @@ Sabrina likes:
 
 
 Features to make it playtest ready:
-	Winner of round shown for longer, wait before final hit and victory
-	
 	Considering moving banish to top of screen and upgrade points to cards?
-	
 	Round animation - center of screen, go up to the corner?
+	Comments about bunnies at the end of the game?
 	
 	Make unlockables actually unlock something? Maybe? Not sure how much we will play
 	so it might not be worth "hiding" content

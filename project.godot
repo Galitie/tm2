@@ -17,6 +17,8 @@ warnings/check_invalid_track_paths=false
 config/name="TM2"
 run/main_scene="uid://cnviuf3qmq26f"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.34906504, 0.34906504, 0.34906498, 1)
+boot_splash/show_image=false
 
 [audio]
 
@@ -30,6 +32,7 @@ MonsterGeneration="*res://monster/monster_generation.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

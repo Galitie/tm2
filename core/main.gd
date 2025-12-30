@@ -270,7 +270,6 @@ func set_upgrade_mode():
 	if current_round == total_rounds - 1:
 		round_label.add_theme_color_override("font_color", Color.RED)
 		round_label.text = "FINAL UPGRADE ROUND"
-		round_label.pivot_offset = round_label.size / 2
 		round_label.global_position = Vector2(23,0)
 	for player in players:
 		player.monster.unzombify()

@@ -24,10 +24,10 @@ var camera_tracking: bool = false
 @onready var audio_player_loop: AudioStreamPlayer = $AudioStreamPlayerLoop
 @onready var audio_player_single : AudioStreamPlayer = $AudioStreamPlayerSingle
 
-@onready var rankings = $Camera2D/CanvasLayer/Rankings
-
 var current_round : int = 0
 var current_mode : Modes
+@onready var round_label : Label = $Camera2D/CanvasLayer/RoundLabel
+@onready var rankings : Label = $Camera2D/CanvasLayer/Rankings
 var current_knocked_out_monsters : Array[Monster] = []
 enum Modes {FIGHT, UPGRADE, CUSTOMIZE, GAME_END}
 
@@ -147,7 +147,6 @@ func set_up_game():
 	$Camera2D/CanvasLayer/CustomizeMenu.set_customize_panels(players)
 	upgrade_menu.set_upgrade_panels(players)
 	$PauseTimer.timeout.connect(_unpause)
-	
 	
 	sudden_death_label.visible = false;
 	sudden_death_label.scale = Vector2(4.0, 4.0)
@@ -269,8 +268,10 @@ func set_upgrade_mode():
 			player.upgrade_points = 3
 			player.rerolls = 3
 	if current_round == total_rounds - 1:
-		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
-		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL UPGRADE ROUND"
+		round_label.add_theme_color_override("font_color", Color.RED)
+		round_label.text = "FINAL UPGRADE ROUND"
+		round_label.pivot_offset = round_label.size / 2
+		round_label.global_position = Vector2(23,0)
 	for player in players:
 		player.monster.unzombify()
 		player.monster.state_machine.transition_state("upgradestart")
@@ -312,11 +313,11 @@ func set_fight_mode():
 	$Camera2D/CanvasLayer/Specials.visible = true
 	#rankings.visible = true
 	if current_round == total_rounds:
-		$Camera2D/CanvasLayer/RoundLabel.add_theme_color_override("font_color", Color.RED)
-		$Camera2D/CanvasLayer/RoundLabel.add_theme_font_size_override("font_size", 36)
-		$Camera2D/CanvasLayer/RoundLabel.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+		round_label.add_theme_color_override("font_color", Color.RED)
+		round_label.text = "FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
 	else:
-		$Camera2D/CanvasLayer/RoundLabel.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+		round_label.text = "ROUND: " + str(current_round) + " / " + str(total_rounds)
+	_round_label_animation()
 	for player in players:
 		player.monster.winner_particles.emitting = false
 		var monster = player.monster
@@ -341,7 +342,16 @@ func _on_sudden_death_timer_timeout():
 	Globals.is_sudden_death_mode = true
 	sudden_death_label.visible = false
 
-
+func _round_label_animation():
+	#get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.2, 1.2), 0.8).set_trans(Tween.TRANS_ELASTIC)
+	await get_tree().create_tween().tween_property(round_label, "global_position", Vector2(556,312.5), 0).finished
+	round_label.pivot_offset = round_label.size / 2
+	get_tree().create_tween().tween_property(round_label, "visible", true, 0.0)
+	await get_tree().create_tween().tween_property(round_label, "scale", Vector2(4.0, 4.0), 1).set_trans(Tween.TRANS_EXPO).finished
+	await get_tree().create_tween().tween_property(round_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(.5).finished
+	round_label.pivot_offset = round_label.size / 2
+	await get_tree().create_tween().tween_property(round_label, "global_position", Vector2(0,0), .2).finished
+	
 func _on_round_over_delay_timer_timeout():
 	camera_tracking = false
 	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
@@ -632,7 +642,7 @@ func handle_game_over():
 		winners[0].monster.winner_particles.emitting = true
 		$AudioStreamPlayerSingle.stream = load("uid://clrn10gshrneo")
 		$AudioStreamPlayerSingle.play()
-		$Camera2D/CanvasLayer/RoundLabel.hide()
+		round_label.hide()
 		$Camera2D/CanvasLayer/Specials.hide()
 		$Camera2D/CanvasLayer/WinnersLabel.text = "WINNER!! Press START to play again"
 		$Camera2D/CanvasLayer/WinnersLabel.show()

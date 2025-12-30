@@ -17,22 +17,9 @@
 [resource]
 script = ExtResource("3_rhubh")
 card_name = "CONSTIPATED"
-description = "Monster is CONSTIPATED, will no longer optionally POOP"
+description = "You are CONSTIPATED, will no longer optionally POOP"
 Type = "passive"
-state_id = ""
 unique = true
-is_special = false
-locked = false
 remove_specific_states = Array[int]([6])
 parts_and_acc = Array[ExtResource("1_jsl2o")]([ExtResource("2_2eyot"), ExtResource("3_3eahx")])
-attribute_1 = 0
-attribute_label_1 = ""
-attribute_amount_1 = 0
-attribute_2 = 0
-attribute_label_2 = ""
-attribute_amount_2 = 0
-attribute_3 = 0
-attribute_label_3 = ""
-attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("3_rhubh")]([])
 remove_cards = Array[ExtResource("3_rhubh")]([ExtResource("4_8nmdk"), ExtResource("5_sbin7"), ExtResource("6_os4px"), ExtResource("7_vnjmh"), ExtResource("8_trpcx"), ExtResource("9_sbin7"), ExtResource("10_os4px"), ExtResource("11_5uh5q"), ExtResource("12_2eyot")])

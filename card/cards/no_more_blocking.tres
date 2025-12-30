@@ -12,12 +12,9 @@
 [resource]
 script = ExtResource("3_yjh64")
 card_name = "RAGE RAGE RAGE"
-description = "Monster is RAGING, will no longer BLOCK"
+description = "You are RAGING, will no longer BLOCK"
 Type = "passive"
-state_id = ""
 unique = true
-is_special = false
-locked = false
 remove_specific_states = Array[int]([5])
 parts_and_acc = Array[ExtResource("1_nllc7")]([ExtResource("2_oike5"), ExtResource("3_yhpih")])
 attribute_1 = 1
@@ -26,8 +23,4 @@ attribute_amount_1 = 5
 attribute_2 = 3
 attribute_label_2 = "DMG"
 attribute_amount_2 = 1
-attribute_3 = 0
-attribute_label_3 = ""
-attribute_amount_3 = 0.0
-unlocked_cards = Array[ExtResource("3_yjh64")]([])
 remove_cards = Array[ExtResource("3_yjh64")]([ExtResource("3_y4270"), ExtResource("4_nqf1n"), ExtResource("5_81pv6"), ExtResource("6_nllc7")])

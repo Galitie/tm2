@@ -11,22 +11,12 @@
 [resource]
 script = ExtResource("2_6kmbr")
 card_name = "SLIME TRAIL"
-description = "Leave a SLIME trail that DMGS monsters that enter it"
+description = "Leave a SLIME trail that DMGS bunnies that enter it"
 Type = "passive"
 state_id = "slime_trail"
 unique = true
-is_special = false
-locked = false
-remove_specific_states = Array[int]([])
 parts_and_acc = Array[ExtResource("1_es4dy")]([ExtResource("2_126w0"), ExtResource("3_st600")])
 attribute_1 = 2
 attribute_label_1 = "SPD"
 attribute_amount_1 = 10
-attribute_2 = 0
-attribute_label_2 = ""
-attribute_amount_2 = 0
-attribute_3 = 0
-attribute_label_3 = ""
-attribute_amount_3 = 0.0
 unlocked_cards = Array[ExtResource("2_6kmbr")]([ExtResource("3_lkoga"), ExtResource("4_ckl7f"), ExtResource("5_ckl7f")])
-remove_cards = Array[ExtResource("2_6kmbr")]([])

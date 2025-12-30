@@ -4,10 +4,6 @@ Guiding lights:
 	Does it have the spirit of Tylermon 1?
 
 
-Accessories:
-	Robot riding the bunny
-
-
 Sabrina likes:
 	Robots
 	Octopus
@@ -31,7 +27,6 @@ Features to make it playtest ready:
 	- Think it might be a cyclical resource bug(?)
 	
 	Outline texture cut off 
-	Shield breaker add effect animation (Raam?)
 	
 	Bonuses:
 		Comments about the bunnies, lethal company style
@@ -104,12 +99,3 @@ Builds:
 	Damage
 	Attack Rate
 	Summons
-
-
-Playtest Notes:
-	Carson solo play 9/4/2025
-		Didn't know what poops do - add guns to ones that do damage?
-		Didn't know what was shooting out the bullets (poops) confusing that it went through some folks and not others
-		Wasn't clear on bomb card that it will hit himself
-		Didn't know what crit mult was
-		Success feedback on block needed

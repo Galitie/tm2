@@ -65,6 +65,7 @@ var mod_color: Color = Color.TRANSPARENT
 var temp_timer = Timer.new()
 var temp_area = Area2D.new()
 
+var effect_tween: Tween
 
 func _ready():
 	add_to_group("DepthEntity")
@@ -159,11 +160,9 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		is_blocking = true
 		if attacker is Monster:
 			if attacker.player.shield_breaker:
-				print("attacker has shield breaker")
 				var broke_shield = [0,0,1].pick_random()
 				if broke_shield:
 					shield_broken = true
-					print("Broke shield!") #Add effect in 'if type == attack_type.MONSTER:' below, or here?
 				else:
 					match current_state.to_lower():
 						"mirrorblock":
@@ -183,8 +182,10 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			return
 	if type == attack_type.MONSTER:
 		if shield_broken:
-			pass
-			#TODO:Add shield broken effect here?
+			var effect: Sprite2D = $effect
+			if effect_tween:
+				effect_tween.kill()
+			effect.get_node("AnimationPlayer").play("block_broken")
 		var attack : String = attacker.state_machine.current_state.name
 		match attack.to_lower():
 			"bite":
@@ -243,7 +244,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	$Damage.text = str(int(damage)) + crit_text + mod_text
 	unlocks.add_counter("total_damage_dealt", int(damage))
 	animation_player_damage.play("damage")
-	hit_effect(critted)
+	hit_effect(critted, shield_broken)
 	state_machine.transition_state("hurt")
 	if current_hp <= 0:
 		if player.zombie and !player.revived and !Globals.is_sudden_death_mode:
@@ -334,8 +335,10 @@ func modify_max_hp(amount):
 	hp_bar.max_value = max_hp
 
 
-func hit_effect(crit: bool = false) -> void:
-	if crit:
+func hit_effect(crit: bool = false, shield_broken: bool = false) -> void:
+	if shield_broken:
+		play_generic_sound("uid://dqxckyrkr4ax5", -4.0)
+	elif crit:
 		play_generic_sound("uid://dfjgpdho3lcvd", -5.0)
 	else:
 		play_generic_sound("uid://djhtlpq02uk4n", -5.0)
@@ -460,17 +463,20 @@ func toggle_effect_graphic(toggle: bool, type: EffectType = EffectType.BLOCK) ->
 				effect_sprite.texture = mirror_block_texture
 			EffectType.THORNS:
 				effect_sprite.texture = thorns_texture
-	
 	effect_sprite.z_index = z_index + 1
 	
 	if toggle:
+		effect_sprite.get_node("AnimationPlayer").play("RESET")
+	
 		if type == EffectType.THORNS && Globals.is_sudden_death_mode:
 			effect_sprite.modulate = Color.WHITE
 		else:
 			effect_sprite.modulate = Color.TRANSPARENT
-			get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
+			effect_tween = create_tween()
+			effect_tween.tween_property(effect_sprite, "modulate", Color.WHITE, 0.25)
 	else:
-		get_tree().create_tween().tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25).finished
+		effect_tween = create_tween()
+		effect_tween.tween_property(effect_sprite, "modulate", Color.TRANSPARENT, 0.25)
 
 func _on_slime_timer_timeout():
 	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:

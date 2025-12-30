@@ -1,9 +1,13 @@
-[gd_scene load_steps=47 format=4 uid="uid://d3fkc0o45x3ja"]
+[gd_scene load_steps=53 format=4 uid="uid://d3fkc0o45x3ja"]
 
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
+[ext_resource type="Resource" uid="uid://bsvu0x8037yil" path="res://card/cards/break_shield.tres" id="2_6bokv"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
 [ext_resource type="Texture2D" uid="uid://cg3oo6qo0whi0" path="res://parts/bee_hat.png" id="2_fhc63"]
 [ext_resource type="Texture2D" uid="uid://c73ac2auwuwbw" path="res://effects/thorn_aura.png" id="3_hqfdu"]
+[ext_resource type="Resource" uid="uid://cr0ughlj0g43p" path="res://card/cards/focused.tres" id="3_xeefn"]
+[ext_resource type="Texture2D" uid="uid://d2lgutubkr8my" path="res://effects/block_broken.png" id="5_6bokv"]
+[ext_resource type="Texture2D" uid="uid://dwju22mna82p" path="res://effects/block_broken2.png" id="6_xeefn"]
 [ext_resource type="Script" uid="uid://dqxdicc1n2yxv" path="res://states/zombie.gd" id="7_3x5v3"]
 [ext_resource type="Script" uid="uid://cf6ii5kxgqg8h" path="res://states/getupand_wander.gd" id="8_14274"]
 [ext_resource type="Script" uid="uid://dyu6tu7ni8b48" path="res://states/special_block.gd" id="8_u8wmr"]
@@ -33,7 +37,6 @@
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://states/fight_start.gd" id="28_hqfdu"]
 [ext_resource type="Script" uid="uid://bkltgssabl5ti" path="res://states/win.gd" id="28_j2wpd"]
 [ext_resource type="Script" uid="uid://cgu2kercj8fnr" path="res://states/lose.gd" id="29_ydc0v"]
-[ext_resource type="Texture2D" uid="uid://bn3ju1wjp60ea" path="res://projectiles/block.png" id="30_hqfdu"]
 
 [sub_resource type="Curve" id="Curve_j2wpd"]
 _data = [Vector2(0.005797103, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.43713576), 0.0, 0.0, 0, 0]
@@ -75,6 +78,104 @@ size = Vector2(35, 82)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5105l"]
 radius = 51.0
 height = 144.0
+
+[sub_resource type="Animation" id="Animation_s4r8n"]
+resource_name = "block_broken"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_6bokv"), ExtResource("6_xeefn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1.1999999),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.035, 1), Vector2(1.001358e-05, 1.001358e-05), Vector2(1.3, 1.3), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.1999999),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nmvkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h012d"]
+_data = {
+&"RESET": SubResource("Animation_nmvkl"),
+&"block_broken": SubResource("Animation_s4r8n")
+}
 
 [sub_resource type="Animation" id="Animation_itwwk"]
 length = 0.001
@@ -205,6 +306,7 @@ y_sort_enabled = true
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
+pre_loaded_cards = Array[Resource]([ExtResource("2_6bokv"), ExtResource("3_xeefn")])
 
 [node name="WinnerParticles" type="GPUParticles2D" parent="."]
 emitting = false
@@ -247,14 +349,17 @@ shape = SubResource("CapsuleShape2D_5105l")
 [node name="aura" type="Sprite2D" parent="."]
 visible = false
 z_index = 1
-position = Vector2(0, -15)
 texture = ExtResource("3_hqfdu")
 
 [node name="effect" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
 z_index = 997
 position = Vector2(0, -15)
-texture = ExtResource("30_hqfdu")
+texture = ExtResource("6_xeefn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="effect"]
+libraries = {
+&"": SubResource("AnimationLibrary_h012d")
+}
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("18_cjpl6")

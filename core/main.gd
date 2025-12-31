@@ -314,6 +314,8 @@ func set_fight_mode():
 	if current_round == total_rounds:
 		round_label.add_theme_color_override("font_color", Color.RED)
 		round_label.text = " FINAL ROUND: " + str(current_round) + " / " + str(total_rounds)
+	elif current_round > total_rounds:
+		round_label.text = " TIEBREAKER ROUND"
 	else:
 		round_label.text = " ROUND: " + str(current_round) + " / " + str(total_rounds)
 	_round_label_animation()
@@ -341,6 +343,7 @@ func _on_sudden_death_timer_timeout():
 	Globals.is_sudden_death_mode = true
 	sudden_death_label.visible = false
 
+
 func _round_label_animation():
 	#get_tree().create_tween().tween_property(camera, "zoom", Vector2(1.2, 1.2), 0.8).set_trans(Tween.TRANS_ELASTIC)
 	await get_tree().create_tween().tween_property(round_label, "global_position", Vector2(556,312.5), 0).finished
@@ -350,7 +353,8 @@ func _round_label_animation():
 	await get_tree().create_tween().tween_property(round_label, "scale", Vector2(1.0, 1.0), 0.2).set_trans(Tween.TRANS_EXPO).set_delay(.5).finished
 	round_label.pivot_offset = round_label.size / 2
 	await get_tree().create_tween().tween_property(round_label, "global_position", Vector2(0,0), .2).finished
-	
+
+
 func _on_round_over_delay_timer_timeout():
 	camera_tracking = false
 	get_tree().create_tween().tween_property(sudden_death_overlay.material, "shader_parameter/Radius", 2.5, 1.0)
@@ -679,7 +683,7 @@ func clear_knocked_out_monsters():
 
 
 func spawn_poop(monster):
-	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
+	monster.play_generic_sound("uid://c2wiqjug8rgf4", -9.0)
 	var poop = preload("uid://b03qji6okxywb").instantiate()
 	poop.add_to_group("DepthEntity")
 	poop.monster = monster
@@ -699,7 +703,7 @@ func spawn_poop(monster):
 
 
 func spawn_bomb(monster):
-	monster.play_generic_sound("uid://c2wiqjug8rgf4", -8.0)
+	monster.play_generic_sound("uid://c2wiqjug8rgf4", -9.0)
 	var bomb = preload("uid://gxo3acon6q5t").instantiate()
 	bomb.monster = monster
 	bomb.global_position = monster.poop_checker.global_position

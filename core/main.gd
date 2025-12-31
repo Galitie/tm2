@@ -440,6 +440,8 @@ func card_pressed(card : Sprite2D, acc_index : int, input, button): #on_button_p
 			partNode.sprite.texture = part.texture
 			partNode.modulate.a = 1.0
 	#var unlocked_resources : Array[Resource] = card.upgrade_panel.unlocked_resources
+	var happy_sound = ["uid://dju77651l0qbv","uid://by8rfciifsp1s", "uid://2yqvlh6m3kkq", "uid://cteyv777ns8ie"].pick_random()
+	player.monster.play_generic_sound(happy_sound, -1)
 	player.upgrade_points -= 1
 	card.upgrade_panel.set_upgrade_text()
 	apply_card_resource_effects(card.chosen_resource, player)

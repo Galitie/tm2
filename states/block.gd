@@ -9,7 +9,7 @@ var block_threshold: int
 func Enter():
 	done_blocking = false
 	block_cycles = 0
-	monster.play_generic_sound("uid://0pyjmjp6rvg7")
+	monster.play_generic_sound("uid://0pyjmjp6rvg7", -2)
 	if monster.player.block_longer:
 		block_threshold = 4.5
 	else:

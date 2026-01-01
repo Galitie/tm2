@@ -14,6 +14,7 @@ func Enter():
 	charge_cycles = 0
 	cycle_threshold = 3
 	monster.animation_player.play("poop")
+	monster.play_generic_sound("uid://hth28y5uoru0")
 	monster.velocity = Vector2.ZERO
 
 

@@ -13,9 +13,11 @@ func _ready():
 	
 	if monster.root.scale.x < 0.0:
 		scale.x = -scale.x
+	$AudioStreamPlayer.stream = load(["uid://gpbmgj3eyv5y", "uid://jt4sbg1e01h6"].pick_random())
+	$AudioStreamPlayer.pitch_scale = randf_range(.5,2)
+	$AudioStreamPlayer.play()
 
-
-func _physics_process(delta):
+func _physics_process(_delta):
 	if monster.current_hp <= 0:
 		_on_lifetime_timeout()
 

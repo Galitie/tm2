@@ -269,6 +269,9 @@ func explode_on_death():
 	var temp_collision = CollisionShape2D.new()
 	var temp_shape_resource = CircleShape2D.new()
 	var temp_sprite = Sprite2D.new()
+	var temp_audio = AudioStreamPlayer2D.new()
+	temp_audio.stream = load("uid://boyc823kxorwi")
+	temp_audio.autoplay = true
 	temp_sprite.texture = load("uid://cgrc4jxdyeooy")
 	temp_sprite.scale = Vector2(3,3)
 	temp_shape_resource.radius = hurtbox_collision.shape.size.x * 1.15
@@ -276,6 +279,7 @@ func explode_on_death():
 	temp_area.add_to_group("Bomb")
 	temp_area.add_to_group("CleanUp")
 	temp_area.add_child(temp_collision)
+	temp_area.add_child(temp_audio)
 	temp_timer = Timer.new()
 	temp_timer.timeout.connect(_on_temp_timer_timeout)
 	temp_area.add_child(temp_sprite)
@@ -284,7 +288,6 @@ func explode_on_death():
 	temp_timer.autostart = true
 	await get_tree().create_timer(.50).timeout
 	call_deferred("add_child", temp_area)
-
 
 #TODO: Raam explosion animation???
 func _on_temp_timer_timeout():

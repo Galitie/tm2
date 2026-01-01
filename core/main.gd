@@ -87,11 +87,13 @@ func listen_for_special_trigger():
 					player.special_used = true
 					specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 					specials[index].text = "Special used!"
+					$AudioStreamPlayerSpecial.play()
 			elif Controller.IsButtonJustPressed(player.controller_port, JOY_BUTTON_Y) and requirements_met:
 				player.monster.state_machine.use_special()
 				player.special_used = true
 				specials[index].add_theme_color_override("font_outline_color", player.monster.player_color)
 				specials[index].text = "Special used!"
+				$AudioStreamPlayerSpecial.play()
 			elif player.monster.current_hp <= 0:
 				specials[index].text = ""
 			index += 1

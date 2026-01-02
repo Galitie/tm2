@@ -191,9 +191,9 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			"bite":
 				if !is_blocking or shield_broken:
 					if attacker.player.bite_heal_more and attacker.current_hp < attacker.max_hp:
-						heal_effect(attacker, .20, "HP HEAL")
+						heal_effect(attacker, .15, "HP HEAL")
 					else:
-						heal_effect(attacker, .10, "HP HEAL")
+						heal_effect(attacker, .5, "HP HEAL")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
@@ -220,11 +220,13 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		modify_hp(-damage)
 	elif type == attack_type.PROJECTILE:
 		if player.super_matrix:
-			block_feedback()
-			heal_label.text = "DODGED"
-			animation_player_heal.play("heal")
-			return
-		if player.matrix:
+			var rand = [1,2].pick_random()
+			if rand == 1:
+				block_feedback()
+				heal_label.text = "DODGED"
+				animation_player_heal.play("heal")
+				return
+		elif player.matrix:
 			var rand = [1,2,3].pick_random()
 			if rand == 1:
 				block_feedback()

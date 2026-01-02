@@ -187,13 +187,15 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 				effect_tween.kill()
 			effect.get_node("AnimationPlayer").play("block_broken")
 		var attack : String = attacker.state_machine.current_state.name
+		#TODO: Currently a bug that if someone else is doing a mirror block
+		# but I have bite, I am healing myself over my own attack!
 		match attack.to_lower():
 			"bite":
 				if !is_blocking or shield_broken:
 					if attacker.player.bite_heal_more and attacker.current_hp < attacker.max_hp:
-						heal_effect(attacker, .15, "HP HEAL")
+						heal_effect(attacker, .10, "HP HEAL")
 					else:
-						heal_effect(attacker, .5, "HP HEAL")
+						heal_effect(attacker, .05, "HP HEAL")
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
@@ -237,7 +239,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		damage = random_modifier
 		modify_hp(-damage)
 	elif type == attack_type.SLIME:
-		damage = 1
+		damage = randi_range(1,5)
 		mod_text = " SLIME"
 		modify_hp(-damage)
 	if Globals.is_sudden_death_mode:
@@ -381,6 +383,8 @@ func block_feedback() -> void:
 
 func heal_effect(attacker:Monster, amount: float, label_text: String):
 	var heal_amount = roundi(attacker.max_hp * amount)
+	if heal_amount <= 0:
+		heal_amount = 1
 	attacker.modify_hp(heal_amount)
 	attacker.heal_label.text = "+"+ str(heal_amount) + " " + label_text
 	attacker.animation_player_heal.play("heal")
@@ -498,7 +502,7 @@ func spawn_slime():
 	if player.larger_slimes:
 		slime.scale += Vector2(randf_range(.50,.70), randf_range(.50,.70))
 	if player.longer_slimes:
-		slime.lifetime = 6
+		slime.lifetime = 8
 	get_tree().get_root().get_node("Game").add_child(slime)
 	slime.add_to_group("Slime")
 	slime.add_to_group("CleanUp")

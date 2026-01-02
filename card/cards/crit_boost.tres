@@ -14,6 +14,3 @@ parts_and_acc = Array[ExtResource("1_h83rr")]([ExtResource("2_tcpv6"), ExtResour
 attribute_1 = 6
 attribute_label_1 = "CRIT"
 attribute_amount_1 = 3
-attribute_2 = 3
-attribute_label_2 = "DMG"
-attribute_amount_2 = 1

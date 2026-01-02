@@ -166,15 +166,13 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 				else:
 					match current_state.to_lower():
 						"mirrorblock":
-							var attacker_state = attacker.state_machine.current_state.name.to_lower()
-							attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
+							attacker.take_damage(attacker, "punch", false, attack_type.MONSTER)
 					block_feedback()
 					return
 			else:
 				match current_state.to_lower():
 					"mirrorblock":
-						var attacker_state = attacker.state_machine.current_state.name.to_lower()
-						attacker.take_damage(attacker, attacker_state, false, attack_type.MONSTER)
+						attacker.take_damage(attacker, "punch", false, attack_type.MONSTER)
 				block_feedback()
 				return
 		else: #Not damage from a monster, block it
@@ -196,6 +194,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 						heal_effect(attacker, .10, "HP HEAL")
 					else:
 						heal_effect(attacker, .05, "HP HEAL")
+		#TODO: Currently a bug that if someone else is doing a mirror block
+		# but I have thorns, I am thorning myself over my own attack!
 		if thorns:
 			var attacker_state = attacker.state_machine.current_state.name.to_lower()
 			attacker.take_damage(self, attacker_state, false, attack_type.THORN)
@@ -241,6 +241,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	elif type == attack_type.SLIME:
 		damage = randi_range(1,5)
 		mod_text = " SLIME"
+		attacker.remove_slime()
 		modify_hp(-damage)
 	if Globals.is_sudden_death_mode:
 		damage = 999

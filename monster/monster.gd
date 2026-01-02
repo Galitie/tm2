@@ -166,13 +166,13 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 				else:
 					match current_state.to_lower():
 						"mirrorblock":
-							attacker.take_damage(attacker, "punch", false, attack_type.MONSTER)
+							attacker.take_damage(attacker, attacker.current_state, false, attack_type.MONSTER)
 					block_feedback()
 					return
 			else:
 				match current_state.to_lower():
 					"mirrorblock":
-						attacker.take_damage(attacker, "punch", false, attack_type.MONSTER)
+						attacker.take_damage(attacker, attacker.current_state, false, attack_type.MONSTER)
 				block_feedback()
 				return
 		else: #Not damage from a monster, block it
@@ -189,7 +189,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 		# but I have bite, I am healing myself over my own attack!
 		match attack.to_lower():
 			"bite":
-				if !is_blocking or shield_broken:
+				if (!is_blocking or shield_broken) and attacker != self:
 					if attacker.player.bite_heal_more and attacker.current_hp < attacker.max_hp:
 						heal_effect(attacker, .10, "HP HEAL")
 					else:
@@ -207,11 +207,12 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			damage = 1
 		modify_hp(-damage)
 	elif type == attack_type.THORN:
-		await get_tree().create_timer(.25).timeout
-		damage = 1
-		mod_text = " THORN"
-		modify_hp(-damage)
-		thorn_effect()
+		if attacker != self:
+			await get_tree().create_timer(.25).timeout
+			damage = 1
+			mod_text = " THORN"
+			modify_hp(-damage)
+			thorn_effect()
 	elif type == attack_type.BOMB:
 		if attacker != null:
 			if player.bomb_no_damage and attacker == self:

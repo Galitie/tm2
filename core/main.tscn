@@ -41,6 +41,7 @@ shader_parameter/Freq = 10.0
 
 [node name="Game" type="Node2D" unique_id=464398111]
 script = ExtResource("1_5vw27")
+debug_mode = false
 
 [node name="Background" type="TextureRect" parent="." unique_id=1413242439]
 z_index = -99

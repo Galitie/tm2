@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=17 format=3 uid="uid://b227pe6g7ai2g"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://b227pe6g7ai2g"]
 
 [sub_resource type="Animation" id="Animation_jsbfh"]
 length = 0.001

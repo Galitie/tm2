@@ -74,7 +74,7 @@ func init(monster: Monster, part: MonsterPart, parent: Node2D, front_shader: Sha
 	#if part.monster_type != MonsterPart.MONSTER_TYPE.ACCESSORY && parent_part != null && part.monster_type != parent_part.monster_type:
 		#part_sprite.offset = (part.offset + parts[parent_part.monster_type][part.type].offset) * 0.5
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if part_ref.type == MonsterPart.PART_TYPE.EYE || part_ref.is_accessory:
 		return
 	

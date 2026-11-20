@@ -7,7 +7,7 @@ var fainted = false
 func Enter():
 	pass
 
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass
 	
 func Physics_Update(_delta:float):

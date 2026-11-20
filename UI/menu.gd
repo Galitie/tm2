@@ -231,5 +231,5 @@ func build_bot_buttons(human_player_amount : int):
 			bot_button_array.append(node)
 
 
-func _on_card_info_pressed(extra_arg_0: String) -> void:
+func _on_card_info_pressed(_extra_arg_0: String) -> void:
 	pass # Replace with function body.

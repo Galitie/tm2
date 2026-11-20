@@ -6,6 +6,7 @@ var target_mon: CharacterBody2D
 
 # --- Movement tuning ---
 var move_speed_adjust: int = 15
+var unicorn_boost = 2
 var max_accel: float = 5000.0
 
 # --- Side position (chosen per chase) ---
@@ -29,11 +30,19 @@ func Enter() -> void:
 	randomize_chase()
 	if target_mon:
 		monster.animation_player.play("walk", -1.0, 1.5)
-		monster.move_speed += move_speed_adjust
+		if monster.player.chase_faster:
+			monster.move_speed += move_speed_adjust * unicorn_boost
+			monster.rainbow_particles.emitting = true
+		else:
+			monster.move_speed += move_speed_adjust
 
 
 func Exit() -> void:
-	monster.move_speed -= move_speed_adjust
+	monster.rainbow_particles.emitting = false
+	if monster.player.chase_faster:
+		monster.move_speed -= move_speed_adjust / unicorn_boost
+	else:
+		monster.move_speed -= move_speed_adjust
 	overlapping_hitbox = false
 
 
@@ -144,7 +153,7 @@ func get_neighbor_monsters() -> Array[CharacterBody2D]:
 	return neighbors
 
 
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass
 
 

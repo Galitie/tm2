@@ -112,5 +112,5 @@ func get_boundary_avoidance_vector() -> Vector2:
 	return force
 	
 # Don't remove these
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass

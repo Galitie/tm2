@@ -526,6 +526,11 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 				player.special_name = "SQUEEZE ONE OUT"
 				player.has_special = true
+			"specialunicorn":
+				player.monster.state_machine.state_choices[card_resource.Type].clear()
+				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
+				player.special_name = "UNICORN IMMUNITY"
+				player.has_special = true
 			"poop_on_hit":
 				player.poop_on_hit = true
 			"slime_trail":
@@ -553,6 +558,8 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.banish_amount += 3
 			"bombs_no_damage":
 				player.bomb_no_damage = true
+			"unicorn_dash":
+				player.chase_faster = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

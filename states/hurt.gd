@@ -8,7 +8,7 @@ func Enter():
 	monster.animation_player.play("hurt")
 
 
-func animation_finished(anim_name: String):
+func animation_finished(_anim_name: String):
 	if monster.current_hp <= 0:
 		Transitioned.emit("knockedout")
 		return

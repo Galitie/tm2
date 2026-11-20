@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://bq4yjrepgavqf"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_cq2tc"]
+[ext_resource type="Resource" uid="uid://dc2heivxloa4w" path="res://parts/unicorn_mane.tres" id="2_umlrv"]
+[ext_resource type="Resource" uid="uid://cemo633yorc3o" path="res://parts/unicorn_horn.tres" id="3_fnaj6"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_aaxqh"]
+
+[resource]
+script = ExtResource("4_aaxqh")
+card_name = "ERASURE"
+description = "Once per round, if triggered, you are IMMUNE to DMG for 3 seconds. Replaces any current specials that use the Y button"
+Type = "special"
+state_id = "specialunicorn"
+unique = true
+is_special = true
+locked = true
+parts_and_acc = Array[ExtResource("1_cq2tc")]([ExtResource("2_umlrv"), ExtResource("3_fnaj6")])

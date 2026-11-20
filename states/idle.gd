@@ -22,5 +22,5 @@ func Update(delta:float):
 		ChooseNewState.emit()
 
 # Don't remove these
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass

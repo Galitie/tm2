@@ -44,5 +44,5 @@ func _emit_next_behavior() -> void:
 	Transitioned.emit(next_state)
 
 
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass

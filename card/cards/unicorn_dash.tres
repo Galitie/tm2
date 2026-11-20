@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://bxlfm50tlbscj"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_ywqij"]
+[ext_resource type="Resource" uid="uid://cemo633yorc3o" path="res://parts/unicorn_horn.tres" id="2_8vysy"]
+[ext_resource type="Resource" uid="uid://dc2heivxloa4w" path="res://parts/unicorn_mane.tres" id="3_4xis3"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_wplsg"]
+[ext_resource type="Resource" uid="uid://bq4yjrepgavqf" path="res://card/cards/special_unicorn.tres" id="5_xvdq3"]
+
+[resource]
+script = ExtResource("4_wplsg")
+card_name = "UNICORN DASH"
+description = "Bonus SPD when CHASING"
+Type = "passive"
+state_id = "unicorn_dash"
+unique = true
+parts_and_acc = Array[ExtResource("1_ywqij")]([ExtResource("2_8vysy"), ExtResource("3_4xis3")])
+unlocked_cards = Array[ExtResource("4_wplsg")]([ExtResource("5_xvdq3")])

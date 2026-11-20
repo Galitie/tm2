@@ -38,6 +38,17 @@ var player : Player
 @onready var audio_player = $AudioStreamPlayer
 @onready var aura = $aura
 @onready var winner_particles = $WinnerParticles
+@onready var rainbow_particles = %RainbowEffect
+var rainbow_tween : Tween
+var rainbow_colors = [
+	Color("ff0e1b"), # Red
+	Color("ff8c0e"), # Orange
+	Color("ffff0e"), # Yellow
+	Color("6bff7d"), # Green
+	Color("3467ff"), # Blue
+	Color("a335ff")  # Purple
+]
+
 
 var block_texture = load("uid://bn3ju1wjp60ea")
 var mirror_block_texture = load("uid://ck7a7uoebctrw")
@@ -313,6 +324,33 @@ func unzombify():
 	mod_color = Color.TRANSPARENT
 	mod_monster(mod_color)
 
+func start_unicorn_immunity():
+	hurtbox_collision.set_deferred("disabled", true)
+	$UnicornTimer.start()
+	rainbow_effect()
+	
+
+func rainbow_effect():
+	rainbow_tween = get_tree().create_tween()
+	rainbow_tween.set_loops()
+
+	for i in range(rainbow_colors.size()):
+		var next_color = rainbow_colors[(i + 1) % rainbow_colors.size()]
+
+		rainbow_tween.tween_method(
+			mod_monster,
+			rainbow_colors[i],
+			next_color,
+			.10
+		).set_trans(Tween.TRANS_CUBIC)
+
+
+func stop_rainbow():
+	if rainbow_tween and rainbow_tween.is_running():
+		rainbow_tween.kill()
+	mod_color = Color.TRANSPARENT
+	mod_monster(mod_color)
+
 
 func _on_zombie_timer_timeout():
 	play_generic_sound("uid://s01jaub4gq8s")
@@ -493,9 +531,11 @@ func _on_slime_timer_timeout():
 	if player.slime_trail and current_hp > 0 and velocity != Vector2.ZERO:
 		spawn_slime()
 
+
 func set_thorns() -> void:
 	thorns = true
 	aura.visible = true
+
 
 func spawn_slime():
 	var slime = preload("uid://upayf74ibwcl").instantiate()
@@ -508,3 +548,8 @@ func spawn_slime():
 	get_tree().get_root().get_node("Game").add_child(slime)
 	slime.add_to_group("Slime")
 	slime.add_to_group("CleanUp")
+
+
+func _on_unicorn_timer_timeout() -> void:
+	toggle_collisions(true)
+	stop_rainbow()

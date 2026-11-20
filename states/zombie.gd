@@ -8,5 +8,5 @@ func Enter():
 	monster.velocity = Vector2.ZERO
 
 
-func animation_finished(anim_name: String) -> void:
+func animation_finished(_anim_name: String) -> void:
 	pass

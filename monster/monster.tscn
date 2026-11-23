@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://sdvxhlxs2o0s" path="res://monster/monster.gd" id="1_ni8ke"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="2_5105l"]
 [ext_resource type="Texture2D" uid="uid://cg3oo6qo0whi0" path="res://parts/bee_hat.png" id="2_fhc63"]
+[ext_resource type="Resource" uid="uid://3aquqn25lskq" path="res://card/cards/bite_heal.tres" id="2_s4r8n"]
 [ext_resource type="Texture2D" uid="uid://cmmlllxluu8y7" path="res://effects/rainbow.png" id="3_6bokv"]
 [ext_resource type="Texture2D" uid="uid://c73ac2auwuwbw" path="res://effects/thorn_aura.png" id="3_hqfdu"]
 [ext_resource type="Texture2D" uid="uid://d2lgutubkr8my" path="res://effects/block_broken.png" id="5_6bokv"]
@@ -314,6 +315,7 @@ y_sort_enabled = true
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_ni8ke")
+pre_loaded_cards = Array[Resource]([ExtResource("2_s4r8n")])
 
 [node name="WinnerParticles" type="GPUParticles2D" parent="." unique_id=110618256]
 emitting = false
@@ -609,9 +611,13 @@ one_shot = true
 wait_time = 0.75
 autostart = true
 
+[node name="PoisonTimer" type="Timer" parent="." unique_id=1552794599]
+wait_time = 5.0
+
 [connection signal="area_entered" from="root/proximity_chase" to="StateMachine/Wander" method="_on_proximity_chase_area_entered"]
 [connection signal="area_entered" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_entered"]
 [connection signal="area_exited" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_exited"]
 [connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]
 [connection signal="timeout" from="UnicornTimer" to="." method="_on_unicorn_timer_timeout"]
 [connection signal="timeout" from="SlimeTimer" to="." method="_on_slime_timer_timeout"]
+[connection signal="timeout" from="PoisonTimer" to="." method="_on_poison_timer_timeout"]

@@ -14,6 +14,7 @@ func Enter():
 	monster.get_node("HPBar").visible = false
 	monster.name_label.hide()
 	monster.aura.visible = false
+	monster.poisoned = false
 
 	if !Globals.is_sudden_death_mode:
 		monster.animation_player.play("faint")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://boq0kfq8h4vf"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_2k6hr"]
+[ext_resource type="Resource" uid="uid://dwr1m22xovgyu" path="res://parts/dino_hat.tres" id="2_2k6hr"]
+[ext_resource type="Resource" uid="uid://b3am62ug37kk3" path="res://parts/dino_body.tres" id="3_t0pxk"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_dlced"]
+[ext_resource type="Resource" uid="uid://c8rous4deg2fn" path="res://card/cards/poison_blood2.tres" id="5_t0pxk"]
+
+[resource]
+script = ExtResource("4_dlced")
+card_name = "BLOODY MARY"
+description = "If BITTEN by an ENEMY who can HEAL, POISON them and do some DMG back"
+Type = "immediate"
+state_id = "poison"
+unique = true
+parts_and_acc = Array[ExtResource("1_2k6hr")]([ExtResource("2_2k6hr"), ExtResource("3_t0pxk")])
+unlocked_cards = Array[ExtResource("4_dlced")]([ExtResource("5_t0pxk")])

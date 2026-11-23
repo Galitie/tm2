@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://c8rous4deg2fn"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_0nux2"]
+[ext_resource type="Resource" uid="uid://dwr1m22xovgyu" path="res://parts/dino_hat.tres" id="2_3ha4m"]
+[ext_resource type="Resource" uid="uid://b3am62ug37kk3" path="res://parts/dino_body.tres" id="3_bon4d"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_c1pj2"]
+
+[resource]
+script = ExtResource("4_c1pj2")
+card_name = "MAMA MIA"
+description = "DOUBLE the POISON effect"
+Type = "immediate"
+state_id = "poison_more"
+unique = true
+locked = true
+parts_and_acc = Array[ExtResource("1_0nux2")]([ExtResource("2_3ha4m"), ExtResource("3_bon4d")])

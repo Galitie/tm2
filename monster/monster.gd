@@ -12,7 +12,8 @@ var crit_multiplier: float = 1.75
 var damage_received_mult: float = 1.0
 var damage_dealt_mult: float = 1.0
 var thorns : bool = false
-enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME}
+var poisoned : bool = false
+enum attack_type {NONE, MONSTER, BOMB, PROJECTILE, THORN, SLIME, POISON}
 var current_state : String
 
 var mon_name : String
@@ -118,6 +119,8 @@ func _physics_process(_delta):
 
 
 func _on_hurtbox_area_entered(area):
+	if $UnicornTimer.time_left > 0 or $ZombieTimer.time_left > 0:
+		return
 	var attacker: Node
 	if area != hitbox:
 		current_state = state_machine.current_state.name.to_lower()
@@ -155,8 +158,6 @@ func _on_hurtbox_area_entered(area):
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
-	if $UnicornTimer.time_left > 0:
-		return
 	var unlocks = get_tree().get_nodes_in_group("Unlocks")
 	unlocks = unlocks[0]
 	var damage : int
@@ -169,7 +170,7 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 	if override_damage:
 		modify_hp(-override_damage)
 		damage = override_damage
-	elif current_state.contains("block"):
+	elif current_state.contains("block") and type != attack_type.POISON:
 		is_blocking = true
 		if attacker is Monster:
 			if attacker.player.shield_breaker:
@@ -198,8 +199,6 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 				effect_tween.kill()
 			effect.get_node("AnimationPlayer").play("block_broken")
 		var attack : String = attacker.state_machine.current_state.name
-		#TODO: Currently a bug that if someone else is doing a mirror block
-		# but I have bite, I am healing myself over my own attack!
 		match attack.to_lower():
 			"bite":
 				if (!is_blocking or shield_broken) and attacker != self:
@@ -207,6 +206,8 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 						heal_effect(attacker, .10, "HP HEAL")
 					else:
 						heal_effect(attacker, .05, "HP HEAL")
+				if player.poison:
+					attacker.get_poisoned()
 		#TODO: Currently a bug that if someone else is doing a mirror block
 		# but I have thorns, I am thorning myself over my own attack!
 		if thorns:
@@ -225,7 +226,16 @@ func take_damage(attacker = null, current_state : String = "", ignore_crit: bool
 			damage = 1
 			mod_text = " THORN"
 			modify_hp(-damage)
-			thorn_effect()
+			thorn_effect()	
+	elif type == attack_type.POISON:
+		if attacker != self:
+			mod_monster(Color("6bff7d"))
+			get_tree().create_tween().tween_method(mod_monster, Color("6bff7d"), mod_color, 1).set_trans(Tween.TRANS_CUBIC)
+			if player.poison_more:
+				damage = 2
+			damage = 1
+			mod_text = " POISON"
+			modify_hp(-damage)
 	elif type == attack_type.BOMB:
 		if attacker != null:
 			if player.bomb_no_damage and attacker == self:
@@ -362,8 +372,7 @@ func _on_zombie_timer_timeout():
 	toggle_collisions(true)
 	if Globals.game.current_mode != Globals.game.Modes.UPGRADE or Globals.game.Modes.GAME_END:
 		state_machine.transition_state("getupandgo")
-		mod_color = Color(0.0, 0.39, 0.0, 0.7)
-		mod_monster(mod_color)
+		mod_monster(Color(0.0, 0.39, 0.0, 0.7))
 	else:
 		state_machine.transition_state("upgradestart")
 
@@ -483,7 +492,7 @@ func roll_crit() -> bool:
 func generate_random_name():
 	var name_parts = []
 	var title_start_list = ["Sir", "Madam", "Lord", "My Lady", "Baron", "Baroness", "Count", "Countess", "Duke", "Princess", "Duchess", "Emperor", "Empress", "King", "Queen", "Prince", "Dark Lord", "Archduke", "High Priest", "Commander", "Captain", "Major", "General", "Colonel", "Admiral", "Professor", "Dr.", "Reverend", "The Honorable", "Your Grace", "Warden", "Inquisitor", "Chancellor", "Vizier", "Grandmaster", "Sovereign", "Archmage", "Mystic", "The Unyielding", "Lil'", "The Gentle", "The Great", "Super", "O'", "Dear", "Darling", "Mega", "Champion", "Mr.", "Miss", "Dame", "Overlord", "Warlord", "Sheriff", "President", "Prof.", "The Magic"]
-	var first_name_prefixes = ["Scooby", "Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub", "Batty", "Bobo", "Piggy", "Shmeckle","Lily", "Dale", "Egg", "Humpy", "Mac", "Fitz", "Von", "Van", "Pickle", "Baby", "Sabun", "Goober", "Gob", "Robo", "Niblet", "Bongo", "Noodle", "Spooky", "Batty", "Drago", "Peepee", "Digi", "Bee", "Rat", "Gus", "Jim", "Chester", "Loki", "Tyler", "Sabrina", "Ryan", "Talia", "Galit", "Carson", "Julian", "Adam", "Cleo", "Ada", "Bast"]
+	var first_name_prefixes = ["Salem", "Scooby", "Snuggle", "Fluffy", "Bunny", "Cuddle", "Muffin", "Puffy", "Doodle", "Wiggly", "Tootsie", "Chubby", "Fuzzy", "Wubby", "Jiggly", "Nibbles", "Boop", "Pookie", "Winky", "Bubbles", "Sprinkle", "Taffy", "Wobble", "Twirly", "Giggly", "Zippy", "Blinky", "Snoot", "Scooty", "Tater", "Tinky", "Tippy", "Mochi", "Mopsy", "Coco", "Tuggy", "Wubby", "Twinkle", "Squee", "Dizzy", "Blinky", "Nibby", "Smoosh", "Pip", "Huggy", "Binky", "Rolo", "Peachy", "Baba", "Boopsy", "Sniffy", "Derek", "Bruce", "Dan", "Tim", "Dennis", "Tushy", "Daddy", "Fabio", "Nippy", "Weenie", "Nubby", "Nub", "Batty", "Bobo", "Piggy", "Shmeckle","Lily", "Dale", "Egg", "Humpy", "Mac", "Fitz", "Von", "Van", "Pickle", "Baby", "Sabun", "Goober", "Gob", "Robo", "Niblet", "Bongo", "Noodle", "Spooky", "Batty", "Drago", "Peepee", "Digi", "Bee", "Rat", "Gus", "Jim", "Chester", "Loki", "Tyler", "Sabrina", "Ryan", "Talia", "Galit", "Carson", "Julian", "Adam", "Cleo", "Ada", "Bast"]
 	var last_name_suffixes = ["roo","wump", "humps" , "wuff", "kins", "poo", "buns", "muff", "wubby", "wuzzy", "boo", "bean", "puff", "snug", "wiggles", "socks", "nugget", "bop", "tush", "sniff", "chub", "nubs", "flop", "snick", "pookie", "bloop", "giggles", "lumps", "floops", "tickles", "munch", "lolly", "hug", "nuzzle", "tots", "zoo", "binky", "sweetie", "nib", "toes", "twix", "peeps", "bubbles", "piddles", "gushs", "wubs", "sprig", "doodles", "noms", "bits", "squeaks", "mon", "nips", "butts", "cheeks", "frog", "shmoops", "shrimps", "prickles", "ween", "burt", "smeeks", "licky", "wax", "pops", "nops", "tits", "shnicky", "hots", "shits", "dicks", "poopsy", "poops", "pug", "pips", "legs", "vicky", "goobs", "goober", "bats", "balls", "lops", "bee", "schnee", "bags", "nut", "staff", "ass"]
 	var end_name_suffixes = ["Jr.", "Sr.", "II", "III", "Esq.", "PhD", "The Undying", "The Maw", "The Forsaken", "The Cute", "The Unbearable", "The Cruel", "The Worn", "The Loved", "The Joyful", "The Kind", "The Stinky", "The Opulent", "The Grim", "The Cursed", "The Faded", "The Burdened", "The Adorable", "The Weird", "The Beefy", "The Elderly", "The Bloodthirsty", "The Sexy", "The Horny", "The Terrible", "The Hideous", "The Vile", "The Cutie", "The Beefcake", "The Hunk", "The Twinkly", "The Generous", "The Gulliable", "The Handsome", "The Shitty", "The Dark", "of Fuckshire", "of Yore", "of Legend", "The Wicked", "The Fabulous", "The Baby", "The Ghastly", "The Timid", "The Hunk", "The Poopy", "The Godly", "The Shafted", "The Treasure", "V", "MD", "The Mighty", "of Chaos", "of Shadows", "The Cringe", "The Creep", "of Tinkles", "The White", "The Grey", "the Thick"]
 	if randi() % 4 == 0:
@@ -554,3 +563,14 @@ func spawn_slime():
 
 func _on_unicorn_timer_timeout() -> void:
 	stop_rainbow()
+
+
+func get_poisoned():
+	if !poisoned:
+		poisoned = true
+	$PoisonTimer.start()
+
+func _on_poison_timer_timeout() -> void:
+	if poisoned:
+		take_damage(null, current_state, true, attack_type.POISON)
+		

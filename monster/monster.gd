@@ -337,9 +337,11 @@ func unzombify():
 	mod_monster(mod_color)
 
 func start_unicorn_immunity():
-	
 	$UnicornTimer.start()
 	rainbow_effect()
+	$UnicornTime.play()
+	await $UnicornTime.finished
+
 	
 
 func rainbow_effect():

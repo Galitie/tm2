@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://ba7gh8a7p08qu" path="res://states/fight_start.gd" id="28_hqfdu"]
 [ext_resource type="Script" uid="uid://bkltgssabl5ti" path="res://states/win.gd" id="28_j2wpd"]
 [ext_resource type="Script" uid="uid://cgu2kercj8fnr" path="res://states/lose.gd" id="29_ydc0v"]
+[ext_resource type="AudioStream" uid="uid://cten5ge2t2ay0" path="res://sounds/Iwanttobewithyou.ogg" id="38_s4r8n"]
 
 [sub_resource type="Curve" id="Curve_j2wpd"]
 _data = [Vector2(0.005797103, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -596,6 +597,10 @@ libraries/ = SubResource("AnimationLibrary_k1bq2")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=11357869]
 process_mode = 3
 stream = ExtResource("23_6py8i")
+
+[node name="UnicornTime" type="AudioStreamPlayer" parent="." unique_id=354669656]
+process_mode = 3
+stream = ExtResource("38_s4r8n")
 
 [node name="ZombieTimer" type="Timer" parent="." unique_id=2064854328]
 wait_time = 2.0

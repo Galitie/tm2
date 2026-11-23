@@ -33,7 +33,7 @@ MonsterGeneration="*res://monster/monster_generation.gd"
 
 [display]
 
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

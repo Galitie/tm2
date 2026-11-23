@@ -5,7 +5,7 @@ var max_hp : int = 3
 var current_hp : int = max_hp
 var base_damage : int = 1
 var intelligence : int = 1
-var move_speed : int = 50
+var move_speed : float = 50
 var attack_speed : int = 1
 var crit_chance: int = 1
 var crit_multiplier: float = 1.75
@@ -155,6 +155,8 @@ func _on_hurtbox_area_entered(area):
 
 
 func take_damage(attacker = null, current_state : String = "", ignore_crit: bool = false, type : attack_type = attack_type.NONE, override_damage : int = 0):
+	if $UnicornTimer.time_left > 0:
+		return
 	var unlocks = get_tree().get_nodes_in_group("Unlocks")
 	unlocks = unlocks[0]
 	var damage : int
@@ -325,7 +327,7 @@ func unzombify():
 	mod_monster(mod_color)
 
 func start_unicorn_immunity():
-	hurtbox_collision.set_deferred("disabled", true)
+	
 	$UnicornTimer.start()
 	rainbow_effect()
 	
@@ -551,5 +553,4 @@ func spawn_slime():
 
 
 func _on_unicorn_timer_timeout() -> void:
-	toggle_collisions(true)
 	stop_rainbow()

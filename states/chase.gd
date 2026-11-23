@@ -6,7 +6,7 @@ var target_mon: CharacterBody2D
 
 # --- Movement tuning ---
 var move_speed_adjust: int = 15
-var unicorn_boost = 2
+var unicorn_boost : float = 1.75
 var max_accel: float = 5000.0
 
 # --- Side position (chosen per chase) ---
@@ -161,6 +161,8 @@ func _on_proximity_chase_area_entered(area: Area2D) -> void:
 	if area.is_in_group("HurtBox") and target_mon != null:
 		if area == target_mon.hurtbox:
 			overlapping_hitbox = true
+	elif area.is_in_group("Walls") and monster.current_state == "chase":
+		ChooseNewState.emit()
 
 
 func _on_proximity_chase_area_exited(area: Area2D) -> void:

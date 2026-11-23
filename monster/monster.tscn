@@ -365,6 +365,7 @@ shape = SubResource("CapsuleShape2D_5105l")
 [node name="aura" type="Sprite2D" parent="." unique_id=1796963334]
 visible = false
 z_index = 1
+z_as_relative = false
 texture = ExtResource("3_hqfdu")
 
 [node name="effect" type="Sprite2D" parent="." unique_id=1001557718]
@@ -608,6 +609,7 @@ one_shot = true
 wait_time = 0.75
 autostart = true
 
+[connection signal="area_entered" from="root/proximity_chase" to="StateMachine/Wander" method="_on_proximity_chase_area_entered"]
 [connection signal="area_entered" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_entered"]
 [connection signal="area_exited" from="root/proximity_chase" to="StateMachine/Chase" method="_on_proximity_chase_area_exited"]
 [connection signal="timeout" from="ZombieTimer" to="." method="_on_zombie_timer_timeout"]

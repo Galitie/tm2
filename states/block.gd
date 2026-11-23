@@ -4,7 +4,7 @@ class_name Block
 var monster: CharacterBody2D
 var done_blocking: bool
 var block_cycles: int
-var block_threshold: int
+var block_threshold: float
 
 func Enter():
 	done_blocking = false

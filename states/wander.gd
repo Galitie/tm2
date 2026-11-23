@@ -114,3 +114,8 @@ func get_boundary_avoidance_vector() -> Vector2:
 # Don't remove these
 func animation_finished(_anim_name: String) -> void:
 	pass
+
+
+func _on_proximity_chase_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Walls") and monster.current_state == "wander":
+		ChooseNewState.emit()

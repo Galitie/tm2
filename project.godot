@@ -50,6 +50,7 @@ Slime=""
 Persist="For saving and loading"
 Leaderboard=""
 Unlocks=""
+Walls=""
 
 [input]
 

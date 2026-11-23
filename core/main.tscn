@@ -41,7 +41,6 @@ shader_parameter/Freq = 10.0
 
 [node name="Game" type="Node2D" unique_id=464398111]
 script = ExtResource("1_5vw27")
-debug_mode = false
 
 [node name="Background" type="TextureRect" parent="." unique_id=1413242439]
 z_index = -99
@@ -72,21 +71,21 @@ process_material = SubResource("ParticleProcessMaterial_ntwa4")
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=1733892646]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=1439216049]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls" unique_id=1439216049 groups=["Walls"]]
 position = Vector2(577, 47)
 shape = SubResource("RectangleShape2D_vp4v2")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=348349548]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls" unique_id=348349548 groups=["Walls"]]
 position = Vector2(577, 602)
 shape = SubResource("RectangleShape2D_vp4v2")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1793889367]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls" unique_id=1793889367 groups=["Walls"]]
 position = Vector2(43, 322)
 rotation = -1.57155
 scale = Vector2(0.560061, 1)
 shape = SubResource("RectangleShape2D_vp4v2")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1947540191]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls" unique_id=1947540191 groups=["Walls"]]
 position = Vector2(1106, 321)
 rotation = -1.57155
 scale = Vector2(0.560061, 1)

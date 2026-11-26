@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://dvfm8tscy0mbu"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_e6bka"]
+[ext_resource type="Resource" uid="uid://cctro5a0omc4c" path="res://parts/mustash.tres" id="2_41gyy"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_rvlhc"]
+
+[resource]
+script = ExtResource("4_rvlhc")
+card_name = "UNLEASH THE BEAST"
+description = "H̜̪͕Ḙͧ H̃A͉̻̟̓͋T̤̼̣͐Hͮ̔ B̦̠͈͑Ḛ͔ͅE̺̭̤ͨṄ A͚͉ͭͮW̺A̰͆ͭK͎̩̿E̝Nͨ͑E͉̞̻ͯ͊ͤD͉̂̓ͯ"
+Type = "passive"
+state_id = "final_summon"
+unique = true
+locked = true
+parts_and_acc = Array[ExtResource("1_e6bka")]([ExtResource("2_41gyy")])

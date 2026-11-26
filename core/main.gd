@@ -564,6 +564,12 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.poison = true
 			"poison_more":
 				player.poison_more = true
+			"summon_1":
+				player.has_summon_1 = true
+			"summon_2":
+				player.has_summon_2 = true
+			"final_summon":
+				player.has_final_summon = true
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():

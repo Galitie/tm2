@@ -6,15 +6,15 @@
 [ext_resource type="Script" uid="uid://cwh7rpj3fn4nl" path="res://monster/monster_part_node.gd" id="3_m81kn"]
 [ext_resource type="Texture2D" uid="uid://cj11g4e2r0lln" path="res://parts/bunny_ear.png" id="4_vonwv"]
 [ext_resource type="Texture2D" uid="uid://kiwi86m7fjn0" path="res://parts/bunny_foreleg.png" id="5_5ecvt"]
-[ext_resource type="Texture2D" uid="uid://g5bl0ydh4dow" path="res://parts/surgeon_mask.png" id="6_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://b5jse6ho7580w" path="res://parts/mustash.png" id="6_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://k34rdlg3wyet" path="res://parts/bunny_eye.png" id="6_jsbfh"]
 [ext_resource type="Shader" uid="uid://3uoclq0ivabh" path="res://monster/back.gdshader" id="6_vonwv"]
-[ext_resource type="Texture2D" uid="uid://dj0sc0t15j3db" path="res://parts/dino_hat.png" id="7_3wgw3"]
+[ext_resource type="Texture2D" uid="uid://dbdocyu5ncto0" path="res://parts/bandana_hat.png" id="7_3wgw3"]
 [ext_resource type="Texture2D" uid="uid://d0olomib4o3l5" path="res://parts/bunny_hindleg.png" id="7_qx6ai"]
 [ext_resource type="Texture2D" uid="uid://c7b3youy14o4l" path="res://parts/bunny_tail.png" id="8_jsbfh"]
 [ext_resource type="AnimationLibrary" uid="uid://b227pe6g7ai2g" path="res://monster/bunny_anim.tres" id="11_11snv"]
 [ext_resource type="Texture2D" uid="uid://b5r4wfwwjtybl" path="res://parts/bunny_outline.png" id="11_76uj3"]
-[ext_resource type="Texture2D" uid="uid://bkq20k72qnr8s" path="res://parts/dino_body.png" id="13_u0q66"]
+[ext_resource type="Texture2D" uid="uid://nf1wl0vhowp3" path="res://parts/devil_cloak.png" id="13_u0q66"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qx6ai"]
 shader = ExtResource("1_g7ptr")
@@ -74,10 +74,8 @@ position = Vector2(31.53, -15.52)
 rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset" unique_id=1958915461]
-visible = false
 texture = ExtResource("6_3wgw3")
-offset = Vector2(-9, 7)
-metadata/_edit_lock_ = true
+offset = Vector2(6, 10)
 
 [node name="HAT" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=1319891111]
 position = Vector2(23.905, -34.75)
@@ -87,7 +85,7 @@ rotation = 0.226893
 
 [node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAT/HAT_anim_offset" unique_id=2145332453]
 texture = ExtResource("7_3wgw3")
-offset = Vector2(10, -2)
+offset = Vector2(-20, 10)
 
 [node name="EAR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=5721582]
 position = Vector2(3.905, -20.59)
@@ -172,7 +170,7 @@ position = Vector2(-15.065, -31.86)
 
 [node name="sprite" type="Sprite2D" parent="BODY/CAPE/CAPE_anim_offset" unique_id=1443712298]
 texture = ExtResource("13_u0q66")
-offset = Vector2(1, 17)
+offset = Vector2(1, 20)
 metadata/_edit_lock_ = true
 
 [node name="hurtbox" type="Area2D" parent="BODY" unique_id=772427419 groups=["HurtBox"]]

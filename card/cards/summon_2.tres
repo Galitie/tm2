@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CardResourceScript" format=3 uid="uid://x0mer8kjvw13"]
+
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="1_j833e"]
+[ext_resource type="Resource" uid="uid://dq5jkuyqkgxb5" path="res://parts/devil_hat.tres" id="2_i6c7w"]
+[ext_resource type="Resource" uid="uid://cogtegn0d5ffw" path="res://parts/devil_cloak.tres" id="3_cr0t5"]
+[ext_resource type="Script" uid="uid://bfco2om6esxdu" path="res://card/card_info.gd" id="4_h688q"]
+[ext_resource type="Resource" uid="uid://dvfm8tscy0mbu" path="res://card/cards/final_summon.tres" id="5_i6c7w"]
+
+[resource]
+script = ExtResource("4_h688q")
+card_name = "PENTAGRAMIFICATION"
+description = "D̜O̜ Y͛O̮U KN͓̆OͧW͔ W̟HͅA̒ͅT̖̾ YȌ̳U̼ͥ A̻RE͇̾ DO̰ͧING M̞̊O͇R͑T̫͐A͎L?"
+Type = "passive"
+state_id = "summon_2"
+unique = true
+locked = true
+parts_and_acc = Array[ExtResource("1_j833e")]([ExtResource("2_i6c7w"), ExtResource("3_cr0t5")])
+attribute_1 = 4
+attribute_label_1 = "REROLL"
+attribute_amount_1 = 1
+unlocked_cards = Array[ExtResource("4_h688q")]([ExtResource("5_i6c7w")])

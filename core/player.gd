@@ -47,6 +47,9 @@ var shield_breaker : bool = false
 var chase_faster : bool = false
 var poison : bool = false
 var poison_more : bool = false
+var has_summon_1 : bool = false
+var has_summon_2: bool = false
+var has_final_summon : bool = false
 
 var current_small_cards : int = 0
 var current_big_cards : int = 0

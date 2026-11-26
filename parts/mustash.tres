@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MonsterPart" format=3 uid="uid://cctro5a0omc4c"]
+
+[ext_resource type="Script" uid="uid://cgcguylqkisf" path="res://monster/monster_connection.gd" id="1_wtgsm"]
+[ext_resource type="Script" uid="uid://bba020kqbcn8s" path="res://monster/monster_part.gd" id="2_hvmwi"]
+[ext_resource type="Texture2D" uid="uid://b5jse6ho7580w" path="res://parts/mustash.png" id="3_wtgsm"]
+
+[resource]
+script = ExtResource("2_hvmwi")
+type = 10
+texture = ExtResource("3_wtgsm")
+offset = Vector2(8, 10)
+is_accessory = true
+metadata/_custom_type_script = "uid://bba020kqbcn8s"

@@ -1,0 +1,333 @@
+[gd_scene format=4 uid="uid://qf1fks1c7rcv"]
+
+[ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="1_m2bw5"]
+[ext_resource type="Texture2D" uid="uid://ciymjtvcgxjo7" path="res://parts/tyler_body.png" id="2_m2bw5"]
+[ext_resource type="Texture2D" uid="uid://bgyu38ms2bmgc" path="res://parts/tyler_head.png" id="3_17ygk"]
+[ext_resource type="Texture2D" uid="uid://bk631pxnvj3w0" path="res://parts/tyler_face.png" id="4_xf5tq"]
+[ext_resource type="Texture2D" uid="uid://hekgl6litdba" path="res://parts/tyler_glasses.png" id="5_75xdw"]
+[ext_resource type="Texture2D" uid="uid://codlcs4u0b1rg" path="res://parts/tyler_face_2.png" id="5_sfiuk"]
+[ext_resource type="Texture2D" uid="uid://cctqlthnbnhjt" path="res://parts/tyler_hair.png" id="6_hu4q4"]
+[ext_resource type="Texture2D" uid="uid://qxmhsqqcjh0j" path="res://parts/tyler_legs.png" id="7_sfiuk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y55vr"]
+shader = ExtResource("1_m2bw5")
+shader_parameter/alpha = 1.0
+shader_parameter/positions = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/colors = PackedVector4Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/line_thickness = 3.0000001425
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/outer_color = Color(0, 0, 0, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ugwyg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xf5tq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sfiuk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nwla"]
+size = Vector2(89.255, 77.36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6eiw"]
+
+[sub_resource type="Animation" id="Animation_sfiuk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BODY/HEAD/HEAD_anim_offset:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BODY/ARMS/ARMS_anim_offset:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BODY:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BODY:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.226893]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.226893]
+}
+
+[sub_resource type="Animation" id="Animation_xf5tq"]
+resource_name = "tyler_idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BODY/HEAD/HEAD_anim_offset:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13868237, 0.40154436),
+"transitions": PackedFloat32Array(1, 5.6568513, 0.35355353),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26376843, 0.48584148),
+"transitions": PackedFloat32Array(1, 4.756828, 3.1383345),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, -3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2664877, 0.48856077),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, -2)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BODY/ARMS/ARMS_anim_offset:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.13958879, 0.41785994),
+"transitions": PackedFloat32Array(1, 0.3186402, 3.1383362),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_sqkop"]
+resource_name = "tyler_walk"
+length = 0.25
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BODY:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.056198087, 0.14502732, 0.2193538),
+"transitions": PackedFloat32Array(4.594793, 2.378414, 2.5491211, 2.143547),
+"update": 0,
+"values": [0.0, 0.2617993877991494, 0.0, -0.2617993877991494]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BODY:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.13777596),
+"transitions": PackedFloat32Array(0.5358867, 10.196478),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08701639, 0.22841801),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.226893, 0.2792526803190927, 0.17453292519943295]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.08429713, 0.23113728),
+"transitions": PackedFloat32Array(1, 0.14865087, 2.8284252),
+"update": 0,
+"values": [0.226893, 0.4363323129985824, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfiuk"]
+_data = {
+&"RESET": SubResource("Animation_sfiuk"),
+&"tyler_idle": SubResource("Animation_xf5tq"),
+&"tyler_walk": SubResource("Animation_sqkop")
+}
+
+[node name="tyler" type="CanvasGroup" unique_id=1758798149]
+material = SubResource("ShaderMaterial_y55vr")
+
+[node name="BODY" type="Node2D" parent="." unique_id=694140753]
+
+[node name="LEG" type="Node2D" parent="BODY" unique_id=452247963]
+position = Vector2(2, -8)
+
+[node name="LEG_anim_offset" type="Node2D" parent="BODY/LEG" unique_id=1569041498]
+
+[node name="sprite" type="Sprite2D" parent="BODY/LEG/LEG_anim_offset" unique_id=300212672]
+texture = ExtResource("7_sfiuk")
+offset = Vector2(0.76, 27.775)
+metadata/_edit_lock_ = true
+
+[node name="ARMS" type="Node2D" parent="BODY" unique_id=413034080]
+
+[node name="ARMS_anim_offset" type="Node2D" parent="BODY/ARMS" unique_id=1910376183]
+
+[node name="sprite" type="Sprite2D" parent="BODY/ARMS/ARMS_anim_offset" unique_id=440946977]
+texture = ExtResource("2_m2bw5")
+metadata/_edit_lock_ = true
+
+[node name="HEAD" type="Node2D" parent="BODY" unique_id=1342382465]
+position = Vector2(-19, -14)
+
+[node name="HEAD_anim_offset" type="Node2D" parent="BODY/HEAD" unique_id=263920209]
+
+[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=392561824]
+texture = ExtResource("3_17ygk")
+offset = Vector2(18.39, -15.195)
+metadata/_edit_lock_ = true
+
+[node name="FACE" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=1303123151]
+position = Vector2(18, -8)
+
+[node name="FACE_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/FACE" unique_id=1545886914]
+
+[node name="sprite" type="AnimatedSprite2D" parent="BODY/HEAD/HEAD_anim_offset/FACE/FACE_anim_offset" unique_id=2034303731]
+sprite_frames = SubResource("SpriteFrames_ugwyg")
+autoplay = "default"
+frame_progress = 0.23831242
+
+[node name="GLASSES" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=846124769]
+position = Vector2(11.000002, -23.000002)
+rotation = -0.1850049
+
+[node name="GLASSES_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES" unique_id=2006458088]
+rotation = 0.226893
+
+[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset" unique_id=1362658089]
+texture = ExtResource("5_75xdw")
+offset = Vector2(6, 10)
+
+[node name="HAIR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=385545267]
+position = Vector2(41.999996, -33.999996)
+rotation = -0.034906585
+
+[node name="HAIR_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/HAIR" unique_id=738977071]
+rotation = 0.226893
+
+[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset" unique_id=190584538]
+texture = ExtResource("6_hu4q4")
+offset = Vector2(-20, 10)
+
+[node name="hurtbox" type="Area2D" parent="BODY" unique_id=1194540772 groups=["HurtBox"]]
+visible = false
+metadata/_edit_lock_ = true
+
+[node name="shape" type="CollisionShape2D" parent="BODY/hurtbox" unique_id=574686654]
+position = Vector2(-1.075, -2.725)
+shape = SubResource("RectangleShape2D_1nwla")
+
+[node name="hitbox" type="Area2D" parent="." unique_id=1490659660 groups=["Attack"]]
+
+[node name="shape" type="CollisionShape2D" parent="hitbox" unique_id=1263921534]
+shape = SubResource("RectangleShape2D_e6eiw")
+disabled = true
+
+[node name="anim_player" type="AnimationPlayer" parent="." unique_id=555405592]
+libraries/ = SubResource("AnimationLibrary_sfiuk")
+autoplay = &"tyler_idle"

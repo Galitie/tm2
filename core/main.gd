@@ -570,6 +570,7 @@ func apply_card_resource_effects(card_resource : Resource, player):
 				player.has_summon_2 = true
 			"final_summon":
 				player.has_final_summon = true
+				spawn_tyler(player.monster)
 			_:
 				player.monster.state_machine.state_choices[card_resource.Type].append(card_resource.state_id)
 	if card_resource.remove_specific_states.size():
@@ -732,6 +733,12 @@ func spawn_bomb(monster):
 		bomb.scale += Vector2(.50, .50)
 	add_child(bomb)	
 
+
+func spawn_tyler(monster):
+	var tyler = preload("uid://qf1fks1c7rcv").instantiate()
+	tyler.monster = monster
+	tyler.global_position = monster.poop_checker.global_position
+	add_child(tyler)
 
 func clean_up_screen():
 	var items = get_tree().get_nodes_in_group("CleanUp")

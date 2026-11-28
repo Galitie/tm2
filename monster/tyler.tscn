@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://qf1fks1c7rcv"]
 
+[ext_resource type="Script" uid="uid://dqch57gtgx3on" path="res://monster/tyler.gd" id="1_3bxml"]
 [ext_resource type="Shader" uid="uid://7bo6dltlcqry" path="res://monster/outline.gdshader" id="1_m2bw5"]
 [ext_resource type="Texture2D" uid="uid://ciymjtvcgxjo7" path="res://parts/tyler_body.png" id="2_m2bw5"]
 [ext_resource type="Texture2D" uid="uid://bgyu38ms2bmgc" path="res://parts/tyler_head.png" id="3_17ygk"]
@@ -319,7 +320,7 @@ tracks/18/keys = {
 
 [sub_resource type="Animation" id="Animation_xf5tq"]
 resource_name = "tyler_idle"
-length = 0.5
+length = 0.3
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -328,7 +329,7 @@ tracks/0/path = NodePath("BODY/HEAD/HEAD_anim_offset:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13868237, 0.40154436),
+"times": PackedFloat32Array(0, 0.06797734, 0.17802525),
 "transitions": PackedFloat32Array(1, 5.6568513, 0.35355353),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0)]
@@ -340,7 +341,7 @@ tracks/1/path = NodePath("BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.26376843, 0.48584148),
+"times": PackedFloat32Array(0, 0.13224189, 0.25624022),
 "transitions": PackedFloat32Array(1, 4.756828, 3.1383345),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, -3)]
@@ -352,7 +353,7 @@ tracks/2/path = NodePath("BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset:posit
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2664877, 0.48856077),
+"times": PackedFloat32Array(0, 0.13496114, 0.2589595),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, -2)]
@@ -364,7 +365,7 @@ tracks/3/path = NodePath("BODY/ARMS/ARMS_anim_offset:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.13958879, 0.41785994),
+"times": PackedFloat32Array(0, 0.06888376, 0.19434083),
 "transitions": PackedFloat32Array(1, 0.3186402, 3.1383362),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 3)]
@@ -640,98 +641,112 @@ _data = {
 &"tyler_walk": SubResource("Animation_sqkop")
 }
 
-[node name="tyler" type="CanvasGroup" unique_id=1758798149]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1o7kg"]
+radius = 27.0
+height = 66.0
+
+[node name="tyler" type="CharacterBody2D" unique_id=458919185]
+script = ExtResource("1_3bxml")
+
+[node name="canvas" type="CanvasGroup" parent="." unique_id=1758798149]
 material = SubResource("ShaderMaterial_y55vr")
 
-[node name="BODY" type="Node2D" parent="." unique_id=694140753]
+[node name="BODY" type="Node2D" parent="canvas" unique_id=694140753]
 
-[node name="LEG" type="Node2D" parent="BODY" unique_id=452247963]
+[node name="LEG" type="Node2D" parent="canvas/BODY" unique_id=452247963]
 position = Vector2(2, -8)
 
-[node name="LEG_anim_offset" type="Node2D" parent="BODY/LEG" unique_id=1569041498]
+[node name="LEG_anim_offset" type="Node2D" parent="canvas/BODY/LEG" unique_id=1569041498]
 
-[node name="sprite" type="Sprite2D" parent="BODY/LEG/LEG_anim_offset" unique_id=300212672]
+[node name="sprite" type="Sprite2D" parent="canvas/BODY/LEG/LEG_anim_offset" unique_id=300212672]
 texture = ExtResource("7_sfiuk")
 offset = Vector2(0.76, 27.775)
 metadata/_edit_lock_ = true
 
-[node name="ARMS" type="Node2D" parent="BODY" unique_id=413034080]
+[node name="ARMS" type="Node2D" parent="canvas/BODY" unique_id=413034080]
 
-[node name="ARMS_anim_offset" type="Node2D" parent="BODY/ARMS" unique_id=1910376183]
+[node name="ARMS_anim_offset" type="Node2D" parent="canvas/BODY/ARMS" unique_id=1910376183]
 
-[node name="sprite" type="Sprite2D" parent="BODY/ARMS/ARMS_anim_offset" unique_id=440946977]
+[node name="sprite" type="Sprite2D" parent="canvas/BODY/ARMS/ARMS_anim_offset" unique_id=440946977]
 texture = ExtResource("2_m2bw5")
 metadata/_edit_lock_ = true
 
-[node name="HEAD" type="Node2D" parent="BODY" unique_id=1342382465]
+[node name="HEAD" type="Node2D" parent="canvas/BODY" unique_id=1342382465]
 position = Vector2(-19, -14)
 
-[node name="HEAD_anim_offset" type="Node2D" parent="BODY/HEAD" unique_id=263920209]
+[node name="HEAD_anim_offset" type="Node2D" parent="canvas/BODY/HEAD" unique_id=263920209]
 
-[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=392561824]
+[node name="sprite" type="Sprite2D" parent="canvas/BODY/HEAD/HEAD_anim_offset" unique_id=392561824]
 texture = ExtResource("3_17ygk")
 offset = Vector2(18.39, -15.195)
 metadata/_edit_lock_ = true
 
-[node name="FACE" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=1303123151]
+[node name="FACE" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset" unique_id=1303123151]
 position = Vector2(18, -8)
 
-[node name="FACE_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/FACE" unique_id=1545886914]
+[node name="FACE_anim_offset" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/FACE" unique_id=1545886914]
 
-[node name="sprite" type="AnimatedSprite2D" parent="BODY/HEAD/HEAD_anim_offset/FACE/FACE_anim_offset" unique_id=2034303731]
+[node name="sprite" type="AnimatedSprite2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/FACE/FACE_anim_offset" unique_id=2034303731]
 sprite_frames = SubResource("SpriteFrames_ugwyg")
 autoplay = "default"
+frame_progress = 0.20867985
 metadata/_edit_lock_ = true
 
-[node name="GLASSES" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=846124769]
+[node name="GLASSES" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset" unique_id=846124769]
 position = Vector2(11.000002, -23.000002)
 rotation = -0.1850049
 
-[node name="GLASSES_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES" unique_id=2006458088]
+[node name="GLASSES_anim_offset" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/GLASSES" unique_id=2006458088]
 rotation = 0.226893
 
-[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset" unique_id=1362658089]
+[node name="sprite" type="Sprite2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/GLASSES/GLASSES_anim_offset" unique_id=1362658089]
 texture = ExtResource("5_75xdw")
 offset = Vector2(6, 10)
 metadata/_edit_lock_ = true
 
-[node name="HAIR" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset" unique_id=385545267]
+[node name="HAIR" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset" unique_id=385545267]
 position = Vector2(41.999996, -33.999996)
 rotation = -0.034906585
 
-[node name="HAIR_anim_offset" type="Node2D" parent="BODY/HEAD/HEAD_anim_offset/HAIR" unique_id=738977071]
+[node name="HAIR_anim_offset" type="Node2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/HAIR" unique_id=738977071]
 rotation = 0.226893
 
-[node name="sprite" type="Sprite2D" parent="BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset" unique_id=190584538]
+[node name="sprite" type="Sprite2D" parent="canvas/BODY/HEAD/HEAD_anim_offset/HAIR/HAIR_anim_offset" unique_id=190584538]
 position = Vector2(-21.514826, 2.7756233)
 texture = ExtResource("6_hu4q4")
 offset = Vector2(1.5148258, 7.2243767)
 metadata/_edit_lock_ = true
 
-[node name="EMOTE" type="Node2D" parent="BODY" unique_id=616874186]
+[node name="EMOTE" type="Node2D" parent="canvas/BODY" unique_id=616874186]
 position = Vector2(9.990502, -83.59161)
 
-[node name="EMOTE_anim_offset" type="Node2D" parent="BODY/EMOTE" unique_id=1571031645]
+[node name="EMOTE_anim_offset" type="Node2D" parent="canvas/BODY/EMOTE" unique_id=1571031645]
 
-[node name="sprite" type="AnimatedSprite2D" parent="BODY/EMOTE/EMOTE_anim_offset" unique_id=371158755]
+[node name="sprite" type="AnimatedSprite2D" parent="canvas/BODY/EMOTE/EMOTE_anim_offset" unique_id=371158755]
 sprite_frames = SubResource("SpriteFrames_1o7kg")
 autoplay = "default"
 
-[node name="hurtbox" type="Area2D" parent="BODY" unique_id=1194540772 groups=["HurtBox"]]
-metadata/_edit_lock_ = true
+[node name="hurtbox" type="Area2D" parent="canvas/BODY" unique_id=1194540772 groups=["HurtBox"]]
+visible = false
 
-[node name="shape" type="CollisionShape2D" parent="BODY/hurtbox" unique_id=574686654]
+[node name="shape" type="CollisionShape2D" parent="canvas/BODY/hurtbox" unique_id=574686654]
 visible = false
 position = Vector2(9.536743e-07, -5.702501)
 shape = SubResource("RectangleShape2D_1nwla")
 
-[node name="hitbox" type="Area2D" parent="." unique_id=1490659660 groups=["Attack"]]
+[node name="hitbox" type="Area2D" parent="canvas" unique_id=1490659660 groups=["Attack"]]
 visible = false
 
-[node name="shape" type="CollisionShape2D" parent="hitbox" unique_id=1263921534]
+[node name="shape" type="CollisionShape2D" parent="canvas/hitbox" unique_id=1263921534]
 shape = SubResource("RectangleShape2D_e6eiw")
 disabled = true
 
 [node name="anim_player" type="AnimationPlayer" parent="." unique_id=555405592]
+root_node = NodePath("../canvas")
 libraries/ = SubResource("AnimationLibrary_sfiuk")
 autoplay = &"tyler_idle"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1253550565]
+visible = false
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_1o7kg")

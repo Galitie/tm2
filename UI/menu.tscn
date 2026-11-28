@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://405m25td441q"]
+[gd_scene format=3 uid="uid://405m25td441q"]
 
 [ext_resource type="Theme" uid="uid://dh465xlsj7ugx" path="res://UI/Theme.tres" id="1_0h2wq"]
 [ext_resource type="Script" uid="uid://v1v7q12g5sje" path="res://UI/menu.gd" id="1_wfiwe"]
@@ -15,12 +15,12 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_kfjwn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" unique_id=474330855]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_vertical = 2
 theme = ExtResource("1_0h2wq")
 script = ExtResource("1_wfiwe")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1057771646]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,22 +38,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HumanMenu" type="CenterContainer" parent="MarginContainer"]
+[node name="HumanMenu" type="CenterContainer" parent="MarginContainer" unique_id=1849410911]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu" unique_id=1209224461]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer" unique_id=153085829]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Label" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/UpgradeTitle"]
+[node name="Label" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/UpgradeTitle" unique_id=1951443449]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_font_sizes/font_size = 28
@@ -62,17 +62,17 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[node name="1" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+[node name="1" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer" unique_id=553898825]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/1"]
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/1" unique_id=1779899936]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo" unique_id=175046166]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,12 +85,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer" unique_id=440708188]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/1/CardInfo/MarginContainer/VBoxContainer" unique_id=664962141]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -101,17 +101,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="2" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+[node name="2" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer" unique_id=628210635]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/2"]
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/2" unique_id=404978920]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo" unique_id=1019815422]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,12 +124,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer" unique_id=398906186]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/2/CardInfo/MarginContainer/VBoxContainer" unique_id=353615028]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -140,17 +140,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="3" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+[node name="3" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer" unique_id=1847977964]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/3"]
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/3" unique_id=2018947319]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo" unique_id=820321758]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,12 +163,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer" unique_id=1774487798]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/3/CardInfo/MarginContainer/VBoxContainer" unique_id=422917343]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -179,17 +179,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="4" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer"]
+[node name="4" type="PanelContainer" parent="MarginContainer/HumanMenu/VBoxContainer" unique_id=435027055]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/4"]
+[node name="CardInfo" type="Button" parent="MarginContainer/HumanMenu/VBoxContainer/4" unique_id=1559937496]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo" unique_id=196246624]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,12 +202,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer" unique_id=1818187738]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HumanMenu/VBoxContainer/4/CardInfo/MarginContainer/VBoxContainer" unique_id=552775571]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -218,23 +218,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="BotsMenu" type="CenterContainer" parent="MarginContainer"]
+[node name="BotsMenu" type="CenterContainer" parent="MarginContainer" unique_id=1860459064]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu" unique_id=1743876033]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="UpgradeTitle" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer" unique_id=1294942139]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Label" type="Label" parent="MarginContainer/BotsMenu/VBoxContainer/UpgradeTitle"]
+[node name="Label" type="Label" parent="MarginContainer/BotsMenu/VBoxContainer/UpgradeTitle" unique_id=1831629321]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Amount of Bots"
@@ -242,19 +242,19 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[node name="3" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="3" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer" unique_id=1615209550]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/3" unique_id=1520303953]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "3"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo" unique_id=1156436992]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -267,24 +267,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/3/CardInfo/MarginContainer" unique_id=2123141336]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="2" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="2" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer" unique_id=141555750]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/2"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/2" unique_id=882970028]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "2"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo" unique_id=340704264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -297,24 +297,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/2/CardInfo/MarginContainer" unique_id=1558920843]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="1" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="1" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer" unique_id=1756992975]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/1" unique_id=934302312]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "1"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo" unique_id=1772167301]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -327,24 +327,24 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/1/CardInfo/MarginContainer" unique_id=11425869]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="0" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer"]
+[node name="0" type="PanelContainer" parent="MarginContainer/BotsMenu/VBoxContainer" unique_id=1728042998]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0"]
+[node name="CardInfo" type="Button" parent="MarginContainer/BotsMenu/VBoxContainer/0" unique_id=1887682589]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 theme_override_colors/font_color = Color(0, 0.290196, 0, 1)
 text = "No Bots"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo" unique_id=1669635666]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -357,28 +357,28 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/BotsMenu/VBoxContainer/0/CardInfo/MarginContainer" unique_id=1624951523]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="RoundMenu" type="CenterContainer" parent="MarginContainer"]
+[node name="RoundMenu" type="CenterContainer" parent="MarginContainer" unique_id=1749466496]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu" unique_id=1675079476]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer"]
+[node name="Title" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer" unique_id=372840785]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Label" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/Title"]
+[node name="Label" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/Title" unique_id=606419618]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Number of Rounds"
@@ -386,17 +386,17 @@ horizontal_alignment = 1
 vertical_alignment = 3
 autowrap_mode = 3
 
-[node name="1" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer"]
+[node name="1" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer" unique_id=182074041]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/1"]
+[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/1" unique_id=251086638]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo" unique_id=1218107689]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -409,12 +409,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo/MarginContainer" unique_id=291472824]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/1/CardInfo/MarginContainer/VBoxContainer" unique_id=1243498339]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -425,17 +425,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="2" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer"]
+[node name="2" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer" unique_id=1600465310]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/2"]
+[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/2" unique_id=2041742437]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo" unique_id=247328700]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -448,12 +448,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo/MarginContainer" unique_id=400473833]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/2/CardInfo/MarginContainer/VBoxContainer" unique_id=2051168156]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -464,17 +464,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="3" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer"]
+[node name="3" type="PanelContainer" parent="MarginContainer/RoundMenu/VBoxContainer" unique_id=136010512]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_0h2wq")
 
-[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/3"]
+[node name="CardInfo" type="Button" parent="MarginContainer/RoundMenu/VBoxContainer/3" unique_id=850747787]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo" unique_id=1887114136]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -487,12 +487,12 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo/MarginContainer" unique_id=1332466420]
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
 alignment = 1
 
-[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/RoundMenu/VBoxContainer/3/CardInfo/MarginContainer/VBoxContainer" unique_id=1069439298]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme = ExtResource("1_0h2wq")
@@ -503,10 +503,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1590902603]
 unique_name_in_owner = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1524083676]
 layout_mode = 0
 offset_right = 1161.0
 offset_bottom = 656.0
@@ -514,13 +514,13 @@ texture = ExtResource("3_4hkxj")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect" unique_id=609175940]
 position = Vector2(593, 613)
 sprite_frames = SubResource("SpriteFrames_dte3n")
 autoplay = "default"
-frame_progress = 0.967242
+frame_progress = 0.73148227
 
-[node name="Loading" type="Label" parent="."]
+[node name="Loading" type="Label" parent="." unique_id=329765608]
 visible = false
 layout_mode = 1
 anchors_preset = 8
